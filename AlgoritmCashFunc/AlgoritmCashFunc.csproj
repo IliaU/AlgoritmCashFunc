@@ -46,6 +46,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Com\Config.cs" />
+    <Compile Include="Com\Lic.cs" />
+    <Compile Include="Com\LicLib\CChar.cs" />
+    <Compile Include="Com\LicLib\onLicEventKey.cs" />
+    <Compile Include="Com\LicLib\onLicItem.cs" />
+    <Compile Include="Com\LicLib\Osnova.cs" />
+    <Compile Include="Com\LicLib\SistemaSchislenia.cs" />
+    <Compile Include="Com\Log.cs" />
+    <Compile Include="Com\ProviderFarm.cs" />
+    <Compile Include="Com\Provider\Lib\ProviderBase.cs" />
+    <Compile Include="Com\Provider\Lib\ProviderI.cs" />
+    <Compile Include="Com\UserFarm.cs" />
+    <Compile Include="FLic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FLic.Designer.cs">
+      <DependentUpon>FLic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lib\EventConvertor.cs" />
+    <Compile Include="Lib\EventEn.cs" />
+    <Compile Include="Lib\EventLog.cs" />
+    <Compile Include="Lib\EventProviderFarm.cs" />
+    <Compile Include="Lib\EventUser.cs" />
+    <Compile Include="Lib\LibBase\UserBase.cs" />
+    <Compile Include="Lib\RoleEn.cs" />
+    <Compile Include="Lib\UProvider.cs" />
+    <Compile Include="Lib\User.cs" />
+    <Compile Include="Lib\UserList.cs" />
     <Compile Include="Start.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +82,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FLic.resx">
+      <DependentUpon>FLic.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -80,9 +111,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Icon.ico" />
     <Content Include="Pic\AKS.jpg" />
     <Content Include="Pic\New.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

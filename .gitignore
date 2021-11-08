@@ -244,3 +244,8 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 ТЗ
+/AlgoritmCashFunc/FLic.cs
+/AlgoritmCashFunc/FLic.Designer.cs
+/AlgoritmCashFunc/FLic.resx
+/AlgoritmCashFunc/Com/Lic.cs
+LicLib
