@@ -1,6 +1,6 @@
 ﻿namespace AlgoritmCashFunc
 {
-    partial class Start
+    partial class FStart
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Start));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FStart));
             this.pnlTop = new System.Windows.Forms.Panel();
             this.pnlTopFill = new System.Windows.Forms.Panel();
             this.btnPrint = new System.Windows.Forms.Button();
@@ -71,7 +71,7 @@
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(0, 24);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(981, 42);
+            this.pnlTop.Size = new System.Drawing.Size(1034, 42);
             this.pnlTop.TabIndex = 0;
             // 
             // pnlTopFill
@@ -82,7 +82,7 @@
             this.pnlTopFill.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTopFill.Location = new System.Drawing.Point(304, 0);
             this.pnlTopFill.Name = "pnlTopFill";
-            this.pnlTopFill.Size = new System.Drawing.Size(417, 42);
+            this.pnlTopFill.Size = new System.Drawing.Size(406, 42);
             this.pnlTopFill.TabIndex = 3;
             // 
             // btnPrint
@@ -129,9 +129,9 @@
             this.pnlTopRight.Controls.Add(this.btnExit);
             this.pnlTopRight.Controls.Add(this.butnOperator);
             this.pnlTopRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlTopRight.Location = new System.Drawing.Point(721, 0);
+            this.pnlTopRight.Location = new System.Drawing.Point(710, 0);
             this.pnlTopRight.Name = "pnlTopRight";
-            this.pnlTopRight.Size = new System.Drawing.Size(260, 42);
+            this.pnlTopRight.Size = new System.Drawing.Size(324, 42);
             this.pnlTopRight.TabIndex = 2;
             // 
             // btnExit
@@ -139,7 +139,7 @@
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(145, 3);
+            this.btnExit.Location = new System.Drawing.Point(204, 3);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(108, 36);
             this.btnExit.TabIndex = 2;
@@ -154,11 +154,12 @@
             this.butnOperator.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.butnOperator.Location = new System.Drawing.Point(6, 3);
             this.butnOperator.Name = "butnOperator";
-            this.butnOperator.Size = new System.Drawing.Size(133, 36);
+            this.butnOperator.Size = new System.Drawing.Size(192, 36);
             this.butnOperator.TabIndex = 1;
-            this.butnOperator.Text = "Оператор  ";
+            this.butnOperator.Text = "Смена оператора  ";
             this.butnOperator.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.butnOperator.UseVisualStyleBackColor = true;
+            this.butnOperator.Click += new System.EventHandler(this.butnOperator_Click);
             // 
             // picBoxAKS
             // 
@@ -188,7 +189,7 @@
             this.pnlFill.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlFill.Location = new System.Drawing.Point(0, 66);
             this.pnlFill.Name = "pnlFill";
-            this.pnlFill.Size = new System.Drawing.Size(981, 411);
+            this.pnlFill.Size = new System.Drawing.Size(1034, 411);
             this.pnlFill.TabIndex = 1;
             // 
             // tabCntOperation
@@ -207,7 +208,7 @@
             this.tabCntOperation.Location = new System.Drawing.Point(0, 0);
             this.tabCntOperation.Name = "tabCntOperation";
             this.tabCntOperation.SelectedIndex = 0;
-            this.tabCntOperation.Size = new System.Drawing.Size(981, 411);
+            this.tabCntOperation.Size = new System.Drawing.Size(1034, 411);
             this.tabCntOperation.TabIndex = 0;
             // 
             // tabPagePrihod
@@ -215,7 +216,7 @@
             this.tabPagePrihod.Location = new System.Drawing.Point(4, 4);
             this.tabPagePrihod.Name = "tabPagePrihod";
             this.tabPagePrihod.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePrihod.Size = new System.Drawing.Size(973, 383);
+            this.tabPagePrihod.Size = new System.Drawing.Size(1026, 383);
             this.tabPagePrihod.TabIndex = 0;
             this.tabPagePrihod.Text = "Приходный ордер";
             this.tabPagePrihod.UseVisualStyleBackColor = true;
@@ -289,7 +290,7 @@
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBottom.Location = new System.Drawing.Point(0, 477);
             this.pnlBottom.Name = "pnlBottom";
-            this.pnlBottom.Size = new System.Drawing.Size(981, 20);
+            this.pnlBottom.Size = new System.Drawing.Size(1034, 20);
             this.pnlBottom.TabIndex = 2;
             // 
             // menuStrip1
@@ -298,7 +299,7 @@
             this.TSMItemSetup});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(981, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1034, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -308,19 +309,20 @@
             this.TSMItemSetup.Size = new System.Drawing.Size(78, 20);
             this.TSMItemSetup.Text = "Настройка";
             // 
-            // Start
+            // FStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(981, 497);
+            this.ClientSize = new System.Drawing.Size(1034, 497);
             this.Controls.Add(this.pnlFill);
             this.Controls.Add(this.pnlBottom);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Start";
+            this.Name = "FStart";
             this.Text = "Кассовые функции RetailPro Prism";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FStart_FormClosing);
             this.pnlTop.ResumeLayout(false);
             this.pnlTopFill.ResumeLayout(false);
             this.pnlTopRight.ResumeLayout(false);

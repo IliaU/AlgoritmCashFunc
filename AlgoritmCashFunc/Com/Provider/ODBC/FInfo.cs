@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AlgoritmCashFunc
+namespace AlgoritmCashFunc.Com.Provider.ODBC
 {
-    public partial class Start : Form
+    public partial class FInfo : Form
     {
-        public Start()
+        public FInfo(ODBCprv Tag)
         {
             InitializeComponent();
         }

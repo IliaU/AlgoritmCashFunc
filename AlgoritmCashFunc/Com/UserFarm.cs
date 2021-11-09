@@ -88,5 +88,22 @@ namespace AlgoritmCashFunc.Com
             }
             return false;
         }
+        
+        /// <summary>
+        /// Блокировка пользователя 
+        /// </summary>
+        public static void LogOff()
+        {
+            try
+            {
+                CurrentUser = null;
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при блокировке пользователя с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.LogOff", "UserFarm"), EventEn.Error);
+                throw ae;
+            }
+        }
     }
 }

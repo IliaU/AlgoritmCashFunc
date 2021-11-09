@@ -57,12 +57,31 @@
     <Compile Include="Com\ProviderFarm.cs" />
     <Compile Include="Com\Provider\Lib\ProviderBase.cs" />
     <Compile Include="Com\Provider\Lib\ProviderI.cs" />
+    <Compile Include="Com\Provider\ODBCprv.cs" />
+    <Compile Include="Com\Provider\ODBC\FInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Com\Provider\ODBC\FInfo.Designer.cs">
+      <DependentUpon>FInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Com\Provider\ODBC\FSetupConnectDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Com\Provider\ODBC\FSetupConnectDB.Designer.cs">
+      <DependentUpon>FSetupConnectDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Com\UserFarm.cs" />
     <Compile Include="FLic.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FLic.Designer.cs">
       <DependentUpon>FLic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FLogon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FLogon.Designer.cs">
+      <DependentUpon>FLogon.cs</DependentUpon>
     </Compile>
     <Compile Include="Lib\EventConvertor.cs" />
     <Compile Include="Lib\EventEn.cs" />
@@ -74,16 +93,25 @@
     <Compile Include="Lib\UProvider.cs" />
     <Compile Include="Lib\User.cs" />
     <Compile Include="Lib\UserList.cs" />
-    <Compile Include="Start.cs">
+    <Compile Include="FStart.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Start.Designer.cs">
-      <DependentUpon>Start.cs</DependentUpon>
+    <Compile Include="FStart.Designer.cs">
+      <DependentUpon>FStart.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Com\Provider\ODBC\FInfo.resx">
+      <DependentUpon>FInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Com\Provider\ODBC\FSetupConnectDB.resx">
+      <DependentUpon>FSetupConnectDB.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FLic.resx">
       <DependentUpon>FLic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FLogon.resx">
+      <DependentUpon>FLogon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -94,8 +122,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Start.resx">
-      <DependentUpon>Start.cs</DependentUpon>
+    <EmbeddedResource Include="FStart.resx">
+      <DependentUpon>FStart.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -113,7 +141,9 @@
   <ItemGroup>
     <Content Include="Icon.ico" />
     <Content Include="Pic\AKS.jpg" />
+    <Content Include="Pic\DB.jpg" />
     <Content Include="Pic\New.jpg" />
+    <Content Include="Pic\Prism.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

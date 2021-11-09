@@ -188,7 +188,7 @@ namespace AlgoritmCashFunc.Com
                     Document.InsertBefore(wbxmdecl, wbRoot);
 
                     // Создаём начальное тело с которым мы будем потом работать
-                    XmlElement xmlMain = Document.CreateElement("AlgoritmPrizm");
+                    XmlElement xmlMain = Document.CreateElement("AlgoritmCashFunc");
                     xmlMain.SetAttribute("Version", _Version.ToString());
                     xmlMain.SetAttribute("Trace", _Trace.ToString());
                     xmlMain.SetAttribute("PrvFullName", null);
