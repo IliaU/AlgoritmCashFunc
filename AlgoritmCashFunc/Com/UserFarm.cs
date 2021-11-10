@@ -11,8 +11,45 @@ namespace AlgoritmCashFunc.Com
     /// <summary>
     /// Управлнеия пользователями
     /// </summary>
-    public static class UserFarm
+    public class UserFarm
     {
+        /// <summary>
+        /// Количество минут перед блокировкой пользоваетля после того как он перестал быть активным со значением по умолчанию
+        /// </summary>
+        private static int _TimeoutMinuteForLogOFF= 10;
+
+        /// <summary>
+        /// Количество минут перед блокировкой пользоваетля после того как он перестал быть активным со значением по умолчанию
+        /// </summary>
+        public static int TimeoutMinuteForLogOFF
+        {
+            get { return _TimeoutMinuteForLogOFF; }
+            private set { }
+        }
+
+        /// <summary>
+        /// Возникновение события блокировки пользователя
+        /// </summary>
+        public static event EventHandler<EventLogOFF> onEventLogOFF;
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="DefTimeoutMinuteForLogOFF">Количество минут перед блокировкой пользоваетля после того как он перестал быть активным со значением по умолчанию когда нигде значения не указано.</param>
+        public UserFarm(int DefTimeoutMinuteForLogOFF)
+        {
+            try
+            {
+                _TimeoutMinuteForLogOFF = DefTimeoutMinuteForLogOFF;
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при загрузке модуля UserFarm с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, GetType().Name, EventEn.FatalError);
+                throw ae;
+            }
+        }
+
         /// <summary>
         /// Пользователи зарегистрированные в сисиетме
         /// </summary>
@@ -105,5 +142,27 @@ namespace AlgoritmCashFunc.Com
                 throw ae;
             }
         }
+
+        /// <summary>
+        /// Произошло событие выхода мользователя вызываем закрытие форм
+        /// </summary>
+        private void LogOFF()
+        {
+            try
+            {
+                EventLogOFF myArg = new EventLogOFF(CurrentUser);
+                if (onEventLogOFF != null)
+                {
+                    onEventLogOFF.Invoke(this, myArg);
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при обработки события с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.LogOFF", GetType().Name), EventEn.Error);
+                throw ae;
+            }
+        }
+
     }
 }

@@ -57,9 +57,9 @@ namespace AlgoritmCashFunc
                     {
 
                         // Инициализвция классов
-                        //                    Com.ConfigReg ConfReg = new Com.ConfigReg();
                         Com.Log Log = new Com.Log("AlgoritmCashFunc.txt");
                         Com.Config Conf = new Com.Config("AlgoritmCashFunc.xml");
+                        Com.UserFarm UFrm = new Com.UserFarm(15);
 
                         Application.EnableVisualStyles();
                         Application.SetCompatibleTextRenderingDefault(false);

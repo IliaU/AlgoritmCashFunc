@@ -146,6 +146,7 @@
             this.btnExit.Text = "Выход  ";
             this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // butnOperator
             // 
@@ -226,7 +227,7 @@
             this.tabPageRashod.Location = new System.Drawing.Point(4, 4);
             this.tabPageRashod.Name = "tabPageRashod";
             this.tabPageRashod.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRashod.Size = new System.Drawing.Size(973, 383);
+            this.tabPageRashod.Size = new System.Drawing.Size(1026, 383);
             this.tabPageRashod.TabIndex = 1;
             this.tabPageRashod.Text = "Расходный ордер";
             this.tabPageRashod.UseVisualStyleBackColor = true;
@@ -235,7 +236,7 @@
             // 
             this.tabPageCashBook.Location = new System.Drawing.Point(4, 4);
             this.tabPageCashBook.Name = "tabPageCashBook";
-            this.tabPageCashBook.Size = new System.Drawing.Size(973, 383);
+            this.tabPageCashBook.Size = new System.Drawing.Size(1026, 383);
             this.tabPageCashBook.TabIndex = 2;
             this.tabPageCashBook.Text = "Кассовая книга";
             this.tabPageCashBook.UseVisualStyleBackColor = true;
@@ -244,7 +245,7 @@
             // 
             this.tabPageVozvrat.Location = new System.Drawing.Point(4, 4);
             this.tabPageVozvrat.Name = "tabPageVozvrat";
-            this.tabPageVozvrat.Size = new System.Drawing.Size(973, 383);
+            this.tabPageVozvrat.Size = new System.Drawing.Size(1026, 383);
             this.tabPageVozvrat.TabIndex = 3;
             this.tabPageVozvrat.Text = "Акт о возврате денег";
             this.tabPageVozvrat.UseVisualStyleBackColor = true;
@@ -253,7 +254,7 @@
             // 
             this.tabPageReportCash.Location = new System.Drawing.Point(4, 4);
             this.tabPageReportCash.Name = "tabPageReportCash";
-            this.tabPageReportCash.Size = new System.Drawing.Size(973, 383);
+            this.tabPageReportCash.Size = new System.Drawing.Size(1026, 383);
             this.tabPageReportCash.TabIndex = 4;
             this.tabPageReportCash.Text = "Отчёт кассира";
             this.tabPageReportCash.UseVisualStyleBackColor = true;
@@ -262,7 +263,7 @@
             // 
             this.tabPageSequensKKM.Location = new System.Drawing.Point(4, 4);
             this.tabPageSequensKKM.Name = "tabPageSequensKKM";
-            this.tabPageSequensKKM.Size = new System.Drawing.Size(973, 383);
+            this.tabPageSequensKKM.Size = new System.Drawing.Size(1026, 383);
             this.tabPageSequensKKM.TabIndex = 5;
             this.tabPageSequensKKM.Text = "Счётчики ККМ";
             this.tabPageSequensKKM.UseVisualStyleBackColor = true;
@@ -271,7 +272,7 @@
             // 
             this.tabPageCheck.Location = new System.Drawing.Point(4, 4);
             this.tabPageCheck.Name = "tabPageCheck";
-            this.tabPageCheck.Size = new System.Drawing.Size(973, 383);
+            this.tabPageCheck.Size = new System.Drawing.Size(1026, 383);
             this.tabPageCheck.TabIndex = 6;
             this.tabPageCheck.Text = "Проверка наличных";
             this.tabPageCheck.UseVisualStyleBackColor = true;
@@ -280,7 +281,7 @@
             // 
             this.tabPageInvent.Location = new System.Drawing.Point(4, 4);
             this.tabPageInvent.Name = "tabPageInvent";
-            this.tabPageInvent.Size = new System.Drawing.Size(973, 383);
+            this.tabPageInvent.Size = new System.Drawing.Size(1026, 383);
             this.tabPageInvent.TabIndex = 7;
             this.tabPageInvent.Text = "Инвентаризация средств";
             this.tabPageInvent.UseVisualStyleBackColor = true;

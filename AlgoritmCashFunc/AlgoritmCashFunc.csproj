@@ -83,6 +83,7 @@
     <Compile Include="FLogon.Designer.cs">
       <DependentUpon>FLogon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Lib\EventLogOFF.cs" />
     <Compile Include="Lib\EventConvertor.cs" />
     <Compile Include="Lib\EventEn.cs" />
     <Compile Include="Lib\EventLog.cs" />
