@@ -50,13 +50,14 @@
             this.tabPageCheck = new System.Windows.Forms.TabPage();
             this.tabPageInvent = new System.Windows.Forms.TabPage();
             this.pnlBottom = new System.Windows.Forms.Panel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tSSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.TSMItemSetup = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemAboutRep = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.tSSLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.TSMItemConfigPrv = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemConfigUsers = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMItemLic = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlTop.SuspendLayout();
             this.pnlTopFill.SuspendLayout();
             this.pnlTopRight.SuspendLayout();
@@ -65,8 +66,8 @@
             this.pnlFill.SuspendLayout();
             this.tabCntOperation.SuspendLayout();
             this.pnlBottom.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTop
@@ -310,33 +311,6 @@
             this.pnlBottom.TabIndex = 2;
             this.pnlBottom.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMItemSetup});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1034, 24);
-            this.menuStrip1.TabIndex = 3;
-            this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
-            // 
-            // TSMItemSetup
-            // 
-            this.TSMItemSetup.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMItemAboutRep,
-            this.TSMItemConfigPrv,
-            this.TSMItemConfigUsers});
-            this.TSMItemSetup.Name = "TSMItemSetup";
-            this.TSMItemSetup.Size = new System.Drawing.Size(78, 20);
-            this.TSMItemSetup.Text = "Настройка";
-            // 
-            // TSMItemAboutRep
-            // 
-            this.TSMItemAboutRep.Name = "TSMItemAboutRep";
-            this.TSMItemAboutRep.Size = new System.Drawing.Size(291, 22);
-            this.TSMItemAboutRep.Text = "Список доступных провайдеров";
-            // 
             // statusStrip1
             // 
             this.statusStrip1.BackColor = System.Drawing.SystemColors.Control;
@@ -355,6 +329,34 @@
             this.tSSLabel.Text = "Лог";
             this.tSSLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMItemSetup});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1034, 24);
+            this.menuStrip1.TabIndex = 3;
+            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
+            // 
+            // TSMItemSetup
+            // 
+            this.TSMItemSetup.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMItemAboutRep,
+            this.TSMItemConfigPrv,
+            this.TSMItemConfigUsers,
+            this.TSMItemLic});
+            this.TSMItemSetup.Name = "TSMItemSetup";
+            this.TSMItemSetup.Size = new System.Drawing.Size(78, 20);
+            this.TSMItemSetup.Text = "Настройка";
+            // 
+            // TSMItemAboutRep
+            // 
+            this.TSMItemAboutRep.Name = "TSMItemAboutRep";
+            this.TSMItemAboutRep.Size = new System.Drawing.Size(291, 22);
+            this.TSMItemAboutRep.Text = "Список доступных провайдеров";
+            // 
             // TSMItemConfigPrv
             // 
             this.TSMItemConfigPrv.Name = "TSMItemConfigPrv";
@@ -368,6 +370,13 @@
             this.TSMItemConfigUsers.Size = new System.Drawing.Size(291, 22);
             this.TSMItemConfigUsers.Text = "Настройка списка пользователей";
             this.TSMItemConfigUsers.Click += new System.EventHandler(this.TSMItemConfigUsers_Click);
+            // 
+            // TSMItemLic
+            // 
+            this.TSMItemLic.Name = "TSMItemLic";
+            this.TSMItemLic.Size = new System.Drawing.Size(291, 22);
+            this.TSMItemLic.Text = "Информация по лицензии";
+            this.TSMItemLic.Click += new System.EventHandler(this.TSMItemLic_Click);
             // 
             // FStart
             // 
@@ -392,10 +401,10 @@
             this.tabCntOperation.ResumeLayout(false);
             this.pnlBottom.ResumeLayout(false);
             this.pnlBottom.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -431,6 +440,7 @@
         private System.Windows.Forms.ToolStripStatusLabel tSSLabel;
         private System.Windows.Forms.ToolStripMenuItem TSMItemConfigPrv;
         private System.Windows.Forms.ToolStripMenuItem TSMItemConfigUsers;
+        private System.Windows.Forms.ToolStripMenuItem TSMItemLic;
     }
 }
 

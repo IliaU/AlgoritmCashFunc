@@ -84,8 +84,8 @@ namespace AlgoritmCashFunc
             }
             catch (Exception ex)
             {
-                ApplicationException ae = new ApplicationException(string.Format("Упали при чтении конфигурации с ошибкой: ({0})", ex.Message));
-                Log.EventSave(ae.Message, string.Format("{0}.FStart_FormClosing", GetType().Name), EventEn.Error);
+                ApplicationException ae = new ApplicationException(string.Format("Упали при выходе пользователя с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.UserFarm_onEventLogOFF", GetType().Name), EventEn.Error);
                 throw ae;
             }
         }
@@ -214,7 +214,7 @@ namespace AlgoritmCashFunc
         }
 
 
-        #region Собятия вызванные выбором в верхнем меню
+        #region События вызванные выбором в верхнем меню
         // Пользователь решил настроить список пользователей
         private void TSMItemConfigUsers_Click(object sender, EventArgs e)
         {
@@ -244,6 +244,20 @@ namespace AlgoritmCashFunc
             catch (Exception ex)
             {
                 Com.Log.EventSave(string.Format(@"Ошибка в методе {0}:""{1}""", "TSMItemConfigPrv_Click", ex.Message), this.GetType().FullName, EventEn.Error, true, true);
+            }
+        }
+
+        // Пользователь вызывает форму с лицензиями
+        private void TSMItemLic_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FLic Frm = new FLic();
+                Frm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Com.Log.EventSave(string.Format(@"Ошибка в методе {0}:""{1}""", "TSMItemLic_Click", ex.Message), this.GetType().FullName, EventEn.Error, true, true);
             }
         }
         #endregion
