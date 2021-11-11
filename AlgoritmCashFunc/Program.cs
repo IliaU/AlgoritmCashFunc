@@ -119,12 +119,15 @@ namespace AlgoritmCashFunc
                                         }
                                     }
 
+                                    // Даём команду остановки
+                                    Com.UserFarm.Stop();
 
                                     // Ожидаем завершения работы сборщика мусора
                                     RunGC = false;
                                     thr.Join();
-                                    //
                                     
+                                    // Ожидаем завершения потока
+                                    Com.UserFarm.Join();
                                 }
                             }
                             else

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Threading;
 using AlgoritmCashFunc.Lib;
 
 namespace AlgoritmCashFunc.Com
@@ -13,6 +14,24 @@ namespace AlgoritmCashFunc.Com
     /// </summary>
     public class UserFarm
     {
+        // Объект для блокировки процесса чтобы не могла пройти активность во время выхода пользователя
+        private static object obj = new object();
+
+        /// <summary>
+        /// Асинхронный поток
+        /// </summary>
+        private static Thread ThrUFarm;
+
+        /// <summary>
+        /// Последняя активность пользователя
+        /// </summary>
+        public static DateTime LastActiveLogon { get; private set; } = DateTime.Now;
+
+        /// <summary>
+        /// Флаг чтобы остановить процесс
+        /// </summary>
+        public static bool FlagRun;
+
         /// <summary>
         /// Количество минут перед блокировкой пользоваетля после того как он перестал быть активным со значением по умолчанию
         /// </summary>
@@ -26,7 +45,7 @@ namespace AlgoritmCashFunc.Com
             get { return _TimeoutMinuteForLogOFF; }
             private set { }
         }
-
+        
         /// <summary>
         /// Возникновение события блокировки пользователя
         /// </summary>
@@ -41,6 +60,15 @@ namespace AlgoritmCashFunc.Com
             try
             {
                 _TimeoutMinuteForLogOFF = DefTimeoutMinuteForLogOFF;
+
+                FlagRun = true;
+
+                // Асинхронный запуск процесса
+                ThrUFarm = new Thread(AUserFarm);
+                //ThrWeb = new Thread(new ParameterizedThreadStart(Run)); //Запуск с параметрами   
+                ThrUFarm.Name = "A_Thr_UFarm";
+                ThrUFarm.IsBackground = true;
+                ThrUFarm.Start();
             }
             catch (Exception ex)
             {
@@ -49,6 +77,7 @@ namespace AlgoritmCashFunc.Com
                 throw ae;
             }
         }
+
 
         /// <summary>
         /// Пользователи зарегистрированные в сисиетме
@@ -133,12 +162,94 @@ namespace AlgoritmCashFunc.Com
         {
             try
             {
-                CurrentUser = null;
+                lock (obj)
+                {
+                    CurrentUser = null;
+                }
             }
             catch (Exception ex)
             {
                 ApplicationException ae = new ApplicationException(string.Format("Упали при блокировке пользователя с ошибкой: ({0})", ex.Message));
                 Log.EventSave(ae.Message, string.Format("{0}.LogOff", "UserFarm"), EventEn.Error);
+                throw ae;
+            }
+        }
+
+        /// <summary>
+        /// Остановка асинхронного процесса
+        /// </summary>
+        public static void Stop()
+        {
+            try
+            {
+                FlagRun = false;
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при асинхронной обработкепроцесса с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.Stop", "UserFarm"), EventEn.Error);
+                throw ae;
+            }
+        }
+
+        /// <summary>
+        /// Ожидаем окончание работы потока
+        /// </summary>
+        public static void Join()
+        {
+            try
+            {
+                ThrUFarm.Join();
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при асинхронной обработкепроцесса с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.Join", "UserFarm"), EventEn.Error);
+                throw ae;
+            }
+        }
+
+        /// <summary>
+        /// Периодическая активность пользователя вызфвается на форме чтобы фиксировать что пользователь активен
+        /// </summary>
+        public static void ActiveStatusLogon()
+        {
+            try
+            {
+                lock (obj)
+                {
+                    LastActiveLogon = DateTime.Now;
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при обработке флага активности пользователя с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.ActiveStatusLogon", "UserFarm"), EventEn.Error);
+                throw ae;
+            }
+        }
+
+        /// <summary>
+        /// Асинхронный процесс который будет проверять нужно лочить пользователя или нет
+        /// </summary>
+        private void AUserFarm()
+        {
+            try
+            {
+                while(FlagRun)
+                {
+                    if (LastActiveLogon.AddMinutes(_TimeoutMinuteForLogOFF) < DateTime.Now)
+                    {
+                        LogOFF();
+                    }
+
+                    Thread.Sleep(1000);
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при асинхронной обработкепроцесса с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.AUserFarm", GetType().Name), EventEn.Error);
                 throw ae;
             }
         }
@@ -150,10 +261,14 @@ namespace AlgoritmCashFunc.Com
         {
             try
             {
-                EventLogOFF myArg = new EventLogOFF(CurrentUser);
-                if (onEventLogOFF != null)
+                lock (obj)
                 {
-                    onEventLogOFF.Invoke(this, myArg);
+                    EventLogOFF myArg = new EventLogOFF(CurrentUser);
+                    if (onEventLogOFF != null)
+                    {
+                        Log.EventSave(string.Format("Блокировка пользователеля {0} ({1})", Com.UserFarm.CurrentUser.Logon, Com.UserFarm.CurrentUser.Role.ToString()), string.Format("{0}.LogOFF", GetType().Name), EventEn.Message);
+                        onEventLogOFF.Invoke(this, myArg);
+                    }
                 }
             }
             catch (Exception ex)

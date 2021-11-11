@@ -11,6 +11,6 @@ namespace AlgoritmCashFunc.Lib
     /// </summary>
     public enum RoleEn
     {
-        None, Admin, Viewer
+        None, Admin, Operator
     }
 }

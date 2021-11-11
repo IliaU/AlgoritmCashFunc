@@ -52,6 +52,11 @@
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.TSMItemSetup = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMItemAboutRep = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tSSLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.TSMItemConfigPrv = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMItemConfigUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlTop.SuspendLayout();
             this.pnlTopFill.SuspendLayout();
             this.pnlTopRight.SuspendLayout();
@@ -59,7 +64,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBoxPrizm)).BeginInit();
             this.pnlFill.SuspendLayout();
             this.tabCntOperation.SuspendLayout();
+            this.pnlBottom.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTop
@@ -110,6 +117,7 @@
             this.btnSave.Text = "Сохранить";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
             // btnNew
             // 
@@ -123,6 +131,7 @@
             this.btnNew.Text = "Новый  ";
             this.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
             // pnlTopRight
             // 
@@ -147,6 +156,7 @@
             this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnExit.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
             // butnOperator
             // 
@@ -161,6 +171,7 @@
             this.butnOperator.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.butnOperator.UseVisualStyleBackColor = true;
             this.butnOperator.Click += new System.EventHandler(this.butnOperator_Click);
+            this.butnOperator.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
             // picBoxAKS
             // 
@@ -172,6 +183,7 @@
             this.picBoxAKS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBoxAKS.TabIndex = 1;
             this.picBoxAKS.TabStop = false;
+            this.picBoxAKS.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
             // picBoxPrizm
             // 
@@ -183,6 +195,7 @@
             this.picBoxPrizm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBoxPrizm.TabIndex = 0;
             this.picBoxPrizm.TabStop = false;
+            this.picBoxPrizm.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
             // pnlFill
             // 
@@ -211,16 +224,17 @@
             this.tabCntOperation.SelectedIndex = 0;
             this.tabCntOperation.Size = new System.Drawing.Size(1034, 411);
             this.tabCntOperation.TabIndex = 0;
+            this.tabCntOperation.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
             // tabPagePrihod
             // 
+            this.tabPagePrihod.BackColor = System.Drawing.SystemColors.Control;
             this.tabPagePrihod.Location = new System.Drawing.Point(4, 4);
             this.tabPagePrihod.Name = "tabPagePrihod";
             this.tabPagePrihod.Padding = new System.Windows.Forms.Padding(3);
             this.tabPagePrihod.Size = new System.Drawing.Size(1026, 383);
             this.tabPagePrihod.TabIndex = 0;
             this.tabPagePrihod.Text = "Приходный ордер";
-            this.tabPagePrihod.UseVisualStyleBackColor = true;
             // 
             // tabPageRashod
             // 
@@ -288,11 +302,13 @@
             // 
             // pnlBottom
             // 
+            this.pnlBottom.Controls.Add(this.statusStrip1);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBottom.Location = new System.Drawing.Point(0, 477);
             this.pnlBottom.Name = "pnlBottom";
             this.pnlBottom.Size = new System.Drawing.Size(1034, 20);
             this.pnlBottom.TabIndex = 2;
+            this.pnlBottom.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
             // menuStrip1
             // 
@@ -303,12 +319,55 @@
             this.menuStrip1.Size = new System.Drawing.Size(1034, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
             // TSMItemSetup
             // 
+            this.TSMItemSetup.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMItemAboutRep,
+            this.TSMItemConfigPrv,
+            this.TSMItemConfigUsers});
             this.TSMItemSetup.Name = "TSMItemSetup";
             this.TSMItemSetup.Size = new System.Drawing.Size(78, 20);
             this.TSMItemSetup.Text = "Настройка";
+            // 
+            // TSMItemAboutRep
+            // 
+            this.TSMItemAboutRep.Name = "TSMItemAboutRep";
+            this.TSMItemAboutRep.Size = new System.Drawing.Size(291, 22);
+            this.TSMItemAboutRep.Text = "Список доступных провайдеров";
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.BackColor = System.Drawing.SystemColors.Control;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tSSLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, -2);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1034, 22);
+            this.statusStrip1.TabIndex = 0;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // tSSLabel
+            // 
+            this.tSSLabel.Name = "tSSLabel";
+            this.tSSLabel.Size = new System.Drawing.Size(27, 17);
+            this.tSSLabel.Text = "Лог";
+            this.tSSLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
+            // 
+            // TSMItemConfigPrv
+            // 
+            this.TSMItemConfigPrv.Name = "TSMItemConfigPrv";
+            this.TSMItemConfigPrv.Size = new System.Drawing.Size(291, 22);
+            this.TSMItemConfigPrv.Text = "Hастройка подключения к базе данных";
+            this.TSMItemConfigPrv.Click += new System.EventHandler(this.TSMItemConfigPrv_Click);
+            // 
+            // TSMItemConfigUsers
+            // 
+            this.TSMItemConfigUsers.Name = "TSMItemConfigUsers";
+            this.TSMItemConfigUsers.Size = new System.Drawing.Size(291, 22);
+            this.TSMItemConfigUsers.Text = "Настройка списка пользователей";
+            this.TSMItemConfigUsers.Click += new System.EventHandler(this.TSMItemConfigUsers_Click);
             // 
             // FStart
             // 
@@ -331,8 +390,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBoxPrizm)).EndInit();
             this.pnlFill.ResumeLayout(false);
             this.tabCntOperation.ResumeLayout(false);
+            this.pnlBottom.ResumeLayout(false);
+            this.pnlBottom.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -363,6 +426,11 @@
         private System.Windows.Forms.TabPage tabPageInvent;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem TSMItemSetup;
+        private System.Windows.Forms.ToolStripMenuItem TSMItemAboutRep;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel tSSLabel;
+        private System.Windows.Forms.ToolStripMenuItem TSMItemConfigPrv;
+        private System.Windows.Forms.ToolStripMenuItem TSMItemConfigUsers;
     }
 }
 

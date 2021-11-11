@@ -134,7 +134,7 @@
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FLogon";
-            this.Text = "Вход в систему управления скидками";
+            this.Text = "Вход в программу";
             this.ResumeLayout(false);
             this.PerformLayout();
 

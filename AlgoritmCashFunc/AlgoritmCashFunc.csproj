@@ -83,6 +83,18 @@
     <Compile Include="FLogon.Designer.cs">
       <DependentUpon>FLogon.cs</DependentUpon>
     </Compile>
+    <Compile Include="FProviderSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FProviderSetup.Designer.cs">
+      <DependentUpon>FProviderSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FUsers.Designer.cs">
+      <DependentUpon>FUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Lib\EventLogOFF.cs" />
     <Compile Include="Lib\EventConvertor.cs" />
     <Compile Include="Lib\EventEn.cs" />
@@ -113,6 +125,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FLogon.resx">
       <DependentUpon>FLogon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FProviderSetup.resx">
+      <DependentUpon>FProviderSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FUsers.resx">
+      <DependentUpon>FUsers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
