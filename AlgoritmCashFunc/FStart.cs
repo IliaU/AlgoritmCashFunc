@@ -38,8 +38,6 @@ namespace AlgoritmCashFunc
                 // Проверяем роль и если админ то даем править менюшку
                 if (Com.UserFarm.CurrentUser.Role == RoleEn.Admin)
                 {
-                    this.menuStrip1.Visible = true;
-
                     // Подключаем список доступных репозиториев для подключения ToolStripMenuItem
                     // TSMItemAboutPrv
                     foreach (string item in Com.ProviderFarm.ListProviderName())
@@ -54,7 +52,18 @@ namespace AlgoritmCashFunc
                         }
                     }
                 }
-                else this.menuStrip1.Visible = false;
+                else
+                {
+                    this.TSMItemConfigPrv.Visible = false;
+                    this.TSMItemAboutRep.Visible = false;
+                }
+                if (UserFarm.CurrentUser.Role == RoleEn.Operator)
+                {
+                    this.TSMItemConfigUsers.Text = "Сменить пароль";
+                    this.TSMItemLic.Visible = false;
+                }
+                else this.TSMItemLic.Visible = true;
+
 
                 // Подписываемся на события
                 Com.Log.onEventLog += Log_onEventLog;

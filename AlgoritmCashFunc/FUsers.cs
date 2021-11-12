@@ -42,7 +42,7 @@ namespace AlgoritmCashFunc
 
             this.cmbBoxRoleEdit.Items.Clear();
             int iindex = -1;
-            int fv = -1;
+            int fo = -1;
             int fa = -1;
             foreach (Lib.RoleEn item in Enum.GetValues(typeof(Lib.RoleEn)))
             {
@@ -50,18 +50,19 @@ namespace AlgoritmCashFunc
                 {
                     iindex++;
                     this.cmbBoxRoleEdit.Items.Add(item.ToString());
-                    if (item == RoleEn.Operator) fv = iindex;
+                    if (item == RoleEn.Operator) fo = iindex;
                     if (item == RoleEn.Admin) fa = iindex;
                 }
             }
-            if (fv != -1 && this.cmbBoxRoleEdit.Items.Count > fv && Com.UserFarm.List.Count > 0) this.cmbBoxRoleEdit.SelectedIndex = fv;
+            if (fo != -1 && this.cmbBoxRoleEdit.Items.Count > fo && Com.UserFarm.List.Count > 0) this.cmbBoxRoleEdit.SelectedIndex = fo;
+            if (fa != -1 && this.cmbBoxRoleEdit.Items.Count > fa && Com.UserFarm.List.Count >= 0 && UserFarm.CurrentUser.Role == RoleEn.Admin) this.cmbBoxRoleEdit.SelectedIndex = fa;
             if (fa != -1 && this.cmbBoxRoleEdit.Items.Count > fa && Com.UserFarm.List.Count == 0) this.cmbBoxRoleEdit.SelectedIndex = fa;
 
             this.dvLogon = new DataView(dtLogon);
             this.dGViewLogon.DataSource = this.dvLogon;
 
             // Разрешаем добавлять пользователей только если мы админы
-            if (Com.UserFarm.CurrentUser.Role == RoleEn.Admin) this.TSMItemAddUser.Visible = true;
+            if (Com.UserFarm.CurrentUser.Role == RoleEn.Admin || Com.UserFarm.CurrentUser.Role == RoleEn.Manager) this.TSMItemAddUser.Visible = true;
             else this.TSMItemAddUser.Visible = false;
         }
 
@@ -108,7 +109,7 @@ namespace AlgoritmCashFunc
         {
             for (int i = 0; i < this.dGViewLogon.Rows.Count; i++)
             {
-                if (Com.UserFarm.CurrentUser != null && Com.UserFarm.CurrentUser.Role != RoleEn.Admin)
+                if (Com.UserFarm.CurrentUser != null)
                 {
                     if (this.dGViewLogon.Rows[i].Cells["Logon"].Value.ToString() == Com.UserFarm.CurrentUser.Logon)
                     {
@@ -176,7 +177,9 @@ namespace AlgoritmCashFunc
                 }
 
                 // Пользователь редактирует свой пароль или он является админом
-                if ((editUser != null && Com.UserFarm.CurrentUser.Logon == editUser.Logon) || Com.UserFarm.CurrentUser.Role == RoleEn.Admin)
+                if ((editUser != null && Com.UserFarm.CurrentUser.Logon == editUser.Logon) 
+                    || Com.UserFarm.CurrentUser.Role == RoleEn.Admin 
+                    || (Com.UserFarm.CurrentUser.Role == RoleEn.Manager && editUser.Role != RoleEn.Admin))
                 {
                     this.txtBoxPasswordEdit.ReadOnly = false;
                     this.cmbBoxRoleEdit.Enabled = true;
