@@ -52,6 +52,7 @@ namespace AlgoritmCashFunc
         {
             try
             {
+                UserFarm.onEventLogOFF -= UserFarm_onEventLogOFF;
                 this.Close();
             }
             catch (Exception ex)
