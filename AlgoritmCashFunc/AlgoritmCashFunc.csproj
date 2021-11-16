@@ -46,7 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\Document.cs" />
+    <Compile Include="BLL\DocumentPlg\DocumentPrihod.cs" />
+    <Compile Include="BLL\DocumentPlg\Lib\DocumentBase.cs" />
+    <Compile Include="BLL\DocumentPlg\Lib\DocumentInterface.cs" />
+    <Compile Include="BLL\DocumentPlg\Lib\OperationBase.cs" />
+    <Compile Include="BLL\Operation.cs" />
     <Compile Include="Com\Config.cs" />
+    <Compile Include="Com\DocumentFarm.cs" />
     <Compile Include="Com\Lic.cs" />
     <Compile Include="Com\LicLib\CChar.cs" />
     <Compile Include="Com\LicLib\onLicEventKey.cs" />

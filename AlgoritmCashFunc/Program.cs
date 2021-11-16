@@ -87,6 +87,14 @@ namespace AlgoritmCashFunc
                             // Проверка режима с интерфейсом или нет
                             if (IsInterfase)
                             {
+                                /* Тест плагинов по документу
+                                Com.DocumentFarm.ListDocumentName();
+                                BLL.Document Doc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                                Doc.PlgMethod.SetTest(1);
+                                DateTime f = ((BLL.DocumentPlg.DocumentPrihod)Doc.DocBsInterfaceCustom).privObj;
+                                */
+
+
                                 // Авторизуем пользователя
                                 Login();
 
