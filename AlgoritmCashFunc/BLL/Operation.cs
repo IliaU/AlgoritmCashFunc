@@ -34,7 +34,7 @@ namespace AlgoritmCashFunc.BLL
         /// <param name="Id">Идентификатор операции</param>
         /// <param name="DocFullName">Тип соответствующий плагину</param>
         /// <param name="OperationName">Описание операции которое видит пользователь</param>
-        public Operation(int Id, string DocFullName, string OperationName)
+        public Operation(int? Id, string DocFullName, string OperationName)
         {
             this.Id = Id;
             this.DocFullName = DocFullName;

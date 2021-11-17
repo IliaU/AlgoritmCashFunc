@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.Windows.Forms;
-using AlgoritmCashFunc.Lib;
+using AlgoritmCashFunc.BLL;
 
 namespace AlgoritmCashFunc.Com.Provider.Lib
 {
@@ -31,6 +31,12 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         /// </summary>
         /// <returns>Строка подклюения с замасированной секретной информацией</returns>
         string PrintConnectionString();
+
+        /// <summary>
+        /// Получение списка операций из базы данных 
+        /// </summary>
+        /// <returns>Стандартный список операций</returns>
+        OperationList GetOperationList();
 /*
         /// <summary>
         /// Устанавливаем факт по чеку

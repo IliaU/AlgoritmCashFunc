@@ -17,7 +17,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
         /// <summary>
         /// Идентификатор продукта в коллекции
         /// </summary>
-        public int Index { get; protected set; }
+        public int Index { get; protected set; } = -1;
 
         /// <summary>
         /// Представляет из себя список продуктов
@@ -29,6 +29,24 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
             /// </summary>
             private List<Operation> _OperationL = new List<Operation>();
 
+            /// <summary>
+            /// Индексаторы
+            /// </summary>
+            /// <param name="s">Поиск по DocFullName</param>
+            /// <returns>Возвращает операцию</returns>
+            public Operation this[string s]
+            {
+                get
+                {
+                    foreach (Operation item in this._OperationL)
+                    {
+                        if (item.DocFullName == s) return item;
+                    }
+
+                    return null;
+                }
+                private set { }
+            }
 
             /// <summary>
             /// Индексаторы
@@ -47,17 +65,19 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
             /// <summary>
             /// Индексаторы
             /// </summary>
-            /// <param name="index">Поиск по id</param>
+            /// <param name="id">Поиск по id</param>
             /// <returns>Возвращает операцию</returns>
             public Operation this[int? id]
             {
                 get
                 {
-                    foreach (Operation item in this._OperationL)
+                    if (id != null)
                     {
-                        if (item.Id != null && item.Id == id) return item;
+                        foreach (Operation item in this._OperationL)
+                        {
+                            if (item.Id != null && item.Id == id) return item;
+                        }
                     }
-
                     return null;
                 }
                 private set { }
@@ -68,8 +88,18 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
             /// </summary>
             public OperationBaseList()
             {
-                // Можно было бы сделать чтобы справочник грузился сразу в конструкторе, но проблема в том что статические классы создаются до того как мы запускаем форму и из за этого возникает проблема с подписью
-                //GetProductListNotCash();
+                try
+                {
+                    // Можно было бы сделать чтобы справочник грузился сразу в конструкторе, но проблема в том что статические классы создаются до того как мы запускаем форму и из за этого возникает проблема с подписью
+                    //GetProductListNotCash();
+                }
+                catch (Exception ex)
+                {
+                    ApplicationException ae = new ApplicationException(string.Format("Упали при инициализации класса с ошибкой: ({0})", ex.Message));
+                    Com.Log.EventSave(ae.Message, GetType().Name, EventEn.Error);
+                    throw ae;
+                }
+                
             }
 
 
@@ -90,7 +120,6 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
                 private set { }
             }
 
-
             /// <summary>
             /// Добавление нового продукта
             /// </summary>
@@ -102,7 +131,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
                     // Добавляет продукт в список
                     lock (_OperationL)
                     {
-                        nOperation.Index = this.Count + 1;
+                        nOperation.Index = this.Count;
                         _OperationL.Add(nOperation);
                     }
                 }

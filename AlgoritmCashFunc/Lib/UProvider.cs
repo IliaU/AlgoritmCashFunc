@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Threading;
 using AlgoritmCashFunc.Com.Provider.Lib;
+using AlgoritmCashFunc.BLL;
 
 namespace AlgoritmCashFunc.Lib
 {
@@ -259,29 +260,15 @@ namespace AlgoritmCashFunc.Lib
             this.PrvB.setData(SQL);
         }
 
-  /*
         /// <summary>
-        /// Устанавливаем факт по чеку
+        /// Получение списка операций из базы данных 
         /// </summary>
-        /// <param name="CustInn">Инн покупателя</param>
-        /// <param name="InvcNo">Сид докумнета</param>
-        /// <param name="PosDate">Дата документа</param>
-        /// <param name="TotalCashSum">Сумма по документу уплаченная налом</param>
-        public void SetPrizmCustPorog(string CustInn, string InvcNo, DateTime PosDate, decimal TotalCashSum)
+        /// <returns>Стандартный список операций</returns>
+        public OperationList GetOperationList()
         {
-            this.PrvI.SetPrizmCustPorog(CustInn, InvcNo, PosDate, TotalCashSum);
+            return this.PrvI.GetOperationList();
         }
 
-        /// <summary>
-        /// Получить сумму по клиенту за дату
-        /// </summary>
-        /// <param name="CustInn">Инн покупателя</param>
-        /// <param name="Dt">Дата смены</param>
-        /// <returns>Сумму по клиенту за выбранную дату</returns>
-        public decimal GetTotalCashSum(string CustInn, DateTime Dt)
-        {
-            return this.PrvI.GetTotalCashSum(CustInn, Dt);
-        }
-*/
+     
     }
 }

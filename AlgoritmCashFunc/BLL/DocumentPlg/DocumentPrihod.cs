@@ -20,7 +20,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         /// <summary>
         /// Конструктор
         /// </summary>
-        public DocumentPrihod() : base(new Operation(100, "DocumentPrihod", "Приходный ордер"))
+        public DocumentPrihod() : base(new Operation(null, "DocumentPrihod", "Приходный ордер"))
         {
             try
             {

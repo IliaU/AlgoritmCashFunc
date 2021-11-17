@@ -10,6 +10,7 @@ using System.Data;
 using AlgoritmCashFunc.Com.Provider.Lib;
 using AlgoritmCashFunc.Lib;
 using System.Threading;
+using AlgoritmCashFunc.BLL;
 
 namespace AlgoritmCashFunc.Com.Provider
 {
@@ -216,15 +217,11 @@ namespace AlgoritmCashFunc.Com.Provider
             }
         }
 
-/*
         /// <summary>
-        /// Устанавливаем факт по чеку
+        /// Получение списка операций из базы данных 
         /// </summary>
-        /// <param name="CustInn">Инн покупателя</param>
-        /// <param name="InvcNo">Сид докумнета</param>
-        /// <param name="PosDate">Дата документа</param>
-        /// <param name="TotalCashSum">Сумма по документу уплаченная налом</param>
-        public void SetPrizmCustPorog(string CustInn, string InvcNo, DateTime PosDate, decimal TotalCashSum)
+        /// <returns>Стандартный список операций</returns>
+        public OperationList GetOperationList()
         {
             try
             {
@@ -237,69 +234,23 @@ namespace AlgoritmCashFunc.Com.Provider
                     {
                         case "SQORA32.DLL":
                         case "SQORA64.DLL":
-                            SetPrizmCustPorogORA(CustInn, InvcNo, PosDate, TotalCashSum);
-                            break;
+                            return GetOperationListORA();
                         case "myodbc8a.dll":
-                            SetPrizmCustPorogMySql(CustInn, InvcNo, PosDate, TotalCashSum);
-                            break;
+                            return GetOperationListMySql();
                         default:
                             throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
                             //break;
                     }
                 }
-                //return true;
             }
             catch (Exception ex)
             {
                 // Логируем ошибку если её должен видеть пользователь или если взведён флаг трассировке в файле настройки программы
-                if (Com.Config.Trace) base.EventSave(ex.Message, "SetPrizmCustPorog", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(ex.Message, "GetOperationList", EventEn.Error);
 
-                // Отображаем ошибку если это нужно
-                MessageBox.Show(ex.Message);
+                throw ex;
             }
         }
-
-        /// <summary>
-        /// Получить сумму по клиенту за дату
-        /// </summary>
-        /// <param name="CustInn">Инн покупателя</param>
-        /// <param name="Dt">Дата смены</param>
-        /// <returns>Сумму по клиенту за выбранную дату</returns>
-        public decimal GetTotalCashSum(string CustInn, DateTime Dt)
-        {
-            try
-            {
-                // Если мы работаем в режиме без базы то выводим тестовые записи
-                if (!this.HashConnect()) throw new ApplicationException("Не установлено подключение с базой данных.");
-                else
-                {
-                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
-                    switch (this.Driver)
-                    {
-                        case "SQORA32.DLL":
-                        case "SQORA64.DLL":
-                            return GetTotalCashSumORA(CustInn, Dt);
-                        case "myodbc8a.dll":
-                            return GetTotalCashSumMySql(CustInn, Dt);
-                        default:
-                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
-                            //break;
-                    }
-                }
-                //return true;
-            }
-            catch (Exception ex)
-            {
-                // Логируем ошибку если её должен видеть пользователь или если взведён флаг трассировке в файле настройки программы
-                if (Com.Config.Trace) base.EventSave(ex.Message, "GetTotalCashSum", EventEn.Error);
-
-                // Отображаем ошибку если это нужно
-                MessageBox.Show(ex.Message);
-
-                return 0;
-            }
-        }
-*/
 
         #endregion
 
@@ -475,6 +426,85 @@ namespace AlgoritmCashFunc.Com.Provider
             }
         }
 
+        /// <summary>
+        /// Получение списка операций из базы данных 
+        /// </summary>
+        /// <returns>Стандартный список операций</returns>
+        private OperationList GetOperationListORA()
+        {
+            string CommandSql = String.Format(@"Select Sum(total_cash_sum) As total_cash_sum 
+From aks.prizm_cust_porog");
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationListORA", EventEn.Dump);
+
+                OperationList rez = new OperationList();
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+
+                            if (dr.HasRows)
+                            {
+                                // Получаем схему таблицы
+                                //DataTable tt = dr.GetSchemaTable();
+
+                                //foreach (DataRow item in tt.Rows)
+                                //{
+                                //    DataColumn ncol = new DataColumn(item["ColumnName"].ToString(), Type.GetType(item["DataType"].ToString()));
+                                //ncol.SetOrdinal(int.Parse(item["ColumnOrdinal"].ToString()));
+                                //ncol.MaxLength = (int.Parse(item["ColumnSize"].ToString()) < 300 ? 300 : int.Parse(item["ColumnSize"].ToString()));
+                                //rez.Columns.Add(ncol);
+                                //}
+
+                                // пробегаем по строкам
+                                while (dr.Read())
+                                {
+                                    int? TmpOperation = null;
+                                    string TmpDocFullName = null;
+                                    string TmpOperationName = null;
+                                    for (int i = 0; i < dr.FieldCount; i++)
+                                    {
+                                        if (!dr.IsDBNull(i) && dr.GetName(i).ToUpper() == ("Operation").ToUpper()) TmpOperation = int.Parse(dr.GetValue(i).ToString());
+                                        if (!dr.IsDBNull(i) && dr.GetName(i).ToUpper() == ("DocFullName").ToUpper()) TmpDocFullName = dr.GetValue(i).ToString();
+                                        if (!dr.IsDBNull(i) && dr.GetName(i).ToUpper() == ("OperationName").ToUpper()) TmpOperationName = dr.GetValue(i).ToString();
+                                    }
+
+                                    //Если данные есть то добавляем их в список
+                                    if (TmpOperation != null && !string.IsNullOrWhiteSpace(TmpDocFullName) && !string.IsNullOrWhiteSpace(TmpOperationName))
+                                    {
+                                        OperationList.OperationListFarmBase.AddOperationToList(rez, new Operation((int)TmpOperation, TmpDocFullName, TmpOperationName));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationListORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationListORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationListORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationListORA", EventEn.Dump);
+                throw;
+            }
+        }
+
 /*
         /// <summary>
         /// Устанавливаем факт по чеку
@@ -518,79 +548,6 @@ namespace AlgoritmCashFunc.Com.Provider
         }
 
 
-        /// <summary>
-        /// Получить сумму по клиенту за дату
-        /// </summary>
-        /// <param name="CustInn">Инн покупателя</param>
-        /// <param name="Dt">Дата смены</param>
-        /// <returns>Сумму по клиенту за выбранную дату</returns>
-        public decimal GetTotalCashSumORA(string CustInn, DateTime Dt)
-        {
-            string CommandSql = String.Format(@"Select Sum(total_cash_sum) As total_cash_sum 
-From aks.prizm_cust_porog
-Where dt=To_Date('{1}.{2}.{3}', 'YYYY.MM.DD')
-    and Cust_inn='{0}'", CustInn, Dt.Year, Dt.Month, Dt.Day);
-
-            try
-            {
-                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetTotalCashSumORA", EventEn.Dump);
-
-                decimal rez = 0;
-
-                // Закрывать конект не нужно он будет закрыт деструктором
-                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
-                {
-                    con.Open();
-
-                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
-                    {
-                        com.CommandTimeout = 900;  // 15 минут
-                        using (OdbcDataReader dr = com.ExecuteReader())
-                        {
-
-                            if (dr.HasRows)
-                            {
-                                // Получаем схему таблицы
-                                //DataTable tt = dr.GetSchemaTable();
-
-                                //foreach (DataRow item in tt.Rows)
-                                //{
-                                //    DataColumn ncol = new DataColumn(item["ColumnName"].ToString(), Type.GetType(item["DataType"].ToString()));
-                                //ncol.SetOrdinal(int.Parse(item["ColumnOrdinal"].ToString()));
-                                //ncol.MaxLength = (int.Parse(item["ColumnSize"].ToString()) < 300 ? 300 : int.Parse(item["ColumnSize"].ToString()));
-                                //rez.Columns.Add(ncol);
-                                //}
-
-                                // пробегаем по строкам
-                                while (dr.Read())
-                                {
-                                    decimal total_cash_sum = 0;
-                                    for (int i = 0; i < dr.FieldCount; i++)
-                                    {
-                                        if (!dr.IsDBNull(i) && dr.GetName(i).ToUpper() == ("TOTAL_CASH_SUM").ToUpper()) total_cash_sum = decimal.Parse(dr.GetValue(i).ToString());
-                                    }
-                                    rez += total_cash_sum;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                return rez;
-            }
-            catch (OdbcException ex)
-            {
-                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetTotalCashSumORA", EventEn.Error);
-                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetTotalCashSumORA", EventEn.Dump);
-                throw;
-            }
-            catch (Exception ex)
-            {
-                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetTotalCashSumORA", EventEn.Error);
-                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetTotalCashSumORA", EventEn.Dump);
-                throw;
-            }
-        }
 */
 
         #endregion
@@ -705,67 +662,20 @@ Where dt=To_Date('{1}.{2}.{3}', 'YYYY.MM.DD')
             }
         }
 
-/*
+
         /// <summary>
-        /// Устанавливаем факт по чеку
+        /// Получение списка операций из базы данных 
         /// </summary>
-        /// <param name="CustInn">Инн покупателя</param>
-        /// <param name="InvcNo">Сид докумнета</param>
-        /// <param name="PosDate">Дата документа</param>
-        /// <param name="TotalCashSum">Сумма по документу уплаченная налом</param>
-        public void SetPrizmCustPorogMySql(string CustInn, string InvcNo, DateTime PosDate, decimal TotalCashSum)
+        /// <returns>Стандартный список операций</returns>
+        private OperationList GetOperationListMySql()
         {
-            string CommandSql = String.Format(@"insert into `aks`.`prizm_cust_porog`(`cust_inn`,`invc_no`,`dt`,`pos_date`, `total_cash_sum`) Values('{0}', {1}, STR_TO_DATE('{2},{3},{4}', '%Y,%m,%d'), STR_TO_DATE('{2},{3},{4} {5},{6},{7}', '%Y,%m,%d %H,%i,%s'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+            string CommandSql = String.Format(@"Select `Operation` , `DocFullName`, `OperationName` From `aks`.`CashFunc_Operation`");
 
             try
             {
-                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetPrizmCustPorogMySql", EventEn.Dump);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationListMySql", EventEn.Dump);
 
-                // Закрывать конект не нужно он будет закрыт деструктором
-                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
-                {
-                    con.Open();
-
-                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
-                    {
-                        com.CommandTimeout = 900;  // 15 минут
-                        com.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (OdbcException ex)
-            {
-                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetPrizmCustPorogMySql", EventEn.Error);
-                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetPrizmCustPorogMySql", EventEn.Dump);
-                throw;
-            }
-            catch (Exception ex)
-            {
-                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetPrizmCustPorogMySql", EventEn.Error);
-                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetPrizmCustPorogMySql", EventEn.Dump);
-                throw;
-            }
-        }
-
-
-        /// <summary>
-        /// Получить сумму по клиенту за дату
-        /// </summary>
-        /// <param name="CustInn">Инн покупателя</param>
-        /// <param name="Dt">Дата смены</param>
-        /// <returns>Сумму по клиенту за выбранную дату</returns>
-        public decimal GetTotalCashSumMySql(string CustInn, DateTime Dt)
-        {
-            string CommandSql = String.Format(@"Select Sum(total_cash_sum) As total_cash_sum 
-From `aks`.`prizm_cust_porog`
-Where `dt`=STR_TO_DATE('{1},{2},{3}', '%Y,%m,%d')
-    and `cust_inn`='{0}'", CustInn, Dt.Year, Dt.Month, Dt.Day);
-
-            try
-            {
-                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetTotalCashSumMySql", EventEn.Dump);
-
-                decimal rez = 0;
+                OperationList rez = new OperationList();
 
                 // Закрывать конект не нужно он будет закрыт деструктором
                 using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
@@ -794,12 +704,21 @@ Where `dt`=STR_TO_DATE('{1},{2},{3}', '%Y,%m,%d')
                                 // пробегаем по строкам
                                 while (dr.Read())
                                 {
-                                    decimal total_cash_sum = 0;
+                                    int? TmpOperation = null;
+                                    string TmpDocFullName = null;
+                                    string TmpOperationName = null;
                                     for (int i = 0; i < dr.FieldCount; i++)
                                     {
-                                        if (!dr.IsDBNull(i) && dr.GetName(i).ToUpper() == ("TOTAL_CASH_SUM").ToUpper()) total_cash_sum = decimal.Parse(dr.GetValue(i).ToString());
+                                        if (!dr.IsDBNull(i) && dr.GetName(i).ToUpper() == ("Operation").ToUpper()) TmpOperation = int.Parse(dr.GetValue(i).ToString());
+                                        if (!dr.IsDBNull(i) && dr.GetName(i).ToUpper() == ("DocFullName").ToUpper()) TmpDocFullName = dr.GetValue(i).ToString();
+                                        if (!dr.IsDBNull(i) && dr.GetName(i).ToUpper() == ("OperationName").ToUpper()) TmpOperationName = dr.GetValue(i).ToString();
                                     }
-                                    rez += total_cash_sum;
+
+                                    //Если данные есть то добавляем их в список
+                                    if (TmpOperation != null && !string.IsNullOrWhiteSpace(TmpDocFullName) && !string.IsNullOrWhiteSpace(TmpOperationName))
+                                    {
+                                        OperationList.OperationListFarmBase.AddOperationToList(rez, new Operation((int)TmpOperation, TmpDocFullName, TmpOperationName));
+                                    }
                                 }
                             }
                         }
@@ -810,18 +729,62 @@ Where `dt`=STR_TO_DATE('{1},{2},{3}', '%Y,%m,%d')
             }
             catch (OdbcException ex)
             {
-                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetTotalCashSumMySql", EventEn.Error);
-                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetTotalCashSumMySql", EventEn.Dump);
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationListMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationListMySql", EventEn.Dump);
                 throw;
             }
             catch (Exception ex)
             {
-                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetTotalCashSumMySql", EventEn.Error);
-                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetTotalCashSumMySql", EventEn.Dump);
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationListMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationListMySql", EventEn.Dump);
                 throw;
             }
         }
-*/
+
+        /*
+                /// <summary>
+                /// Устанавливаем факт по чеку
+                /// </summary>
+                /// <param name="CustInn">Инн покупателя</param>
+                /// <param name="InvcNo">Сид докумнета</param>
+                /// <param name="PosDate">Дата документа</param>
+                /// <param name="TotalCashSum">Сумма по документу уплаченная налом</param>
+                public void SetPrizmCustPorogMySql(string CustInn, string InvcNo, DateTime PosDate, decimal TotalCashSum)
+                {
+                    string CommandSql = String.Format(@"insert into `aks`.`prizm_cust_porog`(`cust_inn`,`invc_no`,`dt`,`pos_date`, `total_cash_sum`) Values('{0}', {1}, STR_TO_DATE('{2},{3},{4}', '%Y,%m,%d'), STR_TO_DATE('{2},{3},{4} {5},{6},{7}', '%Y,%m,%d %H,%i,%s'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+                    try
+                    {
+                        if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetPrizmCustPorogMySql", EventEn.Dump);
+
+                        // Закрывать конект не нужно он будет закрыт деструктором
+                        using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                        {
+                            con.Open();
+
+                            using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                            {
+                                com.CommandTimeout = 900;  // 15 минут
+                                com.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                    catch (OdbcException ex)
+                    {
+                        base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetPrizmCustPorogMySql", EventEn.Error);
+                        if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetPrizmCustPorogMySql", EventEn.Dump);
+                        throw;
+                    }
+                    catch (Exception ex)
+                    {
+                        base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetPrizmCustPorogMySql", EventEn.Error);
+                        if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetPrizmCustPorogMySql", EventEn.Dump);
+                        throw;
+                    }
+                }
+
+        
+            */
         #endregion
 
     }

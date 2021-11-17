@@ -449,12 +449,7 @@ namespace AlgoritmCashFunc.Com
                 try { root.SetAttribute("ConnectionString", Com.Lic.InCode(e.Uprv.ConnectionString)); }
                 catch (Exception) { }
 
-
-
-                // Получаем список объектов
-                //foreach (XmlElement item in root.ChildNodes)
-                //{
-                //}
+                Com.OperationFarm.UpdateOperationList();
 
                 Save();
             }

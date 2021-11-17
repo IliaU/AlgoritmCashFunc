@@ -87,12 +87,18 @@ namespace AlgoritmCashFunc
                             // Проверка режима с интерфейсом или нет
                             if (IsInterfase)
                             {
-                                /* Тест плагинов по документу
+                                /* 
+                                //Тест плагинов по документу
                                 Com.DocumentFarm.ListDocumentName();
                                 BLL.Document Doc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
                                 Doc.PlgMethod.SetTest(1);
                                 DateTime f = ((BLL.DocumentPlg.DocumentPrihod)Doc.DocBsInterfaceCustom).privObj;
+                                
+                                //Получение списка всех операций причём еслли нет подключения к базе данных то мы список дополняем тем что есть в нашем плагине по умолчанию
+                                BLL.OperationList ooo = Com.OperationFarm.CurOperationList;
                                 */
+
+
 
 
                                 // Авторизуем пользователя

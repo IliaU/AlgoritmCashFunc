@@ -52,6 +52,7 @@
     <Compile Include="BLL\DocumentPlg\Lib\DocumentInterface.cs" />
     <Compile Include="BLL\DocumentPlg\Lib\OperationBase.cs" />
     <Compile Include="BLL\Operation.cs" />
+    <Compile Include="BLL\OperationList.cs" />
     <Compile Include="Com\Config.cs" />
     <Compile Include="Com\DocumentFarm.cs" />
     <Compile Include="Com\Lic.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Com\LicLib\Osnova.cs" />
     <Compile Include="Com\LicLib\SistemaSchislenia.cs" />
     <Compile Include="Com\Log.cs" />
+    <Compile Include="Com\OperationFarm.cs" />
     <Compile Include="Com\ProviderFarm.cs" />
     <Compile Include="Com\Provider\Lib\ProviderBase.cs" />
     <Compile Include="Com\Provider\Lib\ProviderI.cs" />

@@ -1,3 +1,19 @@
+#	Drop Table `aks`.`CashFunc_Operation`;
+#
+CREATE TABLE `aks`.`CashFunc_Operation` (
+  `Operation` int NOT NULL AUTO_INCREMENT,
+  `DocFullName` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `OperationName` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`Operation`),
+  UNIQUE KEY `uix_CashFunc_Operaion_DocFullName` (`DocFullName`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci; 
+# 
+INSERT INTO `aks`.`CashFunc_Operation` (`Operation`, `DocFullName`, `OperationName`) VALUES (1, 'DocumentPrihod', 'Приходный ордер');
+
+
+
+
+
 #	Drop Table `aks`.`CashFunc_Local`;
 #
 CREATE TABLE `aks`.`cashfunc_local` (
