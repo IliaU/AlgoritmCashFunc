@@ -269,6 +269,13 @@ namespace AlgoritmCashFunc.Lib
             return this.PrvI.GetOperationList();
         }
 
-     
+        /// <summary>
+        /// Получаем список текущий докуменитов
+        /// </summary>
+        /// <returns>Получает текущий список Local из базы данных</returns>
+        public LocalList GetCurLocalListFromDB()
+        {
+            return this.PrvI.GetCurLocalListFromDB();
+        }
     }
 }

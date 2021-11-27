@@ -60,6 +60,7 @@ namespace AlgoritmCashFunc
                         Com.Log Log = new Com.Log("AlgoritmCashFunc.txt");
                         Com.Config Conf = new Com.Config("AlgoritmCashFunc.xml");
                         Com.UserFarm UFrm = new Com.UserFarm(15);
+                        Com.LocalFarm LFarm = new Com.LocalFarm();
 
                         Application.EnableVisualStyles();
                         Application.SetCompatibleTextRenderingDefault(false);
@@ -97,9 +98,6 @@ namespace AlgoritmCashFunc
                                 //Получение списка всех операций причём еслли нет подключения к базе данных то мы список дополняем тем что есть в нашем плагине по умолчанию
                                 BLL.OperationList ooo = Com.OperationFarm.CurOperationList;
                                 */
-
-
-
 
                                 // Авторизуем пользователя
                                 Login();

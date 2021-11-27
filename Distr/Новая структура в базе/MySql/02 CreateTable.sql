@@ -12,42 +12,23 @@ INSERT INTO `aks`.`CashFunc_Operation` (`Operation`, `DocFullName`, `OperationNa
 
 
 
-
-
-#	Drop Table `aks`.`CashFunc_Local`;
+#Drop Table `aks`.`CashFunc_Local`;
 #
 CREATE TABLE `aks`.`cashfunc_local` (
-  `Local` int NOT NULL AUTO_INCREMENT,
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `LocFullName` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `LocalName` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `IsSeller` bit(1) NOT NULL DEFAULT b'0',
   `IsСustomer` bit(1) NOT NULL DEFAULT b'0',
   `IsDivision` bit(1) NOT NULL DEFAULT b'0',
-  PRIMARY KEY (`Local`)
+  `IsDraft` bit(1) NOT NULL DEFAULT b'1',
+  PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci; 
-# 
-INSERT INTO `aks`.`cashfunc_local` (`Local`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (-1, 'ВСЕ Кассы', 0, 0, 0);
-INSERT INTO `aks`.`cashfunc_local` (`Local`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (1, 'Разовый покупатель', 0, 1, 0);
-INSERT INTO `aks`.`cashfunc_local` (`Local`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (2, 'Касса 1', 0, 0, 1);
-INSERT INTO `aks`.`cashfunc_local` (`Local`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (3, 'Касса 2', 0, 0, 1);
-
-
-
-# Drop Table `aks`.`CashFunc_Local_Info`;
 #
-Create table `aks`.`CashFunc_Local_Info`(
-	`Local` int NOT NULL,
-	`InfoName` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-	`About` varchar(300) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-	`Bool1` bit NULL,
-  `Int1` int NULL,
-	`Var1` varchar(1000) NULL,
-	`Dat1` date NULL,
-   PRIMARY KEY (`Local`, `InfoName`)
-	) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-#
-	Insert into `aks`.`CashFunc_Local_Info` (`Local`,	`InfoName`, `About`, `Var1`) Values (1, 'FIO', 'Фамилия Имя Отчество', 'ФИО');
-	
-	
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (1, 'LocalPokupatel', 'Разовый покупатель', 0, 1, 0);
+
+
+
 
 	
 		

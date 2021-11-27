@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using AlgoritmCashFunc.BLL.DocumentPlg.Lib;
+using AlgoritmCashFunc.BLL.Lib;
 
 namespace AlgoritmCashFunc.BLL
 {

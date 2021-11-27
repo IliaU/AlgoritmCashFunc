@@ -37,23 +37,11 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         /// </summary>
         /// <returns>Стандартный список операций</returns>
         OperationList GetOperationList();
-/*
-        /// <summary>
-        /// Устанавливаем факт по чеку
-        /// </summary>
-        /// <param name="CustInn">Инн покупателя</param>
-        /// <param name="InvcNo">Сид докумнета</param>
-        /// <param name="PosDate">Дата документа</param>
-        /// <param name="TotalCashSum">Сумма по документу уплаченная налом</param>
-        void SetPrizmCustPorog(string CustInn, string InvcNo, DateTime PosDate, decimal TotalCashSum);
 
         /// <summary>
-        /// Получить сумму по клиенту за дату
+        /// Получаем список текущий докуменитов
         /// </summary>
-        /// <param name="CustInn">Инн покупателя</param>
-        /// <param name="Dt">Дата смены</param>
-        /// <returns>Сумму по клиенту за выбранную дату</returns>
-        decimal GetTotalCashSum(string CustInn, DateTime Dt);
-        */
+        /// <returns>Получает текущий список Local из базы данных</returns>
+        LocalList GetCurLocalListFromDB();
     }
 }

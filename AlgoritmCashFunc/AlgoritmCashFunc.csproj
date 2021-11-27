@@ -50,7 +50,12 @@
     <Compile Include="BLL\DocumentPlg\DocumentPrihod.cs" />
     <Compile Include="BLL\DocumentPlg\Lib\DocumentBase.cs" />
     <Compile Include="BLL\DocumentPlg\Lib\DocumentInterface.cs" />
-    <Compile Include="BLL\DocumentPlg\Lib\OperationBase.cs" />
+    <Compile Include="BLL\LocalList.cs" />
+    <Compile Include="BLL\LocalPlg\Lib\LocalBase.cs" />
+    <Compile Include="BLL\Lib\OperationBase.cs" />
+    <Compile Include="BLL\Local.cs" />
+    <Compile Include="BLL\LocalPlg\Lib\LocalInterface.cs" />
+    <Compile Include="BLL\LocalPlg\LocalPokupatel.cs" />
     <Compile Include="BLL\Operation.cs" />
     <Compile Include="BLL\OperationList.cs" />
     <Compile Include="Com\Config.cs" />
@@ -61,6 +66,7 @@
     <Compile Include="Com\LicLib\onLicItem.cs" />
     <Compile Include="Com\LicLib\Osnova.cs" />
     <Compile Include="Com\LicLib\SistemaSchislenia.cs" />
+    <Compile Include="Com\LocalFarm.cs" />
     <Compile Include="Com\Log.cs" />
     <Compile Include="Com\OperationFarm.cs" />
     <Compile Include="Com\ProviderFarm.cs" />

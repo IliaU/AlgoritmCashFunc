@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Collections;
 using AlgoritmCashFunc.Lib;
 
-namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
+namespace AlgoritmCashFunc.BLL.Lib
 {
     /// <summary>
     /// Базовый класс для операций
@@ -99,7 +99,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
                     Com.Log.EventSave(ae.Message, GetType().Name, EventEn.Error);
                     throw ae;
                 }
-                
+
             }
 
 
@@ -137,7 +137,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
                 }
                 catch (Exception ex)
                 {
-                    Com.Log.EventSave(string.Format("Произошла ошибка: ({0})", ex.Message), "OperationBase.Add(Operation nOperation)", EventEn.Error, true, false);
+                    Com.Log.EventSave(string.Format("Произошла ошибка: ({0})", ex.Message), string.Format("{0}.OperationBase.Add(Operation nOperation)", GetType().Name), EventEn.Error, true, false);
                     throw ex;
                 }
             }
