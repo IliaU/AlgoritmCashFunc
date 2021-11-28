@@ -33,8 +33,6 @@ namespace AlgoritmCashFunc.Com
         {
             try
             {
-               
-
                 if (CurLocalList == null)
                 {
                     // Если списка документов ещё нет то создаём его
@@ -134,7 +132,7 @@ namespace AlgoritmCashFunc.Com
         /// <returns>Возвращаем Local</returns>
         public static Local CreateNewLocal(string LocFullName)
         {
-            // Если списка документов ещё нет то создаём его
+            // Если списка Local ещё нет то создаём его
             ListLocalName();
 
             Local rez = null;
@@ -146,9 +144,8 @@ namespace AlgoritmCashFunc.Com
                 {
                     Type myType = Type.GetType("AlgoritmCashFunc.BLL.LocalPlg." + LocFullName.Trim(), false, true);
 
-                    // Создаём экземпляр объекта  
-                    //object[] targ = { ConnectionString };
-                    rez = (Local)Activator.CreateInstance(myType/*, targ*/);
+                    // Создаём экземпляр объекта
+                    rez = (Local)Activator.CreateInstance(myType);
 
                     break;
                 }
@@ -169,7 +166,7 @@ namespace AlgoritmCashFunc.Com
         /// <returns>Возвращаем Local</returns>
         public static Local CreateNewLocal(string LocFullName, int Id, string LocalName, bool IsSeller, bool IsСustomer, bool IsDivision)
         {
-            // Если списка документов ещё нет то создаём его
+            // Если списка Local ещё нет то создаём его
             ListLocalName();
 
             Local rez = null;
@@ -199,7 +196,10 @@ namespace AlgoritmCashFunc.Com
         {
             try
             {
-                CurLocalList = Com.ProviderFarm.CurrentPrv.GetCurLocalListFromDB();
+                if (Com.ProviderFarm.CurrentPrv != null)
+                {
+                    CurLocalList = Com.ProviderFarm.CurrentPrv.GetCurLocalListFromDB();
+                }
 
                 return CurLocalList;
             }

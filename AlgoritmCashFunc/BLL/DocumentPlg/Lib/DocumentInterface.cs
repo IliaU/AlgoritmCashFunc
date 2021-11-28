@@ -11,6 +11,6 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
     /// </summary>
     public interface DocumentInterface
     {
-        void SetTest(int Test);
+        
     }
 }

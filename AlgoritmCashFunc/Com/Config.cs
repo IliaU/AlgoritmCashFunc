@@ -449,7 +449,7 @@ namespace AlgoritmCashFunc.Com
                 try { root.SetAttribute("ConnectionString", Com.Lic.InCode(e.Uprv.ConnectionString)); }
                 catch (Exception) { }
 
-                Com.OperationFarm.UpdateOperationList();
+                //Com.OperationFarm.UpdateOperationList();
 
                 Save();
             }

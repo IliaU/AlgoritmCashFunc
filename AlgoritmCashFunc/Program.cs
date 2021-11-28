@@ -61,6 +61,8 @@ namespace AlgoritmCashFunc
                         Com.Config Conf = new Com.Config("AlgoritmCashFunc.xml");
                         Com.UserFarm UFrm = new Com.UserFarm(15);
                         Com.LocalFarm LFarm = new Com.LocalFarm();
+                        Com.OperationFarm OperFarm = new Com.OperationFarm();
+                        Com.DocumentFarm DFrm = new Com.DocumentFarm();
 
                         Application.EnableVisualStyles();
                         Application.SetCompatibleTextRenderingDefault(false);

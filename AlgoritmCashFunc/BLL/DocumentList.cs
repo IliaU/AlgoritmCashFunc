@@ -4,25 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using AlgoritmCashFunc.BLL.DocumentPlg.Lib;
 using AlgoritmCashFunc.Lib;
-using AlgoritmCashFunc.BLL.OperationPlg.Lib;
 
 namespace AlgoritmCashFunc.BLL
 {
     /// <summary>
-    /// Представляет из себя список операций из базы данных с описанием
+    /// Список документов
     /// </summary>
-    public class Operation : OperationBase, OperationInterface
+    public class DocumentList:DocumentBase.DocumentBaseList
     {
-
         /// <summary>
         /// Конструктор
         /// </summary>
-        /// <param name="OpFullName">Тип плагина</param>
-        /// <param name="OperationName">Имя операции для ползователя</param>
-        /// <param name="KoefDebitor">Дебитор коэфициент</param>
-        /// <param name="KoefCreditor">Кредитор коэфициент</param>
-        public Operation(string OpFullName, string OperationName, int KoefDebitor, int KoefCreditor) : base(OpFullName, OperationName, KoefDebitor, KoefCreditor)
+        public DocumentList()
         {
             try
             {

@@ -4,28 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using AlgoritmCashFunc.BLL.DocumentPlg.Lib;
 using AlgoritmCashFunc.Lib;
+using AlgoritmCashFunc.BLL.OperationPlg.Lib;
 
-namespace AlgoritmCashFunc.BLL.DocumentPlg
+namespace AlgoritmCashFunc.BLL.OperationPlg
 {
     /// <summary>
-    /// Класс который представляет из себя докимент прихода
+    /// Представляет из себя Операцию
     /// </summary>
-    public class DocumentPrihod : Document
+    public class OperationProhod:Operation
     {
-        // какой-то внутренний обьект
-        public DateTime privObj;
-
         /// <summary>
         /// Конструктор для загрузки из базы данных
         /// </summary>
         /// <param name="Id">Идентификатор в базе данных</param>
-        /// <param name="DocFullName">Тип плагина</param>
-        /// <param name="CurOperation">Операция к которой относится этот документ</param>
-        /// <param name="LocalDebitor">Дебитор</param>
-        /// <param name="LocalCreditor">Кредитор</param>
-        public DocumentPrihod(int? Id, Operation CurOperation, Local LocalDebitor, Local LocalCreditor) : base("DocumentPrihod", CurOperation, LocalDebitor, LocalCreditor)
+        /// <param name="OperationName">Имя операции для ползователя</param>
+        /// <param name="KoefDebitor">Дебитор коэфициент</param>
+        /// <param name="KoefCreditor">Кредитор коэфициент</param>
+        public OperationProhod(int? Id, string OperationName, int KoefDebitor, int KoefCreditor) : base("OperationProhod",  OperationName, KoefDebitor, KoefCreditor)
         {
             try
             {
@@ -42,7 +38,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         /// <summary>
         /// Конструктор
         /// </summary>
-        public DocumentPrihod() : this(null, Com.OperationFarm.CurOperationList["DocumentPrihod"], null, null)
+        public OperationProhod() : this(null, "Приходный ордер", 0, 1)
         {
             try
             {
@@ -54,7 +50,5 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 throw ae;
             }
         }
-
-
     }
 }

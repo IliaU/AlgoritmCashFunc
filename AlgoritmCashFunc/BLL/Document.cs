@@ -13,12 +13,16 @@ namespace AlgoritmCashFunc.BLL
     /// <summary>
     /// Документ универсалльный который используем в программах
     /// </summary>
-    public class Document : DocumentBase
+    public class Document : DocumentBase, DocumentInterface
     {
         /// <summary>
         /// Конструктор
         /// </summary>
-        public Document()
+        /// <param name="DocFullName">Тип плагина</param>
+        /// <param name="CurOperation">Операция к которой относится этот документ</param>
+        /// <param name="LocalDebitor">Дебитор</param>
+        /// <param name="LocalCreditor">Кредитор</param>
+        public Document(string DocFullName, Operation CurOperation, Local LocalDebitor, Local LocalCreditor):base(DocFullName, CurOperation, LocalDebitor, LocalCreditor)
         {
             try
             {
@@ -26,7 +30,7 @@ namespace AlgoritmCashFunc.BLL
             }
             catch (Exception ex)
             {
-                ApplicationException ae = new ApplicationException(string.Format("Упали при инициализации класса DocumentPrihod с ошибкой: ({0})", ex.Message));
+                ApplicationException ae = new ApplicationException(string.Format("Упали при инициализации конструктора с ошибкой: ({0})", ex.Message));
                 Com.Log.EventSave(ae.Message, GetType().Name, EventEn.Error);
                 throw ae;
             }

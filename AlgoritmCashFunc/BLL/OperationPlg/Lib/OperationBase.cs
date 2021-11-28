@@ -7,17 +7,67 @@ using System.Threading.Tasks;
 using System.Collections;
 using AlgoritmCashFunc.Lib;
 
-namespace AlgoritmCashFunc.BLL.Lib
+namespace AlgoritmCashFunc.BLL.OperationPlg.Lib
 {
     /// <summary>
     /// Базовый класс для операций
     /// </summary>
-    public abstract class OperationBase : EventArgs
+    public abstract class OperationBase
     {
+        /// <summary>
+        /// Идентификатор в базе данных
+        /// </summary>
+        public int? Id { get; protected set; }
+
         /// <summary>
         /// Идентификатор продукта в коллекции
         /// </summary>
         public int Index { get; protected set; } = -1;
+
+        /// <summary>
+        /// Тип плагина
+        /// </summary>
+        public string OpFullName { get; protected set; }
+
+        /// <summary>
+        /// Имя операции для ползователя
+        /// </summary>
+        public string OperationName { get; protected set; }
+
+        /// <summary>
+        /// Дебитор коэфициент
+        /// </summary>
+        public int KoefDebitor { get; protected set; }
+
+        /// <summary>
+        /// Кредитор коэфициент
+        /// </summary>
+        public int KoefCreditor { get; protected set; }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="OpFullName">Тип плагина</param>
+        /// <param name="OperationName">Имя операции для ползователя</param>
+        /// <param name="KoefDebitor">Дебитор коэфициент</param>
+        /// <param name="KoefCreditor">Кредитор коэфициент</param>
+        public OperationBase(string OpFullName, string OperationName, int KoefDebitor, int KoefCreditor)
+        {
+            try
+            {
+                this.OpFullName = OpFullName;
+                this.OperationName = OperationName;
+                this.KoefDebitor = KoefDebitor;
+                this.KoefCreditor = KoefCreditor;
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при инициализации конструктора с ошибкой: ({0})", ex.Message));
+                Com.Log.EventSave(ae.Message, GetType().Name, EventEn.Error);
+                throw ae;
+            }
+
+        }
 
         /// <summary>
         /// Представляет из себя список продуктов
@@ -40,7 +90,7 @@ namespace AlgoritmCashFunc.BLL.Lib
                 {
                     foreach (Operation item in this._OperationL)
                     {
-                        if (item.DocFullName == s) return item;
+                        if (item.OpFullName == s) return item;
                     }
 
                     return null;

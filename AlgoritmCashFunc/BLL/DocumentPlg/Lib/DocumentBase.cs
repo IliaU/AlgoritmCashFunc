@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Collections;
 using AlgoritmCashFunc.Lib;
 
 namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
@@ -14,29 +15,50 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
     public abstract class DocumentBase
     {
         /// <summary>
+        /// Идентификатор в базе данных
+        /// </summary>
+        public int? Id { get; protected set; }
+
+        /// <summary>
+        /// Идентификатор продукта в коллекции
+        /// </summary>
+        public int Index { get; protected set; } = -1;
+
+        /// <summary>
+        /// Тип плагина
+        /// </summary>
+        public string DocFullName { get; protected set; }
+
+        /// <summary>
         /// Операция к которой относится этот документ
         /// </summary>
         public Operation CurOperation { get; private set; }
 
         /// <summary>
-        /// Внутренняя сылка на интерфейс реализованный в плагине по логике тотже самый класс просто перобразован
+        /// Дебитор
         /// </summary>
-        public DocumentInterface PlgMethod { get; private set; }
+        public Local LocalDebitor { get; private set; } = null;
 
         /// <summary>
-        /// Класс базового интерфейса Кастомизированный можно преобразовать например вот так (DocumentPrihod)DocBsInterfaceCustom;
+        /// Кредитор
         /// </summary>
-        public DocumentBaseInterface DocBsInterfaceCustom;
+        public Local LocalCreditor { get; private set; } = null;
 
         /// <summary>
         /// Конструктор
         /// </summary>
+        /// <param name="DocFullName">Тип плагина</param>
         /// <param name="CurOperation">Операция к которой относится этот документ</param>
-        public DocumentBase()
+        /// <param name="LocalDebitor">Дебитор</param>
+        /// <param name="LocalCreditor">Кредитор</param>
+        public DocumentBase(string DocFullName, Operation CurOperation, Local LocalDebitor, Local LocalCreditor)
         {
             try
             {
-
+                this.DocFullName = DocFullName;
+                this.CurOperation = CurOperation;
+                this.LocalDebitor = LocalDebitor;
+                this.LocalCreditor = LocalCreditor;
             }
             catch (Exception ex)
             {
@@ -46,63 +68,122 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
             }
         }
 
-
-
         /// <summary>
-        /// Базовый класс для интерфейсов чтобы они могли настраивать базовый класс
+        /// Представляет из себя список продуктов
         /// </summary>
-        public abstract class DocumentBaseInterface
+        public class DocumentBaseList : IEnumerable
         {
             /// <summary>
-            /// Операция к которой относится этот документ
+            /// Внутренний список
             /// </summary>
-            public Operation CurOperation { get; private set; }
+            private List<Document> _DocumentL = new List<Document>();
 
             /// <summary>
-            /// Конструктор
+            /// Индексаторы
             /// </summary>
-            /// <param name="CurOperation"></param>
-            public DocumentBaseInterface(Operation CurOperation)
+            /// <param name="index">Поиск по индексы</param>
+            /// <returns>Возвращает Document</returns>
+            public Document this[int index]
+            {
+                get
+                {
+                    return this._DocumentL[index];
+                }
+                private set { }
+            }
+
+            /// <summary>
+            /// Индексаторы
+            /// </summary>
+            /// <param name="id">Поиск по id</param>
+            /// <returns>Возвращает Document</returns>
+            public Document this[int? id]
+            {
+                get
+                {
+                    if (id != null)
+                    {
+                        foreach (Document item in this._DocumentL)
+                        {
+                            if (item.Id != null && item.Id == id) return item;
+                        }
+                    }
+                    return null;
+                }
+                private set { }
+            }
+
+            /// <summary>
+            /// Конструктор в котором можно реализовать например базовое первоначальное получение списка доступных товаров
+            /// </summary>
+            public DocumentBaseList()
             {
                 try
                 {
-                    this.CurOperation = CurOperation;
+                    // Можно было бы сделать чтобы справочник грузился сразу в конструкторе, но проблема в том что статические классы создаются до того как мы запускаем форму и из за этого возникает проблема с подписью
+                    //GetProductListNotCash();
                 }
                 catch (Exception ex)
                 {
-                    ApplicationException ae = new ApplicationException(string.Format("Упали при инициализации класса DocumentBaseInterface с ошибкой: ({0})", ex.Message));
+                    ApplicationException ae = new ApplicationException(string.Format("Упали при инициализации конструктора с ошибкой: ({0})", ex.Message));
                     Com.Log.EventSave(ae.Message, GetType().Name, EventEn.Error);
                     throw ae;
                 }
+
             }
 
 
             /// <summary>
-            /// Класс для фермы чтобы он мог заполнить перекрёсные ссылки и в классе документа и в базовом на интерфейс
+            /// Количчество объектов в контейнере
             /// </summary>
-            public abstract class DocumentFarm
+            public int Count
             {
-                /// <summary>
-                /// Инициализация документа
-                /// </summary>
-                /// <param name="Doc">Документ который нужно инициализировать</param>
-                protected static void InitDocumentBase(DocumentBase DocB, DocumentBaseInterface BasInt)
+                get
                 {
-                    try
+                    int rez;
+                    lock (_DocumentL)
                     {
-                        DocB.DocBsInterfaceCustom = BasInt;
-                        DocB.CurOperation = BasInt.CurOperation;
-                        DocB.PlgMethod = (DocumentInterface)BasInt;
+                        rez = _DocumentL.Count;
                     }
-                    catch (Exception ex)
+                    return rez;
+                }
+                private set { }
+            }
+
+            /// <summary>
+            /// Добавление нового продукта
+            /// </summary>
+            /// <param name="nDocument">Новый Document</param>
+            public void Add(Document nDocument)
+            {
+                try
+                {
+                    // Добавляет продукт в список
+                    lock (_DocumentL)
                     {
-                        ApplicationException ae = new ApplicationException(string.Format("Упали с ошибкой: ({0})", ex.Message));
-                        Com.Log.EventSave(ae.Message, "DocumentBase.DocumentBaseInterface.DocumentFarm", EventEn.Error);
-                        throw ae;
+                        nDocument.Index = this.Count;
+                        _DocumentL.Add(nDocument);
                     }
+                }
+                catch (Exception ex)
+                {
+                    Com.Log.EventSave(string.Format("Произошла ошибка: ({0})", ex.Message), string.Format("{0}.OperationBase.Add(Operation nOperation)", GetType().Name), EventEn.Error, true, false);
+                    throw ex;
                 }
             }
 
+            /// <summary>
+            /// Для обращения по индексатору
+            /// </summary>
+            /// <returns>Возвращаем стандарнтый индексатор</returns>
+            public IEnumerator GetEnumerator()
+            {
+                lock (_DocumentL)
+                {
+                    return _DocumentL.GetEnumerator();
+                }
+            }
         }
+
     }
 }

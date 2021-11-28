@@ -179,7 +179,7 @@ namespace AlgoritmCashFunc.BLL.LocalPlg.Lib
             /// <summary>
             /// Добавление нового продукта
             /// </summary>
-            /// <param name="nProduct">Новая операция</param>
+            /// <param name="nLocal">Новый Local</param>
             public void Add(Local nLocal)
             {
                 try

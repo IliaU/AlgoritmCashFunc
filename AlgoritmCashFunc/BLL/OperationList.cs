@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using AlgoritmCashFunc.Lib;
-using AlgoritmCashFunc.BLL.Lib;
+using AlgoritmCashFunc.BLL.OperationPlg.Lib;
 
 namespace AlgoritmCashFunc.BLL
 {
