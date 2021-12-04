@@ -22,11 +22,11 @@ namespace AlgoritmCashFunc.BLL
         /// <param name="CurOperation">Операция к которой относится этот документ</param>
         /// <param name="LocalDebitor">Дебитор</param>
         /// <param name="LocalCreditor">Кредитор</param>
-        public Document(string DocFullName, Operation CurOperation, Local LocalDebitor, Local LocalCreditor):base(DocFullName, CurOperation, LocalDebitor, LocalCreditor)
+        /// <param name="IsDraft">Черновик</param>
+        public Document(string DocFullName, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, bool IsDraft) :base(DocFullName, CurOperation, LocalDebitor, LocalCreditor, IsDraft)
         {
             try
             {
-
             }
             catch (Exception ex)
             {

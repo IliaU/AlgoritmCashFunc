@@ -50,6 +50,11 @@ namespace AlgoritmCashFunc.BLL.LocalPlg.Lib
         public bool IsDivision { get; protected set; } = false;
 
         /// <summary>
+        /// Черновик
+        /// </summary>
+        public bool IsDraft { get; protected set; } = true;
+
+        /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="LocFullName">Тип плагина</param>
@@ -57,7 +62,8 @@ namespace AlgoritmCashFunc.BLL.LocalPlg.Lib
         /// <param name="IsSeller">Роль поставщика</param>
         /// <param name="IsСustomer">Роль покупатнеля</param>
         /// <param name="IsDivision">Роль подразделения</param>
-        public LocalBase(string LocFullName, string LocalName, bool IsSeller, bool IsСustomer, bool IsDivision)
+        /// <param name="IsDraft">Черновик</param>
+        public LocalBase(string LocFullName, string LocalName, bool IsSeller, bool IsСustomer, bool IsDivision, bool IsDraft)
         {
             try
             {
@@ -66,6 +72,7 @@ namespace AlgoritmCashFunc.BLL.LocalPlg.Lib
                 this.IsSeller = IsSeller;
                 this.IsСustomer = IsСustomer;
                 this.IsDivision = IsDivision;
+                this.IsDraft = IsDraft;
             }
             catch (Exception ex)
             {
@@ -187,6 +194,8 @@ namespace AlgoritmCashFunc.BLL.LocalPlg.Lib
                     // Добавляет продукт в список
                     lock (_LocalL)
                     {
+                        if (nLocal.Id!=null && this[nLocal.Id] != null) throw new ApplicationException(String.Format("В этом списке Local с таким Id ({0}) уже существует", nLocal.Id));
+
                         nLocal.Index = this.Count;
                         _LocalL.Add(nLocal);
                     }
@@ -210,7 +219,5 @@ namespace AlgoritmCashFunc.BLL.LocalPlg.Lib
                 }
             }
         }
-
-
     }
 }

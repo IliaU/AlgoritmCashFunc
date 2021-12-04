@@ -38,7 +38,7 @@ namespace AlgoritmCashFunc.BLL.OperationPlg
         /// <summary>
         /// Конструктор
         /// </summary>
-        public OperationProhod() : this(null, "Приходный ордер", 0, 1)
+        public OperationProhod() : this(null, "Приходный ордер", 1, 0)
         {
             try
             {

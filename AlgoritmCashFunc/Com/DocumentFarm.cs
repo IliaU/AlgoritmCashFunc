@@ -22,8 +22,10 @@ namespace AlgoritmCashFunc.Com
         /// </summary>
         private static List<string> DocumentName;
 
-
-
+        /// <summary>
+        /// Текущий список доступных документов
+        /// </summary>
+        public static DocumentList CurDocumentList = null;
 
         /// <summary>
         /// Конструктор
@@ -36,6 +38,8 @@ namespace AlgoritmCashFunc.Com
                 {
                     // Если списка документов ещё нет то создаём его
                     ListDocumentName();
+
+                    UpdateDocumentListFromDB();
                 }
             }
             catch (Exception ex)
@@ -97,13 +101,19 @@ namespace AlgoritmCashFunc.Com
                         ParameterInfo[] parameters = ctor.GetParameters();
                         
                         // если в этом конструктаре 10 параметров то проверяем тип и имя параметра 
-                        if (parameters.Length == 4)
+                        if (parameters.Length == 10)
                         {
                             bool flag2 = true;
                             if (parameters[0].ParameterType.Name != "Nullable`1" || parameters[0].Name != "Id") flag = false;
-                            if (parameters[1].ParameterType.Name != "Operation" || parameters[1].Name != "CurOperation") flag = false;
-                            if (parameters[2].ParameterType.Name != "Local" || parameters[2].Name != "LocalDebitor") flag = false;
-                            if (parameters[3].ParameterType.Name != "Local" || parameters[3].Name != "LocalCreditor") flag = false;
+                            if (parameters[1].ParameterType.Name != "DateTime" || parameters[1].Name != "UreDate") flag = false;
+                            if (parameters[2].ParameterType.Name != "DateTime" || parameters[2].Name != "CteateDate") flag = false;
+                            if (parameters[3].ParameterType.Name != "DateTime" || parameters[3].Name != "ModifyDate") flag = false;
+                            if (parameters[4].ParameterType.Name != "String" || parameters[4].Name != "ModifyUser") flag = false;
+                            if (parameters[5].ParameterType.Name != "Operation" || parameters[5].Name != "CurOperation") flag = false;
+                            if (parameters[6].ParameterType.Name != "Local" || parameters[6].Name != "LocalDebitor") flag = false;
+                            if (parameters[7].ParameterType.Name != "Local" || parameters[7].Name != "LocalCreditor") flag = false;
+                            if (parameters[8].ParameterType.Name != "Boolean" || parameters[8].Name != "IsDraft") flag = false;
+                            if (parameters[9].ParameterType.Name != "Boolean" || parameters[9].Name != "IsProcessed") flag = false;
                             flag = flag2;
                         }
                         
@@ -152,14 +162,19 @@ namespace AlgoritmCashFunc.Com
         /// <summary>
         /// Создание элемента из базы данных
         /// </summary>
-        /// <param name="DocFullName">Имя плагина определяющего тип Document который создаём</param>
         /// <param name="Id">Идентификатор в базе данных</param>
-        /// <param name="LocalName">Имя из базы данных</param>
-        /// <param name="IsSeller">Роль поставщика</param>
-        /// <param name="IsСustomer">Роль покупателя</param>
-        /// <param name="IsDivision">Роль подразделения или кассы</param>
+        /// <param name="DocFullName">Имя плагина определяющего тип Document который создаём</param>
+        /// <param name="UreDate">Дата создания документа</param>
+        /// <param name="CteateDate">Дата создания документа</param>
+        /// <param name="ModifyDate">Дата изменеия документа</param>
+        /// <param name="ModifyUser">Пользовтаель который изменил последний раз документ</param>
+        /// <param name="CurOperation">Операция к которой относится этот документ</param>
+        /// <param name="LocalDebitor">Дебитор</param>
+        /// <param name="LocalCreditor">Кредитор</param>
+        /// <param name="IsDraft">Черновик</param>
+        /// <param name="IsProcessed">Проведённый документ или нет</param>
         /// <returns>Возвращаем Local</returns>
-        public static Document CreateNewDocument(string DocFullName, int Id, Operation CurOperation, Local LocalDebitor, Local LocalCreditor)
+        public static Document CreateNewDocument(int Id, string DocFullName, DateTime? UreDate, DateTime CteateDate, DateTime ModifyDate, string ModifyUser, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, bool IsDraft, bool IsProcessed)
         {
             // Если списка документов ещё нет то создаём его
             ListDocumentName();
@@ -174,7 +189,7 @@ namespace AlgoritmCashFunc.Com
                     Type myType = Type.GetType("AlgoritmCashFunc.BLL.DocumentPlg." + DocFullName.Trim(), false, true);
 
                     // Создаём экземпляр объекта  
-                    object[] targ = { Id, CurOperation, LocalDebitor, LocalCreditor };
+                    object[] targ = {Id, UreDate, CteateDate, ModifyDate,  ModifyUser, CurOperation, LocalDebitor, LocalCreditor, IsDraft, IsProcessed};
                     rez = (Document)Activator.CreateInstance(myType, targ);
 
                     break;
@@ -184,5 +199,28 @@ namespace AlgoritmCashFunc.Com
             return rez;
         }
 
+
+        /// <summary>
+        /// Актуализация текущего списка Local
+        /// </summary>
+        public static void UpdateDocumentListFromDB()
+        {
+            try
+            {
+                // Получаем список по умолчанию
+                DocumentList TmpDocumentList = null;
+
+            //    if (Com.ProviderFarm.CurrentPrv != null) if (Com.ProviderFarm.CurrentPrv != null) TmpDocumentList = Com.ProviderFarm.CurrentPrv.GetDocumentListFromDB();
+            //        else TmpDocumentList = new DocumentList();
+
+                CurDocumentList = TmpDocumentList;
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при вызове метода с ошибкой: ({0})", ex.Message));
+                Com.Log.EventSave(ae.Message, "DocumentFarm.UpdateDocumentListFromDB", EventEn.Error);
+                throw ae;
+            }
+        }
     }
 }

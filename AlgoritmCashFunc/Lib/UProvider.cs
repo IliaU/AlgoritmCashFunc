@@ -273,9 +273,20 @@ namespace AlgoritmCashFunc.Lib
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <returns>Получает текущий список Local из базы данных</returns>
-        public LocalList GetCurLocalListFromDB()
+        public LocalList GetLocalListFromDB()
         {
-            return this.PrvI.GetCurLocalListFromDB();
+            return this.PrvI.GetLocalListFromDB();
+        }
+
+        /// <summary>
+        /// Получаем список текущий докуменитов
+        /// </summary>
+        /// <param name="LastDay">Сколько последних дней грузить из базы данных если null значит весь период</param>
+        /// <param name="OperationId">Какая операция нас интересует, если </param>
+        /// <returns>Получает список Document из базы данных удовлетворяющий фильтрам</returns>
+        public DocumentList GetDocumentListFromDB(int? LastDay, int? OperationId)
+        {
+            return this.PrvI.GetDocumentListFromDB(LastDay, OperationId);
         }
     }
 }

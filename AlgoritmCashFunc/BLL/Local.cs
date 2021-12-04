@@ -22,7 +22,8 @@ namespace AlgoritmCashFunc.BLL
         /// <param name="IsSeller">Роль поставщика</param>
         /// <param name="IsСustomer">Роль покупатнеля</param>
         /// <param name="IsDivision">Роль подразделения</param>
-        public Local(string LocFullName, string LocalName, bool IsSeller, bool IsСustomer, bool IsDivision):base(LocFullName, LocalName, IsSeller, IsСustomer, IsDivision)
+        /// <param name="IsDraft">Черновик</param>
+        public Local(string LocFullName, string LocalName, bool IsSeller, bool IsСustomer, bool IsDivision, bool IsDraft) :base(LocFullName, LocalName, IsSeller, IsСustomer, IsDivision, IsDraft)
         {
             try
             {

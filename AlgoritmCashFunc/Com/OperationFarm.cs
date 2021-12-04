@@ -37,7 +37,8 @@ namespace AlgoritmCashFunc.Com
                     // Если списка документов ещё нет то создаём его
                     ListOperationName();
 
-                    //GetCurOperationListFromDB();
+                    // Обновление списка операций
+                    UpdateOperationList();
                 }
             }
             catch (Exception ex)
@@ -127,12 +128,12 @@ namespace AlgoritmCashFunc.Com
         /// </summary>
         /// <param name="OpFullName">Имя плагина определяющего тип Operation который создаём</param>
         /// <returns>Возвращаем Local</returns>
-        public static Local CreateNewOperation(string OpFullName)
+        public static Operation CreateNewOperation(string OpFullName)
         {
             // Если списка Local ещё нет то создаём его
             ListOperationName();
 
-            Local rez = null;
+            Operation rez = null;
 
             // Проверяем наличие существование этого типа документа
             foreach (string item in ListOperationName())
@@ -142,7 +143,7 @@ namespace AlgoritmCashFunc.Com
                     Type myType = Type.GetType("AlgoritmCashFunc.BLL.OperationPlg." + OpFullName.Trim(), false, true);
 
                     // Создаём экземпляр объекта
-                    rez = (Local)Activator.CreateInstance(myType);
+                    rez = (Operation)Activator.CreateInstance(myType);
 
                     break;
                 }
@@ -154,29 +155,29 @@ namespace AlgoritmCashFunc.Com
         /// <summary>
         /// Создание элемента из базы данных
         /// </summary>
-        /// <param name="OpFullName">Имя плагина определяющего тип Local который создаём</param>
-        /// <param name="Id">Идентификатор в базе данных</param>
+        /// <param name="Id">Имя плагина определяющего тип Local который создаём</param>
+        /// <param name="TmpOpFullName">Идентификатор в базе данных</param>
         /// <param name="OperationName">Имя операции для ползователя</param>
         /// <param name="KoefDebitor">Дебитор коэфициент</param>
         /// <param name="KoefCreditor">Кредитор коэфициент</param>
         /// <returns>Возвращаем Local</returns>
-        public static Local CreateNewOperation(string OpFullName, int Id, string OperationName, int KoefDebitor, int KoefCreditor)
+        public static Operation CreateNewOperation(int Id, string TmpOpFullName, string OperationName, int KoefDebitor, int KoefCreditor)
         {
             // Если списка Local ещё нет то создаём его
             ListOperationName();
 
-            Local rez = null;
+            Operation rez = null;
 
             // Проверяем наличие существование этого типа документа
-            foreach (string item in ListOperationName())
+            foreach (string item in OpFullName)
             {
-                if (item == OpFullName.Trim())
+                if (item == TmpOpFullName.Trim())
                 {
-                    Type myType = Type.GetType("AlgoritmCashFunc.BLL.OperationPlg." + OpFullName.Trim(), false, true);
+                    Type myType = Type.GetType("AlgoritmCashFunc.BLL.OperationPlg." + TmpOpFullName.Trim(), false, true);
 
                     // Создаём экземпляр объекта  
                     object[] targ = { Id, OperationName, KoefDebitor, KoefCreditor };
-                    rez = (Local)Activator.CreateInstance(myType, targ);
+                    rez = (Operation)Activator.CreateInstance(myType, targ);
 
                     break;
                 }
@@ -184,9 +185,8 @@ namespace AlgoritmCashFunc.Com
 
             return rez;
         }
-
-
-        /*
+        
+        
         /// <summary>
         /// Обновление списка операций
         /// </summary>
@@ -195,27 +195,39 @@ namespace AlgoritmCashFunc.Com
             try
             {
                 // получаем список по умолчанию
-                OperationList TmpOlist = new OperationList();
-                foreach (string item in DocumentFarm.ListDocumentName())
-                {
-                    Document doctmp = DocumentFarm.CreateNewDocument(item);
-                    AddOperationToList(TmpOlist, doctmp.CurOperation);
-                }
+                OperationList TmpOlist = null;
 
                 // Получаем список из базы данных
-                if (Com.ProviderFarm.CurrentPrv != null)
-                {
-                    _CurOperationList = Com.ProviderFarm.CurrentPrv.GetOperationList();
+                if (Com.ProviderFarm.CurrentPrv != null)TmpOlist = Com.ProviderFarm.CurrentPrv.GetOperationList();
+                else TmpOlist = new OperationList();
 
-                    // Пробегаем по дефолтному списку
-                    foreach (Operation item in TmpOlist)
+
+                // Получаем список операций из плагина если операции в итоговом списке нет то нужно её добавить в базу данных
+                foreach (string item in OpFullName)
+                {
+                    // Пробегаем по текщему списку и если этой операции нет значит её надо добавить из текущего списка в плагине
+                    bool HachExists = false;
+                    foreach (Operation itemCur in TmpOlist)
                     {
-                        // Если такой операции не найдено то обогощаем список этой операцией
-                        if (_CurOperationList[item.DocFullName] == null) OperationList.OperationListFarmBase.AddOperationToList(_CurOperationList, item);
+                        if (itemCur.OpFullName== item)
+                        {
+                            HachExists = true;
+                            break;
+                        }
+                    }
+
+                    // Если операции нет в списке то добавляем её
+                    if (!HachExists)
+                    {
+                        Com.Log.EventSave(String.Format("Операции не обнаружено в базе данных нужно её добавить ({0})", item), "OperationFarm.UpdateOperationList", EventEn.Error);
+                        Operation optmp = CreateNewOperation(item);
+                        // Тут можно вызвать сохранение в базе данных если это предусмотренно
+                        // Добавляем в итоговый список
+                        TmpOlist.Add(optmp);
                     }
                 }
-                else _CurOperationList = TmpOlist;
-              
+                
+                CurOperationList = TmpOlist;
             }
             catch (Exception ex)
             {
@@ -224,6 +236,6 @@ namespace AlgoritmCashFunc.Com
                 throw ae;
             }
         }
-        */
+        
     }
 }

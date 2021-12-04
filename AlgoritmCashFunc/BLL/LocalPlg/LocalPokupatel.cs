@@ -22,7 +22,8 @@ namespace AlgoritmCashFunc.BLL.LocalPlg
         /// <param name="IsSeller">Роль поставщика</param>
         /// <param name="IsСustomer">Роль покупателя</param>
         /// <param name="IsDivision">Роль подразделения или кассы</param>
-        public LocalPokupatel(int? Id, string LocalName, bool IsSeller, bool IsСustomer, bool IsDivision) : base("LocalPokupatel", LocalName, IsSeller, IsСustomer, IsDivision)
+        /// <param name="IsDraft">Черновик</param>
+        public LocalPokupatel(int? Id, string LocalName, bool IsSeller, bool IsСustomer, bool IsDivision, bool IsDraft) : base("LocalPokupatel", LocalName, IsSeller, IsСustomer, IsDivision, IsDraft)
         {
             try
             {
@@ -39,7 +40,7 @@ namespace AlgoritmCashFunc.BLL.LocalPlg
         /// <summary>
         /// Конструктор
         /// </summary>
-        public LocalPokupatel():this(null, Guid.NewGuid().ToString(), true, false, false)
+        public LocalPokupatel():this(null, Guid.NewGuid().ToString(), true, false, false, true)
         {
             try
             {

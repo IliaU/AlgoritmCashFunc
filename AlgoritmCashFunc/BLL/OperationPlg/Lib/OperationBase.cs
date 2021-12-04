@@ -152,7 +152,6 @@ namespace AlgoritmCashFunc.BLL.OperationPlg.Lib
 
             }
 
-
             /// <summary>
             /// Количчество объектов в контейнере
             /// </summary>
@@ -174,13 +173,15 @@ namespace AlgoritmCashFunc.BLL.OperationPlg.Lib
             /// Добавление нового продукта
             /// </summary>
             /// <param name="nProduct">Новая операция</param>
-            protected void Add(Operation nOperation)
+            public void Add(Operation nOperation)
             {
                 try
                 {
                     // Добавляет продукт в список
                     lock (_OperationL)
                     {
+                        if (this[nOperation.OpFullName] != null) throw new ApplicationException(String.Format("В этом списке операция с типом {0} уже существует", nOperation.OpFullName));
+
                         nOperation.Index = this.Count;
                         _OperationL.Add(nOperation);
                     }

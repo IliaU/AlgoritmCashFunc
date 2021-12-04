@@ -38,7 +38,7 @@ namespace AlgoritmCashFunc.Com
                     // Если списка документов ещё нет то создаём его
                     ListLocalName();
 
-                    GetCurLocalListFromDB();
+                    UpdateLocalListFromDB();
                 }
             }
             catch (Exception ex)
@@ -101,7 +101,7 @@ namespace AlgoritmCashFunc.Com
                         ParameterInfo[] parameters = ctor.GetParameters();
                         
                         // если в этом конструктаре 5 параметров то проверяем тип и имя параметра 
-                        if (parameters.Length == 5)
+                        if (parameters.Length == 6)
                         {
                             bool flag2 = true;
                             if (parameters[0].ParameterType.Name != "Nullable`1" || parameters[0].Name != "Id") flag = false;
@@ -109,6 +109,7 @@ namespace AlgoritmCashFunc.Com
                             if (parameters[2].ParameterType.Name != "Boolean" || parameters[2].Name != "IsSeller") flag = false;
                             if (parameters[3].ParameterType.Name != "Boolean" || parameters[3].Name != "IsСustomer") flag = false;
                             if (parameters[4].ParameterType.Name != "Boolean" || parameters[4].Name != "IsDivision") flag = false;
+                            if (parameters[5].ParameterType.Name != "Boolean" || parameters[5].Name != "IsDraft") flag = false;
                             flag = flag2;
                         }
                         
@@ -163,8 +164,9 @@ namespace AlgoritmCashFunc.Com
         /// <param name="IsSeller">Роль поставщика</param>
         /// <param name="IsСustomer">Роль покупателя</param>
         /// <param name="IsDivision">Роль подразделения или кассы</param>
+        /// <param name="IsDraft">Черновик</param>
         /// <returns>Возвращаем Local</returns>
-        public static Local CreateNewLocal(string LocFullName, int Id, string LocalName, bool IsSeller, bool IsСustomer, bool IsDivision)
+        public static Local CreateNewLocal(int Id, string LocFullName, string LocalName, bool IsSeller, bool IsСustomer, bool IsDivision, bool IsDraft)
         {
             // Если списка Local ещё нет то создаём его
             ListLocalName();
@@ -179,7 +181,7 @@ namespace AlgoritmCashFunc.Com
                     Type myType = Type.GetType("AlgoritmCashFunc.BLL.LocalPlg." + LocFullName.Trim(), false, true);
 
                     // Создаём экземпляр объекта  
-                    object[] targ = { Id, LocalName, IsSeller, IsСustomer, IsDivision };
+                    object[] targ = { Id, LocalName, IsSeller, IsСustomer, IsDivision, IsDraft};
                     rez = (Local)Activator.CreateInstance(myType, targ);
 
                     break;
@@ -192,21 +194,22 @@ namespace AlgoritmCashFunc.Com
         /// <summary>
         /// Актуализация текущего списка Local
         /// </summary>
-        public static LocalList GetCurLocalListFromDB()
+        public static void UpdateLocalListFromDB()
         {
             try
             {
-                if (Com.ProviderFarm.CurrentPrv != null)
-                {
-                    CurLocalList = Com.ProviderFarm.CurrentPrv.GetCurLocalListFromDB();
-                }
+                // Получаем список по умолчанию
+                LocalList TmpLocalList = null;
 
-                return CurLocalList;
+                if (Com.ProviderFarm.CurrentPrv != null) if (Com.ProviderFarm.CurrentPrv != null) TmpLocalList = Com.ProviderFarm.CurrentPrv.GetLocalListFromDB();
+                    else TmpLocalList = new LocalList();
+
+                CurLocalList = TmpLocalList;
             }
             catch (Exception ex)
             {
                 ApplicationException ae = new ApplicationException(string.Format("Упали при вызове метода с ошибкой: ({0})", ex.Message));
-                Com.Log.EventSave(ae.Message, "LocalFarm.GetCurLocalListFromDB", EventEn.Error);
+                Com.Log.EventSave(ae.Message, "LocalFarm.UpdateLocalListFromDB", EventEn.Error);
                 throw ae;
             }
         }

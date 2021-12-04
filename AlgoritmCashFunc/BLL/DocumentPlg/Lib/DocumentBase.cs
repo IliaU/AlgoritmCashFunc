@@ -30,6 +30,26 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
         public string DocFullName { get; protected set; }
 
         /// <summary>
+        /// Дата создания документа
+        /// </summary>
+        public DateTime CteateDate { get; protected set; } = DateTime.Now;
+
+        /// <summary>
+        /// Юридическая дата к которой относится документ
+        /// </summary>
+        public DateTime? UreDate { get; protected set; } = DateTime.Now.Date;
+
+        /// <summary>
+        /// Дата изменеия документа
+        /// </summary>
+        public DateTime ModifyDate { get; protected set; } = DateTime.Now;
+
+        /// <summary>
+        /// Пользовтаель который изменил последний раз документ
+        /// </summary>
+        public string ModifyUser { get; protected set; } = Com.UserFarm.CurrentUser.Logon;
+
+        /// <summary>
         /// Операция к которой относится этот документ
         /// </summary>
         public Operation CurOperation { get; private set; }
@@ -45,13 +65,24 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
         public Local LocalCreditor { get; private set; } = null;
 
         /// <summary>
+        /// Черновик
+        /// </summary>
+        public bool IsDraft { get; protected set; } = true;
+
+        /// <summary>
+        /// Проведённый документ или нет
+        /// </summary>
+        public bool IsProcessed { get; protected set; } = false;
+
+        /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="DocFullName">Тип плагина</param>
         /// <param name="CurOperation">Операция к которой относится этот документ</param>
         /// <param name="LocalDebitor">Дебитор</param>
         /// <param name="LocalCreditor">Кредитор</param>
-        public DocumentBase(string DocFullName, Operation CurOperation, Local LocalDebitor, Local LocalCreditor)
+        /// <param name="IsDraft"> Черновик</param>
+        public DocumentBase(string DocFullName, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, bool IsDraft)
         {
             try
             {
@@ -59,6 +90,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
                 this.CurOperation = CurOperation;
                 this.LocalDebitor = LocalDebitor;
                 this.LocalCreditor = LocalCreditor;
+                this.IsDraft = IsDraft;
             }
             catch (Exception ex)
             {
