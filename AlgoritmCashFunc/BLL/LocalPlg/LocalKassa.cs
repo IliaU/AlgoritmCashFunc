@@ -9,10 +9,30 @@ using AlgoritmCashFunc.Lib;
 namespace AlgoritmCashFunc.BLL.LocalPlg
 {
     /// <summary>
-    /// Представляет из себя покупателя
+    /// Это касса
     /// </summary>
-    public class LocalPokupatel:Local
+    public sealed class LocalKassa : Local
     {
+        /// <summary>
+        /// Имя хоста к которому привязана текущая локаль
+        /// </summary>
+        public string HostName { get; private set; } = Environment.MachineName;
+
+        /// <summary>
+        /// Организация например OOO "ГУЧЧИ РУС"
+        /// </summary>
+        public string Organization;
+
+        /// <summary>
+        /// Структурное подразделение например ГУЧЧИ Художественный
+        /// </summary>
+        public string StructPodrazdelenie;
+
+        /// <summary>
+        /// ОКПО (Общероссийский классификатор предприятий и организаций) например 17608361
+        /// </summary>
+        public string OKPO;
+
         /// <summary>
         /// Конструктор для загрузки из базы данных
         /// </summary>
@@ -22,11 +42,17 @@ namespace AlgoritmCashFunc.BLL.LocalPlg
         /// <param name="IsСustomer">Роль покупателя</param>
         /// <param name="IsDivision">Роль подразделения или кассы</param>
         /// <param name="IsDraft">Черновик</param>
-        public LocalPokupatel(int? Id, string LocalName, bool IsSeller, bool IsСustomer, bool IsDivision, bool IsDraft) : base("LocalPokupatel", LocalName, IsSeller, IsСustomer, IsDivision, IsDraft)
+        public LocalKassa(int? Id, string LocalName, bool IsSeller, bool IsСustomer, bool IsDivision, bool IsDraft) : base("LocalKassa", LocalName, IsSeller, IsСustomer, IsDivision, IsDraft)
         {
             try
             {
                 base.Id = Id;
+
+                // Если документ читается из базы данных то нужно прочитать дополнительные параметры
+                if(base.Id != null)
+                {
+
+                }
             }
             catch (Exception ex)
             {
@@ -39,7 +65,7 @@ namespace AlgoritmCashFunc.BLL.LocalPlg
         /// <summary>
         /// Конструктор
         /// </summary>
-        public LocalPokupatel():this(null, Guid.NewGuid().ToString(), true, false, false, true)
+        public LocalKassa():this(null, Guid.NewGuid().ToString(), false, false, true, true)
         {
             try
             {
@@ -51,5 +77,8 @@ namespace AlgoritmCashFunc.BLL.LocalPlg
                 throw ae;
             }
         }
+
+
+        public override 
     }
 }

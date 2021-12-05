@@ -35,5 +35,22 @@ namespace AlgoritmCashFunc.BLL
                 throw ae;
             }
         }
+
+        /// <summary>
+        /// Сохранить объект в базе данных
+        /// </summary>
+        public void Save()
+        {
+            try
+            {
+                throw new ApplicationException("dddd");
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
+                Com.Log.EventSave(ae.Message, string.Format("{0}.Save", GetType().Name), EventEn.Error);
+                throw ae;
+            }
+        }
     }
 }

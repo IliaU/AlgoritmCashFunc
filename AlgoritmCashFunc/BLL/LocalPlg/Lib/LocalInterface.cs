@@ -11,7 +11,10 @@ namespace AlgoritmCashFunc.BLL.LocalPlg.Lib
     /// </summary>
     public interface LocalInterface
     {
-
+        /// <summary>
+        /// Сохранить объект в базе данных
+        /// </summary>
+        void Save();
         
     }
 }

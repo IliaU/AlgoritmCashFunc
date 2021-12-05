@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using AlgoritmCashFunc.BLL;
+using AlgoritmCashFunc.BLL.LocalPlg;
 using AlgoritmCashFunc.Lib;
 using System.Reflection;
 
@@ -25,6 +26,11 @@ namespace AlgoritmCashFunc.Com
         /// Текущий список доступных Local
         /// </summary>
         public static LocalList CurLocalList = null;
+
+        /// <summary>
+        /// Текущая локаль нашей Local тоесть касса на которой делается регистрация событий
+        /// </summary>
+        public static LocalKassa CurLocalDepartament = null;
 
         /// <summary>
         /// Конструктор
@@ -48,7 +54,6 @@ namespace AlgoritmCashFunc.Com
                 throw ae;
             }
         }
-
 
         /// <summary>
         /// Получить списко доступных Local
@@ -203,6 +208,23 @@ namespace AlgoritmCashFunc.Com
 
                 if (Com.ProviderFarm.CurrentPrv != null) if (Com.ProviderFarm.CurrentPrv != null) TmpLocalList = Com.ProviderFarm.CurrentPrv.GetLocalListFromDB();
                     else TmpLocalList = new LocalList();
+
+                // Пробегаем по списк для того чтобы проверить есть ли в списке Local  с именем хоста нашей тачки от которой мы сейчас работаем
+                foreach (Local item in TmpLocalList)
+                {
+                    if (item.LocFullName == "LocalKassa" && ((LocalKassa)item).HostName == Environment.MachineName)
+                    {
+                        CurLocalDepartament = (LocalKassa)item;
+                        break;
+                    }
+                }
+
+                // Если не обнаружена касса в этом списке то нужно её слоздать
+                if (CurLocalDepartament == null)
+                {
+                    // Создаём наш объект
+                    LocalKassa TmpLocalKassa = (LocalKassa)(LocalFarm.CreateNewLocal("LocalKassa"));
+                }
 
                 CurLocalList = TmpLocalList;
             }

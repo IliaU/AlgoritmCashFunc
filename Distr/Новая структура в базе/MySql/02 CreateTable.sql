@@ -31,6 +31,25 @@ INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`
 
 
 
+
+Drop Table `aks`.`cashfunc_local_Kassa`;
+#
+CREATE TABLE `cashfunc_local_kassa` (
+  `Id` int NOT NULL,
+  `HostName` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `Organization` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `StructPodr` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `OKPO` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `UIX_local_kassa_HostName` (`HostName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+#
+#INSERT INTO `aks`.`cashfunc_local_Kassa` (`Id`, `HostName`, `Organization`, `StructPodr`, `OKUD`, `OKPO`, `KassaName`) VALUES (1, 'LocalPokupatel', 'Разовый покупатель', 0, 1, 0);
+
+
+
+
+
 #Drop Table `aks`.`CashFunc_Document`;
 #
 CREATE TABLE `aks`.`CashFunc_Document` (
@@ -45,6 +64,7 @@ CREATE TABLE `aks`.`CashFunc_Document` (
   `LocalCreditorId` int NOT NULL,
   `IsDraft` bit(1) NOT NULL DEFAULT b'1',
   `IsProcessed` bit(1) NOT NULL DEFAULT b'0',
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci; 
 

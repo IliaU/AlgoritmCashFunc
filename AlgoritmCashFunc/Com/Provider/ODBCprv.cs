@@ -1215,5 +1215,5 @@ From `aks`.`cashfunc_local`");
             */
         #endregion
 
-        }
+    }
 }
