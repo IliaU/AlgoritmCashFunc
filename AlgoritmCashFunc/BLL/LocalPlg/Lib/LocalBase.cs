@@ -32,7 +32,7 @@ namespace AlgoritmCashFunc.BLL.LocalPlg.Lib
         /// <summary>
         /// Имя в базе данных уникальное. Возможно sid
         /// </summary>
-        public string LocalName { get; protected set; }
+        public string LocalName;
 
         /// <summary>
         /// Роль поставщика
@@ -81,7 +81,7 @@ namespace AlgoritmCashFunc.BLL.LocalPlg.Lib
                 throw ae;
             }
         }
-
+       
         /// <summary>
         /// Представляет из себя список продуктов
         /// </summary>

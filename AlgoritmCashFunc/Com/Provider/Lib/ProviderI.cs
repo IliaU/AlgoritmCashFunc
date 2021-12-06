@@ -45,6 +45,13 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         LocalList GetLocalListFromDB();
 
         /// <summary>
+        /// Сохранение Local в базе
+        /// </summary>
+        /// <param name="NewLocal">Новый локал который нужно сохранить</param>
+        /// <returns>Идентификатор из базы данных под которым сохранили</returns>
+        int SetLocal(Local NewLocal);
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <param name="LastDay">Сколько последних дней грузить из базы данных если null значит весь период</param>

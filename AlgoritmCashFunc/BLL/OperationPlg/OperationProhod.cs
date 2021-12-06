@@ -12,7 +12,7 @@ namespace AlgoritmCashFunc.BLL.OperationPlg
     /// <summary>
     /// Представляет из себя Операцию
     /// </summary>
-    public class OperationProhod:Operation
+    public sealed class OperationProhod:Operation
     {
         /// <summary>
         /// Конструктор для загрузки из базы данных

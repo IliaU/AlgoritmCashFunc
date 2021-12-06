@@ -78,7 +78,21 @@ namespace AlgoritmCashFunc.BLL.LocalPlg
             }
         }
 
-
-        public override 
+        /// <summary>
+        /// Метод заставляет переписать родительский не новый поверз создаёт а переписывает. Для того чтобы плагин мог реализовать своё специфическое сохранение
+        /// </summary>
+        protected override void SaveChildron()
+        {
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
+                Com.Log.EventSave(ae.Message, string.Format("{0}.SaveChildron", GetType().Name), EventEn.Error);
+                throw ae;
+            }
+        }
     }
 }

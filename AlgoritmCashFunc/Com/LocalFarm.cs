@@ -219,11 +219,16 @@ namespace AlgoritmCashFunc.Com
                     }
                 }
 
+                // Сохраняем промежуточный итог
+                CurLocalList = TmpLocalList;
+
                 // Если не обнаружена касса в этом списке то нужно её слоздать
                 if (CurLocalDepartament == null)
                 {
                     // Создаём наш объект
                     LocalKassa TmpLocalKassa = (LocalKassa)(LocalFarm.CreateNewLocal("LocalKassa"));
+                    TmpLocalKassa.LocalName = string.Format("Оператор работающий на хосте {0}", Environment.MachineName);
+                    TmpLocalKassa.Save();
                 }
 
                 CurLocalList = TmpLocalList;

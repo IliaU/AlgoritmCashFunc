@@ -12,7 +12,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
     /// <summary>
     /// Класс который представляет из себя докимент прихода
     /// </summary>
-    public class DocumentPrihod : Document
+    public sealed class DocumentPrihod : Document
     {
         // какой-то внутренний обьект
         public DateTime privObj;
