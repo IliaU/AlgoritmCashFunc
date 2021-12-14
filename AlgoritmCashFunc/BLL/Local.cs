@@ -64,7 +64,8 @@ namespace AlgoritmCashFunc.BLL
                 if (string.IsNullOrWhiteSpace(base.LocalName)) throw new ApplicationException("Необходимо задать имя перед сохраненнием. Это обязательное поле.");
                 if (Com.LocalFarm.CurLocalList[base.LocalName]!=null) throw new ApplicationException("С таким именем Local уже существует. Это уникальное поле.");
 
-                Com.ProviderFarm.CurrentPrv.SetLocal(this);
+                int id = Com.ProviderFarm.CurrentPrv.SetLocal(this);
+                base.Id = id;
 
                 // Запускаем сохранение в нашем плагине
                 this.SaveChildron();

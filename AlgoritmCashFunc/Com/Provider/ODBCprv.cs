@@ -1150,7 +1150,12 @@ From `aks`.`cashfunc_local`");
         /// <returns>Идентификатор из базы данных под которым сохранили</returns>
         private int SetLocalMySql(Local NewLocal)
         {
-            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+            int rez = 0;
+
+            string CommandSql = String.Format(@"insert into `aks`.`cashfunc_local`(`LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`)
+Values(?, ?, ?, ?, ?, ?)");
+            string CommandSql2 = "SELECT LAST_INSERT_ID()  As Id";
+
 
             try
             {
@@ -1163,12 +1168,43 @@ From `aks`.`cashfunc_local`");
 
                     using (OdbcCommand com = new OdbcCommand(CommandSql, con))
                     {
+                        com.Parameters.Add(new OdbcParameter("LocFullName", OdbcType.VarChar, 100) { Value = NewLocal.LocFullName });
+                        com.Parameters.Add(new OdbcParameter("LocalName", OdbcType.VarChar, 100) { Value = NewLocal.LocalName });
+                        com.Parameters.Add(new OdbcParameter("IsSeller", OdbcType.Bit) { Value = NewLocal.IsSeller });
+                        com.Parameters.Add(new OdbcParameter("IsСustomer", OdbcType.Bit) { Value = NewLocal.IsСustomer });
+                        com.Parameters.Add(new OdbcParameter("IsDivision", OdbcType.Bit) { Value = NewLocal.IsDivision });
+                        com.Parameters.Add(new OdbcParameter("IsDraft", OdbcType.Bit) { Value = NewLocal.IsDraft });
+
+
                         com.CommandTimeout = 900;  // 15 минут
                         com.ExecuteNonQuery();
                     }
+                    using (OdbcCommand com2 = new OdbcCommand(CommandSql2, con))
+                    {
+
+                        com2.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com2.ExecuteReader())
+                        {
+
+                            if (dr.HasRows)
+                            {
+                                // пробегаем по строкам
+                                while (dr.Read())
+                                {
+                                    Int64? Id = null;
+
+                                    if (!dr.IsDBNull(0))
+                                    {
+                                        string tmp = dr.GetValue(0).ToString();
+                                        rez = int.Parse(tmp);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
 
-                return 0;
+                return rez;
             }
             catch (OdbcException ex)
             {

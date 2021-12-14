@@ -222,7 +222,7 @@ namespace AlgoritmCashFunc.Com
                 // Сохраняем промежуточный итог
                 CurLocalList = TmpLocalList;
 
-                // Если не обнаружена касса в этом списке то нужно её слоздать
+                // Если не обнаружена касса в этом списке то нужно её создать
                 if (CurLocalDepartament == null)
                 {
                     // Создаём наш объект
@@ -230,8 +230,6 @@ namespace AlgoritmCashFunc.Com
                     TmpLocalKassa.LocalName = string.Format("Оператор работающий на хосте {0}", Environment.MachineName);
                     TmpLocalKassa.Save();
                 }
-
-                CurLocalList = TmpLocalList;
             }
             catch (Exception ex)
             {
