@@ -62,12 +62,27 @@ namespace AlgoritmCashFunc.BLL
             {
                 // Проверка параметров
                 if (string.IsNullOrWhiteSpace(base.LocalName)) throw new ApplicationException("Необходимо задать имя перед сохраненнием. Это обязательное поле.");
-                if (Com.LocalFarm.CurLocalList[base.LocalName]!=null) throw new ApplicationException("С таким именем Local уже существует. Это уникальное поле.");
 
-                int id = Com.ProviderFarm.CurrentPrv.SetLocal(this);
-                base.Id = id;
+                // Если это новый локал то необходимо его создать в базе данных
+                if (base.Id == null)
+                {
+                    // Предварительно проверяем на уникальность имя
+                    if (Com.LocalFarm.CurLocalList[base.LocalName] != null) throw new ApplicationException("С таким именем Local уже существует. Это уникальное поле.");
 
-                // Запускаем сохранение в нашем плагине
+                    // Вставляем новую запись и сохраняем идентификатор
+                    int id = Com.ProviderFarm.CurrentPrv.SetLocal(this);
+                    base.Id = id;
+                }
+                else // Обновление уже существующего Local
+                {
+                    Local LocTmp = Com.LocalFarm.CurLocalList[base.LocalName];
+                    if (LocTmp != null && LocTmp.Id != null && LocTmp.Id != base.Id) new ApplicationException("С таким именем Local уже существует. Это уникальное поле.");
+
+                    // Пробуем обновить в базе инфу в таблице Local  вдруг пользователь например переименовал объект
+                    Com.ProviderFarm.CurrentPrv.UpdateLocal(this);
+                }
+
+                // Запускаем сохранение в нашем дочернем плагине
                 this.SaveChildron();
             }
             catch (Exception ex)

@@ -114,6 +114,8 @@
     <Compile Include="FUsers.Designer.cs">
       <DependentUpon>FUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Lib\ButtonStatusEn.cs" />
+    <Compile Include="Lib\ButtonTagStatus.cs" />
     <Compile Include="Lib\EventLogOFF.cs" />
     <Compile Include="Lib\EventConvertor.cs" />
     <Compile Include="Lib\EventEn.cs" />

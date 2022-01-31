@@ -289,6 +289,53 @@ namespace AlgoritmCashFunc.Lib
         }
 
         /// <summary>
+        /// Обновление Local в базе
+        /// </summary>
+        /// <param name="UpdLocal">Обновляемый локал</param>
+        public void UpdateLocal(Local UpdLocal)
+        {
+            this.PrvI.UpdateLocal(UpdLocal);
+        }
+
+        /// <summary>
+        /// Проверка наличия информации объекта LocalKassa
+        /// </summary>
+        /// <param name="LocalKassa">Объект LocalKassa который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        public bool HashLocalKassa(BLL.LocalPlg.LocalKassa LocalKassa)
+        {
+            return this.PrvI.HashLocalKassa(LocalKassa);
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту LocalKassa
+        /// </summary>
+        /// <param name="LocalKassa">Объект LocalKassa который нужно прочитать в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли проччитать объект или нет</returns>
+        public bool GetLocalKassa(ref BLL.LocalPlg.LocalKassa LocalKassa)
+        {
+            return this.PrvI.GetLocalKassa(ref LocalKassa);
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект LocalKassa
+        /// </summary>
+        /// <param name="NewLocalKassa">Вставляем в базу информацию по объекту LocalKassa</param>
+        public void SetLocalKassa(BLL.LocalPlg.LocalKassa NewLocalKassa)
+        {
+            this.PrvI.SetLocalKassa(NewLocalKassa);
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту LocalKassa
+        /// </summary>
+        /// <param name="UpdLocalKassa">Сам объект данные которого нужно обновить</param>
+        public void UpdateLocalKassa(BLL.LocalPlg.LocalKassa UpdLocalKassa)
+        {
+            this.PrvI.UpdateLocalKassa(UpdLocalKassa);
+        }
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <param name="LastDay">Сколько последних дней грузить из базы данных если null значит весь период</param>

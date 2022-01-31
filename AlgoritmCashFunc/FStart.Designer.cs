@@ -36,12 +36,26 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.pnlTopRight = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
-            this.butnOperator = new System.Windows.Forms.Button();
+            this.btnOperator = new System.Windows.Forms.Button();
             this.picBoxAKS = new System.Windows.Forms.PictureBox();
             this.picBoxPrizm = new System.Windows.Forms.PictureBox();
             this.pnlFill = new System.Windows.Forms.Panel();
             this.tabCntOperation = new System.Windows.Forms.TabControl();
             this.tabPagePrihod = new System.Windows.Forms.TabPage();
+            this.pnlPagPrihTop = new System.Windows.Forms.Panel();
+            this.pnlPagPrihTopTop1 = new System.Windows.Forms.Panel();
+            this.txtBoxStructPodr = new System.Windows.Forms.TextBox();
+            this.lblPrihStructPodr = new System.Windows.Forms.Label();
+            this.pnlPagPrihTopTop0 = new System.Windows.Forms.Panel();
+            this.txtBoxPrihOrganization = new System.Windows.Forms.TextBox();
+            this.lblPrihOrganization = new System.Windows.Forms.Label();
+            this.pnlPagPrihTopRight = new System.Windows.Forms.Panel();
+            this.pnlPagPrihTopRightTop1 = new System.Windows.Forms.Panel();
+            this.lblPrihOKPO = new System.Windows.Forms.Label();
+            this.txtBoxOKPO = new System.Windows.Forms.TextBox();
+            this.pnlPagPrihTopRightTop0 = new System.Windows.Forms.Panel();
+            this.lblPrihOKUD = new System.Windows.Forms.Label();
+            this.txtBoxOKUD = new System.Windows.Forms.TextBox();
             this.tabPageRashod = new System.Windows.Forms.TabPage();
             this.tabPageCashBook = new System.Windows.Forms.TabPage();
             this.tabPageVozvrat = new System.Windows.Forms.TabPage();
@@ -58,6 +72,10 @@
             this.TSMItemConfigPrv = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemConfigUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemLic = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnlPagPrihTopRight1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.grBoxNumDoc = new System.Windows.Forms.GroupBox();
+            this.grBoxDateDoc = new System.Windows.Forms.GroupBox();
             this.pnlTop.SuspendLayout();
             this.pnlTopFill.SuspendLayout();
             this.pnlTopRight.SuspendLayout();
@@ -65,9 +83,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBoxPrizm)).BeginInit();
             this.pnlFill.SuspendLayout();
             this.tabCntOperation.SuspendLayout();
+            this.tabPagePrihod.SuspendLayout();
+            this.pnlPagPrihTop.SuspendLayout();
+            this.pnlPagPrihTopTop1.SuspendLayout();
+            this.pnlPagPrihTopTop0.SuspendLayout();
+            this.pnlPagPrihTopRight.SuspendLayout();
+            this.pnlPagPrihTopRightTop1.SuspendLayout();
+            this.pnlPagPrihTopRightTop0.SuspendLayout();
             this.pnlBottom.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.pnlPagPrihTopRight1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTop
@@ -118,11 +144,13 @@
             this.btnSave.Text = "Сохранить";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             this.btnSave.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
             // btnNew
             // 
             this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnNew.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnNew.Image = ((System.Drawing.Image)(resources.GetObject("btnNew.Image")));
             this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNew.Location = new System.Drawing.Point(6, 3);
@@ -132,12 +160,13 @@
             this.btnNew.Text = "Новый  ";
             this.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             this.btnNew.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
             // pnlTopRight
             // 
             this.pnlTopRight.Controls.Add(this.btnExit);
-            this.pnlTopRight.Controls.Add(this.butnOperator);
+            this.pnlTopRight.Controls.Add(this.btnOperator);
             this.pnlTopRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlTopRight.Location = new System.Drawing.Point(710, 0);
             this.pnlTopRight.Name = "pnlTopRight";
@@ -159,20 +188,20 @@
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             this.btnExit.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
-            // butnOperator
+            // btnOperator
             // 
-            this.butnOperator.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.butnOperator.Image = ((System.Drawing.Image)(resources.GetObject("butnOperator.Image")));
-            this.butnOperator.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.butnOperator.Location = new System.Drawing.Point(6, 3);
-            this.butnOperator.Name = "butnOperator";
-            this.butnOperator.Size = new System.Drawing.Size(192, 36);
-            this.butnOperator.TabIndex = 1;
-            this.butnOperator.Text = "Смена оператора  ";
-            this.butnOperator.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.butnOperator.UseVisualStyleBackColor = true;
-            this.butnOperator.Click += new System.EventHandler(this.butnOperator_Click);
-            this.butnOperator.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
+            this.btnOperator.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnOperator.Image = ((System.Drawing.Image)(resources.GetObject("btnOperator.Image")));
+            this.btnOperator.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnOperator.Location = new System.Drawing.Point(6, 3);
+            this.btnOperator.Name = "btnOperator";
+            this.btnOperator.Size = new System.Drawing.Size(192, 36);
+            this.btnOperator.TabIndex = 1;
+            this.btnOperator.Text = "Смена оператора  ";
+            this.btnOperator.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnOperator.UseVisualStyleBackColor = true;
+            this.btnOperator.Click += new System.EventHandler(this.btnOperator_Click);
+            this.btnOperator.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
             // picBoxAKS
             // 
@@ -230,12 +259,168 @@
             // tabPagePrihod
             // 
             this.tabPagePrihod.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPagePrihod.Controls.Add(this.pnlPagPrihTop);
             this.tabPagePrihod.Location = new System.Drawing.Point(4, 4);
             this.tabPagePrihod.Name = "tabPagePrihod";
             this.tabPagePrihod.Padding = new System.Windows.Forms.Padding(3);
             this.tabPagePrihod.Size = new System.Drawing.Size(1026, 383);
             this.tabPagePrihod.TabIndex = 0;
             this.tabPagePrihod.Text = "Приходный ордер";
+            // 
+            // pnlPagPrihTop
+            // 
+            this.pnlPagPrihTop.Controls.Add(this.label1);
+            this.pnlPagPrihTop.Controls.Add(this.pnlPagPrihTopRight1);
+            this.pnlPagPrihTop.Controls.Add(this.pnlPagPrihTopTop1);
+            this.pnlPagPrihTop.Controls.Add(this.pnlPagPrihTopTop0);
+            this.pnlPagPrihTop.Controls.Add(this.pnlPagPrihTopRight);
+            this.pnlPagPrihTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagPrihTop.Location = new System.Drawing.Point(3, 3);
+            this.pnlPagPrihTop.Name = "pnlPagPrihTop";
+            this.pnlPagPrihTop.Size = new System.Drawing.Size(1020, 186);
+            this.pnlPagPrihTop.TabIndex = 0;
+            // 
+            // pnlPagPrihTopTop1
+            // 
+            this.pnlPagPrihTopTop1.Controls.Add(this.txtBoxStructPodr);
+            this.pnlPagPrihTopTop1.Controls.Add(this.lblPrihStructPodr);
+            this.pnlPagPrihTopTop1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagPrihTopTop1.Location = new System.Drawing.Point(0, 60);
+            this.pnlPagPrihTopTop1.Name = "pnlPagPrihTopTop1";
+            this.pnlPagPrihTopTop1.Size = new System.Drawing.Size(703, 30);
+            this.pnlPagPrihTopTop1.TabIndex = 3;
+            // 
+            // txtBoxStructPodr
+            // 
+            this.txtBoxStructPodr.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxStructPodr.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxStructPodr.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxStructPodr.Location = new System.Drawing.Point(232, 0);
+            this.txtBoxStructPodr.Name = "txtBoxStructPodr";
+            this.txtBoxStructPodr.ReadOnly = true;
+            this.txtBoxStructPodr.Size = new System.Drawing.Size(471, 26);
+            this.txtBoxStructPodr.TabIndex = 1;
+            // 
+            // lblPrihStructPodr
+            // 
+            this.lblPrihStructPodr.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblPrihStructPodr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihStructPodr.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblPrihStructPodr.Location = new System.Drawing.Point(0, 0);
+            this.lblPrihStructPodr.Name = "lblPrihStructPodr";
+            this.lblPrihStructPodr.Size = new System.Drawing.Size(232, 30);
+            this.lblPrihStructPodr.TabIndex = 0;
+            this.lblPrihStructPodr.Text = "Структурное подразделение";
+            this.lblPrihStructPodr.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlPagPrihTopTop0
+            // 
+            this.pnlPagPrihTopTop0.Controls.Add(this.txtBoxPrihOrganization);
+            this.pnlPagPrihTopTop0.Controls.Add(this.lblPrihOrganization);
+            this.pnlPagPrihTopTop0.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagPrihTopTop0.Location = new System.Drawing.Point(0, 0);
+            this.pnlPagPrihTopTop0.Name = "pnlPagPrihTopTop0";
+            this.pnlPagPrihTopTop0.Size = new System.Drawing.Size(703, 60);
+            this.pnlPagPrihTopTop0.TabIndex = 2;
+            // 
+            // txtBoxPrihOrganization
+            // 
+            this.txtBoxPrihOrganization.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxPrihOrganization.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxPrihOrganization.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxPrihOrganization.Location = new System.Drawing.Point(120, 0);
+            this.txtBoxPrihOrganization.Name = "txtBoxPrihOrganization";
+            this.txtBoxPrihOrganization.ReadOnly = true;
+            this.txtBoxPrihOrganization.Size = new System.Drawing.Size(583, 26);
+            this.txtBoxPrihOrganization.TabIndex = 1;
+            // 
+            // lblPrihOrganization
+            // 
+            this.lblPrihOrganization.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblPrihOrganization.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihOrganization.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblPrihOrganization.Location = new System.Drawing.Point(0, 0);
+            this.lblPrihOrganization.Name = "lblPrihOrganization";
+            this.lblPrihOrganization.Size = new System.Drawing.Size(120, 60);
+            this.lblPrihOrganization.TabIndex = 0;
+            this.lblPrihOrganization.Text = "Организация\r\n\r\n";
+            this.lblPrihOrganization.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlPagPrihTopRight
+            // 
+            this.pnlPagPrihTopRight.Controls.Add(this.pnlPagPrihTopRightTop1);
+            this.pnlPagPrihTopRight.Controls.Add(this.pnlPagPrihTopRightTop0);
+            this.pnlPagPrihTopRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlPagPrihTopRight.Location = new System.Drawing.Point(703, 0);
+            this.pnlPagPrihTopRight.Name = "pnlPagPrihTopRight";
+            this.pnlPagPrihTopRight.Size = new System.Drawing.Size(317, 186);
+            this.pnlPagPrihTopRight.TabIndex = 1;
+            // 
+            // pnlPagPrihTopRightTop1
+            // 
+            this.pnlPagPrihTopRightTop1.Controls.Add(this.lblPrihOKPO);
+            this.pnlPagPrihTopRightTop1.Controls.Add(this.txtBoxOKPO);
+            this.pnlPagPrihTopRightTop1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagPrihTopRightTop1.Location = new System.Drawing.Point(0, 30);
+            this.pnlPagPrihTopRightTop1.Name = "pnlPagPrihTopRightTop1";
+            this.pnlPagPrihTopRightTop1.Size = new System.Drawing.Size(317, 30);
+            this.pnlPagPrihTopRightTop1.TabIndex = 1;
+            // 
+            // lblPrihOKPO
+            // 
+            this.lblPrihOKPO.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblPrihOKPO.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihOKPO.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblPrihOKPO.Location = new System.Drawing.Point(99, 0);
+            this.lblPrihOKPO.Name = "lblPrihOKPO";
+            this.lblPrihOKPO.Size = new System.Drawing.Size(79, 30);
+            this.lblPrihOKPO.TabIndex = 4;
+            this.lblPrihOKPO.Text = "по ОКPO";
+            this.lblPrihOKPO.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtBoxOKPO
+            // 
+            this.txtBoxOKPO.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxOKPO.Dock = System.Windows.Forms.DockStyle.Right;
+            this.txtBoxOKPO.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxOKPO.Location = new System.Drawing.Point(178, 0);
+            this.txtBoxOKPO.Name = "txtBoxOKPO";
+            this.txtBoxOKPO.ReadOnly = true;
+            this.txtBoxOKPO.Size = new System.Drawing.Size(139, 26);
+            this.txtBoxOKPO.TabIndex = 3;
+            // 
+            // pnlPagPrihTopRightTop0
+            // 
+            this.pnlPagPrihTopRightTop0.Controls.Add(this.lblPrihOKUD);
+            this.pnlPagPrihTopRightTop0.Controls.Add(this.txtBoxOKUD);
+            this.pnlPagPrihTopRightTop0.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagPrihTopRightTop0.Location = new System.Drawing.Point(0, 0);
+            this.pnlPagPrihTopRightTop0.Name = "pnlPagPrihTopRightTop0";
+            this.pnlPagPrihTopRightTop0.Size = new System.Drawing.Size(317, 30);
+            this.pnlPagPrihTopRightTop0.TabIndex = 0;
+            // 
+            // lblPrihOKUD
+            // 
+            this.lblPrihOKUD.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblPrihOKUD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihOKUD.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblPrihOKUD.Location = new System.Drawing.Point(42, 0);
+            this.lblPrihOKUD.Name = "lblPrihOKUD";
+            this.lblPrihOKUD.Size = new System.Drawing.Size(136, 30);
+            this.lblPrihOKUD.TabIndex = 3;
+            this.lblPrihOKUD.Text = "Форма  по ОКУД";
+            this.lblPrihOKUD.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtBoxOKUD
+            // 
+            this.txtBoxOKUD.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxOKUD.Dock = System.Windows.Forms.DockStyle.Right;
+            this.txtBoxOKUD.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxOKUD.Location = new System.Drawing.Point(178, 0);
+            this.txtBoxOKUD.Name = "txtBoxOKUD";
+            this.txtBoxOKUD.ReadOnly = true;
+            this.txtBoxOKUD.Size = new System.Drawing.Size(139, 26);
+            this.txtBoxOKUD.TabIndex = 2;
             // 
             // tabPageRashod
             // 
@@ -378,6 +563,45 @@
             this.TSMItemLic.Text = "Информация по лицензии";
             this.TSMItemLic.Click += new System.EventHandler(this.TSMItemLic_Click);
             // 
+            // pnlPagPrihTopRight1
+            // 
+            this.pnlPagPrihTopRight1.Controls.Add(this.grBoxDateDoc);
+            this.pnlPagPrihTopRight1.Controls.Add(this.grBoxNumDoc);
+            this.pnlPagPrihTopRight1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlPagPrihTopRight1.Location = new System.Drawing.Point(437, 90);
+            this.pnlPagPrihTopRight1.Name = "pnlPagPrihTopRight1";
+            this.pnlPagPrihTopRight1.Size = new System.Drawing.Size(266, 96);
+            this.pnlPagPrihTopRight1.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(0, 90);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(437, 96);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Приходный кассовый ордер";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // grBoxNumDoc
+            // 
+            this.grBoxNumDoc.Dock = System.Windows.Forms.DockStyle.Right;
+            this.grBoxNumDoc.Location = new System.Drawing.Point(138, 0);
+            this.grBoxNumDoc.Name = "grBoxNumDoc";
+            this.grBoxNumDoc.Size = new System.Drawing.Size(128, 96);
+            this.grBoxNumDoc.TabIndex = 0;
+            this.grBoxNumDoc.TabStop = false;
+            // 
+            // grBoxDateDoc
+            // 
+            this.grBoxDateDoc.Dock = System.Windows.Forms.DockStyle.Right;
+            this.grBoxDateDoc.Location = new System.Drawing.Point(34, 0);
+            this.grBoxDateDoc.Name = "grBoxDateDoc";
+            this.grBoxDateDoc.Size = new System.Drawing.Size(104, 96);
+            this.grBoxDateDoc.TabIndex = 1;
+            this.grBoxDateDoc.TabStop = false;
+            // 
             // FStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -399,12 +623,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBoxPrizm)).EndInit();
             this.pnlFill.ResumeLayout(false);
             this.tabCntOperation.ResumeLayout(false);
+            this.tabPagePrihod.ResumeLayout(false);
+            this.pnlPagPrihTop.ResumeLayout(false);
+            this.pnlPagPrihTopTop1.ResumeLayout(false);
+            this.pnlPagPrihTopTop1.PerformLayout();
+            this.pnlPagPrihTopTop0.ResumeLayout(false);
+            this.pnlPagPrihTopTop0.PerformLayout();
+            this.pnlPagPrihTopRight.ResumeLayout(false);
+            this.pnlPagPrihTopRightTop1.ResumeLayout(false);
+            this.pnlPagPrihTopRightTop1.PerformLayout();
+            this.pnlPagPrihTopRightTop0.ResumeLayout(false);
+            this.pnlPagPrihTopRightTop0.PerformLayout();
             this.pnlBottom.ResumeLayout(false);
             this.pnlBottom.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.pnlPagPrihTopRight1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -423,7 +659,7 @@
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.Button butnOperator;
+        private System.Windows.Forms.Button btnOperator;
         private System.Windows.Forms.TabControl tabCntOperation;
         private System.Windows.Forms.TabPage tabPagePrihod;
         private System.Windows.Forms.TabPage tabPageRashod;
@@ -441,6 +677,24 @@
         private System.Windows.Forms.ToolStripMenuItem TSMItemConfigPrv;
         private System.Windows.Forms.ToolStripMenuItem TSMItemConfigUsers;
         private System.Windows.Forms.ToolStripMenuItem TSMItemLic;
+        private System.Windows.Forms.Panel pnlPagPrihTop;
+        private System.Windows.Forms.Panel pnlPagPrihTopTop0;
+        private System.Windows.Forms.TextBox txtBoxPrihOrganization;
+        private System.Windows.Forms.Label lblPrihOrganization;
+        private System.Windows.Forms.Panel pnlPagPrihTopRight;
+        private System.Windows.Forms.Panel pnlPagPrihTopTop1;
+        private System.Windows.Forms.TextBox txtBoxStructPodr;
+        private System.Windows.Forms.Label lblPrihStructPodr;
+        private System.Windows.Forms.Panel pnlPagPrihTopRightTop1;
+        private System.Windows.Forms.Label lblPrihOKPO;
+        private System.Windows.Forms.TextBox txtBoxOKPO;
+        private System.Windows.Forms.Panel pnlPagPrihTopRightTop0;
+        private System.Windows.Forms.Label lblPrihOKUD;
+        private System.Windows.Forms.TextBox txtBoxOKUD;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel pnlPagPrihTopRight1;
+        private System.Windows.Forms.GroupBox grBoxDateDoc;
+        private System.Windows.Forms.GroupBox grBoxNumDoc;
     }
 }
 

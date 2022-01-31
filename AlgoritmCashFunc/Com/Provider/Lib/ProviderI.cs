@@ -52,6 +52,38 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         int SetLocal(Local NewLocal);
 
         /// <summary>
+        /// Обновление Local в базе
+        /// </summary>
+        /// <param name="UpdLocal">Обновляемый локал</param>
+        void UpdateLocal(Local UpdLocal);
+
+        /// <summary>
+        /// Проверка наличия информации объекта LocalKassa
+        /// </summary>
+        /// <param name="LocalKassa">Объект LocalKassa который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        bool HashLocalKassa(BLL.LocalPlg.LocalKassa LocalKassa);
+
+        /// <summary>
+        /// Читаем информацию по объекту LocalKassa
+        /// </summary>
+        /// <param name="LocalKassa">Объект LocalKassa который нужно прочитать в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли прочитать объект или нет</returns>
+        bool GetLocalKassa(ref BLL.LocalPlg.LocalKassa LocalKassa);
+
+        /// <summary>
+        /// Вставка новой информации в объект LocalKassa
+        /// </summary>
+        /// <param name="NewLocalKassa">Вставляем в базу информацию по объекту LocalKassa</param>
+        void SetLocalKassa(BLL.LocalPlg.LocalKassa NewLocalKassa);
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту LocalKassa
+        /// </summary>
+        /// <param name="UpdLocalKassa">Сам объект данные которого нужно обновить</param>
+        void UpdateLocalKassa(BLL.LocalPlg.LocalKassa UpdLocalKassa);
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <param name="LastDay">Сколько последних дней грузить из базы данных если null значит весь период</param>

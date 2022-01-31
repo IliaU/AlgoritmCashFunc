@@ -51,7 +51,8 @@ namespace AlgoritmCashFunc.BLL.LocalPlg
                 // Если документ читается из базы данных то нужно прочитать дополнительные параметры
                 if(base.Id != null)
                 {
-
+                    LocalKassa MyObj = this;
+                    bool tt = Com.ProviderFarm.CurrentPrv.GetLocalKassa(ref MyObj);
                 }
             }
             catch (Exception ex)
@@ -85,13 +86,45 @@ namespace AlgoritmCashFunc.BLL.LocalPlg
         {
             try
             {
-                
+                if (Com.ProviderFarm.CurrentPrv.HashLocalKassa(this))
+                {
+                    Com.ProviderFarm.CurrentPrv.UpdateLocalKassa(this);
+                }
+                else  // Если нет то вставляем
+                {
+                    Com.ProviderFarm.CurrentPrv.SetLocalKassa(this);
+                }
             }
             catch (Exception ex)
             {
                 ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
                 Com.Log.EventSave(ae.Message, string.Format("{0}.SaveChildron", GetType().Name), EventEn.Error);
                 throw ae;
+            }
+        }
+
+        /// <summary>
+        /// специальный класс для провайдера чтобы он мог править закрытые свойства
+        /// </summary>
+        public class LocalKassaForProviderInterface
+        {
+            /// <summary>
+            /// Установка значения в поле HostHame
+            /// </summary>
+            /// <param name="LocKassa"></param>
+            /// <param name="NewHostHame"></param>
+            public void SetHostName(LocalKassa LocKassa, string NewHostHame)
+            {
+                try
+                {
+                    LocKassa.HostName = NewHostHame;
+                }
+                catch (Exception ex)
+                {
+                    ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
+                    Com.Log.EventSave(ae.Message, string.Format("{0}.SetHostName", GetType().Name), EventEn.Error);
+                    throw ae;
+                }
             }
         }
     }

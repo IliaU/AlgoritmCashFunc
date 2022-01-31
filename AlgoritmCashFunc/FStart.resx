@@ -286,7 +286,7 @@
         yU7wT/15x/8Ao2Svs74Wf8iN4c/7BMP/AKCtFFc1P+LI8HA/8jDEf9u/kf/Z
 </value>
   </data>
-  <data name="butnOperator.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnOperator.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAQEAYABgAAD/4QAWRXhpZgAATU0AKgAAAAgAAAAAAAD/4QM8aHR0cDovL25zLmFk
         b2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pO
