@@ -34,6 +34,61 @@ namespace AlgoritmCashFunc.BLL.LocalPlg
         public string OKPO;
 
         /// <summary>
+        /// Последний зарегистрированный номер документа "Приходный ордер"
+        /// </summary>
+        public int LastDocNumPrih;
+
+        /// <summary>
+        /// Последний зарегистрированный номер документа "Расходный ордер"
+        /// </summary>
+        public int LastDocNumRash;
+
+        /// <summary>
+        /// Последний зарегистрированный номер документа "Кассовая книга"
+        /// </summary>
+        public int LastDocNumKasBook;
+
+        /// <summary>
+        /// Последний зарегистрированный номер документа "Акт о возврате денег"
+        /// </summary>
+        public int LastDocNumActVozv;
+
+        /// <summary>
+        /// Последний зарегистрированный номер документа "Отчёт кассира"
+        /// </summary>
+        public int LastDocNumReportKas;
+
+        /// <summary>
+        /// Последний зарегистрированный номер документа "Счётчики ККМ"
+        /// </summary>
+        public int LastDocNumScetKkm;
+
+        /// <summary>
+        /// Последний зарегистрированный номер документа "Проверка наличных"
+        /// </summary>
+        public int LastDocNumVerifNal;
+
+        /// <summary>
+        /// Последний зарегистрированный номер документа "Инвентаризация средств"
+        /// </summary>
+        public int LastDocNumInvent;
+
+        /// <summary>
+        /// ИНН
+        /// </summary>
+        public string INN;
+
+        /// <summary>
+        /// Заводской номер ККМ
+        /// </summary>
+        public string ZavodKKM;
+
+        /// <summary>
+        /// Регистрационный номер ККМ
+        /// </summary>
+        public string RegKKM;
+
+        /// <summary>
         /// Конструктор для загрузки из базы данных
         /// </summary>
         /// <param name="Id">Идентификатор в базе данных</param>

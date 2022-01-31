@@ -40,12 +40,21 @@ CREATE TABLE `cashfunc_local_kassa` (
   `Organization` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `StructPodr` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `OKPO` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `LastDocNumPrih` int not null default 0,
+  `LastDocNumRash` int not null default 0,
+  `LastDocNumKasBook` int not null default 0,
+  `LastDocNumActVozv` int not null default 0,
+  `LastDocNumReportKas` int not null default 0,
+  `LastDocNumScetKkm` int not null default 0,
+  `LastDocNumVerifNal` int not null default 0,
+  `LastDocNumInvent` int not null default 0,
+  `INN` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `ZavodKKM` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `RegKKM` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `UIX_local_kassa_HostName` (`HostName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 #
-#INSERT INTO `aks`.`cashfunc_local_Kassa` (`Id`, `HostName`, `Organization`, `StructPodr`, `OKUD`, `OKPO`, `KassaName`) VALUES (1, 'LocalPokupatel', 'Разовый покупатель', 0, 1, 0);
-
 
 
 

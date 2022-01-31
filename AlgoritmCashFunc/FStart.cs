@@ -158,7 +158,7 @@ namespace AlgoritmCashFunc
             try
             {
                 // Настройка стиля кнопок
-                if (((ButtonTagStatus)this.btnNew.Tag).Stat== ButtonStatusEn.Active) this.btnNew.ForeColor = Color.Black;
+                if (((ButtonTagStatus)this.btnNew.Tag).Stat == ButtonStatusEn.Active) this.btnNew.ForeColor = Color.Black;
                 else this.btnNew.ForeColor = Color.Silver;
                 //
                 if (((ButtonTagStatus)this.btnSave.Tag).Stat == ButtonStatusEn.Active)
@@ -167,11 +167,61 @@ namespace AlgoritmCashFunc
                     // На какой вкладке активность
                     switch (this.tabCntOperation.SelectedIndex)
                     {
+                        // Приходный ордер
                         case 0:
-                            this.txtBoxOKPO.ReadOnly = false;
-                            this.txtBoxOKUD.ReadOnly = false;
+                            this.txtBoxPrihOKPO.ReadOnly = false;
+                            this.txtBoxPrihOKUD.ReadOnly = false;
                             this.txtBoxPrihOrganization.ReadOnly = false;
-                            this.txtBoxStructPodr.ReadOnly = false;
+                            this.txtBoxPrichStructPodr.ReadOnly = false;
+                            break;
+                        // Расходный ордер
+                        case 1:
+                            this.txtBoxRashOKPO.ReadOnly = false;
+                            this.txtBoxRashOKUD.ReadOnly = false;
+                            this.txtBoxRashOrganization.ReadOnly = false;
+                            this.txtBoxRashStructPodr.ReadOnly = false;
+                            break;
+                        // Кассовая книга
+                        case 2:
+                            this.txtBoxKasBookOKPO.ReadOnly = false;
+                            this.txtBoxKasBookOKUD.ReadOnly = false;
+                            this.txtBoxKasBookOrganization.ReadOnly = false;
+                            this.txtBoxKasBookStructPodr.ReadOnly = false;
+                            break;
+                        // Акт о возврате денег
+                        case 3:
+                            this.txtBoxActVozvOKPO.ReadOnly = false;
+                            this.txtBoxActVozvOKUD.ReadOnly = false;
+                            this.txtBoxActVozvOrganization.ReadOnly = false;
+                            this.txtBoxActVozvStructPodr.ReadOnly = false;
+                            break;
+                        // Отчёт кассира
+                        case 4:
+                            this.txtBoxReportKasOKPO.ReadOnly = false;
+                            this.txtBoxReportKasOKUD.ReadOnly = false;
+                            this.txtBoxReportKasOrganization.ReadOnly = false;
+                            this.txtBoxReportKasStructPodr.ReadOnly = false;
+                            break;
+                        // Счётчики ККМ
+                        case 5:
+                            this.txtBoxScetKkmOKPO.ReadOnly = false;
+                            this.txtBoxScetKkmOKUD.ReadOnly = false;
+                            this.txtBoxScetKkmOrganization.ReadOnly = false;
+                            this.txtBoxScetKkmStructPodr.ReadOnly = false;
+                            break;
+                        // Проверка наличных
+                        case 6:
+                            this.txtBoxVerifNalOKPO.ReadOnly = false;
+                            this.txtBoxVerifNalOKUD.ReadOnly = false;
+                            this.txtBoxVerifNalOrganization.ReadOnly = false;
+                            this.txtBoxVerifNalStructPodr.ReadOnly = false;
+                            break;
+                        // Инвентаризация средств
+                        case 7:
+                            this.txtBoxInventOKPO.ReadOnly = false;
+                            this.txtBoxInventOKUD.ReadOnly = false;
+                            this.txtBoxInventOrganization.ReadOnly = false;
+                            this.txtBoxInventStructPodr.ReadOnly = false;
                             break;
                         default:
                             break;
@@ -183,11 +233,61 @@ namespace AlgoritmCashFunc
                     // На какой вкладке активность
                     switch (this.tabCntOperation.SelectedIndex)
                     {
+                        // Приходный ордер
                         case 0:
-                            this.txtBoxOKPO.ReadOnly = true;
-                            this.txtBoxOKUD.ReadOnly = true;
+                            this.txtBoxPrihOKPO.ReadOnly = true;
+                            this.txtBoxPrihOKUD.ReadOnly = true;
                             this.txtBoxPrihOrganization.ReadOnly = true;
-                            this.txtBoxStructPodr.ReadOnly = true;
+                            this.txtBoxPrichStructPodr.ReadOnly = true;
+                            break;
+                        // Расходный ордер
+                        case 1:
+                            this.txtBoxRashOKPO.ReadOnly = true;
+                            this.txtBoxRashOKUD.ReadOnly = true;
+                            this.txtBoxRashOrganization.ReadOnly = true;
+                            this.txtBoxRashStructPodr.ReadOnly = true;
+                            break;
+                        // Кассовая книга
+                        case 2:
+                            this.txtBoxKasBookOKPO.ReadOnly = true;
+                            this.txtBoxKasBookOKUD.ReadOnly = true;
+                            this.txtBoxKasBookOrganization.ReadOnly = true;
+                            this.txtBoxKasBookStructPodr.ReadOnly = true;
+                            break;
+                        // Акт о возврате денег
+                        case 3:
+                            this.txtBoxActVozvOKPO.ReadOnly = true;
+                            this.txtBoxActVozvOKUD.ReadOnly = true;
+                            this.txtBoxActVozvOrganization.ReadOnly = true;
+                            this.txtBoxActVozvStructPodr.ReadOnly = true;
+                            break;
+                        // Отчёт кассира
+                        case 4:
+                            this.txtBoxReportKasOKPO.ReadOnly = true;
+                            this.txtBoxReportKasOKUD.ReadOnly = true;
+                            this.txtBoxReportKasOrganization.ReadOnly = true;
+                            this.txtBoxReportKasStructPodr.ReadOnly = true;
+                            break;
+                        // Счётчики ККМ
+                        case 5:
+                            this.txtBoxScetKkmOKPO.ReadOnly = true;
+                            this.txtBoxScetKkmOKUD.ReadOnly = true;
+                            this.txtBoxScetKkmOrganization.ReadOnly = true;
+                            this.txtBoxScetKkmStructPodr.ReadOnly = true;
+                            break;
+                        // Проверка наличных
+                        case 6:
+                            this.txtBoxVerifNalOKPO.ReadOnly = true;
+                            this.txtBoxVerifNalOKUD.ReadOnly = true;
+                            this.txtBoxVerifNalOrganization.ReadOnly = true;
+                            this.txtBoxVerifNalStructPodr.ReadOnly = true;
+                            break;
+                        // Инвентаризация средств
+                        case 7:
+                            this.txtBoxInventOKPO.ReadOnly = true;
+                            this.txtBoxInventOKUD.ReadOnly = true;
+                            this.txtBoxInventOrganization.ReadOnly = true;
+                            this.txtBoxInventStructPodr.ReadOnly = true;
                             break;
                         default:
                             break;
@@ -217,21 +317,72 @@ namespace AlgoritmCashFunc
         {
             try
             {
+                // Сброс текущего документа
+                this.CurDoc = null;
+
                 // Получаем текущее подразделение
                 BLL.LocalPlg.LocalKassa Kassa = Com.LocalFarm.CurLocalDepartament;
 
                 // На какой вкладке активность
                 switch (this.tabCntOperation.SelectedIndex)
                 {
+                    // Приходный ордер
                     case 0:
                         // Запоминаем инфу по организации
                         txtBoxPrihOrganization.Text = Kassa.Organization;
-                        txtBoxStructPodr.Text = Kassa.StructPodrazdelenie;
-                        txtBoxOKPO.Text = Kassa.OKPO;
+                        txtBoxPrichStructPodr.Text = Kassa.StructPodrazdelenie;
+                        txtBoxPrihOKPO.Text = Kassa.OKPO;
+                        break;
+                    // Расходный ордер
+                    case 1:
+                        this.txtBoxRashOrganization.Text = Kassa.Organization;
+                        this.txtBoxRashStructPodr.Text = Kassa.StructPodrazdelenie;
+                        this.txtBoxRashOKPO.Text = Kassa.OKPO;
+                        break;
+                    // Кассовая книга
+                    case 2:
+                        this.txtBoxKasBookOrganization.Text = Kassa.Organization;
+                        this.txtBoxKasBookStructPodr.Text = Kassa.StructPodrazdelenie;
+                        this.txtBoxKasBookOKPO.Text = Kassa.OKPO;
+                        break;
+                    // Акт о возврате денег
+                    case 3:
+                        this.txtBoxActVozvOrganization.Text = Kassa.Organization;
+                        this.txtBoxActVozvStructPodr.Text = Kassa.StructPodrazdelenie;
+                        this.txtBoxActVozvOKPO.Text = Kassa.OKPO;
+                        break;
+                    // Отчёт кассира
+                    case 4:
+                        this.txtBoxReportKasOrganization.Text = Kassa.Organization;
+                        this.txtBoxReportKasStructPodr.Text = Kassa.StructPodrazdelenie;
+                        this.txtBoxReportKasOKPO.Text = Kassa.OKPO;
+                        break;
+                    // Счётчики ККМ
+                    case 5:
+                        this.txtBoxScetKkmOrganization.Text = Kassa.Organization;
+                        this.txtBoxScetKkmStructPodr.Text = Kassa.StructPodrazdelenie;
+                        this.txtBoxScetKkmOKPO.Text = Kassa.OKPO;
+                        break;
+                    // Проверка наличных
+                    case 6:
+                        this.txtBoxVerifNalOrganization.Text = Kassa.Organization;
+                        this.txtBoxVerifNalStructPodr.Text = Kassa.StructPodrazdelenie;
+                        this.txtBoxVerifNalOKPO.Text = Kassa.OKPO;
+                        break;
+                    // Инвентаризация средств
+                    case 7:
+                        this.txtBoxInventOrganization.Text = Kassa.Organization;
+                        this.txtBoxInventStructPodr.Text = Kassa.StructPodrazdelenie;
+                        this.txtBoxInventOKPO.Text = Kassa.OKPO;
                         break;
                     default:
                         break;
                 }
+
+                // Правим стиль кнопок
+                ((ButtonTagStatus)this.btnNew.Tag).Stat = ButtonStatusEn.Active;
+                ((ButtonTagStatus)this.btnSave.Tag).Stat = ButtonStatusEn.Passive;
+                this.RenderButtonStyle();
             }
             catch (Exception ex)
             {
@@ -393,11 +544,96 @@ namespace AlgoritmCashFunc
                 // На какой вкладке активность
                 switch (this.tabCntOperation.SelectedIndex)
                 {
+                    // Приходный ордер
                     case 0:
                         // Запоминаем инфу по организации
                         Kassa.Organization = txtBoxPrihOrganization.Text;
-                        Kassa.StructPodrazdelenie = txtBoxStructPodr.Text;
-                        Kassa.OKPO = txtBoxOKPO.Text;
+                        Kassa.StructPodrazdelenie = txtBoxPrichStructPodr.Text;
+                        Kassa.OKPO = txtBoxPrihOKPO.Text;
+
+                        //Валидация заполненных данных по подразделению и сохранение в базе
+                        ValidateKassa(Kassa);
+                        Kassa.Save();
+
+                        break;
+                    // Расходный ордер
+                    case 1:
+                        // Запоминаем инфу по организации
+                        Kassa.Organization = this.txtBoxRashOrganization.Text;
+                        Kassa.StructPodrazdelenie = this.txtBoxRashStructPodr.Text;
+                        Kassa.OKPO = this.txtBoxRashOKPO.Text;
+
+                        //Валидация заполненных данных по подразделению и сохранение в базе
+                        ValidateKassa(Kassa);
+                        Kassa.Save();
+
+                        break;
+                    // Кассовая книга
+                    case 2:
+                        // Запоминаем инфу по организации
+                        Kassa.Organization = this.txtBoxKasBookOrganization.Text;
+                        Kassa.StructPodrazdelenie = this.txtBoxKasBookStructPodr.Text;
+                        Kassa.OKPO = this.txtBoxKasBookOKPO.Text;
+
+                        //Валидация заполненных данных по подразделению и сохранение в базе
+                        ValidateKassa(Kassa);
+                        Kassa.Save();
+
+                        break;
+                    // Акт о возврате денег
+                    case 3:
+                        // Запоминаем инфу по организации
+                        Kassa.Organization = this.txtBoxActVozvOrganization.Text;
+                        Kassa.StructPodrazdelenie = this.txtBoxActVozvStructPodr.Text;
+                        Kassa.OKPO = this.txtBoxActVozvOKPO.Text;
+
+                        //Валидация заполненных данных по подразделению и сохранение в базе
+                        ValidateKassa(Kassa);
+                        Kassa.Save();
+
+                        break;
+                    // Отчёт кассира
+                    case 4:
+                        // Запоминаем инфу по организации
+                        Kassa.Organization = this.txtBoxReportKasOrganization.Text;
+                        Kassa.StructPodrazdelenie = this.txtBoxReportKasStructPodr.Text;
+                        Kassa.OKPO = this.txtBoxReportKasOKPO.Text;
+
+                        //Валидация заполненных данных по подразделению и сохранение в базе
+                        ValidateKassa(Kassa);
+                        Kassa.Save();
+
+                        break;
+                    // Счётчики ККМ
+                    case 5:
+                        // Запоминаем инфу по организации
+                        Kassa.Organization = this.txtBoxScetKkmOrganization.Text;
+                        Kassa.StructPodrazdelenie = this.txtBoxScetKkmStructPodr.Text;
+                        Kassa.OKPO = this.txtBoxScetKkmOKPO.Text;
+
+                        //Валидация заполненных данных по подразделению и сохранение в базе
+                        ValidateKassa(Kassa);
+                        Kassa.Save();
+
+                        break;
+                    // Проверка наличных
+                    case 6:
+                        // Запоминаем инфу по организации
+                        Kassa.Organization = this.txtBoxVerifNalOrganization.Text;
+                        Kassa.StructPodrazdelenie = this.txtBoxVerifNalStructPodr.Text;
+                        Kassa.OKPO = this.txtBoxVerifNalOKPO.Text;
+
+                        //Валидация заполненных данных по подразделению и сохранение в базе
+                        ValidateKassa(Kassa);
+                        Kassa.Save();
+
+                        break;
+                    // Инвентаризация средств
+                    case 7:
+                        // Запоминаем инфу по организации
+                        Kassa.Organization = this.txtBoxInventOrganization.Text;
+                        Kassa.StructPodrazdelenie = this.txtBoxInventStructPodr.Text;
+                        Kassa.OKPO = this.txtBoxInventOKPO.Text;
 
                         //Валидация заполненных данных по подразделению и сохранение в базе
                         ValidateKassa(Kassa);
@@ -428,9 +664,16 @@ namespace AlgoritmCashFunc
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(Kassa.Organization)) throw new ApplicationException("Не заполнено поле Организация");
-                if (string.IsNullOrWhiteSpace(Kassa.StructPodrazdelenie)) throw new ApplicationException("Не заполнено поле Структурное подразделение");
-                if (string.IsNullOrWhiteSpace(Kassa.OKPO)) throw new ApplicationException("Не заполнено поле ОКПО");
+                // Список ошибок
+                ApplicationException ErOrganization= new ApplicationException("Не заполнено поле Организация");
+                ApplicationException ErStructPodrazdelenie = new ApplicationException("Не заполнено поле Структурное подразделение");
+                ApplicationException ErOKPO = new ApplicationException("Не заполнено поле ОКПО");
+
+                // Проверка
+                if (string.IsNullOrWhiteSpace(Kassa.Organization)) throw ErOrganization;
+                if (string.IsNullOrWhiteSpace(Kassa.StructPodrazdelenie)) throw ErStructPodrazdelenie;
+                if (string.IsNullOrWhiteSpace(Kassa.OKPO)) throw ErOKPO;
+                 
             }
             catch (Exception ex)
             {
@@ -449,14 +692,47 @@ namespace AlgoritmCashFunc
                 // На какой вкладке активность
                 switch (this.tabCntOperation.SelectedIndex)
                 {
+                    // Приходный ордер
                     case 0:
-                        // Создаём пустой документ прихода
+                        // Создаём пустой документ
                         this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                        break;
+                    // Кассовая книга
+                    case 2:
+                        // Создаём пустой документ
+                        //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                        break;
+                    // Акт о возврате денег
+                    case 3:
+                        // Создаём пустой документ
+                        //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                        break;
+                    // Отчёт кассира
+                    case 4:
+                        // Создаём пустой документ
+                        //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                        break;
+                    // Счётчики ККМ
+                    case 5:
+                        // Создаём пустой документ
+                        //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                        break;
+                    // Проверка наличных
+                    case 6:
+                        // Создаём пустой документ
+                        //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                        break;
+                    // Инвентаризация средств
+                    case 7:
+                        // Создаём пустой документ
+                        //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
                         break;
                     default:
                         break;
                 }
 
+                // Отрисовываем кнопки
+                ((ButtonTagStatus)this.btnNew.Tag).Stat = ButtonStatusEn.Passive;
                 ((ButtonTagStatus)this.btnSave.Tag).Stat = ButtonStatusEn.Active;
                 this.RenderButtonStyle();
             }
