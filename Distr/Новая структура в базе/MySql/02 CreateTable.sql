@@ -32,9 +32,9 @@ INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`
 
 
 
-Drop Table `aks`.`cashfunc_local_Kassa`;
+#Drop Table `aks`.`cashfunc_local_Kassa`;
 #
-CREATE TABLE `cashfunc_local_kassa` (
+CREATE TABLE `aks`.`cashfunc_local_kassa` (
   `Id` int NOT NULL,
   `HostName` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `Organization` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL,
@@ -51,12 +51,27 @@ CREATE TABLE `cashfunc_local_kassa` (
   `INN` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `ZavodKKM` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `RegKKM` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `GlavBuhFio` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `KkmName` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `DolRukOrg` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `RukFio` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `ZavDivisionFio` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `UIX_local_kassa_HostName` (`HostName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 #
 
-
+#Drop Table `aks`.`cashfunc_local_PaidInReasons`;
+#
+CREATE TABLE `aks`.`cashfunc_local_PaidInReasons` (
+  `Id` int NOT NULL,
+  `Osnovanie` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `DebetNomerSchet` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `KredikKorSchet` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `UIX_local_PaidInReasons` (`Osnovanie`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+#
 
 
 #Drop Table `aks`.`CashFunc_Document`;

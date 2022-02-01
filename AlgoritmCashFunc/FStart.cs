@@ -551,8 +551,15 @@ namespace AlgoritmCashFunc
                         Kassa.StructPodrazdelenie = txtBoxPrichStructPodr.Text;
                         Kassa.OKPO = txtBoxPrihOKPO.Text;
 
-                        //Валидация заполненных данных по подразделению и сохранение в базе
+                        // Валидация заполненных данных по подразделению и сохранение в базе
                         ValidateKassa(Kassa);
+
+                        // Валидация введённой даты
+                        try{ this.CurDoc.UreDate = DateTime.Parse(this.txtBoxPrihDateDoc.Text);}
+                        catch (Exception){ throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxPrihDateDoc.Text));}
+                        
+                        // Сохранение инфы в базе
+                        Kassa.LastDocNumPrih = int.Parse(this.txtBoxPrihNumDoc.Text);
                         Kassa.Save();
 
                         break;
@@ -563,8 +570,15 @@ namespace AlgoritmCashFunc
                         Kassa.StructPodrazdelenie = this.txtBoxRashStructPodr.Text;
                         Kassa.OKPO = this.txtBoxRashOKPO.Text;
 
-                        //Валидация заполненных данных по подразделению и сохранение в базе
+                        // Валидация заполненных данных по подразделению и сохранение в базе
                         ValidateKassa(Kassa);
+
+                        // Валидация введённой даты
+                        try { this.CurDoc.UreDate = DateTime.Parse(this.txtBoxRashDateDoc.Text); }
+                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxRashDateDoc.Text)); }
+
+                        // Сохранение инфы в базе
+                        Kassa.LastDocNumRash = int.Parse(this.txtBoxRashNumDoc.Text);
                         Kassa.Save();
 
                         break;
@@ -575,8 +589,14 @@ namespace AlgoritmCashFunc
                         Kassa.StructPodrazdelenie = this.txtBoxKasBookStructPodr.Text;
                         Kassa.OKPO = this.txtBoxKasBookOKPO.Text;
 
-                        //Валидация заполненных данных по подразделению и сохранение в базе
+                        // Валидация заполненных данных по подразделению и сохранение в базе
                         ValidateKassa(Kassa);
+
+                        // Валидация введённой даты
+                        try { this.CurDoc.UreDate = DateTime.Parse(this.txtBoxKasBookDateDoc.Text); }
+                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxKasBookDateDoc.Text)); }
+
+                        // Сохранение инфы в базе
                         Kassa.Save();
 
                         break;
@@ -587,8 +607,15 @@ namespace AlgoritmCashFunc
                         Kassa.StructPodrazdelenie = this.txtBoxActVozvStructPodr.Text;
                         Kassa.OKPO = this.txtBoxActVozvOKPO.Text;
 
-                        //Валидация заполненных данных по подразделению и сохранение в базе
+                        // Валидация заполненных данных по подразделению и сохранение в базе
                         ValidateKassa(Kassa);
+
+                        // Валидация введённой даты
+                        try { this.CurDoc.UreDate = DateTime.Parse(this.txtBoxActVozvDateDoc.Text); }
+                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxActVozvDateDoc.Text)); }
+
+                        // Сохранение инфы в базе
+                        Kassa.LastDocNumActVozv = int.Parse(this.txtBoxActVozvNumDoc.Text);
                         Kassa.Save();
 
                         break;
@@ -599,8 +626,15 @@ namespace AlgoritmCashFunc
                         Kassa.StructPodrazdelenie = this.txtBoxReportKasStructPodr.Text;
                         Kassa.OKPO = this.txtBoxReportKasOKPO.Text;
 
-                        //Валидация заполненных данных по подразделению и сохранение в базе
+                        // Валидация заполненных данных по подразделению и сохранение в базе
                         ValidateKassa(Kassa);
+
+                        // Валидация введённой даты
+                        try { this.CurDoc.UreDate = DateTime.Parse(this.txtBoxReportKasDateDoc.Text); }
+                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxReportKasDateDoc.Text)); }
+
+                        // Сохранение инфы в базе
+                        Kassa.LastDocNumReportKas = int.Parse(this.txtBoxReportKasNumDoc.Text);
                         Kassa.Save();
 
                         break;
@@ -611,8 +645,15 @@ namespace AlgoritmCashFunc
                         Kassa.StructPodrazdelenie = this.txtBoxScetKkmStructPodr.Text;
                         Kassa.OKPO = this.txtBoxScetKkmOKPO.Text;
 
-                        //Валидация заполненных данных по подразделению и сохранение в базе
+                        // Валидация заполненных данных по подразделению и сохранение в базе
                         ValidateKassa(Kassa);
+
+                        // Валидация введённой даты
+                        try { this.CurDoc.UreDate = DateTime.Parse(this.txtBoxScetKkmDateDoc.Text); }
+                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxScetKkmDateDoc.Text)); }
+
+                        // Сохранение инфы в базе
+                        Kassa.LastDocNumScetKkm = int.Parse(this.txtBoxScetKkmNumDoc.Text);
                         Kassa.Save();
 
                         break;
@@ -623,8 +664,15 @@ namespace AlgoritmCashFunc
                         Kassa.StructPodrazdelenie = this.txtBoxVerifNalStructPodr.Text;
                         Kassa.OKPO = this.txtBoxVerifNalOKPO.Text;
 
-                        //Валидация заполненных данных по подразделению и сохранение в базе
+                        // Валидация заполненных данных по подразделению и сохранение в базе
                         ValidateKassa(Kassa);
+
+                        // Валидация введённой даты
+                        try { this.CurDoc.UreDate = DateTime.Parse(this.txtBoxVerifNalDateDoc.Text); }
+                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxVerifNalDateDoc.Text)); }
+
+                        // Сохранение инфы в базе
+                        Kassa.LastDocNumVerifNal = int.Parse(this.txtBoxVerifNalNumDoc.Text);
                         Kassa.Save();
 
                         break;
@@ -635,18 +683,26 @@ namespace AlgoritmCashFunc
                         Kassa.StructPodrazdelenie = this.txtBoxInventStructPodr.Text;
                         Kassa.OKPO = this.txtBoxInventOKPO.Text;
 
-                        //Валидация заполненных данных по подразделению и сохранение в базе
+                        // Валидация заполненных данных по подразделению и сохранение в базе
                         ValidateKassa(Kassa);
+
+                        // Валидация введённой даты
+                        try { this.CurDoc.UreDate = DateTime.Parse(this.txtBoxInventDateDoc.Text); }
+                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxInventDateDoc.Text)); }
+
+                        // Сохранение инфы в базе
+                        Kassa.LastDocNumInvent = int.Parse(this.txtBoxInventNumDoc.Text);
                         Kassa.Save();
 
                         break;
                     default:
                         break;
                 }
-
-
-
                 
+                // Правим стиль кнопок
+                ((ButtonTagStatus)this.btnNew.Tag).Stat = ButtonStatusEn.Active;
+                ((ButtonTagStatus)this.btnSave.Tag).Stat = ButtonStatusEn.Passive;
+                this.RenderButtonStyle();
             }
             catch (Exception ex)
             {
@@ -689,6 +745,9 @@ namespace AlgoritmCashFunc
         {
             try
             {
+                // Получаем текущее подразделение
+                BLL.LocalPlg.LocalKassa Kassa = Com.LocalFarm.CurLocalDepartament;
+
                 // На какой вкладке активность
                 switch (this.tabCntOperation.SelectedIndex)
                 {
@@ -696,36 +755,63 @@ namespace AlgoritmCashFunc
                     case 0:
                         // Создаём пустой документ
                         this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                        this.txtBoxPrihNumDoc.Text = (Kassa.LastDocNumPrih + 1).ToString();
+                        //
+                        this.txtBoxPrihDateDoc.Text = DateTime.Now.Date.ToShortDateString();
+                        break;
+                    // Расходный ордер
+                    case 1:
+                        // Создаём пустой документ
+                        //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                        this.txtBoxRashNumDoc.Text = (Kassa.LastDocNumRash + 1).ToString();
+                        //
+                        this.txtBoxRashDateDoc.Text = DateTime.Now.Date.ToShortDateString();
                         break;
                     // Кассовая книга
                     case 2:
                         // Создаём пустой документ
                         //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                        //
+                        this.txtBoxKasBookDateDoc.Text = DateTime.Now.Date.ToShortDateString();
                         break;
                     // Акт о возврате денег
                     case 3:
                         // Создаём пустой документ
                         //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                        this.txtBoxActVozvNumDoc.Text = (Kassa.LastDocNumActVozv + 1).ToString();
+                        //
+                        this.txtBoxActVozvDateDoc.Text = DateTime.Now.Date.ToShortDateString();
                         break;
                     // Отчёт кассира
                     case 4:
                         // Создаём пустой документ
                         //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                        this.txtBoxReportKasNumDoc.Text = (Kassa.LastDocNumReportKas + 1).ToString();
                         break;
                     // Счётчики ККМ
                     case 5:
                         // Создаём пустой документ
                         //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                        this.txtBoxScetKkmNumDoc.Text = (Kassa.LastDocNumScetKkm + 1).ToString();
+                        //
+                        this.txtBoxScetKkmDateDoc.Text = DateTime.Now.Date.ToShortDateString();
+                        this.txtBoxScetKkmTimeDoc.Text = DateTime.Now.ToShortTimeString().ToString();
                         break;
                     // Проверка наличных
                     case 6:
                         // Создаём пустой документ
                         //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                        this.txtBoxVerifNalNumDoc.Text = (Kassa.LastDocNumVerifNal + 1).ToString();
+                        //
+                        this.txtBoxVerifNalDateDoc.Text = DateTime.Now.Date.ToShortDateString();
                         break;
                     // Инвентаризация средств
                     case 7:
                         // Создаём пустой документ
                         //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                        this.txtBoxInventNumDoc.Text = (Kassa.LastDocNumInvent + 1).ToString();
+                        //
+                        this.txtBoxInventDateDoc.Text = DateTime.Now.Date.ToShortDateString();
                         break;
                     default:
                         break;

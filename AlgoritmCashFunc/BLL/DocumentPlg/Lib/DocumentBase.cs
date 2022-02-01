@@ -37,7 +37,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
         /// <summary>
         /// Юридическая дата к которой относится документ
         /// </summary>
-        public DateTime? UreDate { get; protected set; } = DateTime.Now.Date;
+        public DateTime? UreDate { get; set; } = DateTime.Now.Date;
 
         /// <summary>
         /// Дата изменеия документа

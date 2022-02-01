@@ -84,6 +84,32 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         void UpdateLocalKassa(BLL.LocalPlg.LocalKassa UpdLocalKassa);
 
         /// <summary>
+        /// Проверка наличия информации объекта PaidInReasons
+        /// </summary>
+        /// <param name="LocalPaidInReasons">Объект LocalKassa который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        bool HashLocalPaidInReasons(BLL.LocalPlg.LocalPaidInReasons LocalPaidInReasons);
+
+        /// <summary>
+        /// Читаем информацию по объекту PaidInReasons
+        /// </summary>
+        /// <param name="LocalPaidInReasons">Объект PaidInReasons который нужно прочитать в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли прочитать объект или нет</returns>
+        bool GetLocalPaidInReasons(ref BLL.LocalPlg.LocalPaidInReasons LocalPaidInReasons);
+
+        /// <summary>
+        /// Вставка новой информации в объект PaidInReasons
+        /// </summary>
+        /// <param name="NewLocalPaidInReasons">Вставляем в базу информацию по объекту LocalKassa</param>
+        void SetLocalPaidInReasons(BLL.LocalPlg.LocalPaidInReasons NewLocalPaidInReasons);
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту PaidInReasons
+        /// </summary>
+        /// <param name="UpdLocalPaidInReasons">Сам объект данные которого нужно обновить</param>
+        void UpdateLocalPaidInReasons(BLL.LocalPlg.LocalPaidInReasons UpdLocalPaidInReasons);
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <param name="LastDay">Сколько последних дней грузить из базы данных если null значит весь период</param>

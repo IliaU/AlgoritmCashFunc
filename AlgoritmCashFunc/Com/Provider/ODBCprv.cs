@@ -503,6 +503,148 @@ namespace AlgoritmCashFunc.Com.Provider
         }
 
         /// <summary>
+        /// Проверка наличия информации объекта LocalPaidInReasons
+        /// </summary>
+        /// <param name="LocalPaidInReasons">Объект LocalPaidInReasons который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        public bool HashLocalPaidInReasons(BLL.LocalPlg.LocalPaidInReasons LocalPaidInReasons)
+        {
+            try
+            {
+                bool rez = false;
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            rez = HashLocalPaidInReasonsORA(LocalPaidInReasons);
+                            break;
+                        case "myodbc8a.dll":
+                            rez = HashLocalPaidInReasonsMySql(LocalPaidInReasons);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return rez;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashLocalPaidInReasons", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту LocalPaidInReasons
+        /// </summary>
+        /// <param name="LocalPaidInReasons">Объект LocalPaidInReasons который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        public bool GetLocalPaidInReasons(ref BLL.LocalPlg.LocalPaidInReasons LocalPaidInReasons)
+        {
+            try
+            {
+                bool rez = false;
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            rez = GetLocalPaidInReasonsORA(ref LocalPaidInReasons);
+                            break;
+                        case "myodbc8a.dll":
+                            rez = GetLocalPaidInReasonsMySql(ref LocalPaidInReasons);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return rez;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetLocalPaidInReasons", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект LocalPaidInReasons
+        /// </summary>
+        /// <param name="NewLocalPaidInReasons">Вставляем в базу информацию по объекту LocalPaidInReasons</param>
+        public void SetLocalPaidInReasons(BLL.LocalPlg.LocalPaidInReasons NewLocalPaidInReasons)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            SetLocalPaidInReasonsORA(NewLocalPaidInReasons);
+                            break;
+                        case "myodbc8a.dll":
+                            SetLocalPaidInReasonsMySql(NewLocalPaidInReasons);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetLocalPaidInReasons", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту LocalPaidInReasons
+        /// </summary>
+        /// <param name="UpdLocalPaidInReasons">Сам объект данные которого нужно обновить</param>
+        public void UpdateLocalPaidInReasons(BLL.LocalPlg.LocalPaidInReasons UpdLocalPaidInReasons)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            UpdateLocalPaidInReasonsORA(UpdLocalPaidInReasons);
+                            break;
+                        case "myodbc8a.dll":
+                            UpdateLocalPaidInReasonsMySql(UpdLocalPaidInReasons);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateLocalPaidInReasons", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <param name="LastDay">Сколько последних дней грузить из базы данных если null значит весь период</param>
@@ -1110,6 +1252,164 @@ From `aks`.`cashfunc_local`");
         }
 
         /// <summary>
+        /// Проверка наличия информации объекта LocalPaidInReasons
+        /// </summary>
+        /// <param name="LocalPaidInReasons">Объект LocalPaidInReasons который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        private bool HashLocalPaidInReasonsORA(BLL.LocalPlg.LocalPaidInReasons LocalPaidInReasons)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashLocalPaidInReasonsORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                return false;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashLocalPaidInReasonsORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashLocalPaidInReasonsORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashLocalPaidInReasonsORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashLocalPaidInReasonsORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту LocalPaidInReasons
+        /// </summary>
+        /// <param name="LocalKassa">Объект LocalPaidInReasons который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        private bool GetLocalPaidInReasonsORA(ref BLL.LocalPlg.LocalPaidInReasons LocalPaidInReasons)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetLocalPaidInReasonsORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                return false;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetLocalPaidInReasonsORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetLocalPaidInReasonsORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetLocalPaidInReasonsORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetLocalPaidInReasonsORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект LocalPaidInReasons
+        /// </summary>
+        /// <param name="NewLocalPaidInReasons">Вставляем в базу информацию по объекту LocalPaidInReasons</param>
+        private void SetLocalPaidInReasonsORA(BLL.LocalPlg.LocalPaidInReasons NewLocalPaidInReasons)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetLocalPaidInReasonsORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetLocalPaidInReasonsORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetLocalPaidInReasonsORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetLocalPaidInReasonsORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetLocalPaidInReasonsORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту LocalPaidInReasons
+        /// </summary>
+        /// <param name="UpdLocalPaidInReasons">Сам объект данные которого нужно обновить</param>
+        private void UpdateLocalPaidInReasonsORA(BLL.LocalPlg.LocalPaidInReasons UpdLocalPaidInReasons)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateLocalPaidInReasonsORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateLocalPaidInReasonsORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateLocalPaidInReasonsORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateLocalPaidInReasonsORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateLocalPaidInReasonsORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <param name="LastDay">Сколько последних дней грузить из базы данных если null значит весь период</param>
@@ -1189,50 +1489,6 @@ From `aks`.`cashfunc_local`");
                 throw;
             }
         }
-/*
-        /// <summary>
-        /// Устанавливаем факт по чеку
-        /// </summary>
-        /// <param name="CustInn">Инн покупателя</param>
-        /// <param name="InvcNo">Сид докумнета</param>
-        /// <param name="PosDate">Дата документа</param>
-        /// <param name="TotalCashSum">Сумма по документу уплаченная налом</param>
-        public void SetPrizmCustPorogORA(string CustInn, string InvcNo, DateTime PosDate, decimal TotalCashSum)
-        {
-            string CommandSql = String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
-
-            try
-            {
-                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetPrizmCustPorogORA", EventEn.Dump);
-
-                // Закрывать конект не нужно он будет закрыт деструктором
-                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
-                {
-                    con.Open();
-
-                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
-                    {
-                        com.CommandTimeout = 900;  // 15 минут
-                        com.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (OdbcException ex)
-            {
-                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetPrizmCustPorogORA", EventEn.Error);
-                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetPrizmCustPorogORA", EventEn.Dump);
-                throw;
-            }
-            catch (Exception ex)
-            {
-                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetPrizmCustPorogORA", EventEn.Error);
-                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetPrizmCustPorogORA", EventEn.Dump);
-                throw;
-            }
-        }
-
-
-*/
 
         #endregion
 
@@ -1707,7 +1963,11 @@ Where Id={0}", (int)LocalKassa.Id);
 
             bool rez = false;
 
-            string CommandSql = String.Format(@"Select `HostName`, `Organization`, `StructPodr`, `OKPO`
+            string CommandSql = String.Format(@"Select `HostName`, `Organization`, `StructPodr`, `OKPO`,
+    `LastDocNumPrih`, `LastDocNumRash`, `LastDocNumKasBook`, `LastDocNumActVozv`, 
+    `LastDocNumReportKas`, `LastDocNumScetKkm`, `LastDocNumVerifNal`, `LastDocNumInvent`,
+    `INN`, `ZavodKKM`, `RegKKM`, `GlavBuhFio`,
+    `KkmName`, `DolRukOrg`, `RukFio`, `ZavDivisionFio`
 From `aks`.`cashfunc_local_kassa`
 Where Id={0}", (int)LocalKassa.Id);
 
@@ -1751,6 +2011,22 @@ Where Id={0}", (int)LocalKassa.Id);
                                     if (!dr.IsDBNull(1)) LocalKassa.Organization = dr.GetString(1);
                                     if (!dr.IsDBNull(2)) LocalKassa.StructPodrazdelenie = dr.GetString(2);
                                     if (!dr.IsDBNull(3)) LocalKassa.OKPO = dr.GetString(3);
+                                    if (!dr.IsDBNull(4)) LocalKassa.LastDocNumPrih = int.Parse(dr.GetValue(4).ToString());
+                                    if (!dr.IsDBNull(5)) LocalKassa.LastDocNumRash = int.Parse(dr.GetValue(5).ToString());
+                                    if (!dr.IsDBNull(6)) LocalKassa.LastDocNumKasBook = int.Parse(dr.GetValue(6).ToString());
+                                    if (!dr.IsDBNull(7)) LocalKassa.LastDocNumActVozv = int.Parse(dr.GetValue(7).ToString());
+                                    if (!dr.IsDBNull(8)) LocalKassa.LastDocNumReportKas = int.Parse(dr.GetValue(8).ToString());
+                                    if (!dr.IsDBNull(9)) LocalKassa.LastDocNumScetKkm = int.Parse(dr.GetValue(9).ToString());
+                                    if (!dr.IsDBNull(10)) LocalKassa.LastDocNumVerifNal = int.Parse(dr.GetValue(10).ToString());
+                                    if (!dr.IsDBNull(11)) LocalKassa.LastDocNumInvent = int.Parse(dr.GetValue(11).ToString());
+                                    if (!dr.IsDBNull(12)) LocalKassa.INN = dr.GetString(12);
+                                    if (!dr.IsDBNull(13)) LocalKassa.ZavodKKM = dr.GetString(13);
+                                    if (!dr.IsDBNull(14)) LocalKassa.RegKKM = dr.GetString(14);
+                                    if (!dr.IsDBNull(15)) LocalKassa.GlavBuhFio = dr.GetString(15);
+                                    if (!dr.IsDBNull(16)) LocalKassa.KkmName = dr.GetString(16);
+                                    if (!dr.IsDBNull(17)) LocalKassa.DolRukOrg = dr.GetString(17);
+                                    if (!dr.IsDBNull(18)) LocalKassa.RukFio = dr.GetString(18);
+                                    if (!dr.IsDBNull(19)) LocalKassa.ZavDivisionFio = dr.GetString(19);
                                 }
                             }
                         }
@@ -1781,8 +2057,19 @@ Where Id={0}", (int)LocalKassa.Id);
         {
             if (NewLocalKassa.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
 
-            string CommandSql = String.Format(@"insert into `aks`.`cashfunc_local_kassa`(id, `HostName`, `Organization`, `StructPodr`, `OKPO`) 
-Values({0}, '{1}', '{2}', '{3}', '{4}')", NewLocalKassa.Id, NewLocalKassa.HostName, NewLocalKassa.Organization, NewLocalKassa.StructPodrazdelenie, NewLocalKassa.OKPO);
+            string CommandSql = String.Format(@"insert into `aks`.`cashfunc_local_kassa`(id, `HostName`, `Organization`, `StructPodr`, `OKPO`,
+    `LastDocNumPrih`, `LastDocNumRash`, `LastDocNumKasBook`, `LastDocNumActVozv`, 
+    `LastDocNumReportKas`, `LastDocNumScetKkm`, `LastDocNumVerifNal`, `LastDocNumInvent`,
+    `INN`, `ZavodKKM`, `RegKKM`, `GlavBuhFio`,
+    `KkmName`, `DolRukOrg`, `RukFio`, `ZavDivisionFio`) 
+Values({0}, '{1}', '{2}', '{3}', '{4}',
+    `{5}`, `{6}`, `{7}`, `{8}`,
+    `{9}`, `{10}`, `{11}`, `{12}`, 
+    `{13}`, `{14}`, `{15}`, `{16}`)", NewLocalKassa.Id, NewLocalKassa.HostName, NewLocalKassa.Organization, NewLocalKassa.StructPodrazdelenie, NewLocalKassa.OKPO,
+                            NewLocalKassa.LastDocNumPrih, NewLocalKassa.LastDocNumRash, NewLocalKassa.LastDocNumKasBook, NewLocalKassa.LastDocNumActVozv,
+                            NewLocalKassa.LastDocNumReportKas, NewLocalKassa.LastDocNumScetKkm, NewLocalKassa.LastDocNumVerifNal, NewLocalKassa.LastDocNumInvent,
+                            NewLocalKassa.INN, NewLocalKassa.ZavodKKM, NewLocalKassa.RegKKM, NewLocalKassa.GlavBuhFio,
+                            NewLocalKassa.KkmName, NewLocalKassa.DolRukOrg, NewLocalKassa.RukFio, NewLocalKassa.ZavDivisionFio);
 
             try
             {
@@ -1823,8 +2110,16 @@ Values({0}, '{1}', '{2}', '{3}', '{4}')", NewLocalKassa.Id, NewLocalKassa.HostNa
             if (UpdLocalKassa.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
 
             string CommandSql = String.Format(@"update `aks`.`cashfunc_local_kassa`
-Set `Organization`='{1}', `StructPodr`='{2}', `OKPO`='{3}' 
-Where Id={0}", UpdLocalKassa.Id, UpdLocalKassa.Organization, UpdLocalKassa.StructPodrazdelenie, UpdLocalKassa.OKPO);
+Set `Organization`='{1}', `StructPodr`='{2}', `OKPO`='{3}',
+    `LastDocNumPrih`={4}, `LastDocNumRash`={5}, `LastDocNumKasBook`={6}, `LastDocNumActVozv`={7}, 
+    `LastDocNumReportKas`={8}, `LastDocNumScetKkm`={9}, `LastDocNumVerifNal`={10}, `LastDocNumInvent`={11},
+    `INN`='{12}', `ZavodKKM`='{13}', `RegKKM`='{14}', `GlavBuhFio`='{15}',
+    `KkmName`='{16}', `DolRukOrg`='{17}', `RukFio`='{18}', `ZavDivisionFio`='{19}'
+Where Id={0}", UpdLocalKassa.Id, UpdLocalKassa.Organization, UpdLocalKassa.StructPodrazdelenie, UpdLocalKassa.OKPO,
+            UpdLocalKassa.LastDocNumPrih, UpdLocalKassa.LastDocNumRash, UpdLocalKassa.LastDocNumKasBook, UpdLocalKassa.LastDocNumActVozv,
+            UpdLocalKassa.LastDocNumReportKas, UpdLocalKassa.LastDocNumScetKkm, UpdLocalKassa.LastDocNumVerifNal, UpdLocalKassa.LastDocNumInvent,
+            UpdLocalKassa.INN, UpdLocalKassa.ZavodKKM, UpdLocalKassa.RegKKM, UpdLocalKassa.GlavBuhFio,
+            UpdLocalKassa.KkmName, UpdLocalKassa.DolRukOrg, UpdLocalKassa.RukFio, UpdLocalKassa.ZavDivisionFio);
 
             try
             {
@@ -1852,6 +2147,220 @@ Where Id={0}", UpdLocalKassa.Id, UpdLocalKassa.Organization, UpdLocalKassa.Struc
             {
                 base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateLocalKassaMySql", EventEn.Error);
                 if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateLocalKassaMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Проверка наличия информации объекта LocalPaidInReasons
+        /// </summary>
+        /// <param name="LocalPaidInReasons">Объект LocalPaidInReasons который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        private bool HashLocalPaidInReasonsMySql(BLL.LocalPlg.LocalPaidInReasons LocalPaidInReasons)
+        {
+            if (LocalPaidInReasons.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            bool rez = false;
+
+            string CommandSql = String.Format(@"Select *
+From `aks`.`cashfunc_local_PaidInReasons`
+Where Id={0}", (int)LocalPaidInReasons.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashLocalPaidInReasonsMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        //com.Parameters.Add(new OdbcParameter("Id", OdbcType.Int) { Value = (int)LocalKassa.Id });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                rez = true;
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashLocalPaidInReasonsMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashLocalPaidInReasonsMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashLocalPaidInReasonsMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashLocalPaidInReasonsMySql", EventEn.Dump);
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту LocalPaidInReasons
+        /// </summary>
+        /// <param name="LocalPaidInReasons">Объект LocalPaidInReasons который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        private bool GetLocalPaidInReasonsMySql(ref BLL.LocalPlg.LocalPaidInReasons LocalPaidInReasons)
+        {
+            if (LocalPaidInReasons.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            bool rez = false;
+
+            string CommandSql = String.Format(@"Select `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`
+From `aks`.`cashfunc_local_PaidInReasons`
+Where Id={0}", (int)LocalPaidInReasons.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetLocalPaidInReasonsMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        //com.Parameters.Add(new OdbcParameter("Id", OdbcType.Int) { Value = (int)LocalKassa.Id });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+
+                            if (dr.HasRows)
+                            {
+                                rez = true;
+
+                                // Получаем схему таблицы
+                                //DataTable tt = dr.GetSchemaTable();
+
+                                //foreach (DataRow item in tt.Rows)
+                                //{
+                                //    DataColumn ncol = new DataColumn(item["ColumnName"].ToString(), Type.GetType(item["DataType"].ToString()));
+                                //ncol.SetOrdinal(int.Parse(item["ColumnOrdinal"].ToString()));
+                                //ncol.MaxLength = (int.Parse(item["ColumnSize"].ToString()) < 300 ? 300 : int.Parse(item["ColumnSize"].ToString()));
+                                //rez.Columns.Add(ncol);
+                                //}
+
+                                // пробегаем по строкам
+                                while (dr.Read())
+                                {
+                                    if (!dr.IsDBNull(0)) LocalPaidInReasons.Osnovanie = dr.GetString(0);
+                                    if (!dr.IsDBNull(1)) LocalPaidInReasons.DebetNomerSchet = dr.GetString(1);
+                                    if (!dr.IsDBNull(2)) LocalPaidInReasons.KredikKorSchet = dr.GetString(2);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetLocalPaidInReasonsMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetLocalPaidInReasonsMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetLocalPaidInReasonsMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetLocalPaidInReasonsMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект LocalPaidInReasons
+        /// </summary>
+        /// <param name="NewLocalPaidInReasons">Вставляем в базу информацию по объекту LocalPaidInReasons</param>
+        private void SetLocalPaidInReasonsMySql(BLL.LocalPlg.LocalPaidInReasons NewLocalPaidInReasons)
+        {
+            if (NewLocalPaidInReasons.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            string CommandSql = String.Format(@"insert into `aks`.`cashfunc_local_PaidInReasons`(id, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) 
+Values({0}, '{1}', '{2}', '{3}')", NewLocalPaidInReasons.Id, NewLocalPaidInReasons.Osnovanie, NewLocalPaidInReasons.DebetNomerSchet, NewLocalPaidInReasons.KredikKorSchet);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetLocalPaidInReasonsMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetLocalPaidInReasonsMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetLocalPaidInReasonsMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetLocalPaidInReasonsMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetLocalPaidInReasonsMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту LocalPaidInReasons
+        /// </summary>
+        /// <param name="UpdLocalPaidInReasons">Сам объект данные которого нужно обновить</param>
+        private void UpdateLocalPaidInReasonsMySql(BLL.LocalPlg.LocalPaidInReasons UpdLocalPaidInReasons)
+        {
+            if (UpdLocalPaidInReasons.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            string CommandSql = String.Format(@"update `aks`.`cashfunc_local_PaidInReasons`
+Set `Osnovanie`='{1}', `DebetNomerSchet`='{2}', `KredikKorSchet`='{3}'
+Where Id={0}", UpdLocalPaidInReasons.Id, UpdLocalPaidInReasons.Osnovanie, UpdLocalPaidInReasons.DebetNomerSchet, UpdLocalPaidInReasons.KredikKorSchet);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateLocalPaidInReasonsMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateLocalPaidInReasonsMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateLocalPaidInReasonsMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateLocalPaidInReasonsMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateLocalPaidInReasonsMySql", EventEn.Dump);
                 throw;
             }
         }

@@ -336,6 +336,44 @@ namespace AlgoritmCashFunc.Lib
         }
 
         /// <summary>
+        /// Проверка наличия информации объекта LocalKassa
+        /// </summary>
+        /// <param name="LocalPaidInReasons">Объект LocalPaidInReasons который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        public bool HashLocalPaidInReasons(BLL.LocalPlg.LocalPaidInReasons LocalPaidInReasons)
+        {
+            return this.PrvI.HashLocalPaidInReasons(LocalPaidInReasons);
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту LocalPaidInReasons
+        /// </summary>
+        /// <param name="LocalPaidInReasons">Объект LocalPaidInReasons который нужно прочитать в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли проччитать объект или нет</returns>
+        public bool GetLocalPaidInReasons(ref BLL.LocalPlg.LocalPaidInReasons LocalPaidInReasons)
+        {
+            return this.PrvI.GetLocalPaidInReasons(ref LocalPaidInReasons);
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект PaidInReasons
+        /// </summary>
+        /// <param name="NewLocalPaidInReasons">Вставляем в базу информацию по объекту LocalPaidInReasons</param>
+        public void SetLocalPaidInReasons(BLL.LocalPlg.LocalPaidInReasons NewLocalPaidInReasons)
+        {
+            this.PrvI.SetLocalPaidInReasons(NewLocalPaidInReasons);
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту PaidInReasons
+        /// </summary>
+        /// <param name="UpdLocalPaidInReasons">Сам объект данные которого нужно обновить</param>
+        public void UpdateLocalPaidInReasons(BLL.LocalPlg.LocalPaidInReasons UpdLocalPaidInReasons)
+        {
+            this.PrvI.UpdateLocalPaidInReasons(UpdLocalPaidInReasons);
+        }
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <param name="LastDay">Сколько последних дней грузить из базы данных если null значит весь период</param>

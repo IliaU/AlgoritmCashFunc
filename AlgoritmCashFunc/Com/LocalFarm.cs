@@ -33,6 +33,21 @@ namespace AlgoritmCashFunc.Com
         public static LocalKassa CurLocalDepartament = null;
 
         /// <summary>
+        /// Список старших кассиров
+        /// </summary>
+        public static List<LocalChiefCashiers> CurLocalChiefCashiers = new List<LocalChiefCashiers>();
+
+        /// <summary>
+        /// Список оснований для прихода
+        /// </summary>
+        public static List<LocalPaidInReasons> CurLocalPaidInReasons = new List<LocalPaidInReasons>();
+
+        /// <summary>
+        /// Список сотрудников
+        /// </summary>
+        public static List<LocalEmployees> CurLocalEmployees = new List<LocalEmployees>();
+
+        /// <summary>
         /// Конструктор
         /// </summary>
         public LocalFarm()
@@ -215,8 +230,16 @@ namespace AlgoritmCashFunc.Com
                     if (item.LocFullName == "LocalKassa" && ((LocalKassa)item).HostName == Environment.MachineName)
                     {
                         CurLocalDepartament = (LocalKassa)item;
-                        break;
                     }
+                    
+                    // Заполняем список старших кассиров
+                    if (item.LocFullName == "LocalChiefCashiers") CurLocalChiefCashiers.Add((LocalChiefCashiers)item);
+
+                    // Заполняем список оснований для прихода
+                    if (item.LocFullName == "LocalPaidInReasons") CurLocalPaidInReasons.Add((LocalPaidInReasons)item);
+
+                    // Заполняем список сотрудников
+                    if (item.LocFullName == "LocalEmployees") CurLocalEmployees.Add((LocalEmployees)item);
                 }
 
                 // Сохраняем промежуточный итог

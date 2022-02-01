@@ -89,6 +89,31 @@ namespace AlgoritmCashFunc.BLL.LocalPlg
         public string RegKKM;
 
         /// <summary>
+        /// Главный бухгалтер
+        /// </summary>
+        public string GlavBuhFio;
+
+        /// <summary>
+        /// Контрольно кассовая машина
+        /// </summary>
+        public string KkmName;
+
+        /// <summary>
+        /// Должность руководителя организации
+        /// </summary>
+        public string DolRukOrg;
+
+        /// <summary>
+        /// ФИО руководителя
+        /// </summary>
+        public string RukFio;
+
+        /// <summary>
+        /// ФИО Заведующий подразделением
+        /// </summary>
+        public string ZavDivisionFio;
+
+        /// <summary>
         /// Конструктор для загрузки из базы данных
         /// </summary>
         /// <param name="Id">Идентификатор в базе данных</param>

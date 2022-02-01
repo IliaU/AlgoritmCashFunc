@@ -159,6 +159,18 @@
             this.txtBoxReportKasOrganization = new System.Windows.Forms.TextBox();
             this.lblReportKasOrganization = new System.Windows.Forms.Label();
             this.pnlPagReportKasTopRight = new System.Windows.Forms.Panel();
+            this.pnlPagReportKasTopRightTop5 = new System.Windows.Forms.Panel();
+            this.lblReportKasRegKKM = new System.Windows.Forms.Label();
+            this.txtBoxReportKasRegKKM = new System.Windows.Forms.TextBox();
+            this.pnlPagReportKasTopRightTop4 = new System.Windows.Forms.Panel();
+            this.lblReportKasZavodKKM = new System.Windows.Forms.Label();
+            this.txtBoxReportKasZavodKKM = new System.Windows.Forms.TextBox();
+            this.pnlPagReportKasTopRightTop3 = new System.Windows.Forms.Panel();
+            this.lblReportKasODKP = new System.Windows.Forms.Label();
+            this.txtBoxReportKasODKP = new System.Windows.Forms.TextBox();
+            this.pnlPagReportKasTopRightTop2 = new System.Windows.Forms.Panel();
+            this.lblReportKasINN = new System.Windows.Forms.Label();
+            this.txtBoxReportKasINN = new System.Windows.Forms.TextBox();
             this.pnlPagReportKasTopRightTop1 = new System.Windows.Forms.Panel();
             this.lblReportKasOKPO = new System.Windows.Forms.Label();
             this.txtBoxReportKasOKPO = new System.Windows.Forms.TextBox();
@@ -185,6 +197,12 @@
             this.txtBoxScetKkmOrganization = new System.Windows.Forms.TextBox();
             this.lblScetKkmOrganization = new System.Windows.Forms.Label();
             this.pnlPagScetKkmTopRight = new System.Windows.Forms.Panel();
+            this.pnlPagScetKkmTopRightTop3 = new System.Windows.Forms.Panel();
+            this.lblScetKkmODKP = new System.Windows.Forms.Label();
+            this.txtBoxScetKkmODKP = new System.Windows.Forms.TextBox();
+            this.pnlPagScetKkmTopRightTop2 = new System.Windows.Forms.Panel();
+            this.lblScetKkmINN = new System.Windows.Forms.Label();
+            this.txtBoxScetKkmINN = new System.Windows.Forms.TextBox();
             this.pnlPagScetKkmTopRightTop1 = new System.Windows.Forms.Panel();
             this.lblScetKkmOKPO = new System.Windows.Forms.Label();
             this.txtBoxScetKkmOKPO = new System.Windows.Forms.TextBox();
@@ -208,6 +226,18 @@
             this.txtBoxVerifNalOrganization = new System.Windows.Forms.TextBox();
             this.lblVerifNalOrganization = new System.Windows.Forms.Label();
             this.pnlPagVerifNalTopRight = new System.Windows.Forms.Panel();
+            this.pnlPagVerifNalTopRightTop5 = new System.Windows.Forms.Panel();
+            this.lblVerifNalRegKKM = new System.Windows.Forms.Label();
+            this.txtBoxVerifNalRegKKM = new System.Windows.Forms.TextBox();
+            this.pnlPagVerifNalTopRightTop4 = new System.Windows.Forms.Panel();
+            this.lblVerifNalZavodKKM = new System.Windows.Forms.Label();
+            this.txtBoxVerifNalZavodKKM = new System.Windows.Forms.TextBox();
+            this.pnlPagVerifNalTopRightTop3 = new System.Windows.Forms.Panel();
+            this.lblVerifNalODKP = new System.Windows.Forms.Label();
+            this.txtBoxVerifNalODKP = new System.Windows.Forms.TextBox();
+            this.pnlPagVerifNalTopRightTop2 = new System.Windows.Forms.Panel();
+            this.lblVerifNalINN = new System.Windows.Forms.Label();
+            this.txtBoxVerifNalINN = new System.Windows.Forms.TextBox();
             this.pnlPagVerifNalTopRightTop1 = new System.Windows.Forms.Panel();
             this.lblVerifNalOKPO = new System.Windows.Forms.Label();
             this.txtBoxVerifNalOKPO = new System.Windows.Forms.TextBox();
@@ -246,36 +276,6 @@
             this.TSMItemConfigPrv = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemConfigUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemLic = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlPagReportKasTopRightTop5 = new System.Windows.Forms.Panel();
-            this.lblReportKasRegKKM = new System.Windows.Forms.Label();
-            this.txtBoxReportKasRegKKM = new System.Windows.Forms.TextBox();
-            this.pnlPagReportKasTopRightTop4 = new System.Windows.Forms.Panel();
-            this.lblReportKasZavodKKM = new System.Windows.Forms.Label();
-            this.txtBoxReportKasZavodKKM = new System.Windows.Forms.TextBox();
-            this.pnlPagReportKasTopRightTop3 = new System.Windows.Forms.Panel();
-            this.lblReportKasODKP = new System.Windows.Forms.Label();
-            this.txtBoxReportKasODKP = new System.Windows.Forms.TextBox();
-            this.pnlPagReportKasTopRightTop2 = new System.Windows.Forms.Panel();
-            this.lblReportKasINN = new System.Windows.Forms.Label();
-            this.txtBoxReportKasINN = new System.Windows.Forms.TextBox();
-            this.pnlPagVerifNalTopRightTop5 = new System.Windows.Forms.Panel();
-            this.lblVerifNalRegKKM = new System.Windows.Forms.Label();
-            this.txtBoxVerifNalRegKKM = new System.Windows.Forms.TextBox();
-            this.pnlPagVerifNalTopRightTop4 = new System.Windows.Forms.Panel();
-            this.lblVerifNalZavodKKM = new System.Windows.Forms.Label();
-            this.txtBoxVerifNalZavodKKM = new System.Windows.Forms.TextBox();
-            this.pnlPagVerifNalTopRightTop3 = new System.Windows.Forms.Panel();
-            this.lblVerifNalODKP = new System.Windows.Forms.Label();
-            this.txtBoxVerifNalODKP = new System.Windows.Forms.TextBox();
-            this.pnlPagVerifNalTopRightTop2 = new System.Windows.Forms.Panel();
-            this.lblVerifNalINN = new System.Windows.Forms.Label();
-            this.txtBoxVerifNalINN = new System.Windows.Forms.TextBox();
-            this.pnlPagScetKkmTopRightTop3 = new System.Windows.Forms.Panel();
-            this.lblScetKkmODKP = new System.Windows.Forms.Label();
-            this.txtBoxScetKkmODKP = new System.Windows.Forms.TextBox();
-            this.pnlPagScetKkmTopRightTop2 = new System.Windows.Forms.Panel();
-            this.lblScetKkmINN = new System.Windows.Forms.Label();
-            this.txtBoxScetKkmINN = new System.Windows.Forms.TextBox();
             this.pnlTop.SuspendLayout();
             this.pnlTopFill.SuspendLayout();
             this.pnlTopRight.SuspendLayout();
@@ -334,6 +334,10 @@
             this.pnlPagReportKasTopTop1.SuspendLayout();
             this.pnlPagReportKasTopTop0.SuspendLayout();
             this.pnlPagReportKasTopRight.SuspendLayout();
+            this.pnlPagReportKasTopRightTop5.SuspendLayout();
+            this.pnlPagReportKasTopRightTop4.SuspendLayout();
+            this.pnlPagReportKasTopRightTop3.SuspendLayout();
+            this.pnlPagReportKasTopRightTop2.SuspendLayout();
             this.pnlPagReportKasTopRightTop1.SuspendLayout();
             this.pnlPagReportKasTopRightTop0.SuspendLayout();
             this.tabPageSequensKKM.SuspendLayout();
@@ -345,6 +349,8 @@
             this.pnlPagScetKkmTopTop1.SuspendLayout();
             this.pnlPagScetKkmTopTop0.SuspendLayout();
             this.pnlPagScetKkmTopRight.SuspendLayout();
+            this.pnlPagScetKkmTopRightTop3.SuspendLayout();
+            this.pnlPagScetKkmTopRightTop2.SuspendLayout();
             this.pnlPagScetKkmTopRightTop1.SuspendLayout();
             this.pnlPagScetKkmTopRightTop0.SuspendLayout();
             this.tabPageCheck.SuspendLayout();
@@ -355,6 +361,10 @@
             this.pnlPagVerifNalTopTop1.SuspendLayout();
             this.pnlPagVerifNalTopTop0.SuspendLayout();
             this.pnlPagVerifNalTopRight.SuspendLayout();
+            this.pnlPagVerifNalTopRightTop5.SuspendLayout();
+            this.pnlPagVerifNalTopRightTop4.SuspendLayout();
+            this.pnlPagVerifNalTopRightTop3.SuspendLayout();
+            this.pnlPagVerifNalTopRightTop2.SuspendLayout();
             this.pnlPagVerifNalTopRightTop1.SuspendLayout();
             this.pnlPagVerifNalTopRightTop0.SuspendLayout();
             this.tabPageInvent.SuspendLayout();
@@ -370,16 +380,6 @@
             this.pnlBottom.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.pnlPagReportKasTopRightTop5.SuspendLayout();
-            this.pnlPagReportKasTopRightTop4.SuspendLayout();
-            this.pnlPagReportKasTopRightTop3.SuspendLayout();
-            this.pnlPagReportKasTopRightTop2.SuspendLayout();
-            this.pnlPagVerifNalTopRightTop5.SuspendLayout();
-            this.pnlPagVerifNalTopRightTop4.SuspendLayout();
-            this.pnlPagVerifNalTopRightTop3.SuspendLayout();
-            this.pnlPagVerifNalTopRightTop2.SuspendLayout();
-            this.pnlPagScetKkmTopRightTop3.SuspendLayout();
-            this.pnlPagScetKkmTopRightTop2.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTop
@@ -630,9 +630,11 @@
             // 
             // txtBoxPrihNumDoc
             // 
+            this.txtBoxPrihNumDoc.BackColor = System.Drawing.SystemColors.Window;
             this.txtBoxPrihNumDoc.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtBoxPrihNumDoc.Location = new System.Drawing.Point(3, 57);
             this.txtBoxPrihNumDoc.Name = "txtBoxPrihNumDoc";
+            this.txtBoxPrihNumDoc.ReadOnly = true;
             this.txtBoxPrihNumDoc.Size = new System.Drawing.Size(116, 21);
             this.txtBoxPrihNumDoc.TabIndex = 2;
             // 
@@ -877,9 +879,11 @@
             // 
             // txtBoxRashNumDoc
             // 
+            this.txtBoxRashNumDoc.BackColor = System.Drawing.SystemColors.Window;
             this.txtBoxRashNumDoc.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtBoxRashNumDoc.Location = new System.Drawing.Point(3, 57);
             this.txtBoxRashNumDoc.Name = "txtBoxRashNumDoc";
+            this.txtBoxRashNumDoc.ReadOnly = true;
             this.txtBoxRashNumDoc.Size = new System.Drawing.Size(116, 21);
             this.txtBoxRashNumDoc.TabIndex = 2;
             // 
@@ -1341,9 +1345,11 @@
             // 
             // txtBoxActVozvNumDoc
             // 
+            this.txtBoxActVozvNumDoc.BackColor = System.Drawing.SystemColors.Window;
             this.txtBoxActVozvNumDoc.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtBoxActVozvNumDoc.Location = new System.Drawing.Point(3, 57);
             this.txtBoxActVozvNumDoc.Name = "txtBoxActVozvNumDoc";
+            this.txtBoxActVozvNumDoc.ReadOnly = true;
             this.txtBoxActVozvNumDoc.Size = new System.Drawing.Size(116, 21);
             this.txtBoxActVozvNumDoc.TabIndex = 2;
             // 
@@ -1724,9 +1730,11 @@
             // 
             // txtBoxReportKasNumDoc
             // 
+            this.txtBoxReportKasNumDoc.BackColor = System.Drawing.SystemColors.Window;
             this.txtBoxReportKasNumDoc.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtBoxReportKasNumDoc.Location = new System.Drawing.Point(3, 57);
             this.txtBoxReportKasNumDoc.Name = "txtBoxReportKasNumDoc";
+            this.txtBoxReportKasNumDoc.ReadOnly = true;
             this.txtBoxReportKasNumDoc.Size = new System.Drawing.Size(116, 21);
             this.txtBoxReportKasNumDoc.TabIndex = 2;
             // 
@@ -1820,6 +1828,138 @@
             this.pnlPagReportKasTopRight.Name = "pnlPagReportKasTopRight";
             this.pnlPagReportKasTopRight.Size = new System.Drawing.Size(317, 187);
             this.pnlPagReportKasTopRight.TabIndex = 1;
+            // 
+            // pnlPagReportKasTopRightTop5
+            // 
+            this.pnlPagReportKasTopRightTop5.Controls.Add(this.lblReportKasRegKKM);
+            this.pnlPagReportKasTopRightTop5.Controls.Add(this.txtBoxReportKasRegKKM);
+            this.pnlPagReportKasTopRightTop5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagReportKasTopRightTop5.Location = new System.Drawing.Point(0, 150);
+            this.pnlPagReportKasTopRightTop5.Name = "pnlPagReportKasTopRightTop5";
+            this.pnlPagReportKasTopRightTop5.Size = new System.Drawing.Size(317, 30);
+            this.pnlPagReportKasTopRightTop5.TabIndex = 9;
+            // 
+            // lblReportKasRegKKM
+            // 
+            this.lblReportKasRegKKM.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblReportKasRegKKM.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblReportKasRegKKM.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblReportKasRegKKM.Location = new System.Drawing.Point(31, 0);
+            this.lblReportKasRegKKM.Name = "lblReportKasRegKKM";
+            this.lblReportKasRegKKM.Size = new System.Drawing.Size(147, 30);
+            this.lblReportKasRegKKM.TabIndex = 4;
+            this.lblReportKasRegKKM.Text = "Регистр. № ККМ";
+            this.lblReportKasRegKKM.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtBoxReportKasRegKKM
+            // 
+            this.txtBoxReportKasRegKKM.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxReportKasRegKKM.Dock = System.Windows.Forms.DockStyle.Right;
+            this.txtBoxReportKasRegKKM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxReportKasRegKKM.Location = new System.Drawing.Point(178, 0);
+            this.txtBoxReportKasRegKKM.Name = "txtBoxReportKasRegKKM";
+            this.txtBoxReportKasRegKKM.ReadOnly = true;
+            this.txtBoxReportKasRegKKM.Size = new System.Drawing.Size(139, 26);
+            this.txtBoxReportKasRegKKM.TabIndex = 3;
+            // 
+            // pnlPagReportKasTopRightTop4
+            // 
+            this.pnlPagReportKasTopRightTop4.Controls.Add(this.lblReportKasZavodKKM);
+            this.pnlPagReportKasTopRightTop4.Controls.Add(this.txtBoxReportKasZavodKKM);
+            this.pnlPagReportKasTopRightTop4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagReportKasTopRightTop4.Location = new System.Drawing.Point(0, 120);
+            this.pnlPagReportKasTopRightTop4.Name = "pnlPagReportKasTopRightTop4";
+            this.pnlPagReportKasTopRightTop4.Size = new System.Drawing.Size(317, 30);
+            this.pnlPagReportKasTopRightTop4.TabIndex = 8;
+            // 
+            // lblReportKasZavodKKM
+            // 
+            this.lblReportKasZavodKKM.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblReportKasZavodKKM.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblReportKasZavodKKM.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblReportKasZavodKKM.Location = new System.Drawing.Point(28, 0);
+            this.lblReportKasZavodKKM.Name = "lblReportKasZavodKKM";
+            this.lblReportKasZavodKKM.Size = new System.Drawing.Size(150, 30);
+            this.lblReportKasZavodKKM.TabIndex = 4;
+            this.lblReportKasZavodKKM.Text = "Заводской № ККМ";
+            this.lblReportKasZavodKKM.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtBoxReportKasZavodKKM
+            // 
+            this.txtBoxReportKasZavodKKM.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxReportKasZavodKKM.Dock = System.Windows.Forms.DockStyle.Right;
+            this.txtBoxReportKasZavodKKM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxReportKasZavodKKM.Location = new System.Drawing.Point(178, 0);
+            this.txtBoxReportKasZavodKKM.Name = "txtBoxReportKasZavodKKM";
+            this.txtBoxReportKasZavodKKM.ReadOnly = true;
+            this.txtBoxReportKasZavodKKM.Size = new System.Drawing.Size(139, 26);
+            this.txtBoxReportKasZavodKKM.TabIndex = 3;
+            // 
+            // pnlPagReportKasTopRightTop3
+            // 
+            this.pnlPagReportKasTopRightTop3.Controls.Add(this.lblReportKasODKP);
+            this.pnlPagReportKasTopRightTop3.Controls.Add(this.txtBoxReportKasODKP);
+            this.pnlPagReportKasTopRightTop3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagReportKasTopRightTop3.Location = new System.Drawing.Point(0, 90);
+            this.pnlPagReportKasTopRightTop3.Name = "pnlPagReportKasTopRightTop3";
+            this.pnlPagReportKasTopRightTop3.Size = new System.Drawing.Size(317, 30);
+            this.pnlPagReportKasTopRightTop3.TabIndex = 7;
+            // 
+            // lblReportKasODKP
+            // 
+            this.lblReportKasODKP.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblReportKasODKP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblReportKasODKP.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblReportKasODKP.Location = new System.Drawing.Point(3, 0);
+            this.lblReportKasODKP.Name = "lblReportKasODKP";
+            this.lblReportKasODKP.Size = new System.Drawing.Size(175, 30);
+            this.lblReportKasODKP.TabIndex = 4;
+            this.lblReportKasODKP.Text = "Вид деятельности ОДКП";
+            this.lblReportKasODKP.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtBoxReportKasODKP
+            // 
+            this.txtBoxReportKasODKP.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxReportKasODKP.Dock = System.Windows.Forms.DockStyle.Right;
+            this.txtBoxReportKasODKP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxReportKasODKP.Location = new System.Drawing.Point(178, 0);
+            this.txtBoxReportKasODKP.Name = "txtBoxReportKasODKP";
+            this.txtBoxReportKasODKP.ReadOnly = true;
+            this.txtBoxReportKasODKP.Size = new System.Drawing.Size(139, 26);
+            this.txtBoxReportKasODKP.TabIndex = 3;
+            // 
+            // pnlPagReportKasTopRightTop2
+            // 
+            this.pnlPagReportKasTopRightTop2.Controls.Add(this.lblReportKasINN);
+            this.pnlPagReportKasTopRightTop2.Controls.Add(this.txtBoxReportKasINN);
+            this.pnlPagReportKasTopRightTop2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagReportKasTopRightTop2.Location = new System.Drawing.Point(0, 60);
+            this.pnlPagReportKasTopRightTop2.Name = "pnlPagReportKasTopRightTop2";
+            this.pnlPagReportKasTopRightTop2.Size = new System.Drawing.Size(317, 30);
+            this.pnlPagReportKasTopRightTop2.TabIndex = 6;
+            // 
+            // lblReportKasINN
+            // 
+            this.lblReportKasINN.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblReportKasINN.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblReportKasINN.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblReportKasINN.Location = new System.Drawing.Point(132, 0);
+            this.lblReportKasINN.Name = "lblReportKasINN";
+            this.lblReportKasINN.Size = new System.Drawing.Size(46, 30);
+            this.lblReportKasINN.TabIndex = 4;
+            this.lblReportKasINN.Text = "ИНН";
+            this.lblReportKasINN.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtBoxReportKasINN
+            // 
+            this.txtBoxReportKasINN.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxReportKasINN.Dock = System.Windows.Forms.DockStyle.Right;
+            this.txtBoxReportKasINN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxReportKasINN.Location = new System.Drawing.Point(178, 0);
+            this.txtBoxReportKasINN.Name = "txtBoxReportKasINN";
+            this.txtBoxReportKasINN.ReadOnly = true;
+            this.txtBoxReportKasINN.Size = new System.Drawing.Size(139, 26);
+            this.txtBoxReportKasINN.TabIndex = 3;
             // 
             // pnlPagReportKasTopRightTop1
             // 
@@ -2006,9 +2146,11 @@
             // 
             // txtBoxScetKkmNumDoc
             // 
+            this.txtBoxScetKkmNumDoc.BackColor = System.Drawing.SystemColors.Window;
             this.txtBoxScetKkmNumDoc.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtBoxScetKkmNumDoc.Location = new System.Drawing.Point(3, 57);
             this.txtBoxScetKkmNumDoc.Name = "txtBoxScetKkmNumDoc";
+            this.txtBoxScetKkmNumDoc.ReadOnly = true;
             this.txtBoxScetKkmNumDoc.Size = new System.Drawing.Size(116, 21);
             this.txtBoxScetKkmNumDoc.TabIndex = 2;
             // 
@@ -2100,6 +2242,72 @@
             this.pnlPagScetKkmTopRight.Name = "pnlPagScetKkmTopRight";
             this.pnlPagScetKkmTopRight.Size = new System.Drawing.Size(317, 187);
             this.pnlPagScetKkmTopRight.TabIndex = 1;
+            // 
+            // pnlPagScetKkmTopRightTop3
+            // 
+            this.pnlPagScetKkmTopRightTop3.Controls.Add(this.lblScetKkmODKP);
+            this.pnlPagScetKkmTopRightTop3.Controls.Add(this.txtBoxScetKkmODKP);
+            this.pnlPagScetKkmTopRightTop3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagScetKkmTopRightTop3.Location = new System.Drawing.Point(0, 90);
+            this.pnlPagScetKkmTopRightTop3.Name = "pnlPagScetKkmTopRightTop3";
+            this.pnlPagScetKkmTopRightTop3.Size = new System.Drawing.Size(317, 30);
+            this.pnlPagScetKkmTopRightTop3.TabIndex = 7;
+            // 
+            // lblScetKkmODKP
+            // 
+            this.lblScetKkmODKP.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblScetKkmODKP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblScetKkmODKP.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblScetKkmODKP.Location = new System.Drawing.Point(3, 0);
+            this.lblScetKkmODKP.Name = "lblScetKkmODKP";
+            this.lblScetKkmODKP.Size = new System.Drawing.Size(175, 30);
+            this.lblScetKkmODKP.TabIndex = 4;
+            this.lblScetKkmODKP.Text = "Вид деятельности ОДКП";
+            this.lblScetKkmODKP.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtBoxScetKkmODKP
+            // 
+            this.txtBoxScetKkmODKP.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxScetKkmODKP.Dock = System.Windows.Forms.DockStyle.Right;
+            this.txtBoxScetKkmODKP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxScetKkmODKP.Location = new System.Drawing.Point(178, 0);
+            this.txtBoxScetKkmODKP.Name = "txtBoxScetKkmODKP";
+            this.txtBoxScetKkmODKP.ReadOnly = true;
+            this.txtBoxScetKkmODKP.Size = new System.Drawing.Size(139, 26);
+            this.txtBoxScetKkmODKP.TabIndex = 3;
+            // 
+            // pnlPagScetKkmTopRightTop2
+            // 
+            this.pnlPagScetKkmTopRightTop2.Controls.Add(this.lblScetKkmINN);
+            this.pnlPagScetKkmTopRightTop2.Controls.Add(this.txtBoxScetKkmINN);
+            this.pnlPagScetKkmTopRightTop2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagScetKkmTopRightTop2.Location = new System.Drawing.Point(0, 60);
+            this.pnlPagScetKkmTopRightTop2.Name = "pnlPagScetKkmTopRightTop2";
+            this.pnlPagScetKkmTopRightTop2.Size = new System.Drawing.Size(317, 30);
+            this.pnlPagScetKkmTopRightTop2.TabIndex = 6;
+            // 
+            // lblScetKkmINN
+            // 
+            this.lblScetKkmINN.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblScetKkmINN.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblScetKkmINN.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblScetKkmINN.Location = new System.Drawing.Point(132, 0);
+            this.lblScetKkmINN.Name = "lblScetKkmINN";
+            this.lblScetKkmINN.Size = new System.Drawing.Size(46, 30);
+            this.lblScetKkmINN.TabIndex = 4;
+            this.lblScetKkmINN.Text = "ИНН";
+            this.lblScetKkmINN.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtBoxScetKkmINN
+            // 
+            this.txtBoxScetKkmINN.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxScetKkmINN.Dock = System.Windows.Forms.DockStyle.Right;
+            this.txtBoxScetKkmINN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxScetKkmINN.Location = new System.Drawing.Point(178, 0);
+            this.txtBoxScetKkmINN.Name = "txtBoxScetKkmINN";
+            this.txtBoxScetKkmINN.ReadOnly = true;
+            this.txtBoxScetKkmINN.Size = new System.Drawing.Size(139, 26);
+            this.txtBoxScetKkmINN.TabIndex = 3;
             // 
             // pnlPagScetKkmTopRightTop1
             // 
@@ -2255,9 +2463,11 @@
             // 
             // txtBoxVerifNalNumDoc
             // 
+            this.txtBoxVerifNalNumDoc.BackColor = System.Drawing.SystemColors.Window;
             this.txtBoxVerifNalNumDoc.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtBoxVerifNalNumDoc.Location = new System.Drawing.Point(3, 57);
             this.txtBoxVerifNalNumDoc.Name = "txtBoxVerifNalNumDoc";
+            this.txtBoxVerifNalNumDoc.ReadOnly = true;
             this.txtBoxVerifNalNumDoc.Size = new System.Drawing.Size(116, 21);
             this.txtBoxVerifNalNumDoc.TabIndex = 2;
             // 
@@ -2351,6 +2561,138 @@
             this.pnlPagVerifNalTopRight.Name = "pnlPagVerifNalTopRight";
             this.pnlPagVerifNalTopRight.Size = new System.Drawing.Size(317, 187);
             this.pnlPagVerifNalTopRight.TabIndex = 1;
+            // 
+            // pnlPagVerifNalTopRightTop5
+            // 
+            this.pnlPagVerifNalTopRightTop5.Controls.Add(this.lblVerifNalRegKKM);
+            this.pnlPagVerifNalTopRightTop5.Controls.Add(this.txtBoxVerifNalRegKKM);
+            this.pnlPagVerifNalTopRightTop5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagVerifNalTopRightTop5.Location = new System.Drawing.Point(0, 150);
+            this.pnlPagVerifNalTopRightTop5.Name = "pnlPagVerifNalTopRightTop5";
+            this.pnlPagVerifNalTopRightTop5.Size = new System.Drawing.Size(317, 30);
+            this.pnlPagVerifNalTopRightTop5.TabIndex = 9;
+            // 
+            // lblVerifNalRegKKM
+            // 
+            this.lblVerifNalRegKKM.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblVerifNalRegKKM.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblVerifNalRegKKM.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblVerifNalRegKKM.Location = new System.Drawing.Point(31, 0);
+            this.lblVerifNalRegKKM.Name = "lblVerifNalRegKKM";
+            this.lblVerifNalRegKKM.Size = new System.Drawing.Size(147, 30);
+            this.lblVerifNalRegKKM.TabIndex = 4;
+            this.lblVerifNalRegKKM.Text = "Регистр. № ККМ";
+            this.lblVerifNalRegKKM.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtBoxVerifNalRegKKM
+            // 
+            this.txtBoxVerifNalRegKKM.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxVerifNalRegKKM.Dock = System.Windows.Forms.DockStyle.Right;
+            this.txtBoxVerifNalRegKKM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxVerifNalRegKKM.Location = new System.Drawing.Point(178, 0);
+            this.txtBoxVerifNalRegKKM.Name = "txtBoxVerifNalRegKKM";
+            this.txtBoxVerifNalRegKKM.ReadOnly = true;
+            this.txtBoxVerifNalRegKKM.Size = new System.Drawing.Size(139, 26);
+            this.txtBoxVerifNalRegKKM.TabIndex = 3;
+            // 
+            // pnlPagVerifNalTopRightTop4
+            // 
+            this.pnlPagVerifNalTopRightTop4.Controls.Add(this.lblVerifNalZavodKKM);
+            this.pnlPagVerifNalTopRightTop4.Controls.Add(this.txtBoxVerifNalZavodKKM);
+            this.pnlPagVerifNalTopRightTop4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagVerifNalTopRightTop4.Location = new System.Drawing.Point(0, 120);
+            this.pnlPagVerifNalTopRightTop4.Name = "pnlPagVerifNalTopRightTop4";
+            this.pnlPagVerifNalTopRightTop4.Size = new System.Drawing.Size(317, 30);
+            this.pnlPagVerifNalTopRightTop4.TabIndex = 8;
+            // 
+            // lblVerifNalZavodKKM
+            // 
+            this.lblVerifNalZavodKKM.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblVerifNalZavodKKM.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblVerifNalZavodKKM.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblVerifNalZavodKKM.Location = new System.Drawing.Point(28, 0);
+            this.lblVerifNalZavodKKM.Name = "lblVerifNalZavodKKM";
+            this.lblVerifNalZavodKKM.Size = new System.Drawing.Size(150, 30);
+            this.lblVerifNalZavodKKM.TabIndex = 4;
+            this.lblVerifNalZavodKKM.Text = "Заводской № ККМ";
+            this.lblVerifNalZavodKKM.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtBoxVerifNalZavodKKM
+            // 
+            this.txtBoxVerifNalZavodKKM.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxVerifNalZavodKKM.Dock = System.Windows.Forms.DockStyle.Right;
+            this.txtBoxVerifNalZavodKKM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxVerifNalZavodKKM.Location = new System.Drawing.Point(178, 0);
+            this.txtBoxVerifNalZavodKKM.Name = "txtBoxVerifNalZavodKKM";
+            this.txtBoxVerifNalZavodKKM.ReadOnly = true;
+            this.txtBoxVerifNalZavodKKM.Size = new System.Drawing.Size(139, 26);
+            this.txtBoxVerifNalZavodKKM.TabIndex = 3;
+            // 
+            // pnlPagVerifNalTopRightTop3
+            // 
+            this.pnlPagVerifNalTopRightTop3.Controls.Add(this.lblVerifNalODKP);
+            this.pnlPagVerifNalTopRightTop3.Controls.Add(this.txtBoxVerifNalODKP);
+            this.pnlPagVerifNalTopRightTop3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagVerifNalTopRightTop3.Location = new System.Drawing.Point(0, 90);
+            this.pnlPagVerifNalTopRightTop3.Name = "pnlPagVerifNalTopRightTop3";
+            this.pnlPagVerifNalTopRightTop3.Size = new System.Drawing.Size(317, 30);
+            this.pnlPagVerifNalTopRightTop3.TabIndex = 7;
+            // 
+            // lblVerifNalODKP
+            // 
+            this.lblVerifNalODKP.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblVerifNalODKP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblVerifNalODKP.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblVerifNalODKP.Location = new System.Drawing.Point(3, 0);
+            this.lblVerifNalODKP.Name = "lblVerifNalODKP";
+            this.lblVerifNalODKP.Size = new System.Drawing.Size(175, 30);
+            this.lblVerifNalODKP.TabIndex = 4;
+            this.lblVerifNalODKP.Text = "Вид деятельности ОДКП";
+            this.lblVerifNalODKP.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtBoxVerifNalODKP
+            // 
+            this.txtBoxVerifNalODKP.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxVerifNalODKP.Dock = System.Windows.Forms.DockStyle.Right;
+            this.txtBoxVerifNalODKP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxVerifNalODKP.Location = new System.Drawing.Point(178, 0);
+            this.txtBoxVerifNalODKP.Name = "txtBoxVerifNalODKP";
+            this.txtBoxVerifNalODKP.ReadOnly = true;
+            this.txtBoxVerifNalODKP.Size = new System.Drawing.Size(139, 26);
+            this.txtBoxVerifNalODKP.TabIndex = 3;
+            // 
+            // pnlPagVerifNalTopRightTop2
+            // 
+            this.pnlPagVerifNalTopRightTop2.Controls.Add(this.lblVerifNalINN);
+            this.pnlPagVerifNalTopRightTop2.Controls.Add(this.txtBoxVerifNalINN);
+            this.pnlPagVerifNalTopRightTop2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagVerifNalTopRightTop2.Location = new System.Drawing.Point(0, 60);
+            this.pnlPagVerifNalTopRightTop2.Name = "pnlPagVerifNalTopRightTop2";
+            this.pnlPagVerifNalTopRightTop2.Size = new System.Drawing.Size(317, 30);
+            this.pnlPagVerifNalTopRightTop2.TabIndex = 6;
+            // 
+            // lblVerifNalINN
+            // 
+            this.lblVerifNalINN.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblVerifNalINN.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblVerifNalINN.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblVerifNalINN.Location = new System.Drawing.Point(132, 0);
+            this.lblVerifNalINN.Name = "lblVerifNalINN";
+            this.lblVerifNalINN.Size = new System.Drawing.Size(46, 30);
+            this.lblVerifNalINN.TabIndex = 4;
+            this.lblVerifNalINN.Text = "ИНН";
+            this.lblVerifNalINN.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtBoxVerifNalINN
+            // 
+            this.txtBoxVerifNalINN.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxVerifNalINN.Dock = System.Windows.Forms.DockStyle.Right;
+            this.txtBoxVerifNalINN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxVerifNalINN.Location = new System.Drawing.Point(178, 0);
+            this.txtBoxVerifNalINN.Name = "txtBoxVerifNalINN";
+            this.txtBoxVerifNalINN.ReadOnly = true;
+            this.txtBoxVerifNalINN.Size = new System.Drawing.Size(139, 26);
+            this.txtBoxVerifNalINN.TabIndex = 3;
             // 
             // pnlPagVerifNalTopRightTop1
             // 
@@ -2506,9 +2848,11 @@
             // 
             // txtBoxInventNumDoc
             // 
+            this.txtBoxInventNumDoc.BackColor = System.Drawing.SystemColors.Window;
             this.txtBoxInventNumDoc.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtBoxInventNumDoc.Location = new System.Drawing.Point(3, 57);
             this.txtBoxInventNumDoc.Name = "txtBoxInventNumDoc";
+            this.txtBoxInventNumDoc.ReadOnly = true;
             this.txtBoxInventNumDoc.Size = new System.Drawing.Size(116, 21);
             this.txtBoxInventNumDoc.TabIndex = 2;
             // 
@@ -2742,336 +3086,6 @@
             this.TSMItemLic.Text = "Информация по лицензии";
             this.TSMItemLic.Click += new System.EventHandler(this.TSMItemLic_Click);
             // 
-            // pnlPagReportKasTopRightTop5
-            // 
-            this.pnlPagReportKasTopRightTop5.Controls.Add(this.lblReportKasRegKKM);
-            this.pnlPagReportKasTopRightTop5.Controls.Add(this.txtBoxReportKasRegKKM);
-            this.pnlPagReportKasTopRightTop5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlPagReportKasTopRightTop5.Location = new System.Drawing.Point(0, 150);
-            this.pnlPagReportKasTopRightTop5.Name = "pnlPagReportKasTopRightTop5";
-            this.pnlPagReportKasTopRightTop5.Size = new System.Drawing.Size(317, 30);
-            this.pnlPagReportKasTopRightTop5.TabIndex = 9;
-            // 
-            // lblReportKasRegKKM
-            // 
-            this.lblReportKasRegKKM.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblReportKasRegKKM.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblReportKasRegKKM.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblReportKasRegKKM.Location = new System.Drawing.Point(31, 0);
-            this.lblReportKasRegKKM.Name = "lblReportKasRegKKM";
-            this.lblReportKasRegKKM.Size = new System.Drawing.Size(147, 30);
-            this.lblReportKasRegKKM.TabIndex = 4;
-            this.lblReportKasRegKKM.Text = "Регистр. № ККМ";
-            this.lblReportKasRegKKM.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtBoxReportKasRegKKM
-            // 
-            this.txtBoxReportKasRegKKM.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.txtBoxReportKasRegKKM.Dock = System.Windows.Forms.DockStyle.Right;
-            this.txtBoxReportKasRegKKM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtBoxReportKasRegKKM.Location = new System.Drawing.Point(178, 0);
-            this.txtBoxReportKasRegKKM.Name = "txtBoxReportKasRegKKM";
-            this.txtBoxReportKasRegKKM.ReadOnly = true;
-            this.txtBoxReportKasRegKKM.Size = new System.Drawing.Size(139, 26);
-            this.txtBoxReportKasRegKKM.TabIndex = 3;
-            // 
-            // pnlPagReportKasTopRightTop4
-            // 
-            this.pnlPagReportKasTopRightTop4.Controls.Add(this.lblReportKasZavodKKM);
-            this.pnlPagReportKasTopRightTop4.Controls.Add(this.txtBoxReportKasZavodKKM);
-            this.pnlPagReportKasTopRightTop4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlPagReportKasTopRightTop4.Location = new System.Drawing.Point(0, 120);
-            this.pnlPagReportKasTopRightTop4.Name = "pnlPagReportKasTopRightTop4";
-            this.pnlPagReportKasTopRightTop4.Size = new System.Drawing.Size(317, 30);
-            this.pnlPagReportKasTopRightTop4.TabIndex = 8;
-            // 
-            // lblReportKasZavodKKM
-            // 
-            this.lblReportKasZavodKKM.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblReportKasZavodKKM.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblReportKasZavodKKM.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblReportKasZavodKKM.Location = new System.Drawing.Point(28, 0);
-            this.lblReportKasZavodKKM.Name = "lblReportKasZavodKKM";
-            this.lblReportKasZavodKKM.Size = new System.Drawing.Size(150, 30);
-            this.lblReportKasZavodKKM.TabIndex = 4;
-            this.lblReportKasZavodKKM.Text = "Заводской № ККМ";
-            this.lblReportKasZavodKKM.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtBoxReportKasZavodKKM
-            // 
-            this.txtBoxReportKasZavodKKM.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.txtBoxReportKasZavodKKM.Dock = System.Windows.Forms.DockStyle.Right;
-            this.txtBoxReportKasZavodKKM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtBoxReportKasZavodKKM.Location = new System.Drawing.Point(178, 0);
-            this.txtBoxReportKasZavodKKM.Name = "txtBoxReportKasZavodKKM";
-            this.txtBoxReportKasZavodKKM.ReadOnly = true;
-            this.txtBoxReportKasZavodKKM.Size = new System.Drawing.Size(139, 26);
-            this.txtBoxReportKasZavodKKM.TabIndex = 3;
-            // 
-            // pnlPagReportKasTopRightTop3
-            // 
-            this.pnlPagReportKasTopRightTop3.Controls.Add(this.lblReportKasODKP);
-            this.pnlPagReportKasTopRightTop3.Controls.Add(this.txtBoxReportKasODKP);
-            this.pnlPagReportKasTopRightTop3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlPagReportKasTopRightTop3.Location = new System.Drawing.Point(0, 90);
-            this.pnlPagReportKasTopRightTop3.Name = "pnlPagReportKasTopRightTop3";
-            this.pnlPagReportKasTopRightTop3.Size = new System.Drawing.Size(317, 30);
-            this.pnlPagReportKasTopRightTop3.TabIndex = 7;
-            // 
-            // lblReportKasODKP
-            // 
-            this.lblReportKasODKP.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblReportKasODKP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblReportKasODKP.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblReportKasODKP.Location = new System.Drawing.Point(3, 0);
-            this.lblReportKasODKP.Name = "lblReportKasODKP";
-            this.lblReportKasODKP.Size = new System.Drawing.Size(175, 30);
-            this.lblReportKasODKP.TabIndex = 4;
-            this.lblReportKasODKP.Text = "Вид деятельности ОДКП";
-            this.lblReportKasODKP.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtBoxReportKasODKP
-            // 
-            this.txtBoxReportKasODKP.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.txtBoxReportKasODKP.Dock = System.Windows.Forms.DockStyle.Right;
-            this.txtBoxReportKasODKP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtBoxReportKasODKP.Location = new System.Drawing.Point(178, 0);
-            this.txtBoxReportKasODKP.Name = "txtBoxReportKasODKP";
-            this.txtBoxReportKasODKP.ReadOnly = true;
-            this.txtBoxReportKasODKP.Size = new System.Drawing.Size(139, 26);
-            this.txtBoxReportKasODKP.TabIndex = 3;
-            // 
-            // pnlPagReportKasTopRightTop2
-            // 
-            this.pnlPagReportKasTopRightTop2.Controls.Add(this.lblReportKasINN);
-            this.pnlPagReportKasTopRightTop2.Controls.Add(this.txtBoxReportKasINN);
-            this.pnlPagReportKasTopRightTop2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlPagReportKasTopRightTop2.Location = new System.Drawing.Point(0, 60);
-            this.pnlPagReportKasTopRightTop2.Name = "pnlPagReportKasTopRightTop2";
-            this.pnlPagReportKasTopRightTop2.Size = new System.Drawing.Size(317, 30);
-            this.pnlPagReportKasTopRightTop2.TabIndex = 6;
-            // 
-            // lblReportKasINN
-            // 
-            this.lblReportKasINN.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblReportKasINN.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblReportKasINN.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblReportKasINN.Location = new System.Drawing.Point(132, 0);
-            this.lblReportKasINN.Name = "lblReportKasINN";
-            this.lblReportKasINN.Size = new System.Drawing.Size(46, 30);
-            this.lblReportKasINN.TabIndex = 4;
-            this.lblReportKasINN.Text = "ИНН";
-            this.lblReportKasINN.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtBoxReportKasINN
-            // 
-            this.txtBoxReportKasINN.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.txtBoxReportKasINN.Dock = System.Windows.Forms.DockStyle.Right;
-            this.txtBoxReportKasINN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtBoxReportKasINN.Location = new System.Drawing.Point(178, 0);
-            this.txtBoxReportKasINN.Name = "txtBoxReportKasINN";
-            this.txtBoxReportKasINN.ReadOnly = true;
-            this.txtBoxReportKasINN.Size = new System.Drawing.Size(139, 26);
-            this.txtBoxReportKasINN.TabIndex = 3;
-            // 
-            // pnlPagVerifNalTopRightTop5
-            // 
-            this.pnlPagVerifNalTopRightTop5.Controls.Add(this.lblVerifNalRegKKM);
-            this.pnlPagVerifNalTopRightTop5.Controls.Add(this.txtBoxVerifNalRegKKM);
-            this.pnlPagVerifNalTopRightTop5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlPagVerifNalTopRightTop5.Location = new System.Drawing.Point(0, 150);
-            this.pnlPagVerifNalTopRightTop5.Name = "pnlPagVerifNalTopRightTop5";
-            this.pnlPagVerifNalTopRightTop5.Size = new System.Drawing.Size(317, 30);
-            this.pnlPagVerifNalTopRightTop5.TabIndex = 9;
-            // 
-            // lblVerifNalRegKKM
-            // 
-            this.lblVerifNalRegKKM.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblVerifNalRegKKM.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblVerifNalRegKKM.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblVerifNalRegKKM.Location = new System.Drawing.Point(31, 0);
-            this.lblVerifNalRegKKM.Name = "lblVerifNalRegKKM";
-            this.lblVerifNalRegKKM.Size = new System.Drawing.Size(147, 30);
-            this.lblVerifNalRegKKM.TabIndex = 4;
-            this.lblVerifNalRegKKM.Text = "Регистр. № ККМ";
-            this.lblVerifNalRegKKM.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtBoxVerifNalRegKKM
-            // 
-            this.txtBoxVerifNalRegKKM.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.txtBoxVerifNalRegKKM.Dock = System.Windows.Forms.DockStyle.Right;
-            this.txtBoxVerifNalRegKKM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtBoxVerifNalRegKKM.Location = new System.Drawing.Point(178, 0);
-            this.txtBoxVerifNalRegKKM.Name = "txtBoxVerifNalRegKKM";
-            this.txtBoxVerifNalRegKKM.ReadOnly = true;
-            this.txtBoxVerifNalRegKKM.Size = new System.Drawing.Size(139, 26);
-            this.txtBoxVerifNalRegKKM.TabIndex = 3;
-            // 
-            // pnlPagVerifNalTopRightTop4
-            // 
-            this.pnlPagVerifNalTopRightTop4.Controls.Add(this.lblVerifNalZavodKKM);
-            this.pnlPagVerifNalTopRightTop4.Controls.Add(this.txtBoxVerifNalZavodKKM);
-            this.pnlPagVerifNalTopRightTop4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlPagVerifNalTopRightTop4.Location = new System.Drawing.Point(0, 120);
-            this.pnlPagVerifNalTopRightTop4.Name = "pnlPagVerifNalTopRightTop4";
-            this.pnlPagVerifNalTopRightTop4.Size = new System.Drawing.Size(317, 30);
-            this.pnlPagVerifNalTopRightTop4.TabIndex = 8;
-            // 
-            // lblVerifNalZavodKKM
-            // 
-            this.lblVerifNalZavodKKM.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblVerifNalZavodKKM.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblVerifNalZavodKKM.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblVerifNalZavodKKM.Location = new System.Drawing.Point(28, 0);
-            this.lblVerifNalZavodKKM.Name = "lblVerifNalZavodKKM";
-            this.lblVerifNalZavodKKM.Size = new System.Drawing.Size(150, 30);
-            this.lblVerifNalZavodKKM.TabIndex = 4;
-            this.lblVerifNalZavodKKM.Text = "Заводской № ККМ";
-            this.lblVerifNalZavodKKM.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtBoxVerifNalZavodKKM
-            // 
-            this.txtBoxVerifNalZavodKKM.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.txtBoxVerifNalZavodKKM.Dock = System.Windows.Forms.DockStyle.Right;
-            this.txtBoxVerifNalZavodKKM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtBoxVerifNalZavodKKM.Location = new System.Drawing.Point(178, 0);
-            this.txtBoxVerifNalZavodKKM.Name = "txtBoxVerifNalZavodKKM";
-            this.txtBoxVerifNalZavodKKM.ReadOnly = true;
-            this.txtBoxVerifNalZavodKKM.Size = new System.Drawing.Size(139, 26);
-            this.txtBoxVerifNalZavodKKM.TabIndex = 3;
-            // 
-            // pnlPagVerifNalTopRightTop3
-            // 
-            this.pnlPagVerifNalTopRightTop3.Controls.Add(this.lblVerifNalODKP);
-            this.pnlPagVerifNalTopRightTop3.Controls.Add(this.txtBoxVerifNalODKP);
-            this.pnlPagVerifNalTopRightTop3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlPagVerifNalTopRightTop3.Location = new System.Drawing.Point(0, 90);
-            this.pnlPagVerifNalTopRightTop3.Name = "pnlPagVerifNalTopRightTop3";
-            this.pnlPagVerifNalTopRightTop3.Size = new System.Drawing.Size(317, 30);
-            this.pnlPagVerifNalTopRightTop3.TabIndex = 7;
-            // 
-            // lblVerifNalODKP
-            // 
-            this.lblVerifNalODKP.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblVerifNalODKP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblVerifNalODKP.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblVerifNalODKP.Location = new System.Drawing.Point(3, 0);
-            this.lblVerifNalODKP.Name = "lblVerifNalODKP";
-            this.lblVerifNalODKP.Size = new System.Drawing.Size(175, 30);
-            this.lblVerifNalODKP.TabIndex = 4;
-            this.lblVerifNalODKP.Text = "Вид деятельности ОДКП";
-            this.lblVerifNalODKP.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtBoxVerifNalODKP
-            // 
-            this.txtBoxVerifNalODKP.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.txtBoxVerifNalODKP.Dock = System.Windows.Forms.DockStyle.Right;
-            this.txtBoxVerifNalODKP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtBoxVerifNalODKP.Location = new System.Drawing.Point(178, 0);
-            this.txtBoxVerifNalODKP.Name = "txtBoxVerifNalODKP";
-            this.txtBoxVerifNalODKP.ReadOnly = true;
-            this.txtBoxVerifNalODKP.Size = new System.Drawing.Size(139, 26);
-            this.txtBoxVerifNalODKP.TabIndex = 3;
-            // 
-            // pnlPagVerifNalTopRightTop2
-            // 
-            this.pnlPagVerifNalTopRightTop2.Controls.Add(this.lblVerifNalINN);
-            this.pnlPagVerifNalTopRightTop2.Controls.Add(this.txtBoxVerifNalINN);
-            this.pnlPagVerifNalTopRightTop2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlPagVerifNalTopRightTop2.Location = new System.Drawing.Point(0, 60);
-            this.pnlPagVerifNalTopRightTop2.Name = "pnlPagVerifNalTopRightTop2";
-            this.pnlPagVerifNalTopRightTop2.Size = new System.Drawing.Size(317, 30);
-            this.pnlPagVerifNalTopRightTop2.TabIndex = 6;
-            // 
-            // lblVerifNalINN
-            // 
-            this.lblVerifNalINN.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblVerifNalINN.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblVerifNalINN.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblVerifNalINN.Location = new System.Drawing.Point(132, 0);
-            this.lblVerifNalINN.Name = "lblVerifNalINN";
-            this.lblVerifNalINN.Size = new System.Drawing.Size(46, 30);
-            this.lblVerifNalINN.TabIndex = 4;
-            this.lblVerifNalINN.Text = "ИНН";
-            this.lblVerifNalINN.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtBoxVerifNalINN
-            // 
-            this.txtBoxVerifNalINN.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.txtBoxVerifNalINN.Dock = System.Windows.Forms.DockStyle.Right;
-            this.txtBoxVerifNalINN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtBoxVerifNalINN.Location = new System.Drawing.Point(178, 0);
-            this.txtBoxVerifNalINN.Name = "txtBoxVerifNalINN";
-            this.txtBoxVerifNalINN.ReadOnly = true;
-            this.txtBoxVerifNalINN.Size = new System.Drawing.Size(139, 26);
-            this.txtBoxVerifNalINN.TabIndex = 3;
-            // 
-            // pnlPagScetKkmTopRightTop3
-            // 
-            this.pnlPagScetKkmTopRightTop3.Controls.Add(this.lblScetKkmODKP);
-            this.pnlPagScetKkmTopRightTop3.Controls.Add(this.txtBoxScetKkmODKP);
-            this.pnlPagScetKkmTopRightTop3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlPagScetKkmTopRightTop3.Location = new System.Drawing.Point(0, 90);
-            this.pnlPagScetKkmTopRightTop3.Name = "pnlPagScetKkmTopRightTop3";
-            this.pnlPagScetKkmTopRightTop3.Size = new System.Drawing.Size(317, 30);
-            this.pnlPagScetKkmTopRightTop3.TabIndex = 7;
-            // 
-            // lblScetKkmODKP
-            // 
-            this.lblScetKkmODKP.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblScetKkmODKP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblScetKkmODKP.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblScetKkmODKP.Location = new System.Drawing.Point(3, 0);
-            this.lblScetKkmODKP.Name = "lblScetKkmODKP";
-            this.lblScetKkmODKP.Size = new System.Drawing.Size(175, 30);
-            this.lblScetKkmODKP.TabIndex = 4;
-            this.lblScetKkmODKP.Text = "Вид деятельности ОДКП";
-            this.lblScetKkmODKP.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtBoxScetKkmODKP
-            // 
-            this.txtBoxScetKkmODKP.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.txtBoxScetKkmODKP.Dock = System.Windows.Forms.DockStyle.Right;
-            this.txtBoxScetKkmODKP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtBoxScetKkmODKP.Location = new System.Drawing.Point(178, 0);
-            this.txtBoxScetKkmODKP.Name = "txtBoxScetKkmODKP";
-            this.txtBoxScetKkmODKP.ReadOnly = true;
-            this.txtBoxScetKkmODKP.Size = new System.Drawing.Size(139, 26);
-            this.txtBoxScetKkmODKP.TabIndex = 3;
-            // 
-            // pnlPagScetKkmTopRightTop2
-            // 
-            this.pnlPagScetKkmTopRightTop2.Controls.Add(this.lblScetKkmINN);
-            this.pnlPagScetKkmTopRightTop2.Controls.Add(this.txtBoxScetKkmINN);
-            this.pnlPagScetKkmTopRightTop2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlPagScetKkmTopRightTop2.Location = new System.Drawing.Point(0, 60);
-            this.pnlPagScetKkmTopRightTop2.Name = "pnlPagScetKkmTopRightTop2";
-            this.pnlPagScetKkmTopRightTop2.Size = new System.Drawing.Size(317, 30);
-            this.pnlPagScetKkmTopRightTop2.TabIndex = 6;
-            // 
-            // lblScetKkmINN
-            // 
-            this.lblScetKkmINN.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblScetKkmINN.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblScetKkmINN.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblScetKkmINN.Location = new System.Drawing.Point(132, 0);
-            this.lblScetKkmINN.Name = "lblScetKkmINN";
-            this.lblScetKkmINN.Size = new System.Drawing.Size(46, 30);
-            this.lblScetKkmINN.TabIndex = 4;
-            this.lblScetKkmINN.Text = "ИНН";
-            this.lblScetKkmINN.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtBoxScetKkmINN
-            // 
-            this.txtBoxScetKkmINN.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.txtBoxScetKkmINN.Dock = System.Windows.Forms.DockStyle.Right;
-            this.txtBoxScetKkmINN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtBoxScetKkmINN.Location = new System.Drawing.Point(178, 0);
-            this.txtBoxScetKkmINN.Name = "txtBoxScetKkmINN";
-            this.txtBoxScetKkmINN.ReadOnly = true;
-            this.txtBoxScetKkmINN.Size = new System.Drawing.Size(139, 26);
-            this.txtBoxScetKkmINN.TabIndex = 3;
-            // 
             // FStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3175,6 +3189,14 @@
             this.pnlPagReportKasTopTop0.ResumeLayout(false);
             this.pnlPagReportKasTopTop0.PerformLayout();
             this.pnlPagReportKasTopRight.ResumeLayout(false);
+            this.pnlPagReportKasTopRightTop5.ResumeLayout(false);
+            this.pnlPagReportKasTopRightTop5.PerformLayout();
+            this.pnlPagReportKasTopRightTop4.ResumeLayout(false);
+            this.pnlPagReportKasTopRightTop4.PerformLayout();
+            this.pnlPagReportKasTopRightTop3.ResumeLayout(false);
+            this.pnlPagReportKasTopRightTop3.PerformLayout();
+            this.pnlPagReportKasTopRightTop2.ResumeLayout(false);
+            this.pnlPagReportKasTopRightTop2.PerformLayout();
             this.pnlPagReportKasTopRightTop1.ResumeLayout(false);
             this.pnlPagReportKasTopRightTop1.PerformLayout();
             this.pnlPagReportKasTopRightTop0.ResumeLayout(false);
@@ -3193,6 +3215,10 @@
             this.pnlPagScetKkmTopTop0.ResumeLayout(false);
             this.pnlPagScetKkmTopTop0.PerformLayout();
             this.pnlPagScetKkmTopRight.ResumeLayout(false);
+            this.pnlPagScetKkmTopRightTop3.ResumeLayout(false);
+            this.pnlPagScetKkmTopRightTop3.PerformLayout();
+            this.pnlPagScetKkmTopRightTop2.ResumeLayout(false);
+            this.pnlPagScetKkmTopRightTop2.PerformLayout();
             this.pnlPagScetKkmTopRightTop1.ResumeLayout(false);
             this.pnlPagScetKkmTopRightTop1.PerformLayout();
             this.pnlPagScetKkmTopRightTop0.ResumeLayout(false);
@@ -3209,6 +3235,14 @@
             this.pnlPagVerifNalTopTop0.ResumeLayout(false);
             this.pnlPagVerifNalTopTop0.PerformLayout();
             this.pnlPagVerifNalTopRight.ResumeLayout(false);
+            this.pnlPagVerifNalTopRightTop5.ResumeLayout(false);
+            this.pnlPagVerifNalTopRightTop5.PerformLayout();
+            this.pnlPagVerifNalTopRightTop4.ResumeLayout(false);
+            this.pnlPagVerifNalTopRightTop4.PerformLayout();
+            this.pnlPagVerifNalTopRightTop3.ResumeLayout(false);
+            this.pnlPagVerifNalTopRightTop3.PerformLayout();
+            this.pnlPagVerifNalTopRightTop2.ResumeLayout(false);
+            this.pnlPagVerifNalTopRightTop2.PerformLayout();
             this.pnlPagVerifNalTopRightTop1.ResumeLayout(false);
             this.pnlPagVerifNalTopRightTop1.PerformLayout();
             this.pnlPagVerifNalTopRightTop0.ResumeLayout(false);
@@ -3235,26 +3269,6 @@
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.pnlPagReportKasTopRightTop5.ResumeLayout(false);
-            this.pnlPagReportKasTopRightTop5.PerformLayout();
-            this.pnlPagReportKasTopRightTop4.ResumeLayout(false);
-            this.pnlPagReportKasTopRightTop4.PerformLayout();
-            this.pnlPagReportKasTopRightTop3.ResumeLayout(false);
-            this.pnlPagReportKasTopRightTop3.PerformLayout();
-            this.pnlPagReportKasTopRightTop2.ResumeLayout(false);
-            this.pnlPagReportKasTopRightTop2.PerformLayout();
-            this.pnlPagVerifNalTopRightTop5.ResumeLayout(false);
-            this.pnlPagVerifNalTopRightTop5.PerformLayout();
-            this.pnlPagVerifNalTopRightTop4.ResumeLayout(false);
-            this.pnlPagVerifNalTopRightTop4.PerformLayout();
-            this.pnlPagVerifNalTopRightTop3.ResumeLayout(false);
-            this.pnlPagVerifNalTopRightTop3.PerformLayout();
-            this.pnlPagVerifNalTopRightTop2.ResumeLayout(false);
-            this.pnlPagVerifNalTopRightTop2.PerformLayout();
-            this.pnlPagScetKkmTopRightTop3.ResumeLayout(false);
-            this.pnlPagScetKkmTopRightTop3.PerformLayout();
-            this.pnlPagScetKkmTopRightTop2.ResumeLayout(false);
-            this.pnlPagScetKkmTopRightTop2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -53,7 +53,10 @@
     <Compile Include="BLL\DocumentPlg\Lib\DocumentInterface.cs" />
     <Compile Include="BLL\LocalList.cs" />
     <Compile Include="BLL\LocalPlg\Lib\LocalBase.cs" />
+    <Compile Include="BLL\LocalPlg\LocalChiefCashiers.cs" />
+    <Compile Include="BLL\LocalPlg\LocalEmployees.cs" />
     <Compile Include="BLL\LocalPlg\LocalKassa.cs" />
+    <Compile Include="BLL\LocalPlg\LocalPaidInReasons.cs" />
     <Compile Include="BLL\OperationPlg\Lib\OperationBase.cs" />
     <Compile Include="BLL\Local.cs" />
     <Compile Include="BLL\LocalPlg\Lib\LocalInterface.cs" />
