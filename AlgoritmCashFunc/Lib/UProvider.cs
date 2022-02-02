@@ -383,5 +383,62 @@ namespace AlgoritmCashFunc.Lib
         {
             return this.PrvI.GetDocumentListFromDB(LastDay, OperationId);
         }
+
+        /// <summary>
+        /// Сохранение Local в базе
+        /// </summary>
+        /// <param name="NewDocument">Новый документ который нужно сохранить</param>
+        /// <returns>Идентификатор из базы данных под которым сохранили</returns>
+        public int SetDocument(Document NewDocument)
+        {
+            return this.PrvI.SetDocument(NewDocument);
+        }
+
+        /// <summary>
+        /// Обновление Documentl в базе
+        /// </summary>
+        /// <param name="UpdDocument">Обновляемый документ</param>
+        public void UpdateDocument(Document UpdDocument)
+        {
+            this.PrvI.UpdateDocument(UpdDocument);
+        }
+
+        /// <summary>
+        /// Проверка наличия информации объекта DocumentPrihod
+        /// </summary>
+        /// <param name="DocumentPrihod">Объект DocumentPrihod который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        public bool HashDocumentPrihod(BLL.DocumentPlg.DocumentPrihod DocumentPrihod)
+        {
+            return this.PrvI.HashDocumentPrihod(DocumentPrihod);
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту DocumentPrihod
+        /// </summary>
+        /// <param name="DocumentPrihod">Объект DocumentPrihod который нужно прочитать в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли проччитать объект или нет</returns>
+        public bool GetDocumentPrihod(ref BLL.DocumentPlg.DocumentPrihod DocumentPrihod)
+        {
+            return this.PrvI.GetDocumentPrihod(ref DocumentPrihod);
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект DocumentPrihod
+        /// </summary>
+        /// <param name="NewDocumentPrihod">Вставляем в базу информацию по объекту DocumentPrihod</param>
+        public void SetDocumentPrihod(BLL.DocumentPlg.DocumentPrihod NewDocumentPrihod)
+        {
+            this.PrvI.SetDocumentPrihod(NewDocumentPrihod);
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту DocumentPrihod
+        /// </summary>
+        /// <param name="UpdDocumentPrihod">Сам объект данные которого нужно обновить</param>
+        public void UpdateDocumentPrihod(BLL.DocumentPlg.DocumentPrihod UpdDocumentPrihod)
+        {
+            this.PrvI.UpdateDocumentPrihod(UpdDocumentPrihod);
+        }
     }
 }

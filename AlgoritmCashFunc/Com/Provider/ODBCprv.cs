@@ -680,6 +680,221 @@ namespace AlgoritmCashFunc.Com.Provider
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Сохранение Document в базе
+        /// </summary>
+        /// <param name="NewDocument">Новый документ который нужно сохранить</param>
+        /// <returns>Идентификатор из базы данных под которым сохранили</returns>
+        public int SetDocument(Document NewDocument)
+        {
+            try
+            {
+                int rez = 0;
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            rez = SetDocumentORA(NewDocument);
+                            break;
+                        case "myodbc8a.dll":
+                            rez = SetDocumentMySql(NewDocument);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return rez;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocument", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(string.Format("{0} ({1})",NewDocument.DocFullName, NewDocument.UreDate), GetType().Name + ".SetDocument", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновление Document в базе
+        /// </summary>
+        /// <param name="UpdDocument">Обновляемый документ</param>
+        public void UpdateDocument(Document UpdDocument)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            UpdateDocumentORA(UpdDocument);
+                            break;
+                        case "myodbc8a.dll":
+                            UpdateDocumentMySql(UpdDocument);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocument", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(string.Format("{0} ({1})", UpdDocument.DocFullName, UpdDocument.UreDate), GetType().Name + ".UpdateDocument", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Проверка наличия информации объекта DocumentPrihod
+        /// </summary>
+        /// <param name="DocumentPrihod">Объект DocumentPrihod который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        public bool HashDocumentPrihod(BLL.DocumentPlg.DocumentPrihod DocumentPrihod)
+        {
+            try
+            {
+                bool rez = false;
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            rez = HashDocumentPrihodORA(DocumentPrihod);
+                            break;
+                        case "myodbc8a.dll":
+                            rez = HashDocumentPrihodMySql(DocumentPrihod);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return rez;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashDocumentPrihod", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту DocumentPrihod
+        /// </summary>
+        /// <param name="DocumentPrihod">Объект DocumentPrihod который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        public bool GetDocumentPrihod(ref BLL.DocumentPlg.DocumentPrihod DocumentPrihod)
+        {
+            try
+            {
+                bool rez = false;
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            rez = GetDocumentPrihodORA(ref DocumentPrihod);
+                            break;
+                        case "myodbc8a.dll":
+                            rez = GetDocumentPrihodMySql(ref DocumentPrihod);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return rez;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".DocumentPrihod", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект DocumentPrihod
+        /// </summary>
+        /// <param name="NewDocumentPrihod">Вставляем в базу информацию по объекту DocumentPrihod</param>
+        public void SetDocumentPrihod(BLL.DocumentPlg.DocumentPrihod NewDocumentPrihod)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            SetDocumentPrihodORA(NewDocumentPrihod);
+                            break;
+                        case "myodbc8a.dll":
+                            SetDocumentPrihodMySql(NewDocumentPrihod);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentPrihod", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту DocumentPrihod
+        /// </summary>
+        /// <param name="UpdDocumentPrihod">Сам объект данные которого нужно обновить</param>
+        public void UpdateDocumentPrihod(BLL.DocumentPlg.DocumentPrihod UpdDocumentPrihod)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            UpdateDocumentPrihodORA(UpdDocumentPrihod);
+                            break;
+                        case "myodbc8a.dll":
+                            UpdateDocumentPrihodMySql(UpdDocumentPrihod);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentPrihod", EventEn.Error);
+                throw;
+            }
+        }
         #endregion
 
         #region Private metod
@@ -1012,8 +1227,7 @@ From `aks`.`cashfunc_local`");
                 throw;
             }
         }
-
-
+        
         /// <summary>
         /// Сохранение Local в базе
         /// </summary>
@@ -1490,6 +1704,244 @@ From `aks`.`cashfunc_local`");
             }
         }
 
+        /// <summary>
+        /// Сохранение Local в базе
+        /// </summary>
+        /// <param name="NewDocument">Новый документ который нужно сохранить</param>
+        /// <returns>Идентификатор из базы данных под которым сохранили</returns>
+        private int SetDocumentORA(Document NewDocument)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                return 0;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновление Document в базе
+        /// </summary>
+        /// <param name="UpdDocument">Обновляемый документ</param>
+        private void UpdateDocumentORA(Document UpdDocument)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Проверка наличия информации объекта DocumentPrihod
+        /// </summary>
+        /// <param name="DocumentPrihod">Объект DocumentPrihod который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        private bool HashDocumentPrihodORA(BLL.DocumentPlg.DocumentPrihod DocumentPrihod)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashDocumentPrihodORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                return false;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashDocumentPrihodORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashDocumentPrihodORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashDocumentPrihodORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashDocumentPrihodORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту DocumentPrihod
+        /// </summary>
+        /// <param name="DocumentPrihod">Объект DocumentPrihod который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        private bool GetDocumentPrihodORA(ref BLL.DocumentPlg.DocumentPrihod DocumentPrihod)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentPrihodORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                return false;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetDocumentPrihodORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentPrihodORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetDocumentPrihodORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentPrihodORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект DocumentPrihod
+        /// </summary>
+        /// <param name="NewDocumentPrihod">Вставляем в базу информацию по объекту DocumentPrihod</param>
+        private void SetDocumentPrihodORA(BLL.DocumentPlg.DocumentPrihod NewDocumentPrihod)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentPrihodORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentPrihodORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentPrihodORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentPrihodORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentPrihodORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту DocumentPrihod
+        /// </summary>
+        /// <param name="UpdDocumentPrihod">Сам объект данные которого нужно обновить</param>
+        private void UpdateDocumentPrihodORA(BLL.DocumentPlg.DocumentPrihod UpdDocumentPrihod)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentPrihodORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentPrihodORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentPrihodORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentPrihodORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentPrihodORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+
         #endregion
 
         #region Private method MySql
@@ -1820,8 +2272,6 @@ Values(?, ?, ?, ?, ?, ?)");
                                 // пробегаем по строкам
                                 while (dr.Read())
                                 {
-                                    Int64? Id = null;
-
                                     if (!dr.IsDBNull(0))
                                     {
                                         string tmp = dr.GetValue(0).ToString();
@@ -2365,7 +2815,6 @@ Where Id={0}", UpdLocalPaidInReasons.Id, UpdLocalPaidInReasons.Osnovanie, UpdLoc
             }
         }
 
-
         /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
@@ -2374,7 +2823,7 @@ Where Id={0}", UpdLocalPaidInReasons.Id, UpdLocalPaidInReasons.Osnovanie, UpdLoc
         /// <returns>Получает список Document из базы данных удовлетворяющий фильтрам</returns>
         private DocumentList GetDocumentListFromDbMySql(int? LastDay, int? OperationId)
         {
-            string CommandSql = String.Format(@"Select `Id`, `DocFullName`, `UreDate`, `CteateDate`, `ModifyDate`, `ModifyUser`, `OperationId`, `LocalDebitorId`, `LocalCreditorId`, `IsDraft`, `IsProcessed` From `aks`.`CashFunc_Document`");
+            string CommandSql = String.Format(@"Select `Id`, `DocFullName`, `UreDate`, `CteateDate`, `ModifyDate`, `ModifyUser`, `OperationId`, `LocalDebitorId`, `LocalCreditorId`, `DocNum`, `IsDraft`, `IsProcessed` From `aks`.`CashFunc_Document`");
 
             try
             {
@@ -2418,6 +2867,7 @@ Where Id={0}", UpdLocalPaidInReasons.Id, UpdLocalPaidInReasons.Osnovanie, UpdLoc
                                     int? TmpOperationId = null;
                                     int? TmpLocalDebitorId = null;
                                     int? TmpLocalCreditorId = null;
+                                    int TmpDocNum = 0;
                                     bool TmpIsDraft = true;
                                     bool TmpIsProcessed = false;
 
@@ -2431,8 +2881,9 @@ Where Id={0}", UpdLocalPaidInReasons.Id, UpdLocalPaidInReasons.Osnovanie, UpdLoc
                                     if (!dr.IsDBNull(6)) TmpOperationId = dr.GetInt32(6);
                                     if (!dr.IsDBNull(7)) TmpLocalDebitorId = dr.GetInt32(7);
                                     if (!dr.IsDBNull(8)) TmpLocalCreditorId = dr.GetInt32(8);
-                                    if (!dr.IsDBNull(9)) TmpIsDraft = Boolean.Parse(dr.GetValue(9).ToString());
-                                    if (!dr.IsDBNull(10)) TmpIsProcessed = Boolean.Parse(dr.GetValue(10).ToString());
+                                    if (!dr.IsDBNull(9)) TmpDocNum = dr.GetInt32(9);
+                                    if (!dr.IsDBNull(10)) TmpIsDraft = Boolean.Parse(dr.GetValue(10).ToString());
+                                    if (!dr.IsDBNull(11)) TmpIsProcessed = Boolean.Parse(dr.GetValue(11).ToString());
 
 
                                     //Если данные есть то добавляем их в список
@@ -2447,7 +2898,7 @@ Where Id={0}", UpdLocalPaidInReasons.Id, UpdLocalPaidInReasons.Osnovanie, UpdLoc
                                         Local TmpCred = LocalFarm.CurLocalList[TmpLocalCreditorId];
                                         if (TmpCred == null) throw new ApplicationException(string.Format("Кредитора с идентификатором {0} в документе где id={1} не существует.", TmpLocalCreditorId, TmpId));
 
-                                        rez.Add(DocumentFarm.CreateNewDocument((int)TmpId, TmpDocFullName, TmpUreDate, (DateTime)TmpCteateDate, (DateTime)TmpModifyDate, TmpModifyUser, TmpOper, TmpDeb, TmpCred, TmpIsDraft, TmpIsProcessed));
+                                        rez.Add(DocumentFarm.CreateNewDocument((int)TmpId, TmpDocFullName, TmpUreDate, (DateTime)TmpCteateDate, (DateTime)TmpModifyDate, TmpModifyUser, TmpOper, TmpDeb, TmpCred, TmpDocNum, TmpIsDraft, TmpIsProcessed));
                                     }
                                 }
                             }
@@ -2470,7 +2921,393 @@ Where Id={0}", UpdLocalPaidInReasons.Id, UpdLocalPaidInReasons.Osnovanie, UpdLoc
                 throw;
             }
         }
-        
+
+        /// <summary>
+        /// Сохранение Document в базе
+        /// </summary>
+        /// <param name="NewDocument">Новый документ который нужно сохранить</param>
+        /// <returns>Идентификатор из базы данных под которым сохранили</returns>
+        private int SetDocumentMySql(Document NewDocument)
+        {
+            int rez = 0;
+
+            string CommandSql = String.Format(@"insert into `aks`.`CashFunc_Document`(`DocFullName`, `UreDate`, `CteateDate`, `ModifyDate`,
+    `ModifyUser`, `OperationId`, `LocalDebitorId`, `LocalCreditorId`,
+    `IsDraft`
+)
+Values(?, ?, ?, ?, 
+    ?, ?, ?, ?,
+    ?)");
+            string CommandSql2 = "SELECT LAST_INSERT_ID()  As Id";
+
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.Parameters.Add(new OdbcParameter("DocFullName", OdbcType.VarChar, 100) { Value = NewDocument.DocFullName });
+                        com.Parameters.Add(new OdbcParameter("UreDate", OdbcType.Date) { Value = NewDocument.UreDate });
+                        com.Parameters.Add(new OdbcParameter("CteateDate", OdbcType.DateTime) { Value = NewDocument.CteateDate });
+                        com.Parameters.Add(new OdbcParameter("ModifyDate", OdbcType.DateTime) { Value = NewDocument.ModifyDate });
+                        //
+                        com.Parameters.Add(new OdbcParameter("ModifyUser", OdbcType.VarChar, 100) { Value = NewDocument.ModifyUser });
+                        com.Parameters.Add(new OdbcParameter("OperationId", OdbcType.Int) { Value = NewDocument.CurOperation.Id });
+                        com.Parameters.Add(new OdbcParameter("LocalDebitorId", OdbcType.Int) { Value = NewDocument.LocalDebitor.Id });
+                        com.Parameters.Add(new OdbcParameter("LocalCreditorId", OdbcType.Int) { Value = NewDocument.LocalCreditor.Id });
+                        //
+                        com.Parameters.Add(new OdbcParameter("IsDraft", OdbcType.Bit) { Value = NewDocument.IsDraft });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                    using (OdbcCommand com2 = new OdbcCommand(CommandSql2, con))
+                    {
+
+                        com2.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com2.ExecuteReader())
+                        {
+
+                            if (dr.HasRows)
+                            {
+                                // пробегаем по строкам
+                                while (dr.Read())
+                                {
+                                    if (!dr.IsDBNull(0))
+                                    {
+                                        string tmp = dr.GetValue(0).ToString();
+                                        rez = int.Parse(tmp);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновление Document в базе
+        /// </summary>
+        /// <param name="UpdDocument">Обновляемый документ</param>
+        private void UpdateDocumentMySql(Document UpdDocument)
+        {
+            if (UpdDocument.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            string CommandSql = String.Format(@"Update `aks`.`CashFunc_Document`
+Set `UreDate`=?, `ModifyDate`=?, `ModifyUser`='{1}', `LocalDebitorId` = {2}, 
+    `LocalCreditorId`={3}, `IsProcessed`={4}, `IsDraft`={5}
+Where Id={0}", UpdDocument.Id,
+                   UpdDocument.ModifyUser,
+                   UpdDocument.LocalDebitor,
+                   UpdDocument.LocalCreditor,
+                   (UpdDocument.IsProcessed ? 1 : 0),
+                   (UpdDocument.IsDraft ? 1 : 0));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.Parameters.Add(new OdbcParameter("UreDate", OdbcType.Date) { Value = UpdDocument.UreDate });
+                        com.Parameters.Add(new OdbcParameter("ModifyDate", OdbcType.DateTime) { Value = UpdDocument.ModifyDate });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при обновлении данных в источнике. {0}", ex.Message), GetType().Name + ".UpdateDocumentMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при обновлении данных в источнике. {0}", ex.Message), GetType().Name + ".UpdateDocumentMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Проверка наличия информации объекта DocumentPrihod
+        /// </summary>
+        /// <param name="DocumentPrihod">Объект DocumentPrihod который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        private bool HashDocumentPrihodMySql(BLL.DocumentPlg.DocumentPrihod DocumentPrihod)
+        {
+            if (DocumentPrihod.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            bool rez = false;
+
+            string CommandSql = String.Format(@"Select *
+From `aks`.`cashfunc_document_Prihod`
+Where Id={0}", (int)DocumentPrihod.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashDocumentPrihodMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        //com.Parameters.Add(new OdbcParameter("Id", OdbcType.Int) { Value = (int)LocalKassa.Id });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                rez = true;
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashDocumentPrihodaMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashDocumentPrihodMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashDocumentPrihodMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashDocumentPrihodMySql", EventEn.Dump);
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту DocumentPrihod
+        /// </summary>
+        /// <param name="DocumentPrihod">Объект DocumentPrihod который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        private bool GetDocumentPrihodMySql(ref BLL.DocumentPlg.DocumentPrihod DocumentPrihod)
+        {
+            if (DocumentPrihod.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            bool rez = false;
+
+            string CommandSql = String.Format(@"Select `DebetNomerSchet`, `KreditKodDivision`, `KredikKorSchet`, `KredikKodAnalUch`,
+    `Summa`, `KodNazn`, `Osnovanie`, `Id_PaidInReasons`,
+    `VtomChisle`, `NDS`, `LastDocNumScetKkm`, `LastDocNumVerifNal`, 
+    `LastDocNumInvent`,`INN`, `Prilozenie`, `GlavBuh`
+From `aks`.`cashfunc_document_Prihod`
+Where Id={0}", (int)DocumentPrihod.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentPrihodMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        //com.Parameters.Add(new OdbcParameter("Id", OdbcType.Int) { Value = (int)LocalKassa.Id });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+
+                            if (dr.HasRows)
+                            {
+                                rez = true;
+
+                                // Получаем схему таблицы
+                                //DataTable tt = dr.GetSchemaTable();
+
+                                //foreach (DataRow item in tt.Rows)
+                                //{
+                                //    DataColumn ncol = new DataColumn(item["ColumnName"].ToString(), Type.GetType(item["DataType"].ToString()));
+                                //ncol.SetOrdinal(int.Parse(item["ColumnOrdinal"].ToString()));
+                                //ncol.MaxLength = (int.Parse(item["ColumnSize"].ToString()) < 300 ? 300 : int.Parse(item["ColumnSize"].ToString()));
+                                //rez.Columns.Add(ncol);
+                                //}
+
+                                // пробегаем по строкам
+                                while (dr.Read())
+                                {
+                                    BLL.LocalPlg.LocalKassa.LocalKassaForProviderInterface interf = new BLL.LocalPlg.LocalKassa.LocalKassaForProviderInterface();
+                                    if (!dr.IsDBNull(0)) DocumentPrihod.DebetNomerSchet= dr.GetString(0);
+                                    if (!dr.IsDBNull(1)) DocumentPrihod.KreditKodDivision = dr.GetString(1);
+                                    if (!dr.IsDBNull(2)) DocumentPrihod.KredikKorSchet = dr.GetString(2);
+                                    if (!dr.IsDBNull(3)) DocumentPrihod.KredikKodAnalUch = dr.GetString(3);
+                                    if (!dr.IsDBNull(4)) DocumentPrihod.Summa = decimal.Parse(dr.GetValue(4).ToString());
+                                    if (!dr.IsDBNull(5)) DocumentPrihod.KodNazn = dr.GetValue(5).ToString();
+                                    if (!dr.IsDBNull(6)) DocumentPrihod.Osnovanie = dr.GetValue(6).ToString();
+                                    if (!dr.IsDBNull(7))
+                                    {
+                                        int IdPaidInReasons = int.Parse(dr.GetValue(7).ToString());
+                                        foreach (BLL.LocalPlg.LocalPaidInReasons itemPaidInReasons in Com.LocalFarm.CurLocalPaidInReasons)
+                                        {
+                                            if (itemPaidInReasons.Id!=null && (int)itemPaidInReasons.Id== IdPaidInReasons)
+                                            {
+                                                DocumentPrihod.PaidInReasons = itemPaidInReasons;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    if (!dr.IsDBNull(8)) DocumentPrihod.VtomChisle = dr.GetValue(8).ToString();
+                                    if (!dr.IsDBNull(9)) DocumentPrihod.NDS = decimal.Parse(dr.GetValue(9).ToString());
+                                    if (!dr.IsDBNull(10)) DocumentPrihod.Prilozenie = dr.GetValue(10).ToString();
+                                    if (!dr.IsDBNull(11)) DocumentPrihod.GlavBuh = dr.GetValue(11).ToString();
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetDocumentPrihodMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentPrihodMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetDocumentPrihodMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentPrihodMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект DocumentPrihod
+        /// </summary>
+        /// <param name="NewDocumentPrihod">Вставляем в базу информацию по объекту DocumentPrihod</param>
+        private void SetDocumentPrihodMySql(BLL.DocumentPlg.DocumentPrihod NewDocumentPrihod)
+        {
+            if (NewDocumentPrihod.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            string CommandSql = String.Format(@"insert into `aks`.`cashfunc_document_Prihod`(id, `DebetNomerSchet`, `KreditKodDivision`, `KredikKorSchet`, 
+    `KredikKodAnalUch`, `Summa`, `KodNazn`, `Osnovanie`, 
+    `Id_PaidInReasons`, `VtomChisle`, `NDS`, `Prilozenie`, 
+    `GlavBuh`) 
+Values({0}, '{1}', '{2}', '{3}',
+    '{4}', {5}, `{6}`, `{7}`, 
+    {8}, `{9}`, {10}, `{11}`, 
+    `{12}`)", NewDocumentPrihod.Id, NewDocumentPrihod.DebetNomerSchet, NewDocumentPrihod.KreditKodDivision, NewDocumentPrihod.KredikKorSchet,
+                            NewDocumentPrihod.KredikKodAnalUch, NewDocumentPrihod.Summa, NewDocumentPrihod.KodNazn, NewDocumentPrihod.Osnovanie,
+                            NewDocumentPrihod.PaidInReasons.Id, NewDocumentPrihod.VtomChisle, NewDocumentPrihod.NDS, NewDocumentPrihod.Prilozenie,
+                            NewDocumentPrihod.GlavBuh);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentPrihodMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentPrihodMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentPrihodMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentPrihodMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentPrihodMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту DocumentPrihod
+        /// </summary>
+        /// <param name="UpdDocumentPrihod">Сам объект данные которого нужно обновить</param>
+        private void UpdateDocumentPrihodMySql(BLL.DocumentPlg.DocumentPrihod UpdDocumentPrihod)
+        {
+            if (UpdDocumentPrihod.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            string CommandSql = String.Format(@"update `aks`.`cashfunc_document_Prihod`
+Set `DebetNomerSchet`='{1}', `KreditKodDivision`='{2}', `KredikKorSchet`='{3}', `KredikKodAnalUch`='{4}', 
+    `Summa`={5}, `KodNazn`='{6}', `Osnovanie`='{7}', `Id_PaidInReasons`={8}, 
+    `VtomChisle`='{9}', `NDS`={10}, `Prilozenie`={11}, `GlavBuh`='{12}'
+Where Id={0}", UpdDocumentPrihod.Id, 
+            UpdDocumentPrihod.DebetNomerSchet, UpdDocumentPrihod.KreditKodDivision, UpdDocumentPrihod.KredikKorSchet, UpdDocumentPrihod.KredikKodAnalUch,
+            UpdDocumentPrihod.Summa, UpdDocumentPrihod.KodNazn, UpdDocumentPrihod.Osnovanie, UpdDocumentPrihod.PaidInReasons.Id,
+            UpdDocumentPrihod.VtomChisle, UpdDocumentPrihod.NDS, UpdDocumentPrihod.Prilozenie, UpdDocumentPrihod.GlavBuh);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentPrihodMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentPrihodMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentPrihodMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentPrihodMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentPrihodMySql", EventEn.Dump);
+                throw;
+            }
+        }
         #endregion
 
     }

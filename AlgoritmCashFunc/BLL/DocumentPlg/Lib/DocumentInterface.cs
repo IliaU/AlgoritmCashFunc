@@ -11,6 +11,9 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
     /// </summary>
     public interface DocumentInterface
     {
-        
+        /// <summary>
+        /// Сохранить объект в базе данных
+        /// </summary>
+        void Save();
     }
 }

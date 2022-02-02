@@ -171,10 +171,11 @@ namespace AlgoritmCashFunc.Com
         /// <param name="CurOperation">Операция к которой относится этот документ</param>
         /// <param name="LocalDebitor">Дебитор</param>
         /// <param name="LocalCreditor">Кредитор</param>
+        /// <param name="DocNum"> Черновик</param>
         /// <param name="IsDraft">Черновик</param>
         /// <param name="IsProcessed">Проведённый документ или нет</param>
         /// <returns>Возвращаем Local</returns>
-        public static Document CreateNewDocument(int Id, string DocFullName, DateTime? UreDate, DateTime CteateDate, DateTime ModifyDate, string ModifyUser, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, bool IsDraft, bool IsProcessed)
+        public static Document CreateNewDocument(int Id, string DocFullName, DateTime? UreDate, DateTime CteateDate, DateTime ModifyDate, string ModifyUser, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, int DocNum, bool IsDraft, bool IsProcessed)
         {
             // Если списка документов ещё нет то создаём его
             ListDocumentName();
@@ -189,7 +190,7 @@ namespace AlgoritmCashFunc.Com
                     Type myType = Type.GetType("AlgoritmCashFunc.BLL.DocumentPlg." + DocFullName.Trim(), false, true);
 
                     // Создаём экземпляр объекта  
-                    object[] targ = {Id, UreDate, CteateDate, ModifyDate,  ModifyUser, CurOperation, LocalDebitor, LocalCreditor, IsDraft, IsProcessed};
+                    object[] targ = {Id, UreDate, CteateDate, ModifyDate,  ModifyUser, CurOperation, LocalDebitor, LocalCreditor, DocNum, IsDraft, IsProcessed};
                     rez = (Document)Activator.CreateInstance(myType, targ);
 
                     break;
@@ -201,7 +202,7 @@ namespace AlgoritmCashFunc.Com
 
 
         /// <summary>
-        /// Актуализация текущего списка Local
+        /// Актуализация текущего списка документов
         /// </summary>
         public static void UpdateDocumentListFromDB()
         {

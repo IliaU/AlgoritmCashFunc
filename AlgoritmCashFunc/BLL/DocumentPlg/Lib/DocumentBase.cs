@@ -52,7 +52,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
         /// <summary>
         /// Операция к которой относится этот документ
         /// </summary>
-        public Operation CurOperation { get; private set; }
+        public Operation CurOperation { get; protected set; }
 
         /// <summary>
         /// Дебитор
@@ -63,6 +63,11 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
         /// Кредитор
         /// </summary>
         public Local LocalCreditor { get; private set; } = null;
+
+        /// <summary>
+        /// Номер документа
+        /// </summary>
+        public int DocNum { get; set; }
 
         /// <summary>
         /// Черновик
@@ -81,8 +86,9 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
         /// <param name="CurOperation">Операция к которой относится этот документ</param>
         /// <param name="LocalDebitor">Дебитор</param>
         /// <param name="LocalCreditor">Кредитор</param>
+        /// <param name="DocNum"> Черновик</param>
         /// <param name="IsDraft"> Черновик</param>
-        public DocumentBase(string DocFullName, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, bool IsDraft)
+        public DocumentBase(string DocFullName, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, int DocNum, bool IsDraft)
         {
             try
             {
@@ -90,6 +96,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
                 this.CurOperation = CurOperation;
                 this.LocalDebitor = LocalDebitor;
                 this.LocalCreditor = LocalCreditor;
+                this.DocNum = DocNum;
                 this.IsDraft = IsDraft;
             }
             catch (Exception ex)
