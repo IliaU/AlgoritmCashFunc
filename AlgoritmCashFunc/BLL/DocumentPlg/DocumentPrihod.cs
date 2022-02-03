@@ -118,11 +118,11 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         /// <summary>
         /// Конструктор
         /// </summary>
-        public DocumentPrihod() : this(null, DateTime.Now.Date, DateTime.Now, DateTime.Now, Com.UserFarm.CurrentUser.Logon, Com.OperationFarm.CurOperationList["OperationProhod"], null, null, Com.LocalFarm.CurLocalDepartament.LastDocNumPrih+1, true, false)
+        public DocumentPrihod() : this(null, DateTime.Now.Date, DateTime.Now, DateTime.Now, Com.UserFarm.CurrentUser.Logon, Com.OperationFarm.CurOperationList["OperationPrihod"], null, null, Com.LocalFarm.CurLocalDepartament.LastDocNumPrih+1, true, false)
         {
             try
             {
-                this.CurOperation = Com.OperationFarm.CurOperationList["OperationProhod"];
+                this.CurOperation = Com.OperationFarm.CurOperationList["OperationPrihod"];
             }
             catch (Exception ex)
             {

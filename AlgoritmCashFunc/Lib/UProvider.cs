@@ -270,6 +270,63 @@ namespace AlgoritmCashFunc.Lib
         }
 
         /// <summary>
+        /// Сохранение Operation в базе
+        /// </summary>
+        /// <param name="NewOperation">Новый Operation который нужно сохранить</param>
+        /// <returns>Идентификатор из базы данных под которым сохранили</returns>
+        public int SetOperation(Operation NewOperation)
+        {
+            return this.PrvI.SetOperation(NewOperation);
+        }
+
+        /// <summary>
+        /// Обновление Operation в базе
+        /// </summary>
+        /// <param name="UpdOperation">Обновляемый Operation</param>
+        public void UpdateOperation(Operation UpdOperation)
+        {
+            this.PrvI.UpdateOperation(UpdOperation);
+        }
+
+        /// <summary>
+        /// Проверка наличия информации объекта OperationPrihod
+        /// </summary>
+        /// <param name="OperationPrihod">Объект OperationPrihod который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        public bool HashOperationPrihod(BLL.OperationPlg.OperationPrihod OperationPrihod)
+        {
+            return this.PrvI.HashOperationPrihod(OperationPrihod);
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту OperationPrihod
+        /// </summary>
+        /// <param name="OperationPrihod">Объект OperationPrihod который нужно прочитать в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли проччитать объект или нет</returns>
+        public bool GetOperationPrihod(ref BLL.OperationPlg.OperationPrihod OperationPrihod)
+        {
+            return this.PrvI.GetOperationPrihod(ref OperationPrihod);
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект OperationPrihod
+        /// </summary>
+        /// <param name="NewOperationPrihod">Вставляем в базу информацию по объекту OperationPrihod</param>
+        public void SetOperationPrihod(BLL.OperationPlg.OperationPrihod NewOperationPrihod)
+        {
+            this.PrvI.SetOperationPrihod(NewOperationPrihod);
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту OperationPrihod
+        /// </summary>
+        /// <param name="UpdOperationPrihod">Сам объект данные которого нужно обновить</param>
+        public void UpdateOperationPrihod(BLL.OperationPlg.OperationPrihod UpdOperationPrihod)
+        {
+            this.PrvI.UpdateOperationPrihod(UpdOperationPrihod);
+        }
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <returns>Получает текущий список Local из базы данных</returns>

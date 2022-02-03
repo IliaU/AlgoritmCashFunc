@@ -100,8 +100,8 @@ namespace AlgoritmCashFunc.Com
                         // получаем параметры конструктора  
                         ParameterInfo[] parameters = ctor.GetParameters();
                         
-                        // если в этом конструктаре 10 параметров то проверяем тип и имя параметра 
-                        if (parameters.Length == 10)
+                        // если в этом конструктаре 11 параметров то проверяем тип и имя параметра 
+                        if (parameters.Length == 11)
                         {
                             bool flag2 = true;
                             if (parameters[0].ParameterType.Name != "Nullable`1" || parameters[0].Name != "Id") flag = false;
@@ -112,8 +112,9 @@ namespace AlgoritmCashFunc.Com
                             if (parameters[5].ParameterType.Name != "Operation" || parameters[5].Name != "CurOperation") flag = false;
                             if (parameters[6].ParameterType.Name != "Local" || parameters[6].Name != "LocalDebitor") flag = false;
                             if (parameters[7].ParameterType.Name != "Local" || parameters[7].Name != "LocalCreditor") flag = false;
-                            if (parameters[8].ParameterType.Name != "Boolean" || parameters[8].Name != "IsDraft") flag = false;
-                            if (parameters[9].ParameterType.Name != "Boolean" || parameters[9].Name != "IsProcessed") flag = false;
+                            if (parameters[8].ParameterType.Name != "Int32" || parameters[8].Name != "DocNum") flag = false;
+                            if (parameters[9].ParameterType.Name != "Boolean" || parameters[9].Name != "IsDraft") flag = false;
+                            if (parameters[10].ParameterType.Name != "Boolean" || parameters[10].Name != "IsProcessed") flag = false;
                             flag = flag2;
                         }
                         

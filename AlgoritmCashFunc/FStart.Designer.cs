@@ -42,7 +42,7 @@
             this.pnlFill = new System.Windows.Forms.Panel();
             this.tabCntOperation = new System.Windows.Forms.TabControl();
             this.tabPagePrihod = new System.Windows.Forms.TabPage();
-            this.pnlPagPrihTop = new System.Windows.Forms.Panel();
+            this.pnlPagPrihTop0 = new System.Windows.Forms.Panel();
             this.lblTitlePrih = new System.Windows.Forms.Label();
             this.pnlPagPrihTopRight1 = new System.Windows.Forms.Panel();
             this.grBoxDateDocPrih = new System.Windows.Forms.GroupBox();
@@ -276,6 +276,54 @@
             this.TSMItemConfigPrv = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemConfigUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemLic = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnlPagPrihTop1 = new System.Windows.Forms.Panel();
+            this.pnlPagPrihTop2 = new System.Windows.Forms.Panel();
+            this.grBoxDebetPrih = new System.Windows.Forms.GroupBox();
+            this.lblPrihDebetNomerSchet = new System.Windows.Forms.Label();
+            this.txtBoxPrichDebetNomerSchet = new System.Windows.Forms.TextBox();
+            this.grBoxKreditPrih = new System.Windows.Forms.GroupBox();
+            this.grBoxKreditKodDivisionPrih = new System.Windows.Forms.GroupBox();
+            this.lblPrihKreditKodDivision = new System.Windows.Forms.Label();
+            this.txtBoxPrihKreditKodDivision = new System.Windows.Forms.TextBox();
+            this.grBoxKredikKorSchetPrih = new System.Windows.Forms.GroupBox();
+            this.txtBoxPrihKreditKorSchet = new System.Windows.Forms.TextBox();
+            this.lblPrihKredikKorSchet = new System.Windows.Forms.Label();
+            this.grBoxKredikKodAnalUchPrih = new System.Windows.Forms.GroupBox();
+            this.txtBoxPrihKredikKodAnalUch = new System.Windows.Forms.TextBox();
+            this.lblPrihKredikKodAnalUch = new System.Windows.Forms.Label();
+            this.grBoxSummaPrih = new System.Windows.Forms.GroupBox();
+            this.txtBoxPrihSumma = new System.Windows.Forms.TextBox();
+            this.lblPrihSumma = new System.Windows.Forms.Label();
+            this.grBoxKodNaznPrih = new System.Windows.Forms.GroupBox();
+            this.txtBoxPrihKodNazn = new System.Windows.Forms.TextBox();
+            this.lblPrihKodNazn = new System.Windows.Forms.Label();
+            this.pnlPagPrihTop2Left = new System.Windows.Forms.Panel();
+            this.pnlPagPrihTop2LeftTop0 = new System.Windows.Forms.Panel();
+            this.lblPrihKreditor = new System.Windows.Forms.Label();
+            this.cmbBoxPrihKreditor = new System.Windows.Forms.ComboBox();
+            this.pnlPagPrihTop2LeftTop1 = new System.Windows.Forms.Panel();
+            this.lblPrihOsnovanie = new System.Windows.Forms.Label();
+            this.txtBoxPrihOsnovanie = new System.Windows.Forms.TextBox();
+            this.lblPrihPaidInReasons = new System.Windows.Forms.Label();
+            this.cmbBoxPrihPaidInReasons = new System.Windows.Forms.ComboBox();
+            this.pnlPagPrihTop2LeftTop2 = new System.Windows.Forms.Panel();
+            this.lblPrihTop2LeftTop2 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblPrihVtomChisle = new System.Windows.Forms.Label();
+            this.txtBoxPrihVtomChisle = new System.Windows.Forms.TextBox();
+            this.grBoxNdsPrih = new System.Windows.Forms.GroupBox();
+            this.rBtnPrihNds0 = new System.Windows.Forms.RadioButton();
+            this.rBtnPrihNds10 = new System.Windows.Forms.RadioButton();
+            this.rBtnPrihNds20 = new System.Windows.Forms.RadioButton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblPrihPrilozenie = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lblPrihGlavBuh = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.cmbBoxPrihDebitor = new System.Windows.Forms.ComboBox();
+            this.lblPrihDebitor = new System.Windows.Forms.Label();
+            this.txtBoxPrihPrilozenie = new System.Windows.Forms.TextBox();
+            this.txtBoxPrihGlavBuh = new System.Windows.Forms.TextBox();
             this.pnlTop.SuspendLayout();
             this.pnlTopFill.SuspendLayout();
             this.pnlTopRight.SuspendLayout();
@@ -284,7 +332,7 @@
             this.pnlFill.SuspendLayout();
             this.tabCntOperation.SuspendLayout();
             this.tabPagePrihod.SuspendLayout();
-            this.pnlPagPrihTop.SuspendLayout();
+            this.pnlPagPrihTop0.SuspendLayout();
             this.pnlPagPrihTopRight1.SuspendLayout();
             this.grBoxDateDocPrih.SuspendLayout();
             this.grBoxNumDocPrih.SuspendLayout();
@@ -380,6 +428,24 @@
             this.pnlBottom.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.pnlPagPrihTop1.SuspendLayout();
+            this.pnlPagPrihTop2.SuspendLayout();
+            this.grBoxDebetPrih.SuspendLayout();
+            this.grBoxKreditPrih.SuspendLayout();
+            this.grBoxKreditKodDivisionPrih.SuspendLayout();
+            this.grBoxKredikKorSchetPrih.SuspendLayout();
+            this.grBoxKredikKodAnalUchPrih.SuspendLayout();
+            this.grBoxSummaPrih.SuspendLayout();
+            this.grBoxKodNaznPrih.SuspendLayout();
+            this.pnlPagPrihTop2Left.SuspendLayout();
+            this.pnlPagPrihTop2LeftTop0.SuspendLayout();
+            this.pnlPagPrihTop2LeftTop1.SuspendLayout();
+            this.pnlPagPrihTop2LeftTop2.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.grBoxNdsPrih.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTop
@@ -519,7 +585,7 @@
             this.pnlFill.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlFill.Location = new System.Drawing.Point(0, 66);
             this.pnlFill.Name = "pnlFill";
-            this.pnlFill.Size = new System.Drawing.Size(1194, 528);
+            this.pnlFill.Size = new System.Drawing.Size(1194, 550);
             this.pnlFill.TabIndex = 1;
             // 
             // tabCntOperation
@@ -538,33 +604,35 @@
             this.tabCntOperation.Location = new System.Drawing.Point(0, 0);
             this.tabCntOperation.Name = "tabCntOperation";
             this.tabCntOperation.SelectedIndex = 0;
-            this.tabCntOperation.Size = new System.Drawing.Size(1194, 528);
+            this.tabCntOperation.Size = new System.Drawing.Size(1194, 550);
             this.tabCntOperation.TabIndex = 0;
             this.tabCntOperation.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
             // tabPagePrihod
             // 
             this.tabPagePrihod.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPagePrihod.Controls.Add(this.pnlPagPrihTop);
+            this.tabPagePrihod.Controls.Add(this.pnlPagPrihTop2);
+            this.tabPagePrihod.Controls.Add(this.pnlPagPrihTop1);
+            this.tabPagePrihod.Controls.Add(this.pnlPagPrihTop0);
             this.tabPagePrihod.Location = new System.Drawing.Point(4, 4);
             this.tabPagePrihod.Name = "tabPagePrihod";
             this.tabPagePrihod.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePrihod.Size = new System.Drawing.Size(1186, 500);
+            this.tabPagePrihod.Size = new System.Drawing.Size(1186, 522);
             this.tabPagePrihod.TabIndex = 0;
             this.tabPagePrihod.Text = "Приходный ордер";
             // 
-            // pnlPagPrihTop
+            // pnlPagPrihTop0
             // 
-            this.pnlPagPrihTop.Controls.Add(this.lblTitlePrih);
-            this.pnlPagPrihTop.Controls.Add(this.pnlPagPrihTopRight1);
-            this.pnlPagPrihTop.Controls.Add(this.pnlPagPrihTopTop1);
-            this.pnlPagPrihTop.Controls.Add(this.pnlPagPrihTopTop0);
-            this.pnlPagPrihTop.Controls.Add(this.pnlPagPrihTopRight);
-            this.pnlPagPrihTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlPagPrihTop.Location = new System.Drawing.Point(3, 3);
-            this.pnlPagPrihTop.Name = "pnlPagPrihTop";
-            this.pnlPagPrihTop.Size = new System.Drawing.Size(1180, 187);
-            this.pnlPagPrihTop.TabIndex = 0;
+            this.pnlPagPrihTop0.Controls.Add(this.lblTitlePrih);
+            this.pnlPagPrihTop0.Controls.Add(this.pnlPagPrihTopRight1);
+            this.pnlPagPrihTop0.Controls.Add(this.pnlPagPrihTopTop1);
+            this.pnlPagPrihTop0.Controls.Add(this.pnlPagPrihTopTop0);
+            this.pnlPagPrihTop0.Controls.Add(this.pnlPagPrihTopRight);
+            this.pnlPagPrihTop0.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagPrihTop0.Location = new System.Drawing.Point(3, 3);
+            this.pnlPagPrihTop0.Name = "pnlPagPrihTop0";
+            this.pnlPagPrihTop0.Size = new System.Drawing.Size(1180, 187);
+            this.pnlPagPrihTop0.TabIndex = 0;
             // 
             // lblTitlePrih
             // 
@@ -3013,7 +3081,7 @@
             // 
             this.pnlBottom.Controls.Add(this.statusStrip1);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBottom.Location = new System.Drawing.Point(0, 594);
+            this.pnlBottom.Location = new System.Drawing.Point(0, 616);
             this.pnlBottom.Name = "pnlBottom";
             this.pnlBottom.Size = new System.Drawing.Size(1194, 20);
             this.pnlBottom.TabIndex = 2;
@@ -3086,11 +3154,557 @@
             this.TSMItemLic.Text = "Информация по лицензии";
             this.TSMItemLic.Click += new System.EventHandler(this.TSMItemLic_Click);
             // 
+            // pnlPagPrihTop1
+            // 
+            this.pnlPagPrihTop1.Controls.Add(this.grBoxKodNaznPrih);
+            this.pnlPagPrihTop1.Controls.Add(this.grBoxSummaPrih);
+            this.pnlPagPrihTop1.Controls.Add(this.grBoxKreditPrih);
+            this.pnlPagPrihTop1.Controls.Add(this.grBoxDebetPrih);
+            this.pnlPagPrihTop1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagPrihTop1.Location = new System.Drawing.Point(3, 190);
+            this.pnlPagPrihTop1.Name = "pnlPagPrihTop1";
+            this.pnlPagPrihTop1.Size = new System.Drawing.Size(1180, 109);
+            this.pnlPagPrihTop1.TabIndex = 1;
+            // 
+            // pnlPagPrihTop2
+            // 
+            this.pnlPagPrihTop2.Controls.Add(this.pnlPagPrihTop2Left);
+            this.pnlPagPrihTop2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagPrihTop2.Location = new System.Drawing.Point(3, 299);
+            this.pnlPagPrihTop2.Name = "pnlPagPrihTop2";
+            this.pnlPagPrihTop2.Size = new System.Drawing.Size(1180, 202);
+            this.pnlPagPrihTop2.TabIndex = 2;
+            // 
+            // grBoxDebetPrih
+            // 
+            this.grBoxDebetPrih.Controls.Add(this.txtBoxPrichDebetNomerSchet);
+            this.grBoxDebetPrih.Controls.Add(this.lblPrihDebetNomerSchet);
+            this.grBoxDebetPrih.Dock = System.Windows.Forms.DockStyle.Left;
+            this.grBoxDebetPrih.Location = new System.Drawing.Point(0, 0);
+            this.grBoxDebetPrih.Name = "grBoxDebetPrih";
+            this.grBoxDebetPrih.Size = new System.Drawing.Size(95, 109);
+            this.grBoxDebetPrih.TabIndex = 0;
+            this.grBoxDebetPrih.TabStop = false;
+            this.grBoxDebetPrih.Text = "Дебет";
+            // 
+            // lblPrihDebetNomerSchet
+            // 
+            this.lblPrihDebetNomerSchet.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblPrihDebetNomerSchet.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihDebetNomerSchet.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblPrihDebetNomerSchet.Location = new System.Drawing.Point(3, 17);
+            this.lblPrihDebetNomerSchet.Name = "lblPrihDebetNomerSchet";
+            this.lblPrihDebetNomerSchet.Size = new System.Drawing.Size(89, 57);
+            this.lblPrihDebetNomerSchet.TabIndex = 1;
+            this.lblPrihDebetNomerSchet.Text = "Номер\r\nсчёта";
+            this.lblPrihDebetNomerSchet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtBoxPrichDebetNomerSchet
+            // 
+            this.txtBoxPrichDebetNomerSchet.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxPrichDebetNomerSchet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxPrichDebetNomerSchet.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxPrichDebetNomerSchet.Location = new System.Drawing.Point(3, 74);
+            this.txtBoxPrichDebetNomerSchet.Name = "txtBoxPrichDebetNomerSchet";
+            this.txtBoxPrichDebetNomerSchet.ReadOnly = true;
+            this.txtBoxPrichDebetNomerSchet.Size = new System.Drawing.Size(89, 26);
+            this.txtBoxPrichDebetNomerSchet.TabIndex = 2;
+            // 
+            // grBoxKreditPrih
+            // 
+            this.grBoxKreditPrih.Controls.Add(this.grBoxKredikKodAnalUchPrih);
+            this.grBoxKreditPrih.Controls.Add(this.grBoxKredikKorSchetPrih);
+            this.grBoxKreditPrih.Controls.Add(this.grBoxKreditKodDivisionPrih);
+            this.grBoxKreditPrih.Dock = System.Windows.Forms.DockStyle.Left;
+            this.grBoxKreditPrih.Location = new System.Drawing.Point(95, 0);
+            this.grBoxKreditPrih.Name = "grBoxKreditPrih";
+            this.grBoxKreditPrih.Size = new System.Drawing.Size(315, 109);
+            this.grBoxKreditPrih.TabIndex = 1;
+            this.grBoxKreditPrih.TabStop = false;
+            this.grBoxKreditPrih.Text = "Кредит";
+            // 
+            // grBoxKreditKodDivisionPrih
+            // 
+            this.grBoxKreditKodDivisionPrih.Controls.Add(this.txtBoxPrihKreditKodDivision);
+            this.grBoxKreditKodDivisionPrih.Controls.Add(this.lblPrihKreditKodDivision);
+            this.grBoxKreditKodDivisionPrih.Dock = System.Windows.Forms.DockStyle.Left;
+            this.grBoxKreditKodDivisionPrih.Location = new System.Drawing.Point(3, 17);
+            this.grBoxKreditKodDivisionPrih.Name = "grBoxKreditKodDivisionPrih";
+            this.grBoxKreditKodDivisionPrih.Size = new System.Drawing.Size(104, 89);
+            this.grBoxKreditKodDivisionPrih.TabIndex = 2;
+            this.grBoxKreditKodDivisionPrih.TabStop = false;
+            // 
+            // lblPrihKreditKodDivision
+            // 
+            this.lblPrihKreditKodDivision.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblPrihKreditKodDivision.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihKreditKodDivision.ForeColor = System.Drawing.Color.Black;
+            this.lblPrihKreditKodDivision.Location = new System.Drawing.Point(3, 17);
+            this.lblPrihKreditKodDivision.Name = "lblPrihKreditKodDivision";
+            this.lblPrihKreditKodDivision.Size = new System.Drawing.Size(98, 40);
+            this.lblPrihKreditKodDivision.TabIndex = 2;
+            this.lblPrihKreditKodDivision.Text = "Код под-\r\nразделения";
+            this.lblPrihKreditKodDivision.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtBoxPrihKreditKodDivision
+            // 
+            this.txtBoxPrihKreditKodDivision.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtBoxPrihKreditKodDivision.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxPrihKreditKodDivision.Location = new System.Drawing.Point(3, 57);
+            this.txtBoxPrihKreditKodDivision.Name = "txtBoxPrihKreditKodDivision";
+            this.txtBoxPrihKreditKodDivision.Size = new System.Drawing.Size(98, 23);
+            this.txtBoxPrihKreditKodDivision.TabIndex = 3;
+            // 
+            // grBoxKredikKorSchetPrih
+            // 
+            this.grBoxKredikKorSchetPrih.Controls.Add(this.txtBoxPrihKreditKorSchet);
+            this.grBoxKredikKorSchetPrih.Controls.Add(this.lblPrihKredikKorSchet);
+            this.grBoxKredikKorSchetPrih.Dock = System.Windows.Forms.DockStyle.Left;
+            this.grBoxKredikKorSchetPrih.Location = new System.Drawing.Point(107, 17);
+            this.grBoxKredikKorSchetPrih.Name = "grBoxKredikKorSchetPrih";
+            this.grBoxKredikKorSchetPrih.Size = new System.Drawing.Size(104, 89);
+            this.grBoxKredikKorSchetPrih.TabIndex = 3;
+            this.grBoxKredikKorSchetPrih.TabStop = false;
+            // 
+            // txtBoxPrihKreditKorSchet
+            // 
+            this.txtBoxPrihKreditKorSchet.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxPrihKreditKorSchet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxPrihKreditKorSchet.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxPrihKreditKorSchet.Location = new System.Drawing.Point(3, 57);
+            this.txtBoxPrihKreditKorSchet.Name = "txtBoxPrihKreditKorSchet";
+            this.txtBoxPrihKreditKorSchet.ReadOnly = true;
+            this.txtBoxPrihKreditKorSchet.Size = new System.Drawing.Size(98, 26);
+            this.txtBoxPrihKreditKorSchet.TabIndex = 2;
+            // 
+            // lblPrihKredikKorSchet
+            // 
+            this.lblPrihKredikKorSchet.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblPrihKredikKorSchet.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihKredikKorSchet.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblPrihKredikKorSchet.Location = new System.Drawing.Point(3, 17);
+            this.lblPrihKredikKorSchet.Name = "lblPrihKredikKorSchet";
+            this.lblPrihKredikKorSchet.Size = new System.Drawing.Size(98, 40);
+            this.lblPrihKredikKorSchet.TabIndex = 1;
+            this.lblPrihKredikKorSchet.Text = "Корресп.\r\nсчёт";
+            this.lblPrihKredikKorSchet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // grBoxKredikKodAnalUchPrih
+            // 
+            this.grBoxKredikKodAnalUchPrih.Controls.Add(this.txtBoxPrihKredikKodAnalUch);
+            this.grBoxKredikKodAnalUchPrih.Controls.Add(this.lblPrihKredikKodAnalUch);
+            this.grBoxKredikKodAnalUchPrih.Dock = System.Windows.Forms.DockStyle.Left;
+            this.grBoxKredikKodAnalUchPrih.Location = new System.Drawing.Point(211, 17);
+            this.grBoxKredikKodAnalUchPrih.Name = "grBoxKredikKodAnalUchPrih";
+            this.grBoxKredikKodAnalUchPrih.Size = new System.Drawing.Size(104, 89);
+            this.grBoxKredikKodAnalUchPrih.TabIndex = 4;
+            this.grBoxKredikKodAnalUchPrih.TabStop = false;
+            // 
+            // txtBoxPrihKredikKodAnalUch
+            // 
+            this.txtBoxPrihKredikKodAnalUch.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtBoxPrihKredikKodAnalUch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxPrihKredikKodAnalUch.Location = new System.Drawing.Point(3, 57);
+            this.txtBoxPrihKredikKodAnalUch.Name = "txtBoxPrihKredikKodAnalUch";
+            this.txtBoxPrihKredikKodAnalUch.Size = new System.Drawing.Size(98, 23);
+            this.txtBoxPrihKredikKodAnalUch.TabIndex = 3;
+            // 
+            // lblPrihKredikKodAnalUch
+            // 
+            this.lblPrihKredikKodAnalUch.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblPrihKredikKodAnalUch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihKredikKodAnalUch.ForeColor = System.Drawing.Color.Black;
+            this.lblPrihKredikKodAnalUch.Location = new System.Drawing.Point(3, 17);
+            this.lblPrihKredikKodAnalUch.Name = "lblPrihKredikKodAnalUch";
+            this.lblPrihKredikKodAnalUch.Size = new System.Drawing.Size(98, 40);
+            this.lblPrihKredikKodAnalUch.TabIndex = 2;
+            this.lblPrihKredikKodAnalUch.Text = "Код аналит.\r\nучёта";
+            this.lblPrihKredikKodAnalUch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // grBoxSummaPrih
+            // 
+            this.grBoxSummaPrih.Controls.Add(this.txtBoxPrihSumma);
+            this.grBoxSummaPrih.Controls.Add(this.lblPrihSumma);
+            this.grBoxSummaPrih.Dock = System.Windows.Forms.DockStyle.Left;
+            this.grBoxSummaPrih.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.grBoxSummaPrih.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.grBoxSummaPrih.Location = new System.Drawing.Point(410, 0);
+            this.grBoxSummaPrih.Name = "grBoxSummaPrih";
+            this.grBoxSummaPrih.Size = new System.Drawing.Size(118, 109);
+            this.grBoxSummaPrih.TabIndex = 2;
+            this.grBoxSummaPrih.TabStop = false;
+            this.grBoxSummaPrih.Text = "Сумма";
+            // 
+            // txtBoxPrihSumma
+            // 
+            this.txtBoxPrihSumma.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxPrihSumma.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxPrihSumma.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxPrihSumma.Location = new System.Drawing.Point(3, 74);
+            this.txtBoxPrihSumma.Name = "txtBoxPrihSumma";
+            this.txtBoxPrihSumma.ReadOnly = true;
+            this.txtBoxPrihSumma.Size = new System.Drawing.Size(112, 26);
+            this.txtBoxPrihSumma.TabIndex = 2;
+            // 
+            // lblPrihSumma
+            // 
+            this.lblPrihSumma.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblPrihSumma.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihSumma.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblPrihSumma.Location = new System.Drawing.Point(3, 17);
+            this.lblPrihSumma.Name = "lblPrihSumma";
+            this.lblPrihSumma.Size = new System.Drawing.Size(112, 57);
+            this.lblPrihSumma.TabIndex = 1;
+            this.lblPrihSumma.Text = "\r\n";
+            this.lblPrihSumma.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // grBoxKodNaznPrih
+            // 
+            this.grBoxKodNaznPrih.Controls.Add(this.txtBoxPrihKodNazn);
+            this.grBoxKodNaznPrih.Controls.Add(this.lblPrihKodNazn);
+            this.grBoxKodNaznPrih.Dock = System.Windows.Forms.DockStyle.Left;
+            this.grBoxKodNaznPrih.Location = new System.Drawing.Point(528, 0);
+            this.grBoxKodNaznPrih.Name = "grBoxKodNaznPrih";
+            this.grBoxKodNaznPrih.Size = new System.Drawing.Size(118, 109);
+            this.grBoxKodNaznPrih.TabIndex = 5;
+            this.grBoxKodNaznPrih.TabStop = false;
+            this.grBoxKodNaznPrih.Text = "Код назначения";
+            // 
+            // txtBoxPrihKodNazn
+            // 
+            this.txtBoxPrihKodNazn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtBoxPrihKodNazn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxPrihKodNazn.Location = new System.Drawing.Point(3, 74);
+            this.txtBoxPrihKodNazn.Name = "txtBoxPrihKodNazn";
+            this.txtBoxPrihKodNazn.Size = new System.Drawing.Size(112, 23);
+            this.txtBoxPrihKodNazn.TabIndex = 3;
+            // 
+            // lblPrihKodNazn
+            // 
+            this.lblPrihKodNazn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblPrihKodNazn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihKodNazn.ForeColor = System.Drawing.Color.Black;
+            this.lblPrihKodNazn.Location = new System.Drawing.Point(3, 17);
+            this.lblPrihKodNazn.Name = "lblPrihKodNazn";
+            this.lblPrihKodNazn.Size = new System.Drawing.Size(112, 57);
+            this.lblPrihKodNazn.TabIndex = 2;
+            this.lblPrihKodNazn.Text = "\r\n";
+            this.lblPrihKodNazn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pnlPagPrihTop2Left
+            // 
+            this.pnlPagPrihTop2Left.Controls.Add(this.panel4);
+            this.pnlPagPrihTop2Left.Controls.Add(this.panel3);
+            this.pnlPagPrihTop2Left.Controls.Add(this.panel2);
+            this.pnlPagPrihTop2Left.Controls.Add(this.panel1);
+            this.pnlPagPrihTop2Left.Controls.Add(this.pnlPagPrihTop2LeftTop2);
+            this.pnlPagPrihTop2Left.Controls.Add(this.pnlPagPrihTop2LeftTop1);
+            this.pnlPagPrihTop2Left.Controls.Add(this.pnlPagPrihTop2LeftTop0);
+            this.pnlPagPrihTop2Left.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlPagPrihTop2Left.Location = new System.Drawing.Point(0, 0);
+            this.pnlPagPrihTop2Left.Name = "pnlPagPrihTop2Left";
+            this.pnlPagPrihTop2Left.Size = new System.Drawing.Size(656, 202);
+            this.pnlPagPrihTop2Left.TabIndex = 0;
+            // 
+            // pnlPagPrihTop2LeftTop0
+            // 
+            this.pnlPagPrihTop2LeftTop0.Controls.Add(this.cmbBoxPrihKreditor);
+            this.pnlPagPrihTop2LeftTop0.Controls.Add(this.lblPrihKreditor);
+            this.pnlPagPrihTop2LeftTop0.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagPrihTop2LeftTop0.Location = new System.Drawing.Point(0, 0);
+            this.pnlPagPrihTop2LeftTop0.Name = "pnlPagPrihTop2LeftTop0";
+            this.pnlPagPrihTop2LeftTop0.Size = new System.Drawing.Size(656, 27);
+            this.pnlPagPrihTop2LeftTop0.TabIndex = 0;
+            // 
+            // lblPrihKreditor
+            // 
+            this.lblPrihKreditor.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblPrihKreditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihKreditor.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblPrihKreditor.Location = new System.Drawing.Point(0, 0);
+            this.lblPrihKreditor.Name = "lblPrihKreditor";
+            this.lblPrihKreditor.Size = new System.Drawing.Size(120, 27);
+            this.lblPrihKreditor.TabIndex = 1;
+            this.lblPrihKreditor.Text = "Принято от";
+            this.lblPrihKreditor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cmbBoxPrihKreditor
+            // 
+            this.cmbBoxPrihKreditor.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.cmbBoxPrihKreditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbBoxPrihKreditor.FormattingEnabled = true;
+            this.cmbBoxPrihKreditor.Location = new System.Drawing.Point(120, 0);
+            this.cmbBoxPrihKreditor.Name = "cmbBoxPrihKreditor";
+            this.cmbBoxPrihKreditor.Size = new System.Drawing.Size(536, 23);
+            this.cmbBoxPrihKreditor.TabIndex = 2;
+            // 
+            // pnlPagPrihTop2LeftTop1
+            // 
+            this.pnlPagPrihTop2LeftTop1.Controls.Add(this.cmbBoxPrihPaidInReasons);
+            this.pnlPagPrihTop2LeftTop1.Controls.Add(this.lblPrihPaidInReasons);
+            this.pnlPagPrihTop2LeftTop1.Controls.Add(this.txtBoxPrihOsnovanie);
+            this.pnlPagPrihTop2LeftTop1.Controls.Add(this.lblPrihOsnovanie);
+            this.pnlPagPrihTop2LeftTop1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagPrihTop2LeftTop1.Location = new System.Drawing.Point(0, 27);
+            this.pnlPagPrihTop2LeftTop1.Name = "pnlPagPrihTop2LeftTop1";
+            this.pnlPagPrihTop2LeftTop1.Size = new System.Drawing.Size(656, 27);
+            this.pnlPagPrihTop2LeftTop1.TabIndex = 1;
+            // 
+            // lblPrihOsnovanie
+            // 
+            this.lblPrihOsnovanie.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblPrihOsnovanie.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihOsnovanie.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblPrihOsnovanie.Location = new System.Drawing.Point(0, 0);
+            this.lblPrihOsnovanie.Name = "lblPrihOsnovanie";
+            this.lblPrihOsnovanie.Size = new System.Drawing.Size(120, 27);
+            this.lblPrihOsnovanie.TabIndex = 1;
+            this.lblPrihOsnovanie.Text = "Основание";
+            this.lblPrihOsnovanie.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtBoxPrihOsnovanie
+            // 
+            this.txtBoxPrihOsnovanie.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxPrihOsnovanie.Dock = System.Windows.Forms.DockStyle.Left;
+            this.txtBoxPrihOsnovanie.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxPrihOsnovanie.Location = new System.Drawing.Point(120, 0);
+            this.txtBoxPrihOsnovanie.Name = "txtBoxPrihOsnovanie";
+            this.txtBoxPrihOsnovanie.ReadOnly = true;
+            this.txtBoxPrihOsnovanie.Size = new System.Drawing.Size(51, 26);
+            this.txtBoxPrihOsnovanie.TabIndex = 3;
+            // 
+            // lblPrihPaidInReasons
+            // 
+            this.lblPrihPaidInReasons.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblPrihPaidInReasons.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihPaidInReasons.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblPrihPaidInReasons.Location = new System.Drawing.Point(171, 0);
+            this.lblPrihPaidInReasons.Name = "lblPrihPaidInReasons";
+            this.lblPrihPaidInReasons.Size = new System.Drawing.Size(31, 27);
+            this.lblPrihPaidInReasons.TabIndex = 4;
+            this.lblPrihPaidInReasons.Text = "\r\n";
+            this.lblPrihPaidInReasons.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cmbBoxPrihPaidInReasons
+            // 
+            this.cmbBoxPrihPaidInReasons.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.cmbBoxPrihPaidInReasons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbBoxPrihPaidInReasons.FormattingEnabled = true;
+            this.cmbBoxPrihPaidInReasons.Location = new System.Drawing.Point(202, 0);
+            this.cmbBoxPrihPaidInReasons.Name = "cmbBoxPrihPaidInReasons";
+            this.cmbBoxPrihPaidInReasons.Size = new System.Drawing.Size(454, 23);
+            this.cmbBoxPrihPaidInReasons.TabIndex = 5;
+            // 
+            // pnlPagPrihTop2LeftTop2
+            // 
+            this.pnlPagPrihTop2LeftTop2.Controls.Add(this.lblPrihTop2LeftTop2);
+            this.pnlPagPrihTop2LeftTop2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagPrihTop2LeftTop2.Location = new System.Drawing.Point(0, 54);
+            this.pnlPagPrihTop2LeftTop2.Name = "pnlPagPrihTop2LeftTop2";
+            this.pnlPagPrihTop2LeftTop2.Size = new System.Drawing.Size(656, 27);
+            this.pnlPagPrihTop2LeftTop2.TabIndex = 2;
+            // 
+            // lblPrihTop2LeftTop2
+            // 
+            this.lblPrihTop2LeftTop2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblPrihTop2LeftTop2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihTop2LeftTop2.ForeColor = System.Drawing.Color.Black;
+            this.lblPrihTop2LeftTop2.Location = new System.Drawing.Point(0, 0);
+            this.lblPrihTop2LeftTop2.Name = "lblPrihTop2LeftTop2";
+            this.lblPrihTop2LeftTop2.Size = new System.Drawing.Size(485, 27);
+            this.lblPrihTop2LeftTop2.TabIndex = 1;
+            this.lblPrihTop2LeftTop2.Tag = "Сумма: @Rub руб. @Kop коп.";
+            this.lblPrihTop2LeftTop2.Text = "Сумма:";
+            this.lblPrihTop2LeftTop2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.grBoxNdsPrih);
+            this.panel1.Controls.Add(this.txtBoxPrihVtomChisle);
+            this.panel1.Controls.Add(this.lblPrihVtomChisle);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 81);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(656, 30);
+            this.panel1.TabIndex = 3;
+            // 
+            // lblPrihVtomChisle
+            // 
+            this.lblPrihVtomChisle.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblPrihVtomChisle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihVtomChisle.ForeColor = System.Drawing.Color.Black;
+            this.lblPrihVtomChisle.Location = new System.Drawing.Point(0, 0);
+            this.lblPrihVtomChisle.Name = "lblPrihVtomChisle";
+            this.lblPrihVtomChisle.Size = new System.Drawing.Size(120, 30);
+            this.lblPrihVtomChisle.TabIndex = 2;
+            this.lblPrihVtomChisle.Text = "В том числе";
+            this.lblPrihVtomChisle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtBoxPrihVtomChisle
+            // 
+            this.txtBoxPrihVtomChisle.Dock = System.Windows.Forms.DockStyle.Left;
+            this.txtBoxPrihVtomChisle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxPrihVtomChisle.Location = new System.Drawing.Point(120, 0);
+            this.txtBoxPrihVtomChisle.Name = "txtBoxPrihVtomChisle";
+            this.txtBoxPrihVtomChisle.Size = new System.Drawing.Size(384, 23);
+            this.txtBoxPrihVtomChisle.TabIndex = 4;
+            // 
+            // grBoxNdsPrih
+            // 
+            this.grBoxNdsPrih.Controls.Add(this.rBtnPrihNds20);
+            this.grBoxNdsPrih.Controls.Add(this.rBtnPrihNds10);
+            this.grBoxNdsPrih.Controls.Add(this.rBtnPrihNds0);
+            this.grBoxNdsPrih.Dock = System.Windows.Forms.DockStyle.Left;
+            this.grBoxNdsPrih.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.grBoxNdsPrih.Location = new System.Drawing.Point(504, 0);
+            this.grBoxNdsPrih.Margin = new System.Windows.Forms.Padding(0);
+            this.grBoxNdsPrih.Name = "grBoxNdsPrih";
+            this.grBoxNdsPrih.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.grBoxNdsPrih.Size = new System.Drawing.Size(150, 30);
+            this.grBoxNdsPrih.TabIndex = 5;
+            this.grBoxNdsPrih.TabStop = false;
+            this.grBoxNdsPrih.Text = "НДС";
+            // 
+            // rBtnPrihNds0
+            // 
+            this.rBtnPrihNds0.AutoSize = true;
+            this.rBtnPrihNds0.Dock = System.Windows.Forms.DockStyle.Left;
+            this.rBtnPrihNds0.Location = new System.Drawing.Point(3, 11);
+            this.rBtnPrihNds0.Name = "rBtnPrihNds0";
+            this.rBtnPrihNds0.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.rBtnPrihNds0.Size = new System.Drawing.Size(43, 16);
+            this.rBtnPrihNds0.TabIndex = 0;
+            this.rBtnPrihNds0.TabStop = true;
+            this.rBtnPrihNds0.Text = "0%";
+            this.rBtnPrihNds0.UseVisualStyleBackColor = true;
+            // 
+            // rBtnPrihNds10
+            // 
+            this.rBtnPrihNds10.AutoSize = true;
+            this.rBtnPrihNds10.Dock = System.Windows.Forms.DockStyle.Left;
+            this.rBtnPrihNds10.Location = new System.Drawing.Point(46, 11);
+            this.rBtnPrihNds10.Name = "rBtnPrihNds10";
+            this.rBtnPrihNds10.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.rBtnPrihNds10.Size = new System.Drawing.Size(49, 16);
+            this.rBtnPrihNds10.TabIndex = 1;
+            this.rBtnPrihNds10.TabStop = true;
+            this.rBtnPrihNds10.Text = "10%";
+            this.rBtnPrihNds10.UseVisualStyleBackColor = true;
+            // 
+            // rBtnPrihNds20
+            // 
+            this.rBtnPrihNds20.AutoSize = true;
+            this.rBtnPrihNds20.Dock = System.Windows.Forms.DockStyle.Left;
+            this.rBtnPrihNds20.Location = new System.Drawing.Point(95, 11);
+            this.rBtnPrihNds20.Name = "rBtnPrihNds20";
+            this.rBtnPrihNds20.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.rBtnPrihNds20.Size = new System.Drawing.Size(49, 16);
+            this.rBtnPrihNds20.TabIndex = 2;
+            this.rBtnPrihNds20.TabStop = true;
+            this.rBtnPrihNds20.Text = "20%";
+            this.rBtnPrihNds20.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.txtBoxPrihPrilozenie);
+            this.panel2.Controls.Add(this.lblPrihPrilozenie);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 111);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(656, 27);
+            this.panel2.TabIndex = 4;
+            // 
+            // lblPrihPrilozenie
+            // 
+            this.lblPrihPrilozenie.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblPrihPrilozenie.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihPrilozenie.ForeColor = System.Drawing.Color.Black;
+            this.lblPrihPrilozenie.Location = new System.Drawing.Point(0, 0);
+            this.lblPrihPrilozenie.Name = "lblPrihPrilozenie";
+            this.lblPrihPrilozenie.Size = new System.Drawing.Size(120, 27);
+            this.lblPrihPrilozenie.TabIndex = 1;
+            this.lblPrihPrilozenie.Text = "Приложение";
+            this.lblPrihPrilozenie.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.txtBoxPrihGlavBuh);
+            this.panel3.Controls.Add(this.lblPrihGlavBuh);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 138);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(656, 27);
+            this.panel3.TabIndex = 5;
+            // 
+            // lblPrihGlavBuh
+            // 
+            this.lblPrihGlavBuh.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblPrihGlavBuh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihGlavBuh.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblPrihGlavBuh.Location = new System.Drawing.Point(0, 0);
+            this.lblPrihGlavBuh.Name = "lblPrihGlavBuh";
+            this.lblPrihGlavBuh.Size = new System.Drawing.Size(171, 27);
+            this.lblPrihGlavBuh.TabIndex = 1;
+            this.lblPrihGlavBuh.Text = "Главный бухгалтер";
+            this.lblPrihGlavBuh.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.cmbBoxPrihDebitor);
+            this.panel4.Controls.Add(this.lblPrihDebitor);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 165);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(656, 27);
+            this.panel4.TabIndex = 6;
+            // 
+            // cmbBoxPrihDebitor
+            // 
+            this.cmbBoxPrihDebitor.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.cmbBoxPrihDebitor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbBoxPrihDebitor.FormattingEnabled = true;
+            this.cmbBoxPrihDebitor.Location = new System.Drawing.Point(171, 0);
+            this.cmbBoxPrihDebitor.Name = "cmbBoxPrihDebitor";
+            this.cmbBoxPrihDebitor.Size = new System.Drawing.Size(485, 23);
+            this.cmbBoxPrihDebitor.TabIndex = 2;
+            // 
+            // lblPrihDebitor
+            // 
+            this.lblPrihDebitor.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblPrihDebitor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihDebitor.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblPrihDebitor.Location = new System.Drawing.Point(0, 0);
+            this.lblPrihDebitor.Name = "lblPrihDebitor";
+            this.lblPrihDebitor.Size = new System.Drawing.Size(171, 27);
+            this.lblPrihDebitor.TabIndex = 1;
+            this.lblPrihDebitor.Text = "Получил кассир";
+            this.lblPrihDebitor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtBoxPrihPrilozenie
+            // 
+            this.txtBoxPrihPrilozenie.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxPrihPrilozenie.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxPrihPrilozenie.Location = new System.Drawing.Point(120, 0);
+            this.txtBoxPrihPrilozenie.Name = "txtBoxPrihPrilozenie";
+            this.txtBoxPrihPrilozenie.Size = new System.Drawing.Size(536, 23);
+            this.txtBoxPrihPrilozenie.TabIndex = 4;
+            // 
+            // txtBoxPrihGlavBuh
+            // 
+            this.txtBoxPrihGlavBuh.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxPrihGlavBuh.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxPrihGlavBuh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxPrihGlavBuh.Location = new System.Drawing.Point(171, 0);
+            this.txtBoxPrihGlavBuh.Name = "txtBoxPrihGlavBuh";
+            this.txtBoxPrihGlavBuh.ReadOnly = true;
+            this.txtBoxPrihGlavBuh.Size = new System.Drawing.Size(485, 26);
+            this.txtBoxPrihGlavBuh.TabIndex = 3;
+            // 
             // FStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1194, 614);
+            this.ClientSize = new System.Drawing.Size(1194, 636);
             this.Controls.Add(this.pnlFill);
             this.Controls.Add(this.pnlBottom);
             this.Controls.Add(this.pnlTop);
@@ -3108,7 +3722,7 @@
             this.pnlFill.ResumeLayout(false);
             this.tabCntOperation.ResumeLayout(false);
             this.tabPagePrihod.ResumeLayout(false);
-            this.pnlPagPrihTop.ResumeLayout(false);
+            this.pnlPagPrihTop0.ResumeLayout(false);
             this.pnlPagPrihTopRight1.ResumeLayout(false);
             this.grBoxDateDocPrih.ResumeLayout(false);
             this.grBoxDateDocPrih.PerformLayout();
@@ -3269,6 +3883,35 @@
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.pnlPagPrihTop1.ResumeLayout(false);
+            this.pnlPagPrihTop2.ResumeLayout(false);
+            this.grBoxDebetPrih.ResumeLayout(false);
+            this.grBoxDebetPrih.PerformLayout();
+            this.grBoxKreditPrih.ResumeLayout(false);
+            this.grBoxKreditKodDivisionPrih.ResumeLayout(false);
+            this.grBoxKreditKodDivisionPrih.PerformLayout();
+            this.grBoxKredikKorSchetPrih.ResumeLayout(false);
+            this.grBoxKredikKorSchetPrih.PerformLayout();
+            this.grBoxKredikKodAnalUchPrih.ResumeLayout(false);
+            this.grBoxKredikKodAnalUchPrih.PerformLayout();
+            this.grBoxSummaPrih.ResumeLayout(false);
+            this.grBoxSummaPrih.PerformLayout();
+            this.grBoxKodNaznPrih.ResumeLayout(false);
+            this.grBoxKodNaznPrih.PerformLayout();
+            this.pnlPagPrihTop2Left.ResumeLayout(false);
+            this.pnlPagPrihTop2LeftTop0.ResumeLayout(false);
+            this.pnlPagPrihTop2LeftTop1.ResumeLayout(false);
+            this.pnlPagPrihTop2LeftTop1.PerformLayout();
+            this.pnlPagPrihTop2LeftTop2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.grBoxNdsPrih.ResumeLayout(false);
+            this.grBoxNdsPrih.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3305,7 +3948,7 @@
         private System.Windows.Forms.ToolStripMenuItem TSMItemConfigPrv;
         private System.Windows.Forms.ToolStripMenuItem TSMItemConfigUsers;
         private System.Windows.Forms.ToolStripMenuItem TSMItemLic;
-        private System.Windows.Forms.Panel pnlPagPrihTop;
+        private System.Windows.Forms.Panel pnlPagPrihTop0;
         private System.Windows.Forms.Panel pnlPagPrihTopTop0;
         private System.Windows.Forms.TextBox txtBoxPrihOrganization;
         private System.Windows.Forms.Label lblPrihOrganization;
@@ -3523,6 +4166,54 @@
         private System.Windows.Forms.Panel pnlPagVerifNalTopRightTop2;
         private System.Windows.Forms.Label lblVerifNalINN;
         private System.Windows.Forms.TextBox txtBoxVerifNalINN;
+        private System.Windows.Forms.Panel pnlPagPrihTop1;
+        private System.Windows.Forms.Panel pnlPagPrihTop2;
+        private System.Windows.Forms.GroupBox grBoxDebetPrih;
+        private System.Windows.Forms.Label lblPrihDebetNomerSchet;
+        private System.Windows.Forms.TextBox txtBoxPrichDebetNomerSchet;
+        private System.Windows.Forms.GroupBox grBoxKreditPrih;
+        private System.Windows.Forms.GroupBox grBoxKreditKodDivisionPrih;
+        private System.Windows.Forms.TextBox txtBoxPrihKreditKodDivision;
+        private System.Windows.Forms.Label lblPrihKreditKodDivision;
+        private System.Windows.Forms.GroupBox grBoxKredikKorSchetPrih;
+        private System.Windows.Forms.TextBox txtBoxPrihKreditKorSchet;
+        private System.Windows.Forms.Label lblPrihKredikKorSchet;
+        private System.Windows.Forms.GroupBox grBoxKredikKodAnalUchPrih;
+        private System.Windows.Forms.TextBox txtBoxPrihKredikKodAnalUch;
+        private System.Windows.Forms.Label lblPrihKredikKodAnalUch;
+        private System.Windows.Forms.GroupBox grBoxSummaPrih;
+        private System.Windows.Forms.TextBox txtBoxPrihSumma;
+        private System.Windows.Forms.Label lblPrihSumma;
+        private System.Windows.Forms.GroupBox grBoxKodNaznPrih;
+        private System.Windows.Forms.TextBox txtBoxPrihKodNazn;
+        private System.Windows.Forms.Label lblPrihKodNazn;
+        private System.Windows.Forms.Panel pnlPagPrihTop2Left;
+        private System.Windows.Forms.Panel pnlPagPrihTop2LeftTop0;
+        private System.Windows.Forms.Label lblPrihKreditor;
+        private System.Windows.Forms.ComboBox cmbBoxPrihKreditor;
+        private System.Windows.Forms.Panel pnlPagPrihTop2LeftTop1;
+        private System.Windows.Forms.Label lblPrihOsnovanie;
+        private System.Windows.Forms.TextBox txtBoxPrihOsnovanie;
+        private System.Windows.Forms.Label lblPrihPaidInReasons;
+        private System.Windows.Forms.ComboBox cmbBoxPrihPaidInReasons;
+        private System.Windows.Forms.Panel pnlPagPrihTop2LeftTop2;
+        private System.Windows.Forms.Label lblPrihTop2LeftTop2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblPrihVtomChisle;
+        private System.Windows.Forms.TextBox txtBoxPrihVtomChisle;
+        private System.Windows.Forms.GroupBox grBoxNdsPrih;
+        private System.Windows.Forms.RadioButton rBtnPrihNds0;
+        private System.Windows.Forms.RadioButton rBtnPrihNds20;
+        private System.Windows.Forms.RadioButton rBtnPrihNds10;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.ComboBox cmbBoxPrihDebitor;
+        private System.Windows.Forms.Label lblPrihDebitor;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label lblPrihGlavBuh;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label lblPrihPrilozenie;
+        private System.Windows.Forms.TextBox txtBoxPrihGlavBuh;
+        private System.Windows.Forms.TextBox txtBoxPrihPrilozenie;
     }
 }
 

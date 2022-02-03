@@ -64,7 +64,7 @@
     <Compile Include="BLL\Operation.cs" />
     <Compile Include="BLL\OperationList.cs" />
     <Compile Include="BLL\OperationPlg\Lib\OperationInterface.cs" />
-    <Compile Include="BLL\OperationPlg\OperationProhod.cs" />
+    <Compile Include="BLL\OperationPlg\OperationPrihod.cs" />
     <Compile Include="Com\Config.cs" />
     <Compile Include="Com\DocumentFarm.cs" />
     <Compile Include="Com\Lic.cs" />

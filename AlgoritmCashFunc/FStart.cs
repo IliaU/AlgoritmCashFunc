@@ -169,10 +169,15 @@ namespace AlgoritmCashFunc
                     {
                         // Приходный ордер
                         case 0:
-                            this.txtBoxPrihOKPO.ReadOnly = false;
-                            this.txtBoxPrihOKUD.ReadOnly = false;
-                            this.txtBoxPrihOrganization.ReadOnly = false;
-                            this.txtBoxPrichStructPodr.ReadOnly = false;
+                            // Делаем поля читаемыми только админу и менеджеру
+                            if (Com.UserFarm.CurrentUser.Role == RoleEn.Admin ||
+                                Com.UserFarm.CurrentUser.Role == RoleEn.Manager)
+                            {
+                                this.txtBoxPrihOKPO.ReadOnly = false;
+                                this.txtBoxPrihOKUD.ReadOnly = false;
+                                this.txtBoxPrihOrganization.ReadOnly = false;
+                                this.txtBoxPrichStructPodr.ReadOnly = false;
+                            }
                             break;
                         // Расходный ордер
                         case 1:
@@ -332,6 +337,10 @@ namespace AlgoritmCashFunc
                         txtBoxPrihOrganization.Text = Kassa.Organization;
                         txtBoxPrichStructPodr.Text = Kassa.StructPodrazdelenie;
                         txtBoxPrihOKPO.Text = Kassa.OKPO;
+
+                        // Заполняем инфу по операции
+                        BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)OperationFarm.CurOperationList["OperationPrihod"];
+                        txtBoxPrihOKUD.Text = (OperPrihod!=null && !string.IsNullOrWhiteSpace(OperPrihod.OKUD) ? OperPrihod.OKUD:"");
                         break;
                     // Расходный ордер
                     case 1:
@@ -562,6 +571,11 @@ namespace AlgoritmCashFunc
                         Kassa.LastDocNumPrih = int.Parse(this.txtBoxPrihNumDoc.Text);
                         Kassa.Save();
 
+                        // Заполняем инфу по операции
+                        BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)this.CurDoc.CurOperation;
+                        OperPrihod.OKUD = txtBoxPrihOKUD.Text;
+                        OperPrihod.Save();
+
                         break;
                     // Расходный ордер
                     case 1:
@@ -756,14 +770,23 @@ namespace AlgoritmCashFunc
                         // Создаём пустой документ
                         this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
                         this.txtBoxPrihNumDoc.Text = (Kassa.LastDocNumPrih + 1).ToString();
+                        // Проверка на наличие ошибок при создании пустого документа
+                        if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", "DocumentPrihod"));
                         //
                         this.txtBoxPrihDateDoc.Text = DateTime.Now.Date.ToShortDateString();
+                        
+                        // Заполняем инфу по операции
+                        BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)this.CurDoc.CurOperation;
+                        txtBoxPrihOKUD.Text = OperPrihod.OKUD;
+                 
                         break;
                     // Расходный ордер
                     case 1:
                         // Создаём пустой документ
                         //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
                         this.txtBoxRashNumDoc.Text = (Kassa.LastDocNumRash + 1).ToString();
+                        // Проверка на наличие ошибок при создании пустого документа
+                        //if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
                         //
                         this.txtBoxRashDateDoc.Text = DateTime.Now.Date.ToShortDateString();
                         break;
@@ -771,6 +794,8 @@ namespace AlgoritmCashFunc
                     case 2:
                         // Создаём пустой документ
                         //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                        // Проверка на наличие ошибок при создании пустого документа
+                        //if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
                         //
                         this.txtBoxKasBookDateDoc.Text = DateTime.Now.Date.ToShortDateString();
                         break;
@@ -779,6 +804,8 @@ namespace AlgoritmCashFunc
                         // Создаём пустой документ
                         //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
                         this.txtBoxActVozvNumDoc.Text = (Kassa.LastDocNumActVozv + 1).ToString();
+                        // Проверка на наличие ошибок при создании пустого документа
+                        //if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
                         //
                         this.txtBoxActVozvDateDoc.Text = DateTime.Now.Date.ToShortDateString();
                         break;
@@ -787,12 +814,17 @@ namespace AlgoritmCashFunc
                         // Создаём пустой документ
                         //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
                         this.txtBoxReportKasNumDoc.Text = (Kassa.LastDocNumReportKas + 1).ToString();
+                        // Проверка на наличие ошибок при создании пустого документа
+                        //if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
+                        //
                         break;
                     // Счётчики ККМ
                     case 5:
                         // Создаём пустой документ
                         //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
                         this.txtBoxScetKkmNumDoc.Text = (Kassa.LastDocNumScetKkm + 1).ToString();
+                        // Проверка на наличие ошибок при создании пустого документа
+                        //if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
                         //
                         this.txtBoxScetKkmDateDoc.Text = DateTime.Now.Date.ToShortDateString();
                         this.txtBoxScetKkmTimeDoc.Text = DateTime.Now.ToShortTimeString().ToString();
@@ -802,6 +834,8 @@ namespace AlgoritmCashFunc
                         // Создаём пустой документ
                         //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
                         this.txtBoxVerifNalNumDoc.Text = (Kassa.LastDocNumVerifNal + 1).ToString();
+                        // Проверка на наличие ошибок при создании пустого документа
+                        //if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
                         //
                         this.txtBoxVerifNalDateDoc.Text = DateTime.Now.Date.ToShortDateString();
                         break;
@@ -810,6 +844,8 @@ namespace AlgoritmCashFunc
                         // Создаём пустой документ
                         //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
                         this.txtBoxInventNumDoc.Text = (Kassa.LastDocNumInvent + 1).ToString();
+                        // Проверка на наличие ошибок при создании пустого документа
+                        //if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
                         //
                         this.txtBoxInventDateDoc.Text = DateTime.Now.Date.ToShortDateString();
                         break;

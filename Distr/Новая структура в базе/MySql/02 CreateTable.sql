@@ -10,8 +10,17 @@ CREATE TABLE `cashfunc_operation` (
   UNIQUE KEY `uix_CashFunc_Operaion_OpFullName` (`OpFullName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 # 
-INSERT INTO `aks`.`CashFunc_Operation` (`Id`, `OpFullName`, `OperationName`, `KoefDebitor`, `KoefCreditor`) VALUES (1, 'OperationProhod', 'Приходный ордер', 1, 0);
+INSERT INTO `aks`.`CashFunc_Operation` (`Id`, `OpFullName`, `OperationName`, `KoefDebitor`, `KoefCreditor`) VALUES (1, 'OperationPrihod', 'Приходный ордер', 1, 0);
 
+
+#Drop Table `aks`.`cashfunc_Operation_Prihod`;
+#
+CREATE TABLE `aks`.`cashfunc_Operation_Prihod` (
+  `Id` int NOT NULL,
+  `OKUD` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+#
 
 
 #Drop Table `aks`.`CashFunc_Local`;

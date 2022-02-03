@@ -8,5 +8,9 @@ namespace AlgoritmCashFunc.BLL.OperationPlg.Lib
 {
     public interface OperationInterface
     {
+        /// <summary>
+        /// Сохранить объект в базе данных
+        /// </summary>
+        void Save();
     }
 }
