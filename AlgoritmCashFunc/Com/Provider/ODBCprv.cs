@@ -3715,12 +3715,12 @@ Where Id={0}", UpdLocalPaidInReasons.Id, UpdLocalPaidInReasons.Osnovanie, UpdLoc
             int rez = 0;
 
             string CommandSql = String.Format(@"insert into `aks`.`CashFunc_Document`(`DocFullName`, `UreDate`, `CteateDate`, `ModifyDate`,
-    `ModifyUser`, `OperationId`, `LocalDebitorId`, `LocalCreditorId`,
-    `IsDraft`
+    `ModifyUser`, `OperationId`, `LocalDebitorId`, `LocalCreditorId`, 
+    `DocNum`, `IsDraft`
 )
 Values(?, ?, ?, ?, 
     ?, ?, ?, ?,
-    ?)");
+    ?, ?)");
             string CommandSql2 = "SELECT LAST_INSERT_ID()  As Id";
 
 
@@ -3745,6 +3745,7 @@ Values(?, ?, ?, ?,
                         com.Parameters.Add(new OdbcParameter("LocalDebitorId", OdbcType.Int) { Value = NewDocument.LocalDebitor.Id });
                         com.Parameters.Add(new OdbcParameter("LocalCreditorId", OdbcType.Int) { Value = NewDocument.LocalCreditor.Id });
                         //
+                        com.Parameters.Add(new OdbcParameter("DocNum", OdbcType.Int) { Value = NewDocument.DocNum });
                         com.Parameters.Add(new OdbcParameter("IsDraft", OdbcType.Bit) { Value = NewDocument.IsDraft });
 
                         com.CommandTimeout = 900;  // 15 минут
@@ -3799,12 +3800,14 @@ Values(?, ?, ?, ?,
 
             string CommandSql = String.Format(@"Update `aks`.`CashFunc_Document`
 Set `UreDate`=?, `ModifyDate`=?, `ModifyUser`='{1}', `LocalDebitorId` = {2}, 
-    `LocalCreditorId`={3}, `IsProcessed`={4}, `IsDraft`={5}
+    `LocalCreditorId`={3}, `IsProcessed`={4}, `DocNum`={5}, `IsDraft`={6}
 Where Id={0}", UpdDocument.Id,
                    UpdDocument.ModifyUser,
                    UpdDocument.LocalDebitor,
+                   //
                    UpdDocument.LocalCreditor,
                    (UpdDocument.IsProcessed ? 1 : 0),
+                   UpdDocument.DocNum,
                    (UpdDocument.IsDraft ? 1 : 0));
 
             try
@@ -4007,13 +4010,25 @@ Where Id={0}", (int)DocumentPrihod.Id);
     `KredikKodAnalUch`, `Summa`, `KodNazn`, `Osnovanie`, 
     `Id_PaidInReasons`, `VtomChisle`, `NDS`, `Prilozenie`, 
     `GlavBuh`) 
-Values({0}, '{1}', '{2}', '{3}',
-    '{4}', {5}, `{6}`, `{7}`, 
-    {8}, `{9}`, {10}, `{11}`, 
-    `{12}`)", NewDocumentPrihod.Id, NewDocumentPrihod.DebetNomerSchet, NewDocumentPrihod.KreditKodDivision, NewDocumentPrihod.KredikKorSchet,
-                            NewDocumentPrihod.KredikKodAnalUch, NewDocumentPrihod.Summa, NewDocumentPrihod.KodNazn, NewDocumentPrihod.Osnovanie,
-                            NewDocumentPrihod.PaidInReasons.Id, NewDocumentPrihod.VtomChisle, NewDocumentPrihod.NDS, NewDocumentPrihod.Prilozenie,
-                            NewDocumentPrihod.GlavBuh);
+Values({0}, {1}, {2}, {3},
+    {4}, {5}, {6}, {7}, 
+    {8}, {9}, {10}, {11}, 
+    {12})", (NewDocumentPrihod.Id==null?"null": NewDocumentPrihod.Id.ToString()),
+            (string.IsNullOrWhiteSpace(NewDocumentPrihod.DebetNomerSchet)?"null":string.Format("'{0}'", NewDocumentPrihod.DebetNomerSchet)),
+            (string.IsNullOrWhiteSpace(NewDocumentPrihod.KreditKodDivision) ? "null" : string.Format("'{0}'", NewDocumentPrihod.KreditKodDivision)),
+            (string.IsNullOrWhiteSpace(NewDocumentPrihod.KredikKorSchet) ? "null" : string.Format("'{0}'", NewDocumentPrihod.KredikKorSchet)),
+            //
+            (string.IsNullOrWhiteSpace(NewDocumentPrihod.KredikKodAnalUch) ? "null" : string.Format("'{0}'", NewDocumentPrihod.KredikKodAnalUch)),
+            NewDocumentPrihod.Summa.ToString().Replace(",","."),
+            (string.IsNullOrWhiteSpace(NewDocumentPrihod.KodNazn) ? "null" : string.Format("'{0}'", NewDocumentPrihod.KodNazn)),
+            (string.IsNullOrWhiteSpace(NewDocumentPrihod.Osnovanie) ? "null" : string.Format("'{0}'", NewDocumentPrihod.Osnovanie)),
+            //
+            (NewDocumentPrihod.PaidInReasons==null || NewDocumentPrihod.PaidInReasons.Id==null?"null": NewDocumentPrihod.PaidInReasons.Id.ToString()),
+            (string.IsNullOrWhiteSpace(NewDocumentPrihod.VtomChisle) ? "null" : string.Format("'{0}'", NewDocumentPrihod.VtomChisle)),
+            NewDocumentPrihod.NDS.ToString().Replace(",", "."),
+            (string.IsNullOrWhiteSpace(NewDocumentPrihod.Prilozenie) ? "null" : string.Format("'{0}'", NewDocumentPrihod.Prilozenie)),
+            //
+            (string.IsNullOrWhiteSpace(NewDocumentPrihod.GlavBuh)) ? "null" : string.Format("'{0}'", NewDocumentPrihod.GlavBuh));
 
             try
             {

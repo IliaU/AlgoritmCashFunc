@@ -64,6 +64,7 @@ namespace AlgoritmCashFunc.BLL
                 base.ModifyUser = Com.UserFarm.CurrentUser.Logon;
                 base.ModifyDate = DateTime.Now;
                 base.IsProcessed = false;
+                base.IsDraft = false;
 
                 // Если это новый документ то необходимо его создать в базе данных
                 if (base.Id == null)

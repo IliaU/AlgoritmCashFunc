@@ -57,12 +57,12 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
         /// <summary>
         /// Дебитор
         /// </summary>
-        public Local LocalDebitor { get; private set; } = null;
+        public Local LocalDebitor { get; set; } = null;
 
         /// <summary>
         /// Кредитор
         /// </summary>
-        public Local LocalCreditor { get; private set; } = null;
+        public Local LocalCreditor { get; set; } = null;
 
         /// <summary>
         /// Номер документа

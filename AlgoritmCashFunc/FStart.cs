@@ -178,6 +178,11 @@ namespace AlgoritmCashFunc
                                 this.txtBoxPrihOrganization.ReadOnly = false;
                                 this.txtBoxPrichStructPodr.ReadOnly = false;
                             }
+
+                            // разрешено править всем
+                            this.cmbBoxPrihKreditor.Enabled = true; // Принято от 
+                            this.cmbBoxPrihDebitor.Enabled = true;  // Получил кассир
+
                             break;
                         // Расходный ордер
                         case 1:
@@ -244,6 +249,11 @@ namespace AlgoritmCashFunc
                             this.txtBoxPrihOKUD.ReadOnly = true;
                             this.txtBoxPrihOrganization.ReadOnly = true;
                             this.txtBoxPrichStructPodr.ReadOnly = true;
+                            this.cmbBoxPrihKreditor.Enabled = false;
+
+                            // разрешено править всем
+                            this.cmbBoxPrihKreditor.Enabled = false; // Принято от 
+                            this.cmbBoxPrihDebitor.Enabled = false;  // Получил кассир
                             break;
                         // Расходный ордер
                         case 1:
@@ -341,6 +351,25 @@ namespace AlgoritmCashFunc
                         // Заполняем инфу по операции
                         BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)OperationFarm.CurOperationList["OperationPrihod"];
                         txtBoxPrihOKUD.Text = (OperPrihod!=null && !string.IsNullOrWhiteSpace(OperPrihod.OKUD) ? OperPrihod.OKUD:"");
+
+                        // Заполняем список принято от
+                        if (this.cmbBoxPrihKreditor.Items.Count==0)
+                        {
+                            foreach (BLL.Local item in Com.LocalFarm.CurLocalEmployees)
+                            {
+                                this.cmbBoxPrihKreditor.Items.Add(item.LocalName);
+                            }
+                        }
+
+                        // Заполняем получил кассир
+                        if (this.cmbBoxPrihDebitor.Items.Count == 0)
+                        {
+                            foreach (BLL.Local item in Com.LocalFarm.CurLocalChiefCashiers)
+                            {
+                                this.cmbBoxPrihDebitor.Items.Add(item.LocalName);
+                            }
+                        }
+
                         break;
                     // Расходный ордер
                     case 1:
@@ -564,9 +593,31 @@ namespace AlgoritmCashFunc
                         ValidateKassa(Kassa);
 
                         // Валидация введённой даты
-                        try{ this.CurDoc.UreDate = DateTime.Parse(this.txtBoxPrihDateDoc.Text);}
+                        if (string.IsNullOrWhiteSpace(this.txtBoxPrihNumDoc.Text)) new ApplicationException("Поле номер документа не может быть пустым.");
+                        else
+                        {
+                            try { this.CurDoc.DocNum = int.Parse(this.txtBoxPrihNumDoc.Text); }
+                            catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение номера документа {0} к числу.", this.txtBoxPrihNumDoc.Text)); }
+                        }
+
+                        // Валидация введённой даты
+                        try { this.CurDoc.UreDate = DateTime.Parse(this.txtBoxPrihDateDoc.Text);}
                         catch (Exception){ throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxPrihDateDoc.Text));}
-                        
+
+                        // Валидация кредитора
+                        if (this.cmbBoxPrihKreditor.SelectedIndex == -1) throw new ApplicationException("Не указано от кого принято.");
+                        else
+                        {
+                            this.CurDoc.LocalCreditor = LocalFarm.CurLocalEmployees[this.cmbBoxPrihKreditor.SelectedIndex];
+                        }
+
+                        // Валидация Дебитора
+                        if (this.cmbBoxPrihDebitor.SelectedIndex == -1) throw new ApplicationException("Не указано кnо получил.");
+                        else
+                        {
+                            this.CurDoc.LocalDebitor = LocalFarm.CurLocalChiefCashiers[this.cmbBoxPrihDebitor.SelectedIndex];
+                        }
+
                         // Сохранение инфы в базе
                         Kassa.LastDocNumPrih = int.Parse(this.txtBoxPrihNumDoc.Text);
                         Kassa.Save();
@@ -575,6 +626,9 @@ namespace AlgoritmCashFunc
                         BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)this.CurDoc.CurOperation;
                         OperPrihod.OKUD = txtBoxPrihOKUD.Text;
                         OperPrihod.Save();
+
+                        // Сохранение документа
+                        this.CurDoc.Save();
 
                         break;
                     // Расходный ордер
@@ -779,6 +833,8 @@ namespace AlgoritmCashFunc
                         BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)this.CurDoc.CurOperation;
                         txtBoxPrihOKUD.Text = OperPrihod.OKUD;
                  
+
+
                         break;
                     // Расходный ордер
                     case 1:
