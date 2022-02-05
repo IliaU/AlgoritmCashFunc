@@ -869,12 +869,15 @@
             // cmbBoxPrihPaidInReasons
             // 
             this.cmbBoxPrihPaidInReasons.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.cmbBoxPrihPaidInReasons.Cursor = System.Windows.Forms.Cursors.Default;
             this.cmbBoxPrihPaidInReasons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbBoxPrihPaidInReasons.Enabled = false;
             this.cmbBoxPrihPaidInReasons.FormattingEnabled = true;
             this.cmbBoxPrihPaidInReasons.Location = new System.Drawing.Point(202, 0);
             this.cmbBoxPrihPaidInReasons.Name = "cmbBoxPrihPaidInReasons";
             this.cmbBoxPrihPaidInReasons.Size = new System.Drawing.Size(454, 23);
             this.cmbBoxPrihPaidInReasons.TabIndex = 5;
+            this.cmbBoxPrihPaidInReasons.SelectedIndexChanged += new System.EventHandler(this.cmbBoxPrihPaidInReasons_SelectedIndexChanged);
             // 
             // lblPrihPaidInReasons
             // 
@@ -970,10 +973,12 @@
             // 
             // txtBoxPrihKodNazn
             // 
+            this.txtBoxPrihKodNazn.BackColor = System.Drawing.SystemColors.Window;
             this.txtBoxPrihKodNazn.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtBoxPrihKodNazn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtBoxPrihKodNazn.Location = new System.Drawing.Point(3, 74);
             this.txtBoxPrihKodNazn.Name = "txtBoxPrihKodNazn";
+            this.txtBoxPrihKodNazn.ReadOnly = true;
             this.txtBoxPrihKodNazn.Size = new System.Drawing.Size(112, 23);
             this.txtBoxPrihKodNazn.TabIndex = 3;
             // 
@@ -1052,10 +1057,12 @@
             // 
             // txtBoxPrihKredikKodAnalUch
             // 
+            this.txtBoxPrihKredikKodAnalUch.BackColor = System.Drawing.SystemColors.Window;
             this.txtBoxPrihKredikKodAnalUch.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtBoxPrihKredikKodAnalUch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtBoxPrihKredikKodAnalUch.Location = new System.Drawing.Point(3, 57);
             this.txtBoxPrihKredikKodAnalUch.Name = "txtBoxPrihKredikKodAnalUch";
+            this.txtBoxPrihKredikKodAnalUch.ReadOnly = true;
             this.txtBoxPrihKredikKodAnalUch.Size = new System.Drawing.Size(98, 23);
             this.txtBoxPrihKredikKodAnalUch.TabIndex = 3;
             // 
@@ -1118,10 +1125,12 @@
             // 
             // txtBoxPrihKreditKodDivision
             // 
+            this.txtBoxPrihKreditKodDivision.BackColor = System.Drawing.SystemColors.Window;
             this.txtBoxPrihKreditKodDivision.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtBoxPrihKreditKodDivision.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtBoxPrihKreditKodDivision.Location = new System.Drawing.Point(3, 57);
             this.txtBoxPrihKreditKodDivision.Name = "txtBoxPrihKreditKodDivision";
+            this.txtBoxPrihKreditKodDivision.ReadOnly = true;
             this.txtBoxPrihKreditKodDivision.Size = new System.Drawing.Size(98, 23);
             this.txtBoxPrihKreditKodDivision.TabIndex = 3;
             // 

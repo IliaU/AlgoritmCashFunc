@@ -37,6 +37,13 @@ CREATE TABLE `aks`.`cashfunc_local` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci; 
 #
 INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (1, 'LocalPokupatel', 'Разовый покупатель', 0, 1, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (2, 'LocalPaidInReasons', 'Возврат от подотчётного лица', 1, 1, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (3, 'LocalPaidInReasons', 'Оплата от покупателя (наличные)', 1, 1, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (4, 'LocalPaidInReasons', 'Оплата от покупателя (кредитные карты)', 1, 1, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (5, 'LocalPaidInReasons', 'Аванс от покупателя (наличные)', 1, 1, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (6, 'LocalPaidInReasons', 'Возврат денежных средств на размен', 1, 1, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (7, 'LocalPaidInReasons', 'Прочий приход', 1, 1, 0);
+
 
 
 
@@ -81,6 +88,12 @@ CREATE TABLE `aks`.`cashfunc_local_PaidInReasons` (
   UNIQUE KEY `UIX_local_PaidInReasons` (`Osnovanie`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 #
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) VALUES (2, '101', '50.01', '71.01');
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) VALUES (3, '102', '50.01', '62.P');
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) VALUES (4, '103', '57.03', '62.01');
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) VALUES (5, '104', '50.01', '62.02');
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) VALUES (6, '105', '50.01', '73.04');
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) VALUES (7, '106', '50.01', '91.01');
 
 
 #Drop Table `aks`.`CashFunc_Document`;

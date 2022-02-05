@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using AlgoritmCashFunc.Com;
+using AlgoritmCashFunc.BLL;
 using AlgoritmCashFunc.Lib;
 
 namespace AlgoritmCashFunc
@@ -177,11 +178,22 @@ namespace AlgoritmCashFunc
                                 this.txtBoxPrihOKUD.ReadOnly = false;
                                 this.txtBoxPrihOrganization.ReadOnly = false;
                                 this.txtBoxPrichStructPodr.ReadOnly = false;
+                                this.txtBoxPrichDebetNomerSchet.ReadOnly = false;
+                                this.txtBoxPrihKreditKorSchet.ReadOnly = false;
+                                this.txtBoxPrihOsnovanie.ReadOnly = false;
+                                this.txtBoxPrihGlavBuh.ReadOnly = false;
                             }
 
                             // разрешено править всем
-                            this.cmbBoxPrihKreditor.Enabled = true; // Принято от 
-                            this.cmbBoxPrihDebitor.Enabled = true;  // Получил кассир
+                            this.cmbBoxPrihKreditor.Enabled = true;         // Принято от 
+                            this.cmbBoxPrihDebitor.Enabled = true;          // Получил кассир
+                            this.cmbBoxPrihPaidInReasons.Enabled = true;    // Основание
+
+                            this.txtBoxPrihKreditKodDivision.ReadOnly = false;
+                            this.txtBoxPrihKredikKodAnalUch.ReadOnly = false;
+                            this.txtBoxPrihSumma.ReadOnly = false;
+                            this.txtBoxPrihKodNazn.ReadOnly = false;
+
 
                             break;
                         // Расходный ордер
@@ -249,11 +261,21 @@ namespace AlgoritmCashFunc
                             this.txtBoxPrihOKUD.ReadOnly = true;
                             this.txtBoxPrihOrganization.ReadOnly = true;
                             this.txtBoxPrichStructPodr.ReadOnly = true;
-                            this.cmbBoxPrihKreditor.Enabled = false;
+                            this.txtBoxPrichDebetNomerSchet.ReadOnly = true;
+                            this.txtBoxPrihKreditKorSchet.ReadOnly = true;
+                            this.txtBoxPrihOsnovanie.ReadOnly = true;
+                            this.txtBoxPrihGlavBuh.ReadOnly = true;
 
                             // разрешено править всем
                             this.cmbBoxPrihKreditor.Enabled = false; // Принято от 
                             this.cmbBoxPrihDebitor.Enabled = false;  // Получил кассир
+                            this.cmbBoxPrihPaidInReasons.Enabled = false;    // Основание
+
+                            this.txtBoxPrihKreditKodDivision.ReadOnly = true;
+                            this.txtBoxPrihKredikKodAnalUch.ReadOnly = true;
+                            this.txtBoxPrihSumma.ReadOnly = true;
+                            this.txtBoxPrihKodNazn.ReadOnly = true;
+
                             break;
                         // Расходный ордер
                         case 1:
@@ -344,18 +366,19 @@ namespace AlgoritmCashFunc
                     // Приходный ордер
                     case 0:
                         // Запоминаем инфу по организации
-                        txtBoxPrihOrganization.Text = Kassa.Organization;
-                        txtBoxPrichStructPodr.Text = Kassa.StructPodrazdelenie;
-                        txtBoxPrihOKPO.Text = Kassa.OKPO;
+                        this.txtBoxPrihOrganization.Text = Kassa.Organization;
+                        this.txtBoxPrichStructPodr.Text = Kassa.StructPodrazdelenie;
+                        this.txtBoxPrihOKPO.Text = Kassa.OKPO;
+                        this.txtBoxPrihGlavBuh.Text = Kassa.GlavBuhFio;
 
                         // Заполняем инфу по операции
                         BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)OperationFarm.CurOperationList["OperationPrihod"];
                         txtBoxPrihOKUD.Text = (OperPrihod!=null && !string.IsNullOrWhiteSpace(OperPrihod.OKUD) ? OperPrihod.OKUD:"");
 
-                        // Заполняем список принято от
+                        // Приход заполняем список принято от
                         if (this.cmbBoxPrihKreditor.Items.Count==0)
                         {
-                            foreach (BLL.Local item in Com.LocalFarm.CurLocalEmployees)
+                            foreach (Local item in LocalFarm.CurLocalEmployees)
                             {
                                 this.cmbBoxPrihKreditor.Items.Add(item.LocalName);
                             }
@@ -364,11 +387,30 @@ namespace AlgoritmCashFunc
                         // Заполняем получил кассир
                         if (this.cmbBoxPrihDebitor.Items.Count == 0)
                         {
-                            foreach (BLL.Local item in Com.LocalFarm.CurLocalChiefCashiers)
+                            foreach (Local item in LocalFarm.CurLocalChiefCashiers)
                             {
                                 this.cmbBoxPrihDebitor.Items.Add(item.LocalName);
                             }
                         }
+
+                        // Основание
+                        if (this.cmbBoxPrihPaidInReasons.Items.Count == 0)
+                        {
+                            foreach (Local item in LocalFarm.CurLocalPaidInReasons)
+                            {
+                                this.cmbBoxPrihPaidInReasons.Items.Add(item.LocalName);
+                            }
+                        }
+
+                        // Заполняем поле основание значенеие по умолчанию и зависимые поля
+                        this.cmbBoxPrihPaidInReasons_SelectedIndexChanged(null, null);
+                        this.cmbBoxPrihDebitor.SelectedIndex = -1;
+                        this.cmbBoxPrihKreditor.SelectedIndex = -1;
+
+                        this.txtBoxPrihKreditKodDivision.Text = string.Empty;
+                        this.txtBoxPrihKredikKodAnalUch.Text = string.Empty;
+                        this.txtBoxPrihSumma.Text = string.Empty;
+                        this.txtBoxPrihKodNazn.Text = string.Empty;
 
                         break;
                     // Расходный ордер
@@ -585,9 +627,10 @@ namespace AlgoritmCashFunc
                     // Приходный ордер
                     case 0:
                         // Запоминаем инфу по организации
-                        Kassa.Organization = txtBoxPrihOrganization.Text;
-                        Kassa.StructPodrazdelenie = txtBoxPrichStructPodr.Text;
-                        Kassa.OKPO = txtBoxPrihOKPO.Text;
+                        Kassa.Organization = this.txtBoxPrihOrganization.Text;
+                        Kassa.StructPodrazdelenie = this.txtBoxPrichStructPodr.Text;
+                        Kassa.OKPO = this.txtBoxPrihOKPO.Text;
+                        Kassa.GlavBuhFio = this.txtBoxPrihGlavBuh.Text;
 
                         // Валидация заполненных данных по подразделению и сохранение в базе
                         ValidateKassa(Kassa);
@@ -612,10 +655,42 @@ namespace AlgoritmCashFunc
                         }
 
                         // Валидация Дебитора
-                        if (this.cmbBoxPrihDebitor.SelectedIndex == -1) throw new ApplicationException("Не указано кnо получил.");
+                        if (this.cmbBoxPrihDebitor.SelectedIndex == -1) throw new ApplicationException("Не указано кто получил.");
                         else
                         {
                             this.CurDoc.LocalDebitor = LocalFarm.CurLocalChiefCashiers[this.cmbBoxPrihDebitor.SelectedIndex];
+                        }
+
+                        ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KreditKodDivision = this.txtBoxPrihKreditKodDivision.Text;
+                        ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KredikKodAnalUch = this.txtBoxPrihKredikKodAnalUch.Text;
+                        //
+                        // Валидация суммы
+                        if (!string.IsNullOrWhiteSpace(this.txtBoxPrihSumma.Text))
+                        {
+                            try { ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).Summa = decimal.Parse(this.txtBoxPrihSumma.Text); }
+                            catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение к сумме {0}.", this.txtBoxPrihSumma.Text)); }
+                        }
+                        else ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).Summa = 0;
+                        //
+                        ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KodNazn = this.txtBoxPrihKodNazn.Text;
+
+                        // Валидация основание
+                        if (this.cmbBoxPrihPaidInReasons.SelectedIndex == -1) throw new ApplicationException("Не указано основание.");
+                        else
+                        {
+                            BLL.LocalPlg.LocalPaidInReasons LoclPaidInReasons = LocalFarm.CurLocalPaidInReasons[this.cmbBoxPrihPaidInReasons.SelectedIndex];
+                            //
+                            LoclPaidInReasons.DebetNomerSchet = this.txtBoxPrichDebetNomerSchet.Text;
+                            ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).DebetNomerSchet = this.txtBoxPrichDebetNomerSchet.Text;
+                            //
+                            LoclPaidInReasons.KredikKorSchet = this.txtBoxPrihKreditKorSchet.Text;
+                            ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KredikKorSchet = this.txtBoxPrihKreditKorSchet.Text;
+                            //
+                            LoclPaidInReasons.Osnovanie = this.txtBoxPrihOsnovanie.Text;
+                            ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).Osnovanie = this.txtBoxPrihOsnovanie.Text;
+                            //
+                            ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).PaidInReasons = LoclPaidInReasons;
+                            LoclPaidInReasons.Save();
                         }
 
                         // Сохранение инфы в базе
@@ -626,6 +701,8 @@ namespace AlgoritmCashFunc
                         BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)this.CurDoc.CurOperation;
                         OperPrihod.OKUD = txtBoxPrihOKUD.Text;
                         OperPrihod.Save();
+
+                        
 
                         // Сохранение документа
                         this.CurDoc.Save();
@@ -767,6 +844,9 @@ namespace AlgoritmCashFunc
                         break;
                 }
                 
+                // Пишем успех но не в лог просто чтобы пользователь увидел что у него всё ок
+                Log.EventSave(string.Format("Документ №{0} успешно сохранён ({1}).", this.CurDoc.DocNum, this.CurDoc.DocFullName), string.Format("{0}.btnSave_Click", GetType().Name), EventEn.Message, false, false);
+
                 // Правим стиль кнопок
                 ((ButtonTagStatus)this.btnNew.Tag).Stat = ButtonStatusEn.Active;
                 ((ButtonTagStatus)this.btnSave.Tag).Stat = ButtonStatusEn.Passive;
@@ -824,6 +904,7 @@ namespace AlgoritmCashFunc
                         // Создаём пустой документ
                         this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
                         this.txtBoxPrihNumDoc.Text = (Kassa.LastDocNumPrih + 1).ToString();
+                        this.txtBoxPrihGlavBuh.Text = Kassa.GlavBuhFio;
                         // Проверка на наличие ошибок при создании пустого документа
                         if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", "DocumentPrihod"));
                         //
@@ -831,9 +912,19 @@ namespace AlgoritmCashFunc
                         
                         // Заполняем инфу по операции
                         BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)this.CurDoc.CurOperation;
-                        txtBoxPrihOKUD.Text = OperPrihod.OKUD;
-                 
+                        this.txtBoxPrihOKUD.Text = OperPrihod.OKUD;
+                        
 
+                        // Заполняем поле основание значенеие по умолчанию и зависимые поля
+                        this.cmbBoxPrihPaidInReasons_SelectedIndexChanged(null, null);
+
+                        this.cmbBoxPrihDebitor.SelectedIndex = -1;
+                        this.cmbBoxPrihKreditor.SelectedIndex = -1;
+
+                        this.txtBoxPrihKreditKodDivision.Text = string.Empty;
+                        this.txtBoxPrihKredikKodAnalUch.Text = string.Empty;
+                        this.txtBoxPrihSumma.Text = string.Empty;
+                        this.txtBoxPrihKodNazn.Text = string.Empty;
 
                         break;
                     // Расходный ордер
@@ -922,6 +1013,39 @@ namespace AlgoritmCashFunc
             }
         }
         #endregion
-        
+
+
+        #region События связанные с выбором внутри элементов котороые к основной логике не имеют отношения
+
+        // В приходе пользователь выбирает основание, необходимо заполнить зависимые поля значениями по умолчанию
+        private void cmbBoxPrihPaidInReasons_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                // Сбрасываем все значения на пустоту
+                if (sender==null || this.cmbBoxPrihPaidInReasons.SelectedIndex==-1)
+                {
+                    this.txtBoxPrichDebetNomerSchet.Text = string.Empty;
+                    this.txtBoxPrihKreditKorSchet.Text = string.Empty;
+                    this.txtBoxPrihOsnovanie.Text = string.Empty;
+                    this.cmbBoxPrihPaidInReasons.SelectedIndex = -1;
+                }
+                else
+                {
+                    // Получаем текущее основание
+                    BLL.LocalPlg.LocalPaidInReasons LoclPaidInReasons = LocalFarm.CurLocalPaidInReasons[this.cmbBoxPrihPaidInReasons.SelectedIndex];
+                    this.txtBoxPrichDebetNomerSchet.Text = LoclPaidInReasons.DebetNomerSchet;
+                    this.txtBoxPrihKreditKorSchet.Text = LoclPaidInReasons.KredikKorSchet;
+                    this.txtBoxPrihOsnovanie.Text = LoclPaidInReasons.Osnovanie;
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при создании документа с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.btnNew_Click", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
+            }
+        }
+        #endregion
     }
 }
