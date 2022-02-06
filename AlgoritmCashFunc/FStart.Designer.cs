@@ -762,6 +762,7 @@
             this.grBoxNdsPrih.Controls.Add(this.rBtnPrihNds10);
             this.grBoxNdsPrih.Controls.Add(this.rBtnPrihNds0);
             this.grBoxNdsPrih.Dock = System.Windows.Forms.DockStyle.Left;
+            this.grBoxNdsPrih.Enabled = false;
             this.grBoxNdsPrih.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.grBoxNdsPrih.Location = new System.Drawing.Point(504, 0);
             this.grBoxNdsPrih.Margin = new System.Windows.Forms.Padding(0);

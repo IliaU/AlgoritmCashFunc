@@ -193,6 +193,9 @@ namespace AlgoritmCashFunc
                             this.txtBoxPrihKredikKodAnalUch.ReadOnly = false;
                             this.txtBoxPrihSumma.ReadOnly = false;
                             this.txtBoxPrihKodNazn.ReadOnly = false;
+                            this.txtBoxPrihVtomChisle.ReadOnly = false;
+                            this.grBoxNdsPrih.Enabled = true;
+                            this.txtBoxPrihPrilozenie.ReadOnly = false;
 
 
                             break;
@@ -275,6 +278,9 @@ namespace AlgoritmCashFunc
                             this.txtBoxPrihKredikKodAnalUch.ReadOnly = true;
                             this.txtBoxPrihSumma.ReadOnly = true;
                             this.txtBoxPrihKodNazn.ReadOnly = true;
+                            this.txtBoxPrihVtomChisle.ReadOnly = true;
+                            this.grBoxNdsPrih.Enabled = false;
+                            this.txtBoxPrihPrilozenie.ReadOnly = true;
 
                             break;
                         // Расходный ордер
@@ -411,6 +417,9 @@ namespace AlgoritmCashFunc
                         this.txtBoxPrihKredikKodAnalUch.Text = string.Empty;
                         this.txtBoxPrihSumma.Text = string.Empty;
                         this.txtBoxPrihKodNazn.Text = string.Empty;
+                        this.txtBoxPrihVtomChisle.Text = string.Empty;
+                        this.rBtnPrihNds0.Checked = true;
+                        this.txtBoxPrihPrilozenie.Text = string.Empty;
 
                         break;
                     // Расходный ордер
@@ -689,6 +698,16 @@ namespace AlgoritmCashFunc
                             LoclPaidInReasons.Osnovanie = this.txtBoxPrihOsnovanie.Text;
                             ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).Osnovanie = this.txtBoxPrihOsnovanie.Text;
                             //
+                            ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).VtomChisle = this.txtBoxPrihVtomChisle.Text;
+                            //
+                            if (this.rBtnPrihNds10.Checked) ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).NDS = 10;
+                            else if (this.rBtnPrihNds20.Checked) ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).NDS = 20;
+                            else ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).NDS = 0;
+                            //
+                            ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).Prilozenie = this.txtBoxPrihPrilozenie.Text;
+                            //
+                            ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).GlavBuh = this.txtBoxPrihGlavBuh.Text;
+                            //
                             ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).PaidInReasons = LoclPaidInReasons;
                             LoclPaidInReasons.Save();
                         }
@@ -701,7 +720,6 @@ namespace AlgoritmCashFunc
                         BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)this.CurDoc.CurOperation;
                         OperPrihod.OKUD = txtBoxPrihOKUD.Text;
                         OperPrihod.Save();
-
                         
 
                         // Сохранение документа
