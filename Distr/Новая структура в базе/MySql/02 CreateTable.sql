@@ -125,6 +125,7 @@ CREATE TABLE `aks`.`cashfunc_document_Prihod` (
   `KredikKorSchet` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `KredikKodAnalUch` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `Summa` decimal(16,4) DEFAULT NULL,
+  `SummaStr` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `KodNazn` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `Osnovanie` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `Id_PaidInReasons` int NULL,

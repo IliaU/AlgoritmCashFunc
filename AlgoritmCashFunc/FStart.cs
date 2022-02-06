@@ -676,7 +676,11 @@ namespace AlgoritmCashFunc
                         // Валидация суммы
                         if (!string.IsNullOrWhiteSpace(this.txtBoxPrihSumma.Text))
                         {
-                            try { ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).Summa = decimal.Parse(this.txtBoxPrihSumma.Text); }
+                            try
+                            {
+                                ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).Summa = decimal.Round(decimal.Parse(this.txtBoxPrihSumma.Text),2);
+                                ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).SummaStr = this.lblPrihSummaString.Text.Replace("Сумма:", "").Trim();
+                            }
                             catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение к сумме {0}.", this.txtBoxPrihSumma.Text)); }
                         }
                         else ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).Summa = 0;
@@ -1063,6 +1067,53 @@ namespace AlgoritmCashFunc
                 Log.EventSave(ae.Message, string.Format("{0}.btnNew_Click", GetType().Name), EventEn.Error, true, true);
                 //throw ae;
             }
+        }
+       
+        // Пользователь вбил сумму нужно её перевести в текст
+        private void txtBoxPrihSumma_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    // Получакем значение и преобразовываем к строке
+                    decimal summ = decimal.Parse(this.txtBoxPrihSumma.Text);
+                    string tmp = decimal.Round(summ,2).ToString().Replace(".", ",");
+
+                    // Создаём переменные для рублей и копеек
+                    int? sumR=null;
+                    int? sumK=null;
+
+                    // Проверка на наличие копеек
+                    if (tmp.IndexOf(',') > -1)
+                    {
+                        sumR = int.Parse(tmp.Substring(0, tmp.IndexOf(',')));
+                        sumK = int.Parse(tmp.Substring(tmp.IndexOf(',')+1));
+                    }
+                    else sumR = (int)summ;
+
+                    // Получаей часть которая представляет из себя рубли
+                    string rub = string.Empty;
+                    if (sumR != null) rub = Utils.GetStringForInt((int) sumR, "рубль", "рубля", "рублей", false);
+
+                    // получаем часть которая представляет из себя копейки
+                    string kop = string.Empty;
+                    if (sumK != null) kop = Utils.GetStringForInt((int)sumK, "копейка", "копейки", "копеек", true).ToLower();
+
+                    this.lblPrihSummaString.Text = string.Format("Сумма: {0} {1}", rub, kop).Trim();
+                }
+                catch (Exception)
+                {
+                    this.lblPrihSummaString.Text = "Сумма:";
+                }
+            }
+            catch (Exception)
+            {
+                //ApplicationException ae = new ApplicationException(string.Format("Упали при попытки превратить число в строку с ошибкой: ({0})", txtBoxPrihSumma, ex.Message));
+                //Log.EventSave(ae.Message, string.Format("{0}.txtBoxPrihSumma_TextChanged", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
+            }
+
         }
         #endregion
     }

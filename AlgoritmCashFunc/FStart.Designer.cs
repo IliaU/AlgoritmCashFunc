@@ -62,7 +62,7 @@
             this.txtBoxPrihVtomChisle = new System.Windows.Forms.TextBox();
             this.lblPrihVtomChisle = new System.Windows.Forms.Label();
             this.pnlPagPrihTop2LeftTop2 = new System.Windows.Forms.Panel();
-            this.lblPrihTop2LeftTop2 = new System.Windows.Forms.Label();
+            this.lblPrihSummaString = new System.Windows.Forms.Label();
             this.pnlPagPrihTop2LeftTop1 = new System.Windows.Forms.Panel();
             this.cmbBoxPrihPaidInReasons = new System.Windows.Forms.ComboBox();
             this.lblPrihPaidInReasons = new System.Windows.Forms.Label();
@@ -835,25 +835,25 @@
             // 
             // pnlPagPrihTop2LeftTop2
             // 
-            this.pnlPagPrihTop2LeftTop2.Controls.Add(this.lblPrihTop2LeftTop2);
+            this.pnlPagPrihTop2LeftTop2.Controls.Add(this.lblPrihSummaString);
             this.pnlPagPrihTop2LeftTop2.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlPagPrihTop2LeftTop2.Location = new System.Drawing.Point(0, 54);
             this.pnlPagPrihTop2LeftTop2.Name = "pnlPagPrihTop2LeftTop2";
             this.pnlPagPrihTop2LeftTop2.Size = new System.Drawing.Size(656, 27);
             this.pnlPagPrihTop2LeftTop2.TabIndex = 2;
             // 
-            // lblPrihTop2LeftTop2
+            // lblPrihSummaString
             // 
-            this.lblPrihTop2LeftTop2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblPrihTop2LeftTop2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblPrihTop2LeftTop2.ForeColor = System.Drawing.Color.Black;
-            this.lblPrihTop2LeftTop2.Location = new System.Drawing.Point(0, 0);
-            this.lblPrihTop2LeftTop2.Name = "lblPrihTop2LeftTop2";
-            this.lblPrihTop2LeftTop2.Size = new System.Drawing.Size(485, 27);
-            this.lblPrihTop2LeftTop2.TabIndex = 1;
-            this.lblPrihTop2LeftTop2.Tag = "Сумма: @Rub руб. @Kop коп.";
-            this.lblPrihTop2LeftTop2.Text = "Сумма:";
-            this.lblPrihTop2LeftTop2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblPrihSummaString.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblPrihSummaString.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrihSummaString.ForeColor = System.Drawing.Color.Black;
+            this.lblPrihSummaString.Location = new System.Drawing.Point(0, 0);
+            this.lblPrihSummaString.Name = "lblPrihSummaString";
+            this.lblPrihSummaString.Size = new System.Drawing.Size(648, 27);
+            this.lblPrihSummaString.TabIndex = 1;
+            this.lblPrihSummaString.Tag = "Сумма: @Rub руб. @Kop коп.";
+            this.lblPrihSummaString.Text = "Сумма:";
+            this.lblPrihSummaString.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pnlPagPrihTop2LeftTop1
             // 
@@ -1019,6 +1019,7 @@
             this.txtBoxPrihSumma.ReadOnly = true;
             this.txtBoxPrihSumma.Size = new System.Drawing.Size(112, 26);
             this.txtBoxPrihSumma.TabIndex = 2;
+            this.txtBoxPrihSumma.TextChanged += new System.EventHandler(this.txtBoxPrihSumma_TextChanged);
             // 
             // lblPrihSumma
             // 
@@ -4217,7 +4218,7 @@
         private System.Windows.Forms.Label lblPrihPaidInReasons;
         private System.Windows.Forms.ComboBox cmbBoxPrihPaidInReasons;
         private System.Windows.Forms.Panel pnlPagPrihTop2LeftTop2;
-        private System.Windows.Forms.Label lblPrihTop2LeftTop2;
+        private System.Windows.Forms.Label lblPrihSummaString;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblPrihVtomChisle;
         private System.Windows.Forms.TextBox txtBoxPrihVtomChisle;

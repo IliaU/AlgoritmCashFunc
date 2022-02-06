@@ -3911,9 +3911,10 @@ Where Id={0}", (int)DocumentPrihod.Id);
             bool rez = false;
 
             string CommandSql = String.Format(@"Select `DebetNomerSchet`, `KreditKodDivision`, `KredikKorSchet`, `KredikKodAnalUch`,
-    `Summa`, `KodNazn`, `Osnovanie`, `Id_PaidInReasons`,
-    `VtomChisle`, `NDS`, `LastDocNumScetKkm`, `LastDocNumVerifNal`, 
-    `LastDocNumInvent`,`INN`, `Prilozenie`, `GlavBuh`
+    `Summa`, `SummaStr`, `KodNazn`, `Osnovanie`,
+    `Id_PaidInReasons`, `VtomChisle`, `NDS`, `LastDocNumScetKkm`,
+    `LastDocNumVerifNal`, `LastDocNumInvent`,`INN`, `Prilozenie`,
+    `GlavBuh`
 From `aks`.`cashfunc_document_Prihod`
 Where Id={0}", (int)DocumentPrihod.Id);
 
@@ -3958,11 +3959,12 @@ Where Id={0}", (int)DocumentPrihod.Id);
                                     if (!dr.IsDBNull(2)) DocumentPrihod.KredikKorSchet = dr.GetString(2);
                                     if (!dr.IsDBNull(3)) DocumentPrihod.KredikKodAnalUch = dr.GetString(3);
                                     if (!dr.IsDBNull(4)) DocumentPrihod.Summa = decimal.Parse(dr.GetValue(4).ToString());
-                                    if (!dr.IsDBNull(5)) DocumentPrihod.KodNazn = dr.GetValue(5).ToString();
-                                    if (!dr.IsDBNull(6)) DocumentPrihod.Osnovanie = dr.GetValue(6).ToString();
-                                    if (!dr.IsDBNull(7))
+                                    if (!dr.IsDBNull(5)) DocumentPrihod.SummaStr = dr.GetValue(5).ToString();
+                                    if (!dr.IsDBNull(6)) DocumentPrihod.KodNazn = dr.GetValue(6).ToString();
+                                    if (!dr.IsDBNull(7)) DocumentPrihod.Osnovanie = dr.GetValue(7).ToString();
+                                    if (!dr.IsDBNull(8))
                                     {
-                                        int IdPaidInReasons = int.Parse(dr.GetValue(7).ToString());
+                                        int IdPaidInReasons = int.Parse(dr.GetValue(8).ToString());
                                         foreach (BLL.LocalPlg.LocalPaidInReasons itemPaidInReasons in Com.LocalFarm.CurLocalPaidInReasons)
                                         {
                                             if (itemPaidInReasons.Id!=null && (int)itemPaidInReasons.Id== IdPaidInReasons)
@@ -3972,10 +3974,10 @@ Where Id={0}", (int)DocumentPrihod.Id);
                                             }
                                         }
                                     }
-                                    if (!dr.IsDBNull(8)) DocumentPrihod.VtomChisle = dr.GetValue(8).ToString();
-                                    if (!dr.IsDBNull(9)) DocumentPrihod.NDS = decimal.Parse(dr.GetValue(9).ToString());
-                                    if (!dr.IsDBNull(10)) DocumentPrihod.Prilozenie = dr.GetValue(10).ToString();
-                                    if (!dr.IsDBNull(11)) DocumentPrihod.GlavBuh = dr.GetValue(11).ToString();
+                                    if (!dr.IsDBNull(9)) DocumentPrihod.VtomChisle = dr.GetValue(9).ToString();
+                                    if (!dr.IsDBNull(10)) DocumentPrihod.NDS = decimal.Parse(dr.GetValue(10).ToString());
+                                    if (!dr.IsDBNull(11)) DocumentPrihod.Prilozenie = dr.GetValue(11).ToString();
+                                    if (!dr.IsDBNull(12)) DocumentPrihod.GlavBuh = dr.GetValue(12).ToString();
                                 }
                             }
                         }
@@ -4007,27 +4009,28 @@ Where Id={0}", (int)DocumentPrihod.Id);
             if (NewDocumentPrihod.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
 
             string CommandSql = String.Format(@"insert into `aks`.`cashfunc_document_Prihod`(id, `DebetNomerSchet`, `KreditKodDivision`, `KredikKorSchet`, 
-    `KredikKodAnalUch`, `Summa`, `KodNazn`, `Osnovanie`, 
-    `Id_PaidInReasons`, `VtomChisle`, `NDS`, `Prilozenie`, 
-    `GlavBuh`) 
+    `KredikKodAnalUch`, `Summa`, `SummaStr`, `KodNazn`,
+    `Osnovanie`, `Id_PaidInReasons`, `VtomChisle`, `NDS`,
+    `Prilozenie`, `GlavBuh`) 
 Values({0}, {1}, {2}, {3},
     {4}, {5}, {6}, {7}, 
     {8}, {9}, {10}, {11}, 
-    {12})", (NewDocumentPrihod.Id==null?"null": NewDocumentPrihod.Id.ToString()),
+    {12}, {13})", (NewDocumentPrihod.Id==null?"null": NewDocumentPrihod.Id.ToString()),
             (string.IsNullOrWhiteSpace(NewDocumentPrihod.DebetNomerSchet)?"null":string.Format("'{0}'", NewDocumentPrihod.DebetNomerSchet)),
             (string.IsNullOrWhiteSpace(NewDocumentPrihod.KreditKodDivision) ? "null" : string.Format("'{0}'", NewDocumentPrihod.KreditKodDivision)),
             (string.IsNullOrWhiteSpace(NewDocumentPrihod.KredikKorSchet) ? "null" : string.Format("'{0}'", NewDocumentPrihod.KredikKorSchet)),
             //
             (string.IsNullOrWhiteSpace(NewDocumentPrihod.KredikKodAnalUch) ? "null" : string.Format("'{0}'", NewDocumentPrihod.KredikKodAnalUch)),
             NewDocumentPrihod.Summa.ToString().Replace(",","."),
+            (string.IsNullOrWhiteSpace(NewDocumentPrihod.SummaStr) ? "null" : string.Format("'{0}'", NewDocumentPrihod.SummaStr)),
             (string.IsNullOrWhiteSpace(NewDocumentPrihod.KodNazn) ? "null" : string.Format("'{0}'", NewDocumentPrihod.KodNazn)),
-            (string.IsNullOrWhiteSpace(NewDocumentPrihod.Osnovanie) ? "null" : string.Format("'{0}'", NewDocumentPrihod.Osnovanie)),
             //
+            (string.IsNullOrWhiteSpace(NewDocumentPrihod.Osnovanie) ? "null" : string.Format("'{0}'", NewDocumentPrihod.Osnovanie)),
             (NewDocumentPrihod.PaidInReasons==null || NewDocumentPrihod.PaidInReasons.Id==null?"null": NewDocumentPrihod.PaidInReasons.Id.ToString()),
             (string.IsNullOrWhiteSpace(NewDocumentPrihod.VtomChisle) ? "null" : string.Format("'{0}'", NewDocumentPrihod.VtomChisle)),
             NewDocumentPrihod.NDS.ToString().Replace(",", "."),
-            (string.IsNullOrWhiteSpace(NewDocumentPrihod.Prilozenie) ? "null" : string.Format("'{0}'", NewDocumentPrihod.Prilozenie)),
             //
+            (string.IsNullOrWhiteSpace(NewDocumentPrihod.Prilozenie) ? "null" : string.Format("'{0}'", NewDocumentPrihod.Prilozenie)),
             (string.IsNullOrWhiteSpace(NewDocumentPrihod.GlavBuh)) ? "null" : string.Format("'{0}'", NewDocumentPrihod.GlavBuh));
 
             try
@@ -4069,13 +4072,28 @@ Values({0}, {1}, {2}, {3},
             if (UpdDocumentPrihod.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
 
             string CommandSql = String.Format(@"update `aks`.`cashfunc_document_Prihod`
-Set `DebetNomerSchet`='{1}', `KreditKodDivision`='{2}', `KredikKorSchet`='{3}', `KredikKodAnalUch`='{4}', 
-    `Summa`={5}, `KodNazn`='{6}', `Osnovanie`='{7}', `Id_PaidInReasons`={8}, 
-    `VtomChisle`='{9}', `NDS`={10}, `Prilozenie`={11}, `GlavBuh`='{12}'
-Where Id={0}", UpdDocumentPrihod.Id, 
-            UpdDocumentPrihod.DebetNomerSchet, UpdDocumentPrihod.KreditKodDivision, UpdDocumentPrihod.KredikKorSchet, UpdDocumentPrihod.KredikKodAnalUch,
-            UpdDocumentPrihod.Summa, UpdDocumentPrihod.KodNazn, UpdDocumentPrihod.Osnovanie, UpdDocumentPrihod.PaidInReasons.Id,
-            UpdDocumentPrihod.VtomChisle, UpdDocumentPrihod.NDS, UpdDocumentPrihod.Prilozenie, UpdDocumentPrihod.GlavBuh);
+Set `DebetNomerSchet`={1}, `KreditKodDivision`={2}, `KredikKorSchet`={3}, `KredikKodAnalUch`={4}, 
+    `Summa`={5}, `SummaStr`={6}, `KodNazn`={7}, `Osnovanie`={8},
+    `Id_PaidInReasons`={9}, `VtomChisle`={10}, `NDS`={11}, `Prilozenie`={12},
+    `GlavBuh`={13}
+Where Id={0}", UpdDocumentPrihod.Id,
+            //
+            (string.IsNullOrWhiteSpace(UpdDocumentPrihod.DebetNomerSchet) ? "null" : string.Format("'{0}'", UpdDocumentPrihod.DebetNomerSchet)),
+            (string.IsNullOrWhiteSpace(UpdDocumentPrihod.KreditKodDivision) ? "null" : string.Format("'{0}'", UpdDocumentPrihod.KreditKodDivision)),
+            (string.IsNullOrWhiteSpace(UpdDocumentPrihod.KredikKorSchet) ? "null" : string.Format("'{0}'", UpdDocumentPrihod.KredikKorSchet)),
+            (string.IsNullOrWhiteSpace(UpdDocumentPrihod.KredikKodAnalUch) ? "null" : string.Format("'{0}'", UpdDocumentPrihod.KredikKodAnalUch)),
+            //
+            UpdDocumentPrihod.Summa.ToString().Replace(",", "."),
+            (string.IsNullOrWhiteSpace(UpdDocumentPrihod.SummaStr) ? "null" : string.Format("'{0}'", UpdDocumentPrihod.SummaStr)),
+            (string.IsNullOrWhiteSpace(UpdDocumentPrihod.KodNazn) ? "null" : string.Format("'{0}'", UpdDocumentPrihod.KodNazn)),
+            (string.IsNullOrWhiteSpace(UpdDocumentPrihod.Osnovanie) ? "null" : string.Format("'{0}'", UpdDocumentPrihod.Osnovanie)),
+            //
+            (UpdDocumentPrihod.PaidInReasons == null || UpdDocumentPrihod.PaidInReasons.Id == null ? "null" : UpdDocumentPrihod.PaidInReasons.Id.ToString()),
+            (string.IsNullOrWhiteSpace(UpdDocumentPrihod.VtomChisle) ? "null" : string.Format("'{0}'", UpdDocumentPrihod.VtomChisle)),
+            UpdDocumentPrihod.NDS.ToString().Replace(",", "."),
+            (string.IsNullOrWhiteSpace(UpdDocumentPrihod.Prilozenie) ? "null" : string.Format("'{0}'", UpdDocumentPrihod.Prilozenie)),
+            //
+            (string.IsNullOrWhiteSpace(UpdDocumentPrihod.GlavBuh)) ? "null" : string.Format("'{0}'", UpdDocumentPrihod.GlavBuh));
 
             try
             {

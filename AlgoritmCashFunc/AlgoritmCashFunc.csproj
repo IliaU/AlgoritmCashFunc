@@ -93,6 +93,7 @@
       <DependentUpon>FSetupConnectDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Com\UserFarm.cs" />
+    <Compile Include="Com\Utils.cs" />
     <Compile Include="FLic.cs">
       <SubType>Form</SubType>
     </Compile>

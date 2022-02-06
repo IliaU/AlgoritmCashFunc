@@ -40,6 +40,11 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         public decimal Summa;
 
         /// <summary>
+        /// Сумма в виде строки для отчётов
+        /// </summary>
+        public string SummaStr;
+
+        /// <summary>
         /// Код назначения
         /// </summary>
         public string KodNazn;

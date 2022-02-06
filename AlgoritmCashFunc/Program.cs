@@ -63,7 +63,7 @@ namespace AlgoritmCashFunc
                         Com.LocalFarm LFarm = new Com.LocalFarm();
                         Com.OperationFarm OperFarm = new Com.OperationFarm();
                         Com.DocumentFarm DFrm = new Com.DocumentFarm();
-
+                        
                         Application.EnableVisualStyles();
                         Application.SetCompatibleTextRenderingDefault(false);
 
