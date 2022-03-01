@@ -11,11 +11,21 @@ CREATE TABLE `cashfunc_operation` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 # 
 INSERT INTO `aks`.`CashFunc_Operation` (`Id`, `OpFullName`, `OperationName`, `KoefDebitor`, `KoefCreditor`) VALUES (1, 'OperationPrihod', 'Приходный ордер', 1, 0);
+INSERT INTO `aks`.`CashFunc_Operation` (`Id`, `OpFullName`, `OperationName`, `KoefDebitor`, `KoefCreditor`) VALUES (2, 'OperationRashod', 'Расходный ордер', -1, 0);
 
 
 #Drop Table `aks`.`cashfunc_Operation_Prihod`;
 #
 CREATE TABLE `aks`.`cashfunc_Operation_Prihod` (
+  `Id` int NOT NULL,
+  `OKUD` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+#
+
+#Drop Table `aks`.`cashfunc_Operation_Rashod`;
+#
+CREATE TABLE `aks`.`cashfunc_Operation_Rashod` (
   `Id` int NOT NULL,
   `OKUD` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`Id`)
@@ -43,7 +53,11 @@ INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`
 INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (5, 'LocalPaidInReasons', 'Аванс от покупателя (наличные)', 1, 1, 0);
 INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (6, 'LocalPaidInReasons', 'Возврат денежных средств на размен', 1, 1, 0);
 INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (7, 'LocalPaidInReasons', 'Прочий приход', 1, 1, 0);
-
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (8, 'LocalPaidRashReasons', 'Выдача подотчетному лицу', 1, 1, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (9, 'LocalPaidRashReasons', 'Возврат покупателю', 1, 1, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (10, 'LocalPaidRashReasons', 'Выдача денежных средств на размен', 1, 1, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (11, 'LocalPaidRashReasons', 'Инкассация', 1, 1, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (12, 'LocalPaidRashReasons', 'Прочий расход', 1, 1, 0);
 
 
 
@@ -88,12 +102,32 @@ CREATE TABLE `aks`.`cashfunc_local_PaidInReasons` (
   UNIQUE KEY `UIX_local_PaidInReasons` (`Osnovanie`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 #
-INSERT INTO `aks`.`cashfunc_local` (`Id`, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) VALUES (2, '101', '50.01', '71.01');
-INSERT INTO `aks`.`cashfunc_local` (`Id`, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) VALUES (3, '102', '50.01', '62.P');
-INSERT INTO `aks`.`cashfunc_local` (`Id`, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) VALUES (4, '103', '57.03', '62.01');
-INSERT INTO `aks`.`cashfunc_local` (`Id`, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) VALUES (5, '104', '50.01', '62.02');
-INSERT INTO `aks`.`cashfunc_local` (`Id`, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) VALUES (6, '105', '50.01', '73.04');
-INSERT INTO `aks`.`cashfunc_local` (`Id`, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) VALUES (7, '106', '50.01', '91.01');
+INSERT INTO `aks`.`cashfunc_local_PaidInReasons` (`Id`, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) VALUES (2, '101', '50.01', '71.01');
+INSERT INTO `aks`.`cashfunc_local_PaidInReasons` (`Id`, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) VALUES (3, '102', '50.01', '62.P');
+INSERT INTO `aks`.`cashfunc_local_PaidInReasons` (`Id`, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) VALUES (4, '103', '57.03', '62.01');
+INSERT INTO `aks`.`cashfunc_local_PaidInReasons` (`Id`, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) VALUES (5, '104', '50.01', '62.02');
+INSERT INTO `aks`.`cashfunc_local_PaidInReasons` (`Id`, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) VALUES (6, '105', '50.01', '73.04');
+INSERT INTO `aks`.`cashfunc_local_PaidInReasons` (`Id`, `Osnovanie`, `DebetNomerSchet`, `KredikKorSchet`) VALUES (7, '106', '50.01', '91.01');
+
+
+#Drop Table `aks`.`cashfunc_local_PaidRashReasons`;
+#
+CREATE TABLE `aks`.`cashfunc_local_PaidRashReasons` (
+  `Id` int NOT NULL,
+  `Osnovanie` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `KreditNomerSchet` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `DebetKorSchet` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `UIX_local_PaidRashReasons` (`Osnovanie`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+#
+INSERT INTO `aks`.`cashfunc_local_PaidRashReasons` (`Id`, `Osnovanie`, `KreditNomerSchet`, `DebetKorSchet`) VALUES (8, '201', '50.01', '71.01');
+INSERT INTO `aks`.`cashfunc_local_PaidRashReasons` (`Id`, `Osnovanie`, `KreditNomerSchet`, `DebetKorSchet`) VALUES (9, '203', '50.01', '62.01');
+INSERT INTO `aks`.`cashfunc_local_PaidRashReasons` (`Id`, `Osnovanie`, `KreditNomerSchet`, `DebetKorSchet`) VALUES (10, '204', '50.01', '73.04');
+INSERT INTO `aks`.`cashfunc_local_PaidRashReasons` (`Id`, `Osnovanie`, `KreditNomerSchet`, `DebetKorSchet`) VALUES (11, '205', '50.01', '57.01');
+INSERT INTO `aks`.`cashfunc_local_PaidRashReasons` (`Id`, `Osnovanie`, `KreditNomerSchet`, `DebetKorSchet`) VALUES (12, '206', '50.01', '91.02');
+
+
 
 
 #Drop Table `aks`.`CashFunc_Document`;

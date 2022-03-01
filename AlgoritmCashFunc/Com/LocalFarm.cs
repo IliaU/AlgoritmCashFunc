@@ -43,6 +43,11 @@ namespace AlgoritmCashFunc.Com
         public static List<LocalPaidInReasons> CurLocalPaidInReasons = new List<LocalPaidInReasons>();
 
         /// <summary>
+        /// Список оснований для расхода
+        /// </summary>
+        public static List<LocalPaidRashReasons> CurLocalPaidRashReasons = new List<LocalPaidRashReasons>();
+
+        /// <summary>
         /// Список сотрудников
         /// </summary>
         public static List<LocalEmployees> CurLocalEmployees = new List<LocalEmployees>();
@@ -238,6 +243,9 @@ namespace AlgoritmCashFunc.Com
                     // Заполняем список оснований для прихода
                     if (item.LocFullName == "LocalPaidInReasons") CurLocalPaidInReasons.Add((LocalPaidInReasons)item);
 
+                    // Заполняем список оснований для расхода
+                    if (item.LocFullName == "LocalPaidRashReasons") CurLocalPaidRashReasons.Add((LocalPaidRashReasons)item);
+                    
                     // Заполняем список сотрудников
                     if (item.LocFullName == "LocalEmployees") CurLocalEmployees.Add((LocalEmployees)item);
                 }

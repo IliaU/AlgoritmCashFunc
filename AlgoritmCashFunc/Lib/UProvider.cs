@@ -327,6 +327,44 @@ namespace AlgoritmCashFunc.Lib
         }
 
         /// <summary>
+        /// Проверка наличия информации объекта OperationRashod
+        /// </summary>
+        /// <param name="OperationRashod">Объект OperationRashod который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        public bool HashOperationRashod(BLL.OperationPlg.OperationRashod OperationRashod)
+        {
+            return this.PrvI.HashOperationRashod(OperationRashod);
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту OperationRashod
+        /// </summary>
+        /// <param name="OperationRashod">Объект OperationRashod который нужно прочитать в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли проччитать объект или нет</returns>
+        public bool GetOperationRashod(ref BLL.OperationPlg.OperationRashod OperationRashod)
+        {
+            return this.PrvI.GetOperationRashod(ref OperationRashod);
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект OperationRashod
+        /// </summary>
+        /// <param name="NewOperationRashod">Вставляем в базу информацию по объекту OperationRashod</param>
+        public void SetOperationRashod(BLL.OperationPlg.OperationRashod NewOperationRashod)
+        {
+            this.PrvI.SetOperationRashod(NewOperationRashod);
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту OperationRashod
+        /// </summary>
+        /// <param name="UpdOperationRashod">Сам объект данные которого нужно обновить</param>
+        public void UpdateOperationRashod(BLL.OperationPlg.OperationRashod UpdOperationRashod)
+        {
+            this.PrvI.UpdateOperationRashod(UpdOperationRashod);
+        }
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <returns>Получает текущий список Local из базы данных</returns>
@@ -430,6 +468,44 @@ namespace AlgoritmCashFunc.Lib
             this.PrvI.UpdateLocalPaidInReasons(UpdLocalPaidInReasons);
         }
 
+        /// <summary>
+        /// Проверка наличия информации объекта LocalKassa
+        /// </summary>
+        /// <param name="LocalPaidRashReasons">Объект LocalPaidRashReasons который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        public bool HashLocalPaidRashReasons(BLL.LocalPlg.LocalPaidRashReasons LocalPaidRashReasons)
+        {
+            return this.PrvI.HashLocalPaidRashReasons(LocalPaidRashReasons);
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту LocalPaidRashReasons
+        /// </summary>
+        /// <param name="LocalPaidRashReasons">Объект LocalPaidRashReasons который нужно прочитать в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли проччитать объект или нет</returns>
+        public bool GetLocalPaidRashReasons(ref BLL.LocalPlg.LocalPaidRashReasons LocalPaidRashReasons)
+        {
+            return this.PrvI.GetLocalPaidRashReasons(ref LocalPaidRashReasons);
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект PaidRashReasons
+        /// </summary>
+        /// <param name="NewLocalPaidRashReasons">Вставляем в базу информацию по объекту LocalPaidRashReasons</param>
+        public void SetLocalPaidRashReasons(BLL.LocalPlg.LocalPaidRashReasons NewLocalPaidRashReasons)
+        {
+            this.PrvI.SetLocalPaidRashReasons(NewLocalPaidRashReasons);
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту PaidRashReasons
+        /// </summary>
+        /// <param name="UpdLocalPaidRashReasons">Сам объект данные которого нужно обновить</param>
+        public void UpdateLocalPaidRashReasons(BLL.LocalPlg.LocalPaidRashReasons UpdLocalPaidRashReasons)
+        {
+            this.PrvI.UpdateLocalPaidRashReasons(UpdLocalPaidRashReasons);
+        }
+        
         /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>

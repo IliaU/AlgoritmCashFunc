@@ -76,7 +76,33 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         /// </summary>
         /// <param name="UpdOperationPrihod">Сам объект данные которого нужно обновить</param>
         void UpdateOperationPrihod(BLL.OperationPlg.OperationPrihod UpdOperationPrihod);
-        
+
+        /// <summary>
+        /// Проверка наличия информации объекта OperationRashod
+        /// </summary>
+        /// <param name="OperationRashod">Объект OperationRashod который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        bool HashOperationRashod(BLL.OperationPlg.OperationRashod OperationRashod);
+
+        /// <summary>
+        /// Читаем информацию по объекту OperationRashod
+        /// </summary>
+        /// <param name="OperationRashod">Объект OperationRashod который нужно прочитать в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли прочитать объект или нет</returns>
+        bool GetOperationRashod(ref BLL.OperationPlg.OperationRashod OperationRashod);
+
+        /// <summary>
+        /// Вставка новой информации в объект OperationRashod
+        /// </summary>
+        /// <param name="NewOperationRashod">Вставляем в базу информацию по объекту OperationRashod</param>
+        void SetOperationRashod(BLL.OperationPlg.OperationRashod NewOperationRashod);
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту OperationRashod
+        /// </summary>
+        /// <param name="UpdOperationRashod">Сам объект данные которого нужно обновить</param>
+        void UpdateOperationRashod(BLL.OperationPlg.OperationRashod UpdOperationRashod);
+
         /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
@@ -147,6 +173,32 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         /// </summary>
         /// <param name="UpdLocalPaidInReasons">Сам объект данные которого нужно обновить</param>
         void UpdateLocalPaidInReasons(BLL.LocalPlg.LocalPaidInReasons UpdLocalPaidInReasons);
+
+        /// <summary>
+        /// Проверка наличия информации объекта PaidRashReasons
+        /// </summary>
+        /// <param name="LocalPaidRashReasons">Объект LocalKassa который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        bool HashLocalPaidRashReasons(BLL.LocalPlg.LocalPaidRashReasons LocalPaidRashReasons);
+
+        /// <summary>
+        /// Читаем информацию по объекту PaidRashReasons
+        /// </summary>
+        /// <param name="LocalPaidRashReasons">Объект PaidRashReasons который нужно прочитать в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли прочитать объект или нет</returns>
+        bool GetLocalPaidRashReasons(ref BLL.LocalPlg.LocalPaidRashReasons LocalPaidRashReasons);
+
+        /// <summary>
+        /// Вставка новой информации в объект PaidRashnReasons
+        /// </summary>
+        /// <param name="NewLocalPaidRashReasons">Вставляем в базу информацию по объекту LocalKassa</param>
+        void SetLocalPaidRashReasons(BLL.LocalPlg.LocalPaidRashReasons NewLocalPaidRashReasons);
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту PaidRashReasons
+        /// </summary>
+        /// <param name="UpdLocalPaidRashReasons">Сам объект данные которого нужно обновить</param>
+        void UpdateLocalPaidRashReasons(BLL.LocalPlg.LocalPaidRashReasons UpdLocalPaidRashReasons);
 
         /// <summary>
         /// Получаем список текущий докуменитов

@@ -468,6 +468,148 @@ namespace AlgoritmCashFunc.Com.Provider
         }
 
         /// <summary>
+        /// Проверка наличия информации объекта OperationRashod
+        /// </summary>
+        /// <param name="OperationRashod">Объект OperationRashod который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        public bool HashOperationRashod(BLL.OperationPlg.OperationRashod OperationRashod)
+        {
+            try
+            {
+                bool rez = false;
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            rez = HashOperationRashodORA(OperationRashod);
+                            break;
+                        case "myodbc8a.dll":
+                            rez = HashOperationRashodMySql(OperationRashod);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return rez;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashOperationPrihod", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту OperationRashod
+        /// </summary>
+        /// <param name="OperationRashod">Объект OperationRashod который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        public bool GetOperationRashod(ref BLL.OperationPlg.OperationRashod OperationRashod)
+        {
+            try
+            {
+                bool rez = false;
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            rez = GetOperationRashodORA(ref OperationRashod);
+                            break;
+                        case "myodbc8a.dll":
+                            rez = GetOperationRashodMySql(ref OperationRashod);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return rez;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationPrihod", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект OperationRashod
+        /// </summary>
+        /// <param name="NewOperationRashod">Вставляем в базу информацию по объекту OperationRashod</param>
+        public void SetOperationRashod(BLL.OperationPlg.OperationRashod NewOperationRashod)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            SetOperationRashodORA(NewOperationRashod);
+                            break;
+                        case "myodbc8a.dll":
+                            SetOperationRashodMySql(NewOperationRashod);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetOperationPrihod", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту OperationRashod
+        /// </summary>
+        /// <param name="UpdOperationRashod">Сам объект данные которого нужно обновить</param>
+        public void UpdateOperationRashod(BLL.OperationPlg.OperationRashod UpdOperationRashod)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            UpdateOperationRashodORA(UpdOperationRashod);
+                            break;
+                        case "myodbc8a.dll":
+                            UpdateOperationRashodMySql(UpdOperationRashod);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationPrihod", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <returns>Получает текущий список Local из базы данных</returns>
@@ -855,6 +997,148 @@ namespace AlgoritmCashFunc.Com.Provider
             catch (Exception ex)
             {
                 base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateLocalPaidInReasons", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Проверка наличия информации объекта LocalPaidRashReasons
+        /// </summary>
+        /// <param name="LocalPaidRashReasons">Объект LocalPaidRashReasons который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        public bool HashLocalPaidRashReasons(BLL.LocalPlg.LocalPaidRashReasons LocalPaidRashReasons)
+        {
+            try
+            {
+                bool rez = false;
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            rez = HashLocalPaidRashReasonsORA(LocalPaidRashReasons);
+                            break;
+                        case "myodbc8a.dll":
+                            rez = HashLocalPaidRashReasonsMySql(LocalPaidRashReasons);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return rez;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashLocalPaidRashReasons", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту LocalPaidRashReasons
+        /// </summary>
+        /// <param name="LocalPaidRashReasons">Объект LocalPaidRashReasons который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        public bool GetLocalPaidRashReasons(ref BLL.LocalPlg.LocalPaidRashReasons LocalPaidRashReasons)
+        {
+            try
+            {
+                bool rez = false;
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            rez = GetLocalPaidRashReasonsORA(ref LocalPaidRashReasons);
+                            break;
+                        case "myodbc8a.dll":
+                            rez = GetLocalPaidRashReasonsMySql(ref LocalPaidRashReasons);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return rez;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetLocalPaidRashReasons", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект LocalPaidRashReasons
+        /// </summary>
+        /// <param name="NewLocalPaidRashReasons">Вставляем в базу информацию по объекту LocalPaidRashReasons</param>
+        public void SetLocalPaidRashReasons(BLL.LocalPlg.LocalPaidRashReasons NewLocalPaidRashReasons)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            SetLocalPaidRashReasonsORA(NewLocalPaidRashReasons);
+                            break;
+                        case "myodbc8a.dll":
+                            SetLocalPaidRashReasonsMySql(NewLocalPaidRashReasons);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetLocalPaidRashReasons", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту LocalPaidRashReasons
+        /// </summary>
+        /// <param name="UpdLocalPaidRashReasons">Сам объект данные которого нужно обновить</param>
+        public void UpdateLocalPaidRashReasons(BLL.LocalPlg.LocalPaidRashReasons UpdLocalPaidRashReasons)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            UpdateLocalPaidRashReasonsORA(UpdLocalPaidRashReasons);
+                            break;
+                        case "myodbc8a.dll":
+                            UpdateLocalPaidRashReasonsMySql(UpdLocalPaidRashReasons);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateLocalPaidRashReasons", EventEn.Error);
                 throw;
             }
         }
@@ -1601,6 +1885,164 @@ From aks.prizm_cust_porog");
         }
 
         /// <summary>
+        /// Проверка наличия информации объекта OperationRashod
+        /// </summary>
+        /// <param name="OperationRashod">Объект OperationRashod который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        private bool HashOperationRashodORA(BLL.OperationPlg.OperationRashod OperationRashod)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashOperationRashodORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                return false;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashOperationRashodORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashOperationRashodORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashOperationRashodORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashOperationRashodORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту OperationRashod
+        /// </summary>
+        /// <param name="OperationRashod">Объект OperationRashod который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        private bool GetOperationRashodORA(ref BLL.OperationPlg.OperationRashod OperationRashod)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationRashodORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                return false;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationRashodORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationRashodORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationRashodORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationRashodORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект OperationRashod
+        /// </summary>
+        /// <param name="NewOperationRashod">Вставляем в базу информацию по объекту OperationRashod</param>
+        private void SetOperationRashodORA(BLL.OperationPlg.OperationRashod NewOperationRashod)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetOperationRashodORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetOperationRashodORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetOperationRashodORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetOperationRashodORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetOperationRashodORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту OperationRashod
+        /// </summary>
+        /// <param name="UpdOperationRashod">Сам объект данные которого нужно обновить</param>
+        private void UpdateOperationRashodORA(BLL.OperationPlg.OperationRashod UpdOperationRashod)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationRashodORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationRashodORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationRashodORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationRashodORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationRashodORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <returns>Получает текущий список Local из базы данных</returns>
@@ -2074,6 +2516,164 @@ From `aks`.`cashfunc_local`");
             }
         }
 
+        /// <summary>
+        /// Проверка наличия информации объекта LocalPaidRashReasons
+        /// </summary>
+        /// <param name="LocalPaidRashReasons">Объект LocalPaidRashReasons который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        private bool HashLocalPaidRashReasonsORA(BLL.LocalPlg.LocalPaidRashReasons LocalPaidRashReasons)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashLocalPaidRashReasonsORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                return false;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashLocalPaidRashReasonsORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashLocalPaidRashReasonsORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashLocalPaidRashReasonsORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashLocalPaidRashReasonsORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту LocalPaidRashReasons
+        /// </summary>
+        /// <param name="LocalKassa">Объект LocalPaidRashReasons который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        private bool GetLocalPaidRashReasonsORA(ref BLL.LocalPlg.LocalPaidRashReasons LocalPaidRashReasons)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetLocalPaidRashReasonsORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                return false;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetLocalPaidRashReasonsORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetLocalPaidRashReasonsORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetLocalPaidRashReasonsORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetLocalPaidRashReasonsORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект LocalPaidRashReasons
+        /// </summary>
+        /// <param name="NewLocalPaidRashReasons">Вставляем в базу информацию по объекту LocalPaidRashReasons</param>
+        private void SetLocalPaidRashReasonsORA(BLL.LocalPlg.LocalPaidRashReasons NewLocalPaidRashReasons)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetLocalPaidRashReasonsORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetLocalPaidRashReasonsORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetLocalPaidRashReasonsORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetLocalPaidRashReasonsORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetLocalPaidRashReasonsORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту LocalPaidRashReasons
+        /// </summary>
+        /// <param name="UpdLocalPaidRashReasons">Сам объект данные которого нужно обновить</param>
+        private void UpdateLocalPaidRashReasonsORA(BLL.LocalPlg.LocalPaidRashReasons UpdLocalPaidRashReasons)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateLocalPaidRashReasonsORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateLocalPaidRashReasonsORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateLocalPaidRashReasonsORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateLocalPaidRashReasonsORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateLocalPaidRashReasonsORA", EventEn.Dump);
+                throw;
+            }
+        }
+        
         /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
@@ -2922,6 +3522,221 @@ Where Id={0}", UpdOperationPrihod.Id,
         }
 
         /// <summary>
+        /// Проверка наличия информации объекта OperationRashod
+        /// </summary>
+        /// <param name="OperationRashod">Объект OperationRashod который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        private bool HashOperationRashodMySql(BLL.OperationPlg.OperationRashod OperationRashod)
+        {
+            if (OperationRashod.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            bool rez = false;
+
+            string CommandSql = String.Format(@"Select *
+From `aks`.`cashfunc_Operation_Rashod`
+Where Id={0}", (int)OperationRashod.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashOperationRashodMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        //com.Parameters.Add(new OdbcParameter("Id", OdbcType.Int) { Value = (int)LocalKassa.Id });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                rez = true;
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashOperationRashodMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashOperationRashodMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashOperationRashodMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashOperationRashodMySql", EventEn.Dump);
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту OperationRashod
+        /// </summary>
+        /// <param name="OperationRashod">Объект OperationRashod который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        private bool GetOperationRashodMySql(ref BLL.OperationPlg.OperationRashod OperationRashod)
+        {
+            if (OperationRashod.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            bool rez = false;
+
+            string CommandSql = String.Format(@"Select `OKUD`
+From `aks`.`cashfunc_Operation_Rashod`
+Where Id={0}", (int)OperationRashod.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationRashodMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        //com.Parameters.Add(new OdbcParameter("Id", OdbcType.Int) { Value = (int)LocalKassa.Id });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+
+                            if (dr.HasRows)
+                            {
+                                rez = true;
+
+                                // Получаем схему таблицы
+                                //DataTable tt = dr.GetSchemaTable();
+
+                                //foreach (DataRow item in tt.Rows)
+                                //{
+                                //    DataColumn ncol = new DataColumn(item["ColumnName"].ToString(), Type.GetType(item["DataType"].ToString()));
+                                //ncol.SetOrdinal(int.Parse(item["ColumnOrdinal"].ToString()));
+                                //ncol.MaxLength = (int.Parse(item["ColumnSize"].ToString()) < 300 ? 300 : int.Parse(item["ColumnSize"].ToString()));
+                                //rez.Columns.Add(ncol);
+                                //}
+
+                                // пробегаем по строкам
+                                while (dr.Read())
+                                {
+                                    if (!dr.IsDBNull(0)) OperationRashod.OKUD = dr.GetString(0);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationRashodMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationRashodMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationRashodMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationRashodMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект OperationRashod
+        /// </summary>
+        /// <param name="NewOperationRashod">Вставляем в базу информацию по объекту OperationRashod</param>
+        private void SetOperationRashodMySql(BLL.OperationPlg.OperationRashod NewOperationRashod)
+        {
+            if (NewOperationRashod.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            string CommandSql = String.Format(@"insert into `aks`.`cashfunc_Operation_Rashod`(id, `OKUD`) 
+Values({0}, {1})", NewOperationRashod.Id,
+                (string.IsNullOrWhiteSpace(NewOperationRashod.OKUD) ? "null" : string.Format("'{0}'", NewOperationRashod.OKUD)));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetOperationRashodMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetOperationRashodMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetOperationRashodMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetOperationRashodMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetOperationRashodMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту OperationRashod
+        /// </summary>
+        /// <param name="UpdOperationRashod">Сам объект данные которого нужно обновить</param>
+        private void UpdateOperationRashodMySql(BLL.OperationPlg.OperationRashod UpdOperationRashod)
+        {
+            if (UpdOperationRashod.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            string CommandSql = String.Format(@"update `aks`.`cashfunc_Operation_Prihod`
+Set `OKUD`={1}
+Where Id={0}", UpdOperationRashod.Id,
+                (string.IsNullOrWhiteSpace(UpdOperationRashod.OKUD) ? "null" : string.Format("'{0}'", UpdOperationRashod.OKUD)));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationRashodMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationRashodMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationRashodMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationRashodMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationRashodMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+
+        /// <summary>
         /// Получаем список текущий Local
         /// </summary>
         /// <returns>Получает текущий список Local из базы данных</returns>
@@ -3594,6 +4409,220 @@ Where Id={0}", UpdLocalPaidInReasons.Id, UpdLocalPaidInReasons.Osnovanie, UpdLoc
             {
                 base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateLocalPaidInReasonsMySql", EventEn.Error);
                 if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateLocalPaidInReasonsMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Проверка наличия информации объекта LocalPaidRashReasons
+        /// </summary>
+        /// <param name="LocalPaidRashReasons">Объект LocalPaidRashReasons который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        private bool HashLocalPaidRashReasonsMySql(BLL.LocalPlg.LocalPaidRashReasons LocalPaidRashReasons)
+        {
+            if (LocalPaidRashReasons.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            bool rez = false;
+
+            string CommandSql = String.Format(@"Select *
+From `aks`.`cashfunc_local_PaidRashReasons`
+Where Id={0}", (int)LocalPaidRashReasons.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashLocalPaidRashReasonsMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        //com.Parameters.Add(new OdbcParameter("Id", OdbcType.Int) { Value = (int)LocalKassa.Id });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                rez = true;
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashLocalPaidRashReasonsMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashLocalPaidRashReasonsMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashLocalPaidRashReasonsMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashLocalPaidRashReasonsMySql", EventEn.Dump);
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту LocalPaidRashReasons
+        /// </summary>
+        /// <param name="LocalPaidRashReasons">Объект LocalPaidRashReasons который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        private bool GetLocalPaidRashReasonsMySql(ref BLL.LocalPlg.LocalPaidRashReasons LocalPaidRashReasons)
+        {
+            if (LocalPaidRashReasons.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            bool rez = false;
+
+            string CommandSql = String.Format(@"Select `Osnovanie`, `KreditNomerSchet`, `DebetKorSchet`
+From `aks`.`cashfunc_local_PaidRashReasons`
+Where Id={0}", (int)LocalPaidRashReasons.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetLocalPaidRashReasonsMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        //com.Parameters.Add(new OdbcParameter("Id", OdbcType.Int) { Value = (int)LocalKassa.Id });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+
+                            if (dr.HasRows)
+                            {
+                                rez = true;
+
+                                // Получаем схему таблицы
+                                //DataTable tt = dr.GetSchemaTable();
+
+                                //foreach (DataRow item in tt.Rows)
+                                //{
+                                //    DataColumn ncol = new DataColumn(item["ColumnName"].ToString(), Type.GetType(item["DataType"].ToString()));
+                                //ncol.SetOrdinal(int.Parse(item["ColumnOrdinal"].ToString()));
+                                //ncol.MaxLength = (int.Parse(item["ColumnSize"].ToString()) < 300 ? 300 : int.Parse(item["ColumnSize"].ToString()));
+                                //rez.Columns.Add(ncol);
+                                //}
+
+                                // пробегаем по строкам
+                                while (dr.Read())
+                                {
+                                    if (!dr.IsDBNull(0)) LocalPaidRashReasons.Osnovanie = dr.GetString(0);
+                                    if (!dr.IsDBNull(1)) LocalPaidRashReasons.KreditNomerSchet = dr.GetString(1);
+                                    if (!dr.IsDBNull(2)) LocalPaidRashReasons.DebetKorSchet = dr.GetString(2);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetLocalPaidRashReasonsMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetLocalPaidRashReasonsMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetLocalPaidRashReasonsMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetLocalPaidRashReasonsMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект LocalPaidRashReasons
+        /// </summary>
+        /// <param name="NewLocalPaidRashReasons">Вставляем в базу информацию по объекту LocalPaidRashReasons</param>
+        private void SetLocalPaidRashReasonsMySql(BLL.LocalPlg.LocalPaidRashReasons NewLocalPaidRashReasons)
+        {
+            if (NewLocalPaidRashReasons.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            string CommandSql = String.Format(@"insert into `aks`.`cashfunc_local_PaidRashReasons`(id, `Osnovanie`, `KreditNomerSchet`, `DebetKorSchet`) 
+Values({0}, '{1}', '{2}', '{3}')", NewLocalPaidRashReasons.Id, NewLocalPaidRashReasons.Osnovanie, NewLocalPaidRashReasons.KreditNomerSchet, NewLocalPaidRashReasons.DebetKorSchet);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetLocalPaidRashReasonsMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetLocalPaidRashReasonsMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetLocalPaidRashReasonsMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetLocalPaidRashReasonsMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetLocalPaidRashReasonsMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту LocalPaidRashReasons
+        /// </summary>
+        /// <param name="UpdLocalPaidRashReasons">Сам объект данные которого нужно обновить</param>
+        private void UpdateLocalPaidRashReasonsMySql(BLL.LocalPlg.LocalPaidRashReasons UpdLocalPaidRashReasons)
+        {
+            if (UpdLocalPaidRashReasons.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            string CommandSql = String.Format(@"update `aks`.`cashfunc_local_PaidRashReasons`
+Set `Osnovanie`='{1}', `KreditNomerSchet`='{2}', `DebetKorSchet`='{3}'
+Where Id={0}", UpdLocalPaidRashReasons.Id, UpdLocalPaidRashReasons.Osnovanie, UpdLocalPaidRashReasons.KreditNomerSchet, UpdLocalPaidRashReasons.DebetKorSchet);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateLocalPaidRashReasonsMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateLocalPaidRashReasonsMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateLocalPaidRashReasonsMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateLocalPaidRashReasonsMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateLocalPaidRashReasonsMySql", EventEn.Dump);
                 throw;
             }
         }
