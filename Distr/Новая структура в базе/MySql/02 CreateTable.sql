@@ -169,6 +169,26 @@ CREATE TABLE `aks`.`cashfunc_document_Prihod` (
   `GlavBuh` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-#	
-		
+#
 
+#Drop Table `aks`.`cashfunc_document_Rashod`;
+#
+CREATE TABLE `aks`.`cashfunc_document_Rashod` (
+  `Id` int NOT NULL,
+  `DebetKodDivision` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `DebetKorSchet` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `DebetKodAnalUch` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `KreditNomerSchet` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `Summa` decimal(16,4) DEFAULT NULL,
+  `SummaStr` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `KodNazn` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `PoDoc` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `Osnovanie` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `Id_PaidRashReasons` int NULL,
+  `Prilozenie` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `DolRukFio` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `RukFio` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `GlavBuh` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+#	

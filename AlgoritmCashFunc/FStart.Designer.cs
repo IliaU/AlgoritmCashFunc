@@ -45,16 +45,16 @@
             this.tabPagePrihod = new System.Windows.Forms.TabPage();
             this.pnlPagPrihTop2 = new System.Windows.Forms.Panel();
             this.pnlPagPrihTop2Left = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.pnlPagPrihTop2LeftTop6 = new System.Windows.Forms.Panel();
             this.cmbBoxPrihDebitor = new System.Windows.Forms.ComboBox();
             this.lblPrihDebitor = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.pnlPagPrihTop2LeftTop5 = new System.Windows.Forms.Panel();
             this.txtBoxPrihGlavBuh = new System.Windows.Forms.TextBox();
             this.lblPrihGlavBuh = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnlPagPrihTop2LeftTop4 = new System.Windows.Forms.Panel();
             this.txtBoxPrihPrilozenie = new System.Windows.Forms.TextBox();
             this.lblPrihPrilozenie = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlPagPrihTop2LeftTop3 = new System.Windows.Forms.Panel();
             this.grBoxNdsPrih = new System.Windows.Forms.GroupBox();
             this.rBtnPrihNds20 = new System.Windows.Forms.RadioButton();
             this.rBtnPrihNds10 = new System.Windows.Forms.RadioButton();
@@ -114,6 +114,56 @@
             this.lblPrihOKUD = new System.Windows.Forms.Label();
             this.txtBoxPrihOKUD = new System.Windows.Forms.TextBox();
             this.tabPageRashod = new System.Windows.Forms.TabPage();
+            this.pnlPagRashTop2 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.pnlPagRashTop2LeftTop8 = new System.Windows.Forms.Panel();
+            this.cmbBoxRashKreditor = new System.Windows.Forms.ComboBox();
+            this.lblRashKreditor = new System.Windows.Forms.Label();
+            this.pnlPagRashTop2LeftTop7 = new System.Windows.Forms.Panel();
+            this.txtBoxRashGlavBuh = new System.Windows.Forms.TextBox();
+            this.lblRashGlavBuh = new System.Windows.Forms.Label();
+            this.pnlPagRashTop2LeftTop6 = new System.Windows.Forms.Panel();
+            this.txtBoxRashRukFio = new System.Windows.Forms.TextBox();
+            this.lblRashRukFio = new System.Windows.Forms.Label();
+            this.pnlPagRashTop2LeftTop5 = new System.Windows.Forms.Panel();
+            this.txtBoxRashDolRukOrg = new System.Windows.Forms.TextBox();
+            this.lblRashDolRukOrg = new System.Windows.Forms.Label();
+            this.pnlPagRashTop2LeftTop4 = new System.Windows.Forms.Panel();
+            this.txtBoxRashPrilozenie = new System.Windows.Forms.TextBox();
+            this.lblRashPrilozenie = new System.Windows.Forms.Label();
+            this.pnlPagRashTop2LeftTop3 = new System.Windows.Forms.Panel();
+            this.lblRashSummaString = new System.Windows.Forms.Label();
+            this.pnlPagRashTop2LeftTop2 = new System.Windows.Forms.Panel();
+            this.cmbBoxRashPaidRashReasons = new System.Windows.Forms.ComboBox();
+            this.lblRashPaidRashReasons = new System.Windows.Forms.Label();
+            this.txtBoxRashOsnovanie = new System.Windows.Forms.TextBox();
+            this.lblRashOsnovanie = new System.Windows.Forms.Label();
+            this.pnlPagRashTop2LeftTop1 = new System.Windows.Forms.Panel();
+            this.txtBoxRashPoDoc = new System.Windows.Forms.TextBox();
+            this.lblRashPoDoc = new System.Windows.Forms.Label();
+            this.pnlPagRashTop2LeftTop0 = new System.Windows.Forms.Panel();
+            this.cmbBoxRashDebitor = new System.Windows.Forms.ComboBox();
+            this.lblRashDebitor = new System.Windows.Forms.Label();
+            this.pnlPagRashTop1 = new System.Windows.Forms.Panel();
+            this.grBoxKodNaznRash = new System.Windows.Forms.GroupBox();
+            this.txtBoxRashKodNazn = new System.Windows.Forms.TextBox();
+            this.lblRashKodNazn = new System.Windows.Forms.Label();
+            this.grBoxSummaRash = new System.Windows.Forms.GroupBox();
+            this.txtBoxRashSumma = new System.Windows.Forms.TextBox();
+            this.lblRashSumma = new System.Windows.Forms.Label();
+            this.grBoxKreditRash = new System.Windows.Forms.GroupBox();
+            this.txtBoxRashKreditNomerSchet = new System.Windows.Forms.TextBox();
+            this.lblRashKreditNomerSchet = new System.Windows.Forms.Label();
+            this.grBoxDebetRash = new System.Windows.Forms.GroupBox();
+            this.grBoxDebitKodAnalUchRash = new System.Windows.Forms.GroupBox();
+            this.txtBoxRashDebitKodAnalUch = new System.Windows.Forms.TextBox();
+            this.lblRashDebitKodAnalUch = new System.Windows.Forms.Label();
+            this.grBoxDebitKorSchetRash = new System.Windows.Forms.GroupBox();
+            this.txtBoxRashDebitKorSchet = new System.Windows.Forms.TextBox();
+            this.lblRashDebitKorSchet = new System.Windows.Forms.Label();
+            this.grBoxDebitKodDivisionRash = new System.Windows.Forms.GroupBox();
+            this.txtBoxRashDebitKodDivision = new System.Windows.Forms.TextBox();
+            this.lblRashDebitKodDivision = new System.Windows.Forms.Label();
             this.pnlPagRashTop = new System.Windows.Forms.Panel();
             this.lblTitleRash = new System.Windows.Forms.Label();
             this.pnlPagRashTopRight1 = new System.Windows.Forms.Panel();
@@ -336,10 +386,10 @@
             this.tabPagePrihod.SuspendLayout();
             this.pnlPagPrihTop2.SuspendLayout();
             this.pnlPagPrihTop2Left.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.pnlPagPrihTop2LeftTop6.SuspendLayout();
+            this.pnlPagPrihTop2LeftTop5.SuspendLayout();
+            this.pnlPagPrihTop2LeftTop4.SuspendLayout();
+            this.pnlPagPrihTop2LeftTop3.SuspendLayout();
             this.grBoxNdsPrih.SuspendLayout();
             this.pnlPagPrihTop2LeftTop2.SuspendLayout();
             this.pnlPagPrihTop2LeftTop1.SuspendLayout();
@@ -362,6 +412,25 @@
             this.pnlPagPrihTopRightTop1.SuspendLayout();
             this.pnlPagPrihTopRightTop0.SuspendLayout();
             this.tabPageRashod.SuspendLayout();
+            this.pnlPagRashTop2.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.pnlPagRashTop2LeftTop8.SuspendLayout();
+            this.pnlPagRashTop2LeftTop7.SuspendLayout();
+            this.pnlPagRashTop2LeftTop6.SuspendLayout();
+            this.pnlPagRashTop2LeftTop5.SuspendLayout();
+            this.pnlPagRashTop2LeftTop4.SuspendLayout();
+            this.pnlPagRashTop2LeftTop3.SuspendLayout();
+            this.pnlPagRashTop2LeftTop2.SuspendLayout();
+            this.pnlPagRashTop2LeftTop1.SuspendLayout();
+            this.pnlPagRashTop2LeftTop0.SuspendLayout();
+            this.pnlPagRashTop1.SuspendLayout();
+            this.grBoxKodNaznRash.SuspendLayout();
+            this.grBoxSummaRash.SuspendLayout();
+            this.grBoxKreditRash.SuspendLayout();
+            this.grBoxDebetRash.SuspendLayout();
+            this.grBoxDebitKodAnalUchRash.SuspendLayout();
+            this.grBoxDebitKorSchetRash.SuspendLayout();
+            this.grBoxDebitKodDivisionRash.SuspendLayout();
             this.pnlPagRashTop.SuspendLayout();
             this.pnlPagRashTopRight1.SuspendLayout();
             this.grBoxDateDocRight.SuspendLayout();
@@ -588,7 +657,7 @@
             this.pnlFill.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlFill.Location = new System.Drawing.Point(0, 66);
             this.pnlFill.Name = "pnlFill";
-            this.pnlFill.Size = new System.Drawing.Size(1194, 550);
+            this.pnlFill.Size = new System.Drawing.Size(1194, 591);
             this.pnlFill.TabIndex = 1;
             // 
             // tabCntOperation
@@ -607,7 +676,7 @@
             this.tabCntOperation.Location = new System.Drawing.Point(0, 0);
             this.tabCntOperation.Name = "tabCntOperation";
             this.tabCntOperation.SelectedIndex = 0;
-            this.tabCntOperation.Size = new System.Drawing.Size(1194, 550);
+            this.tabCntOperation.Size = new System.Drawing.Size(1194, 591);
             this.tabCntOperation.TabIndex = 0;
             this.tabCntOperation.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
@@ -620,7 +689,7 @@
             this.tabPagePrihod.Location = new System.Drawing.Point(4, 4);
             this.tabPagePrihod.Name = "tabPagePrihod";
             this.tabPagePrihod.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePrihod.Size = new System.Drawing.Size(1186, 522);
+            this.tabPagePrihod.Size = new System.Drawing.Size(1186, 563);
             this.tabPagePrihod.TabIndex = 0;
             this.tabPagePrihod.Text = "Приходный ордер";
             // 
@@ -630,33 +699,33 @@
             this.pnlPagPrihTop2.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlPagPrihTop2.Location = new System.Drawing.Point(3, 299);
             this.pnlPagPrihTop2.Name = "pnlPagPrihTop2";
-            this.pnlPagPrihTop2.Size = new System.Drawing.Size(1180, 202);
+            this.pnlPagPrihTop2.Size = new System.Drawing.Size(1180, 230);
             this.pnlPagPrihTop2.TabIndex = 2;
             // 
             // pnlPagPrihTop2Left
             // 
-            this.pnlPagPrihTop2Left.Controls.Add(this.panel4);
-            this.pnlPagPrihTop2Left.Controls.Add(this.panel3);
-            this.pnlPagPrihTop2Left.Controls.Add(this.panel2);
-            this.pnlPagPrihTop2Left.Controls.Add(this.panel1);
+            this.pnlPagPrihTop2Left.Controls.Add(this.pnlPagPrihTop2LeftTop6);
+            this.pnlPagPrihTop2Left.Controls.Add(this.pnlPagPrihTop2LeftTop5);
+            this.pnlPagPrihTop2Left.Controls.Add(this.pnlPagPrihTop2LeftTop4);
+            this.pnlPagPrihTop2Left.Controls.Add(this.pnlPagPrihTop2LeftTop3);
             this.pnlPagPrihTop2Left.Controls.Add(this.pnlPagPrihTop2LeftTop2);
             this.pnlPagPrihTop2Left.Controls.Add(this.pnlPagPrihTop2LeftTop1);
             this.pnlPagPrihTop2Left.Controls.Add(this.pnlPagPrihTop2LeftTop0);
             this.pnlPagPrihTop2Left.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlPagPrihTop2Left.Location = new System.Drawing.Point(0, 0);
             this.pnlPagPrihTop2Left.Name = "pnlPagPrihTop2Left";
-            this.pnlPagPrihTop2Left.Size = new System.Drawing.Size(656, 202);
+            this.pnlPagPrihTop2Left.Size = new System.Drawing.Size(656, 230);
             this.pnlPagPrihTop2Left.TabIndex = 0;
             // 
-            // panel4
+            // pnlPagPrihTop2LeftTop6
             // 
-            this.panel4.Controls.Add(this.cmbBoxPrihDebitor);
-            this.panel4.Controls.Add(this.lblPrihDebitor);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 165);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(656, 27);
-            this.panel4.TabIndex = 6;
+            this.pnlPagPrihTop2LeftTop6.Controls.Add(this.cmbBoxPrihDebitor);
+            this.pnlPagPrihTop2LeftTop6.Controls.Add(this.lblPrihDebitor);
+            this.pnlPagPrihTop2LeftTop6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagPrihTop2LeftTop6.Location = new System.Drawing.Point(0, 165);
+            this.pnlPagPrihTop2LeftTop6.Name = "pnlPagPrihTop2LeftTop6";
+            this.pnlPagPrihTop2LeftTop6.Size = new System.Drawing.Size(656, 27);
+            this.pnlPagPrihTop2LeftTop6.TabIndex = 6;
             // 
             // cmbBoxPrihDebitor
             // 
@@ -681,15 +750,15 @@
             this.lblPrihDebitor.Text = "Получил кассир";
             this.lblPrihDebitor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // panel3
+            // pnlPagPrihTop2LeftTop5
             // 
-            this.panel3.Controls.Add(this.txtBoxPrihGlavBuh);
-            this.panel3.Controls.Add(this.lblPrihGlavBuh);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 138);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(656, 27);
-            this.panel3.TabIndex = 5;
+            this.pnlPagPrihTop2LeftTop5.Controls.Add(this.txtBoxPrihGlavBuh);
+            this.pnlPagPrihTop2LeftTop5.Controls.Add(this.lblPrihGlavBuh);
+            this.pnlPagPrihTop2LeftTop5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagPrihTop2LeftTop5.Location = new System.Drawing.Point(0, 138);
+            this.pnlPagPrihTop2LeftTop5.Name = "pnlPagPrihTop2LeftTop5";
+            this.pnlPagPrihTop2LeftTop5.Size = new System.Drawing.Size(656, 27);
+            this.pnlPagPrihTop2LeftTop5.TabIndex = 5;
             // 
             // txtBoxPrihGlavBuh
             // 
@@ -714,15 +783,15 @@
             this.lblPrihGlavBuh.Text = "Главный бухгалтер";
             this.lblPrihGlavBuh.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // panel2
+            // pnlPagPrihTop2LeftTop4
             // 
-            this.panel2.Controls.Add(this.txtBoxPrihPrilozenie);
-            this.panel2.Controls.Add(this.lblPrihPrilozenie);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 111);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(656, 27);
-            this.panel2.TabIndex = 4;
+            this.pnlPagPrihTop2LeftTop4.Controls.Add(this.txtBoxPrihPrilozenie);
+            this.pnlPagPrihTop2LeftTop4.Controls.Add(this.lblPrihPrilozenie);
+            this.pnlPagPrihTop2LeftTop4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagPrihTop2LeftTop4.Location = new System.Drawing.Point(0, 111);
+            this.pnlPagPrihTop2LeftTop4.Name = "pnlPagPrihTop2LeftTop4";
+            this.pnlPagPrihTop2LeftTop4.Size = new System.Drawing.Size(656, 27);
+            this.pnlPagPrihTop2LeftTop4.TabIndex = 4;
             // 
             // txtBoxPrihPrilozenie
             // 
@@ -745,16 +814,16 @@
             this.lblPrihPrilozenie.Text = "Приложение";
             this.lblPrihPrilozenie.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // panel1
+            // pnlPagPrihTop2LeftTop3
             // 
-            this.panel1.Controls.Add(this.grBoxNdsPrih);
-            this.panel1.Controls.Add(this.txtBoxPrihVtomChisle);
-            this.panel1.Controls.Add(this.lblPrihVtomChisle);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 81);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(656, 30);
-            this.panel1.TabIndex = 3;
+            this.pnlPagPrihTop2LeftTop3.Controls.Add(this.grBoxNdsPrih);
+            this.pnlPagPrihTop2LeftTop3.Controls.Add(this.txtBoxPrihVtomChisle);
+            this.pnlPagPrihTop2LeftTop3.Controls.Add(this.lblPrihVtomChisle);
+            this.pnlPagPrihTop2LeftTop3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagPrihTop2LeftTop3.Location = new System.Drawing.Point(0, 81);
+            this.pnlPagPrihTop2LeftTop3.Name = "pnlPagPrihTop2LeftTop3";
+            this.pnlPagPrihTop2LeftTop3.Size = new System.Drawing.Size(656, 30);
+            this.pnlPagPrihTop2LeftTop3.TabIndex = 3;
             // 
             // grBoxNdsPrih
             // 
@@ -1424,13 +1493,585 @@
             // tabPageRashod
             // 
             this.tabPageRashod.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageRashod.Controls.Add(this.pnlPagRashTop2);
+            this.tabPageRashod.Controls.Add(this.pnlPagRashTop1);
             this.tabPageRashod.Controls.Add(this.pnlPagRashTop);
             this.tabPageRashod.Location = new System.Drawing.Point(4, 4);
             this.tabPageRashod.Name = "tabPageRashod";
             this.tabPageRashod.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRashod.Size = new System.Drawing.Size(1186, 522);
+            this.tabPageRashod.Size = new System.Drawing.Size(1186, 563);
             this.tabPageRashod.TabIndex = 1;
             this.tabPageRashod.Text = "Расходный ордер";
+            // 
+            // pnlPagRashTop2
+            // 
+            this.pnlPagRashTop2.Controls.Add(this.panel6);
+            this.pnlPagRashTop2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagRashTop2.Location = new System.Drawing.Point(3, 299);
+            this.pnlPagRashTop2.Name = "pnlPagRashTop2";
+            this.pnlPagRashTop2.Size = new System.Drawing.Size(1180, 243);
+            this.pnlPagRashTop2.TabIndex = 3;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.pnlPagRashTop2LeftTop8);
+            this.panel6.Controls.Add(this.pnlPagRashTop2LeftTop7);
+            this.panel6.Controls.Add(this.pnlPagRashTop2LeftTop6);
+            this.panel6.Controls.Add(this.pnlPagRashTop2LeftTop5);
+            this.panel6.Controls.Add(this.pnlPagRashTop2LeftTop4);
+            this.panel6.Controls.Add(this.pnlPagRashTop2LeftTop3);
+            this.panel6.Controls.Add(this.pnlPagRashTop2LeftTop2);
+            this.panel6.Controls.Add(this.pnlPagRashTop2LeftTop1);
+            this.panel6.Controls.Add(this.pnlPagRashTop2LeftTop0);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel6.Location = new System.Drawing.Point(0, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(656, 243);
+            this.panel6.TabIndex = 0;
+            // 
+            // pnlPagRashTop2LeftTop8
+            // 
+            this.pnlPagRashTop2LeftTop8.Controls.Add(this.cmbBoxRashKreditor);
+            this.pnlPagRashTop2LeftTop8.Controls.Add(this.lblRashKreditor);
+            this.pnlPagRashTop2LeftTop8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagRashTop2LeftTop8.Location = new System.Drawing.Point(0, 216);
+            this.pnlPagRashTop2LeftTop8.Name = "pnlPagRashTop2LeftTop8";
+            this.pnlPagRashTop2LeftTop8.Size = new System.Drawing.Size(656, 27);
+            this.pnlPagRashTop2LeftTop8.TabIndex = 6;
+            // 
+            // cmbBoxRashKreditor
+            // 
+            this.cmbBoxRashKreditor.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.cmbBoxRashKreditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbBoxRashKreditor.Enabled = false;
+            this.cmbBoxRashKreditor.FormattingEnabled = true;
+            this.cmbBoxRashKreditor.Location = new System.Drawing.Point(171, 0);
+            this.cmbBoxRashKreditor.Name = "cmbBoxRashKreditor";
+            this.cmbBoxRashKreditor.Size = new System.Drawing.Size(485, 23);
+            this.cmbBoxRashKreditor.TabIndex = 2;
+            // 
+            // lblRashKreditor
+            // 
+            this.lblRashKreditor.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblRashKreditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblRashKreditor.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblRashKreditor.Location = new System.Drawing.Point(0, 0);
+            this.lblRashKreditor.Name = "lblRashKreditor";
+            this.lblRashKreditor.Size = new System.Drawing.Size(171, 27);
+            this.lblRashKreditor.TabIndex = 1;
+            this.lblRashKreditor.Text = "Выдал кассир";
+            this.lblRashKreditor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlPagRashTop2LeftTop7
+            // 
+            this.pnlPagRashTop2LeftTop7.Controls.Add(this.txtBoxRashGlavBuh);
+            this.pnlPagRashTop2LeftTop7.Controls.Add(this.lblRashGlavBuh);
+            this.pnlPagRashTop2LeftTop7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagRashTop2LeftTop7.Location = new System.Drawing.Point(0, 189);
+            this.pnlPagRashTop2LeftTop7.Name = "pnlPagRashTop2LeftTop7";
+            this.pnlPagRashTop2LeftTop7.Size = new System.Drawing.Size(656, 27);
+            this.pnlPagRashTop2LeftTop7.TabIndex = 5;
+            // 
+            // txtBoxRashGlavBuh
+            // 
+            this.txtBoxRashGlavBuh.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxRashGlavBuh.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxRashGlavBuh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxRashGlavBuh.Location = new System.Drawing.Point(171, 0);
+            this.txtBoxRashGlavBuh.Name = "txtBoxRashGlavBuh";
+            this.txtBoxRashGlavBuh.ReadOnly = true;
+            this.txtBoxRashGlavBuh.Size = new System.Drawing.Size(485, 26);
+            this.txtBoxRashGlavBuh.TabIndex = 3;
+            // 
+            // lblRashGlavBuh
+            // 
+            this.lblRashGlavBuh.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblRashGlavBuh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblRashGlavBuh.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblRashGlavBuh.Location = new System.Drawing.Point(0, 0);
+            this.lblRashGlavBuh.Name = "lblRashGlavBuh";
+            this.lblRashGlavBuh.Size = new System.Drawing.Size(171, 27);
+            this.lblRashGlavBuh.TabIndex = 1;
+            this.lblRashGlavBuh.Text = "Главный бухгалтер";
+            this.lblRashGlavBuh.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlPagRashTop2LeftTop6
+            // 
+            this.pnlPagRashTop2LeftTop6.Controls.Add(this.txtBoxRashRukFio);
+            this.pnlPagRashTop2LeftTop6.Controls.Add(this.lblRashRukFio);
+            this.pnlPagRashTop2LeftTop6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagRashTop2LeftTop6.Location = new System.Drawing.Point(0, 162);
+            this.pnlPagRashTop2LeftTop6.Name = "pnlPagRashTop2LeftTop6";
+            this.pnlPagRashTop2LeftTop6.Size = new System.Drawing.Size(656, 27);
+            this.pnlPagRashTop2LeftTop6.TabIndex = 9;
+            // 
+            // txtBoxRashRukFio
+            // 
+            this.txtBoxRashRukFio.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxRashRukFio.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxRashRukFio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxRashRukFio.Location = new System.Drawing.Point(171, 0);
+            this.txtBoxRashRukFio.Name = "txtBoxRashRukFio";
+            this.txtBoxRashRukFio.ReadOnly = true;
+            this.txtBoxRashRukFio.Size = new System.Drawing.Size(485, 26);
+            this.txtBoxRashRukFio.TabIndex = 3;
+            // 
+            // lblRashRukFio
+            // 
+            this.lblRashRukFio.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblRashRukFio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblRashRukFio.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblRashRukFio.Location = new System.Drawing.Point(0, 0);
+            this.lblRashRukFio.Name = "lblRashRukFio";
+            this.lblRashRukFio.Size = new System.Drawing.Size(171, 27);
+            this.lblRashRukFio.TabIndex = 1;
+            this.lblRashRukFio.Text = "Руководитель";
+            this.lblRashRukFio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlPagRashTop2LeftTop5
+            // 
+            this.pnlPagRashTop2LeftTop5.Controls.Add(this.txtBoxRashDolRukOrg);
+            this.pnlPagRashTop2LeftTop5.Controls.Add(this.lblRashDolRukOrg);
+            this.pnlPagRashTop2LeftTop5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagRashTop2LeftTop5.Location = new System.Drawing.Point(0, 135);
+            this.pnlPagRashTop2LeftTop5.Name = "pnlPagRashTop2LeftTop5";
+            this.pnlPagRashTop2LeftTop5.Size = new System.Drawing.Size(656, 27);
+            this.pnlPagRashTop2LeftTop5.TabIndex = 8;
+            // 
+            // txtBoxRashDolRukOrg
+            // 
+            this.txtBoxRashDolRukOrg.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxRashDolRukOrg.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxRashDolRukOrg.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxRashDolRukOrg.Location = new System.Drawing.Point(312, 0);
+            this.txtBoxRashDolRukOrg.Name = "txtBoxRashDolRukOrg";
+            this.txtBoxRashDolRukOrg.ReadOnly = true;
+            this.txtBoxRashDolRukOrg.Size = new System.Drawing.Size(344, 26);
+            this.txtBoxRashDolRukOrg.TabIndex = 3;
+            // 
+            // lblRashDolRukOrg
+            // 
+            this.lblRashDolRukOrg.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblRashDolRukOrg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblRashDolRukOrg.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblRashDolRukOrg.Location = new System.Drawing.Point(0, 0);
+            this.lblRashDolRukOrg.Name = "lblRashDolRukOrg";
+            this.lblRashDolRukOrg.Size = new System.Drawing.Size(312, 27);
+            this.lblRashDolRukOrg.TabIndex = 1;
+            this.lblRashDolRukOrg.Text = "Должность руководителя организации";
+            this.lblRashDolRukOrg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlPagRashTop2LeftTop4
+            // 
+            this.pnlPagRashTop2LeftTop4.Controls.Add(this.txtBoxRashPrilozenie);
+            this.pnlPagRashTop2LeftTop4.Controls.Add(this.lblRashPrilozenie);
+            this.pnlPagRashTop2LeftTop4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagRashTop2LeftTop4.Location = new System.Drawing.Point(0, 108);
+            this.pnlPagRashTop2LeftTop4.Name = "pnlPagRashTop2LeftTop4";
+            this.pnlPagRashTop2LeftTop4.Size = new System.Drawing.Size(656, 27);
+            this.pnlPagRashTop2LeftTop4.TabIndex = 4;
+            // 
+            // txtBoxRashPrilozenie
+            // 
+            this.txtBoxRashPrilozenie.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxRashPrilozenie.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxRashPrilozenie.Location = new System.Drawing.Point(120, 0);
+            this.txtBoxRashPrilozenie.Name = "txtBoxRashPrilozenie";
+            this.txtBoxRashPrilozenie.Size = new System.Drawing.Size(536, 23);
+            this.txtBoxRashPrilozenie.TabIndex = 4;
+            // 
+            // lblRashPrilozenie
+            // 
+            this.lblRashPrilozenie.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblRashPrilozenie.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblRashPrilozenie.ForeColor = System.Drawing.Color.Black;
+            this.lblRashPrilozenie.Location = new System.Drawing.Point(0, 0);
+            this.lblRashPrilozenie.Name = "lblRashPrilozenie";
+            this.lblRashPrilozenie.Size = new System.Drawing.Size(120, 27);
+            this.lblRashPrilozenie.TabIndex = 1;
+            this.lblRashPrilozenie.Text = "Приложение";
+            this.lblRashPrilozenie.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlPagRashTop2LeftTop3
+            // 
+            this.pnlPagRashTop2LeftTop3.Controls.Add(this.lblRashSummaString);
+            this.pnlPagRashTop2LeftTop3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagRashTop2LeftTop3.Location = new System.Drawing.Point(0, 81);
+            this.pnlPagRashTop2LeftTop3.Name = "pnlPagRashTop2LeftTop3";
+            this.pnlPagRashTop2LeftTop3.Size = new System.Drawing.Size(656, 27);
+            this.pnlPagRashTop2LeftTop3.TabIndex = 2;
+            // 
+            // lblRashSummaString
+            // 
+            this.lblRashSummaString.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblRashSummaString.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblRashSummaString.ForeColor = System.Drawing.Color.Black;
+            this.lblRashSummaString.Location = new System.Drawing.Point(0, 0);
+            this.lblRashSummaString.Name = "lblRashSummaString";
+            this.lblRashSummaString.Size = new System.Drawing.Size(648, 27);
+            this.lblRashSummaString.TabIndex = 1;
+            this.lblRashSummaString.Tag = "Сумма: @Rub руб. @Kop коп.";
+            this.lblRashSummaString.Text = "Сумма:";
+            this.lblRashSummaString.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlPagRashTop2LeftTop2
+            // 
+            this.pnlPagRashTop2LeftTop2.Controls.Add(this.cmbBoxRashPaidRashReasons);
+            this.pnlPagRashTop2LeftTop2.Controls.Add(this.lblRashPaidRashReasons);
+            this.pnlPagRashTop2LeftTop2.Controls.Add(this.txtBoxRashOsnovanie);
+            this.pnlPagRashTop2LeftTop2.Controls.Add(this.lblRashOsnovanie);
+            this.pnlPagRashTop2LeftTop2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagRashTop2LeftTop2.Location = new System.Drawing.Point(0, 54);
+            this.pnlPagRashTop2LeftTop2.Name = "pnlPagRashTop2LeftTop2";
+            this.pnlPagRashTop2LeftTop2.Size = new System.Drawing.Size(656, 27);
+            this.pnlPagRashTop2LeftTop2.TabIndex = 1;
+            // 
+            // cmbBoxRashPaidRashReasons
+            // 
+            this.cmbBoxRashPaidRashReasons.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.cmbBoxRashPaidRashReasons.Cursor = System.Windows.Forms.Cursors.Default;
+            this.cmbBoxRashPaidRashReasons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbBoxRashPaidRashReasons.Enabled = false;
+            this.cmbBoxRashPaidRashReasons.FormattingEnabled = true;
+            this.cmbBoxRashPaidRashReasons.Location = new System.Drawing.Point(202, 0);
+            this.cmbBoxRashPaidRashReasons.Name = "cmbBoxRashPaidRashReasons";
+            this.cmbBoxRashPaidRashReasons.Size = new System.Drawing.Size(454, 23);
+            this.cmbBoxRashPaidRashReasons.TabIndex = 5;
+            // 
+            // lblRashPaidRashReasons
+            // 
+            this.lblRashPaidRashReasons.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblRashPaidRashReasons.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblRashPaidRashReasons.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblRashPaidRashReasons.Location = new System.Drawing.Point(171, 0);
+            this.lblRashPaidRashReasons.Name = "lblRashPaidRashReasons";
+            this.lblRashPaidRashReasons.Size = new System.Drawing.Size(31, 27);
+            this.lblRashPaidRashReasons.TabIndex = 4;
+            this.lblRashPaidRashReasons.Text = "\r\n";
+            this.lblRashPaidRashReasons.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtBoxRashOsnovanie
+            // 
+            this.txtBoxRashOsnovanie.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxRashOsnovanie.Dock = System.Windows.Forms.DockStyle.Left;
+            this.txtBoxRashOsnovanie.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxRashOsnovanie.Location = new System.Drawing.Point(120, 0);
+            this.txtBoxRashOsnovanie.Name = "txtBoxRashOsnovanie";
+            this.txtBoxRashOsnovanie.ReadOnly = true;
+            this.txtBoxRashOsnovanie.Size = new System.Drawing.Size(51, 26);
+            this.txtBoxRashOsnovanie.TabIndex = 3;
+            // 
+            // lblRashOsnovanie
+            // 
+            this.lblRashOsnovanie.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblRashOsnovanie.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblRashOsnovanie.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblRashOsnovanie.Location = new System.Drawing.Point(0, 0);
+            this.lblRashOsnovanie.Name = "lblRashOsnovanie";
+            this.lblRashOsnovanie.Size = new System.Drawing.Size(120, 27);
+            this.lblRashOsnovanie.TabIndex = 1;
+            this.lblRashOsnovanie.Text = "Основание";
+            this.lblRashOsnovanie.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlPagRashTop2LeftTop1
+            // 
+            this.pnlPagRashTop2LeftTop1.Controls.Add(this.txtBoxRashPoDoc);
+            this.pnlPagRashTop2LeftTop1.Controls.Add(this.lblRashPoDoc);
+            this.pnlPagRashTop2LeftTop1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagRashTop2LeftTop1.Location = new System.Drawing.Point(0, 27);
+            this.pnlPagRashTop2LeftTop1.Name = "pnlPagRashTop2LeftTop1";
+            this.pnlPagRashTop2LeftTop1.Size = new System.Drawing.Size(656, 27);
+            this.pnlPagRashTop2LeftTop1.TabIndex = 7;
+            // 
+            // txtBoxRashPoDoc
+            // 
+            this.txtBoxRashPoDoc.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxRashPoDoc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxRashPoDoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxRashPoDoc.Location = new System.Drawing.Point(120, 0);
+            this.txtBoxRashPoDoc.Name = "txtBoxRashPoDoc";
+            this.txtBoxRashPoDoc.ReadOnly = true;
+            this.txtBoxRashPoDoc.Size = new System.Drawing.Size(536, 26);
+            this.txtBoxRashPoDoc.TabIndex = 3;
+            // 
+            // lblRashPoDoc
+            // 
+            this.lblRashPoDoc.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblRashPoDoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblRashPoDoc.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblRashPoDoc.Location = new System.Drawing.Point(0, 0);
+            this.lblRashPoDoc.Name = "lblRashPoDoc";
+            this.lblRashPoDoc.Size = new System.Drawing.Size(120, 27);
+            this.lblRashPoDoc.TabIndex = 1;
+            this.lblRashPoDoc.Text = "По документу";
+            this.lblRashPoDoc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlPagRashTop2LeftTop0
+            // 
+            this.pnlPagRashTop2LeftTop0.Controls.Add(this.cmbBoxRashDebitor);
+            this.pnlPagRashTop2LeftTop0.Controls.Add(this.lblRashDebitor);
+            this.pnlPagRashTop2LeftTop0.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagRashTop2LeftTop0.Location = new System.Drawing.Point(0, 0);
+            this.pnlPagRashTop2LeftTop0.Name = "pnlPagRashTop2LeftTop0";
+            this.pnlPagRashTop2LeftTop0.Size = new System.Drawing.Size(656, 27);
+            this.pnlPagRashTop2LeftTop0.TabIndex = 0;
+            // 
+            // cmbBoxRashDebitor
+            // 
+            this.cmbBoxRashDebitor.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.cmbBoxRashDebitor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbBoxRashDebitor.Enabled = false;
+            this.cmbBoxRashDebitor.FormattingEnabled = true;
+            this.cmbBoxRashDebitor.Location = new System.Drawing.Point(120, 0);
+            this.cmbBoxRashDebitor.Name = "cmbBoxRashDebitor";
+            this.cmbBoxRashDebitor.Size = new System.Drawing.Size(536, 23);
+            this.cmbBoxRashDebitor.TabIndex = 2;
+            // 
+            // lblRashDebitor
+            // 
+            this.lblRashDebitor.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblRashDebitor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblRashDebitor.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblRashDebitor.Location = new System.Drawing.Point(0, 0);
+            this.lblRashDebitor.Name = "lblRashDebitor";
+            this.lblRashDebitor.Size = new System.Drawing.Size(120, 27);
+            this.lblRashDebitor.TabIndex = 1;
+            this.lblRashDebitor.Text = "Выдать";
+            this.lblRashDebitor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlPagRashTop1
+            // 
+            this.pnlPagRashTop1.Controls.Add(this.grBoxKodNaznRash);
+            this.pnlPagRashTop1.Controls.Add(this.grBoxSummaRash);
+            this.pnlPagRashTop1.Controls.Add(this.grBoxKreditRash);
+            this.pnlPagRashTop1.Controls.Add(this.grBoxDebetRash);
+            this.pnlPagRashTop1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagRashTop1.Location = new System.Drawing.Point(3, 190);
+            this.pnlPagRashTop1.Name = "pnlPagRashTop1";
+            this.pnlPagRashTop1.Size = new System.Drawing.Size(1180, 109);
+            this.pnlPagRashTop1.TabIndex = 2;
+            // 
+            // grBoxKodNaznRash
+            // 
+            this.grBoxKodNaznRash.Controls.Add(this.txtBoxRashKodNazn);
+            this.grBoxKodNaznRash.Controls.Add(this.lblRashKodNazn);
+            this.grBoxKodNaznRash.Dock = System.Windows.Forms.DockStyle.Left;
+            this.grBoxKodNaznRash.Location = new System.Drawing.Point(528, 0);
+            this.grBoxKodNaznRash.Name = "grBoxKodNaznRash";
+            this.grBoxKodNaznRash.Size = new System.Drawing.Size(118, 109);
+            this.grBoxKodNaznRash.TabIndex = 5;
+            this.grBoxKodNaznRash.TabStop = false;
+            this.grBoxKodNaznRash.Text = "Код назначения";
+            // 
+            // txtBoxRashKodNazn
+            // 
+            this.txtBoxRashKodNazn.BackColor = System.Drawing.SystemColors.Window;
+            this.txtBoxRashKodNazn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtBoxRashKodNazn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxRashKodNazn.Location = new System.Drawing.Point(3, 74);
+            this.txtBoxRashKodNazn.Name = "txtBoxRashKodNazn";
+            this.txtBoxRashKodNazn.ReadOnly = true;
+            this.txtBoxRashKodNazn.Size = new System.Drawing.Size(112, 23);
+            this.txtBoxRashKodNazn.TabIndex = 3;
+            // 
+            // lblRashKodNazn
+            // 
+            this.lblRashKodNazn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblRashKodNazn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblRashKodNazn.ForeColor = System.Drawing.Color.Black;
+            this.lblRashKodNazn.Location = new System.Drawing.Point(3, 17);
+            this.lblRashKodNazn.Name = "lblRashKodNazn";
+            this.lblRashKodNazn.Size = new System.Drawing.Size(112, 57);
+            this.lblRashKodNazn.TabIndex = 2;
+            this.lblRashKodNazn.Text = "\r\n";
+            this.lblRashKodNazn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // grBoxSummaRash
+            // 
+            this.grBoxSummaRash.Controls.Add(this.txtBoxRashSumma);
+            this.grBoxSummaRash.Controls.Add(this.lblRashSumma);
+            this.grBoxSummaRash.Dock = System.Windows.Forms.DockStyle.Left;
+            this.grBoxSummaRash.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.grBoxSummaRash.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.grBoxSummaRash.Location = new System.Drawing.Point(410, 0);
+            this.grBoxSummaRash.Name = "grBoxSummaRash";
+            this.grBoxSummaRash.Size = new System.Drawing.Size(118, 109);
+            this.grBoxSummaRash.TabIndex = 2;
+            this.grBoxSummaRash.TabStop = false;
+            this.grBoxSummaRash.Text = "Сумма";
+            // 
+            // txtBoxRashSumma
+            // 
+            this.txtBoxRashSumma.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxRashSumma.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxRashSumma.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxRashSumma.Location = new System.Drawing.Point(3, 74);
+            this.txtBoxRashSumma.Name = "txtBoxRashSumma";
+            this.txtBoxRashSumma.ReadOnly = true;
+            this.txtBoxRashSumma.Size = new System.Drawing.Size(112, 26);
+            this.txtBoxRashSumma.TabIndex = 2;
+            // 
+            // lblRashSumma
+            // 
+            this.lblRashSumma.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblRashSumma.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblRashSumma.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblRashSumma.Location = new System.Drawing.Point(3, 17);
+            this.lblRashSumma.Name = "lblRashSumma";
+            this.lblRashSumma.Size = new System.Drawing.Size(112, 57);
+            this.lblRashSumma.TabIndex = 1;
+            this.lblRashSumma.Text = "\r\n";
+            this.lblRashSumma.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // grBoxKreditRash
+            // 
+            this.grBoxKreditRash.Controls.Add(this.txtBoxRashKreditNomerSchet);
+            this.grBoxKreditRash.Controls.Add(this.lblRashKreditNomerSchet);
+            this.grBoxKreditRash.Dock = System.Windows.Forms.DockStyle.Left;
+            this.grBoxKreditRash.Location = new System.Drawing.Point(315, 0);
+            this.grBoxKreditRash.Name = "grBoxKreditRash";
+            this.grBoxKreditRash.Size = new System.Drawing.Size(95, 109);
+            this.grBoxKreditRash.TabIndex = 0;
+            this.grBoxKreditRash.TabStop = false;
+            this.grBoxKreditRash.Text = "Кредит";
+            // 
+            // txtBoxRashKreditNomerSchet
+            // 
+            this.txtBoxRashKreditNomerSchet.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxRashKreditNomerSchet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxRashKreditNomerSchet.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxRashKreditNomerSchet.Location = new System.Drawing.Point(3, 74);
+            this.txtBoxRashKreditNomerSchet.Name = "txtBoxRashKreditNomerSchet";
+            this.txtBoxRashKreditNomerSchet.ReadOnly = true;
+            this.txtBoxRashKreditNomerSchet.Size = new System.Drawing.Size(89, 26);
+            this.txtBoxRashKreditNomerSchet.TabIndex = 2;
+            // 
+            // lblRashKreditNomerSchet
+            // 
+            this.lblRashKreditNomerSchet.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblRashKreditNomerSchet.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblRashKreditNomerSchet.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblRashKreditNomerSchet.Location = new System.Drawing.Point(3, 17);
+            this.lblRashKreditNomerSchet.Name = "lblRashKreditNomerSchet";
+            this.lblRashKreditNomerSchet.Size = new System.Drawing.Size(89, 57);
+            this.lblRashKreditNomerSchet.TabIndex = 1;
+            this.lblRashKreditNomerSchet.Text = "Номер\r\nсчёта";
+            this.lblRashKreditNomerSchet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // grBoxDebetRash
+            // 
+            this.grBoxDebetRash.Controls.Add(this.grBoxDebitKodAnalUchRash);
+            this.grBoxDebetRash.Controls.Add(this.grBoxDebitKorSchetRash);
+            this.grBoxDebetRash.Controls.Add(this.grBoxDebitKodDivisionRash);
+            this.grBoxDebetRash.Dock = System.Windows.Forms.DockStyle.Left;
+            this.grBoxDebetRash.Location = new System.Drawing.Point(0, 0);
+            this.grBoxDebetRash.Name = "grBoxDebetRash";
+            this.grBoxDebetRash.Size = new System.Drawing.Size(315, 109);
+            this.grBoxDebetRash.TabIndex = 1;
+            this.grBoxDebetRash.TabStop = false;
+            this.grBoxDebetRash.Text = "Дебет";
+            // 
+            // grBoxDebitKodAnalUchRash
+            // 
+            this.grBoxDebitKodAnalUchRash.Controls.Add(this.txtBoxRashDebitKodAnalUch);
+            this.grBoxDebitKodAnalUchRash.Controls.Add(this.lblRashDebitKodAnalUch);
+            this.grBoxDebitKodAnalUchRash.Dock = System.Windows.Forms.DockStyle.Left;
+            this.grBoxDebitKodAnalUchRash.Location = new System.Drawing.Point(211, 17);
+            this.grBoxDebitKodAnalUchRash.Name = "grBoxDebitKodAnalUchRash";
+            this.grBoxDebitKodAnalUchRash.Size = new System.Drawing.Size(104, 89);
+            this.grBoxDebitKodAnalUchRash.TabIndex = 4;
+            this.grBoxDebitKodAnalUchRash.TabStop = false;
+            // 
+            // txtBoxRashDebitKodAnalUch
+            // 
+            this.txtBoxRashDebitKodAnalUch.BackColor = System.Drawing.SystemColors.Window;
+            this.txtBoxRashDebitKodAnalUch.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtBoxRashDebitKodAnalUch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxRashDebitKodAnalUch.Location = new System.Drawing.Point(3, 57);
+            this.txtBoxRashDebitKodAnalUch.Name = "txtBoxRashDebitKodAnalUch";
+            this.txtBoxRashDebitKodAnalUch.ReadOnly = true;
+            this.txtBoxRashDebitKodAnalUch.Size = new System.Drawing.Size(98, 23);
+            this.txtBoxRashDebitKodAnalUch.TabIndex = 3;
+            // 
+            // lblRashDebitKodAnalUch
+            // 
+            this.lblRashDebitKodAnalUch.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblRashDebitKodAnalUch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblRashDebitKodAnalUch.ForeColor = System.Drawing.Color.Black;
+            this.lblRashDebitKodAnalUch.Location = new System.Drawing.Point(3, 17);
+            this.lblRashDebitKodAnalUch.Name = "lblRashDebitKodAnalUch";
+            this.lblRashDebitKodAnalUch.Size = new System.Drawing.Size(98, 40);
+            this.lblRashDebitKodAnalUch.TabIndex = 2;
+            this.lblRashDebitKodAnalUch.Text = "Код аналит.\r\nучёта";
+            this.lblRashDebitKodAnalUch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // grBoxDebitKorSchetRash
+            // 
+            this.grBoxDebitKorSchetRash.Controls.Add(this.txtBoxRashDebitKorSchet);
+            this.grBoxDebitKorSchetRash.Controls.Add(this.lblRashDebitKorSchet);
+            this.grBoxDebitKorSchetRash.Dock = System.Windows.Forms.DockStyle.Left;
+            this.grBoxDebitKorSchetRash.Location = new System.Drawing.Point(107, 17);
+            this.grBoxDebitKorSchetRash.Name = "grBoxDebitKorSchetRash";
+            this.grBoxDebitKorSchetRash.Size = new System.Drawing.Size(104, 89);
+            this.grBoxDebitKorSchetRash.TabIndex = 3;
+            this.grBoxDebitKorSchetRash.TabStop = false;
+            // 
+            // txtBoxRashDebitKorSchet
+            // 
+            this.txtBoxRashDebitKorSchet.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxRashDebitKorSchet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtBoxRashDebitKorSchet.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxRashDebitKorSchet.Location = new System.Drawing.Point(3, 57);
+            this.txtBoxRashDebitKorSchet.Name = "txtBoxRashDebitKorSchet";
+            this.txtBoxRashDebitKorSchet.ReadOnly = true;
+            this.txtBoxRashDebitKorSchet.Size = new System.Drawing.Size(98, 26);
+            this.txtBoxRashDebitKorSchet.TabIndex = 2;
+            // 
+            // lblRashDebitKorSchet
+            // 
+            this.lblRashDebitKorSchet.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblRashDebitKorSchet.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblRashDebitKorSchet.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblRashDebitKorSchet.Location = new System.Drawing.Point(3, 17);
+            this.lblRashDebitKorSchet.Name = "lblRashDebitKorSchet";
+            this.lblRashDebitKorSchet.Size = new System.Drawing.Size(98, 40);
+            this.lblRashDebitKorSchet.TabIndex = 1;
+            this.lblRashDebitKorSchet.Text = "Корресп.\r\nсчёт";
+            this.lblRashDebitKorSchet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // grBoxDebitKodDivisionRash
+            // 
+            this.grBoxDebitKodDivisionRash.Controls.Add(this.txtBoxRashDebitKodDivision);
+            this.grBoxDebitKodDivisionRash.Controls.Add(this.lblRashDebitKodDivision);
+            this.grBoxDebitKodDivisionRash.Dock = System.Windows.Forms.DockStyle.Left;
+            this.grBoxDebitKodDivisionRash.Location = new System.Drawing.Point(3, 17);
+            this.grBoxDebitKodDivisionRash.Name = "grBoxDebitKodDivisionRash";
+            this.grBoxDebitKodDivisionRash.Size = new System.Drawing.Size(104, 89);
+            this.grBoxDebitKodDivisionRash.TabIndex = 2;
+            this.grBoxDebitKodDivisionRash.TabStop = false;
+            // 
+            // txtBoxRashDebitKodDivision
+            // 
+            this.txtBoxRashDebitKodDivision.BackColor = System.Drawing.SystemColors.Window;
+            this.txtBoxRashDebitKodDivision.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtBoxRashDebitKodDivision.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxRashDebitKodDivision.Location = new System.Drawing.Point(3, 57);
+            this.txtBoxRashDebitKodDivision.Name = "txtBoxRashDebitKodDivision";
+            this.txtBoxRashDebitKodDivision.ReadOnly = true;
+            this.txtBoxRashDebitKodDivision.Size = new System.Drawing.Size(98, 23);
+            this.txtBoxRashDebitKodDivision.TabIndex = 3;
+            // 
+            // lblRashDebitKodDivision
+            // 
+            this.lblRashDebitKodDivision.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblRashDebitKodDivision.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblRashDebitKodDivision.ForeColor = System.Drawing.Color.Black;
+            this.lblRashDebitKodDivision.Location = new System.Drawing.Point(3, 17);
+            this.lblRashDebitKodDivision.Name = "lblRashDebitKodDivision";
+            this.lblRashDebitKodDivision.Size = new System.Drawing.Size(98, 40);
+            this.lblRashDebitKodDivision.TabIndex = 2;
+            this.lblRashDebitKodDivision.Text = "Код под-\r\nразделения";
+            this.lblRashDebitKodDivision.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlPagRashTop
             // 
@@ -1677,7 +2318,7 @@
             this.tabPageCashBook.Location = new System.Drawing.Point(4, 4);
             this.tabPageCashBook.Name = "tabPageCashBook";
             this.tabPageCashBook.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCashBook.Size = new System.Drawing.Size(1186, 522);
+            this.tabPageCashBook.Size = new System.Drawing.Size(1186, 563);
             this.tabPageCashBook.TabIndex = 2;
             this.tabPageCashBook.Text = "Кассовая книга";
             // 
@@ -1893,7 +2534,7 @@
             this.tabPageVozvrat.Location = new System.Drawing.Point(4, 4);
             this.tabPageVozvrat.Name = "tabPageVozvrat";
             this.tabPageVozvrat.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageVozvrat.Size = new System.Drawing.Size(1186, 522);
+            this.tabPageVozvrat.Size = new System.Drawing.Size(1186, 563);
             this.tabPageVozvrat.TabIndex = 3;
             this.tabPageVozvrat.Text = "Акт о возврате денег";
             // 
@@ -2279,7 +2920,7 @@
             this.tabPageReportCash.Location = new System.Drawing.Point(4, 4);
             this.tabPageReportCash.Name = "tabPageReportCash";
             this.tabPageReportCash.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageReportCash.Size = new System.Drawing.Size(1186, 522);
+            this.tabPageReportCash.Size = new System.Drawing.Size(1186, 563);
             this.tabPageReportCash.TabIndex = 4;
             this.tabPageReportCash.Text = "Отчёт кассира";
             // 
@@ -2664,7 +3305,7 @@
             this.tabPageSequensKKM.Location = new System.Drawing.Point(4, 4);
             this.tabPageSequensKKM.Name = "tabPageSequensKKM";
             this.tabPageSequensKKM.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSequensKKM.Size = new System.Drawing.Size(1186, 522);
+            this.tabPageSequensKKM.Size = new System.Drawing.Size(1186, 563);
             this.tabPageSequensKKM.TabIndex = 5;
             this.tabPageSequensKKM.Text = "Счётчики ККМ";
             // 
@@ -3012,7 +3653,7 @@
             this.tabPageCheck.Location = new System.Drawing.Point(4, 4);
             this.tabPageCheck.Name = "tabPageCheck";
             this.tabPageCheck.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCheck.Size = new System.Drawing.Size(1186, 522);
+            this.tabPageCheck.Size = new System.Drawing.Size(1186, 563);
             this.tabPageCheck.TabIndex = 6;
             this.tabPageCheck.Text = "Проверка наличных";
             // 
@@ -3397,7 +4038,7 @@
             this.tabPageInvent.Location = new System.Drawing.Point(4, 4);
             this.tabPageInvent.Name = "tabPageInvent";
             this.tabPageInvent.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageInvent.Size = new System.Drawing.Size(1186, 522);
+            this.tabPageInvent.Size = new System.Drawing.Size(1186, 563);
             this.tabPageInvent.TabIndex = 7;
             this.tabPageInvent.Text = "Инвентаризация средств";
             // 
@@ -3643,7 +4284,7 @@
             // 
             this.pnlBottom.Controls.Add(this.statusStrip1);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBottom.Location = new System.Drawing.Point(0, 616);
+            this.pnlBottom.Location = new System.Drawing.Point(0, 657);
             this.pnlBottom.Name = "pnlBottom";
             this.pnlBottom.Size = new System.Drawing.Size(1194, 20);
             this.pnlBottom.TabIndex = 2;
@@ -3724,7 +4365,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1194, 636);
+            this.ClientSize = new System.Drawing.Size(1194, 677);
             this.Controls.Add(this.pnlFill);
             this.Controls.Add(this.pnlBottom);
             this.Controls.Add(this.pnlTop);
@@ -3744,13 +4385,13 @@
             this.tabPagePrihod.ResumeLayout(false);
             this.pnlPagPrihTop2.ResumeLayout(false);
             this.pnlPagPrihTop2Left.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlPagPrihTop2LeftTop6.ResumeLayout(false);
+            this.pnlPagPrihTop2LeftTop5.ResumeLayout(false);
+            this.pnlPagPrihTop2LeftTop5.PerformLayout();
+            this.pnlPagPrihTop2LeftTop4.ResumeLayout(false);
+            this.pnlPagPrihTop2LeftTop4.PerformLayout();
+            this.pnlPagPrihTop2LeftTop3.ResumeLayout(false);
+            this.pnlPagPrihTop2LeftTop3.PerformLayout();
             this.grBoxNdsPrih.ResumeLayout(false);
             this.grBoxNdsPrih.PerformLayout();
             this.pnlPagPrihTop2LeftTop2.ResumeLayout(false);
@@ -3787,6 +4428,37 @@
             this.pnlPagPrihTopRightTop0.ResumeLayout(false);
             this.pnlPagPrihTopRightTop0.PerformLayout();
             this.tabPageRashod.ResumeLayout(false);
+            this.pnlPagRashTop2.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.pnlPagRashTop2LeftTop8.ResumeLayout(false);
+            this.pnlPagRashTop2LeftTop7.ResumeLayout(false);
+            this.pnlPagRashTop2LeftTop7.PerformLayout();
+            this.pnlPagRashTop2LeftTop6.ResumeLayout(false);
+            this.pnlPagRashTop2LeftTop6.PerformLayout();
+            this.pnlPagRashTop2LeftTop5.ResumeLayout(false);
+            this.pnlPagRashTop2LeftTop5.PerformLayout();
+            this.pnlPagRashTop2LeftTop4.ResumeLayout(false);
+            this.pnlPagRashTop2LeftTop4.PerformLayout();
+            this.pnlPagRashTop2LeftTop3.ResumeLayout(false);
+            this.pnlPagRashTop2LeftTop2.ResumeLayout(false);
+            this.pnlPagRashTop2LeftTop2.PerformLayout();
+            this.pnlPagRashTop2LeftTop1.ResumeLayout(false);
+            this.pnlPagRashTop2LeftTop1.PerformLayout();
+            this.pnlPagRashTop2LeftTop0.ResumeLayout(false);
+            this.pnlPagRashTop1.ResumeLayout(false);
+            this.grBoxKodNaznRash.ResumeLayout(false);
+            this.grBoxKodNaznRash.PerformLayout();
+            this.grBoxSummaRash.ResumeLayout(false);
+            this.grBoxSummaRash.PerformLayout();
+            this.grBoxKreditRash.ResumeLayout(false);
+            this.grBoxKreditRash.PerformLayout();
+            this.grBoxDebetRash.ResumeLayout(false);
+            this.grBoxDebitKodAnalUchRash.ResumeLayout(false);
+            this.grBoxDebitKodAnalUchRash.PerformLayout();
+            this.grBoxDebitKorSchetRash.ResumeLayout(false);
+            this.grBoxDebitKorSchetRash.PerformLayout();
+            this.grBoxDebitKodDivisionRash.ResumeLayout(false);
+            this.grBoxDebitKodDivisionRash.PerformLayout();
             this.pnlPagRashTop.ResumeLayout(false);
             this.pnlPagRashTopRight1.ResumeLayout(false);
             this.grBoxDateDocRight.ResumeLayout(false);
@@ -4219,23 +4891,73 @@
         private System.Windows.Forms.ComboBox cmbBoxPrihPaidInReasons;
         private System.Windows.Forms.Panel pnlPagPrihTop2LeftTop2;
         private System.Windows.Forms.Label lblPrihSummaString;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlPagPrihTop2LeftTop3;
         private System.Windows.Forms.Label lblPrihVtomChisle;
         private System.Windows.Forms.TextBox txtBoxPrihVtomChisle;
         private System.Windows.Forms.GroupBox grBoxNdsPrih;
         private System.Windows.Forms.RadioButton rBtnPrihNds0;
         private System.Windows.Forms.RadioButton rBtnPrihNds20;
         private System.Windows.Forms.RadioButton rBtnPrihNds10;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel pnlPagPrihTop2LeftTop6;
         private System.Windows.Forms.ComboBox cmbBoxPrihDebitor;
         private System.Windows.Forms.Label lblPrihDebitor;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel pnlPagPrihTop2LeftTop5;
         private System.Windows.Forms.Label lblPrihGlavBuh;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel pnlPagPrihTop2LeftTop4;
         private System.Windows.Forms.Label lblPrihPrilozenie;
         private System.Windows.Forms.TextBox txtBoxPrihGlavBuh;
         private System.Windows.Forms.TextBox txtBoxPrihPrilozenie;
         private System.Windows.Forms.BindingSource localBindingSource;
+        private System.Windows.Forms.Panel pnlPagRashTop2;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel pnlPagRashTop2LeftTop8;
+        private System.Windows.Forms.ComboBox cmbBoxRashKreditor;
+        private System.Windows.Forms.Label lblRashKreditor;
+        private System.Windows.Forms.Panel pnlPagRashTop2LeftTop7;
+        private System.Windows.Forms.TextBox txtBoxRashGlavBuh;
+        private System.Windows.Forms.Label lblRashGlavBuh;
+        private System.Windows.Forms.Panel pnlPagRashTop2LeftTop4;
+        private System.Windows.Forms.TextBox txtBoxRashPrilozenie;
+        private System.Windows.Forms.Label lblRashPrilozenie;
+        private System.Windows.Forms.Panel pnlPagRashTop2LeftTop3;
+        private System.Windows.Forms.Label lblRashSummaString;
+        private System.Windows.Forms.Panel pnlPagRashTop2LeftTop2;
+        private System.Windows.Forms.ComboBox cmbBoxRashPaidRashReasons;
+        private System.Windows.Forms.Label lblRashPaidRashReasons;
+        private System.Windows.Forms.TextBox txtBoxRashOsnovanie;
+        private System.Windows.Forms.Label lblRashOsnovanie;
+        private System.Windows.Forms.Panel pnlPagRashTop2LeftTop0;
+        private System.Windows.Forms.ComboBox cmbBoxRashDebitor;
+        private System.Windows.Forms.Label lblRashDebitor;
+        private System.Windows.Forms.Panel pnlPagRashTop1;
+        private System.Windows.Forms.GroupBox grBoxKodNaznRash;
+        private System.Windows.Forms.TextBox txtBoxRashKodNazn;
+        private System.Windows.Forms.Label lblRashKodNazn;
+        private System.Windows.Forms.GroupBox grBoxSummaRash;
+        private System.Windows.Forms.TextBox txtBoxRashSumma;
+        private System.Windows.Forms.Label lblRashSumma;
+        private System.Windows.Forms.GroupBox grBoxKreditRash;
+        private System.Windows.Forms.TextBox txtBoxRashKreditNomerSchet;
+        private System.Windows.Forms.Label lblRashKreditNomerSchet;
+        private System.Windows.Forms.GroupBox grBoxDebetRash;
+        private System.Windows.Forms.GroupBox grBoxDebitKodAnalUchRash;
+        private System.Windows.Forms.TextBox txtBoxRashDebitKodAnalUch;
+        private System.Windows.Forms.Label lblRashDebitKodAnalUch;
+        private System.Windows.Forms.GroupBox grBoxDebitKorSchetRash;
+        private System.Windows.Forms.TextBox txtBoxRashDebitKorSchet;
+        private System.Windows.Forms.Label lblRashDebitKorSchet;
+        private System.Windows.Forms.GroupBox grBoxDebitKodDivisionRash;
+        private System.Windows.Forms.TextBox txtBoxRashDebitKodDivision;
+        private System.Windows.Forms.Label lblRashDebitKodDivision;
+        private System.Windows.Forms.Panel pnlPagRashTop2LeftTop1;
+        private System.Windows.Forms.TextBox txtBoxRashPoDoc;
+        private System.Windows.Forms.Label lblRashPoDoc;
+        private System.Windows.Forms.Panel pnlPagRashTop2LeftTop6;
+        private System.Windows.Forms.TextBox txtBoxRashRukFio;
+        private System.Windows.Forms.Label lblRashRukFio;
+        private System.Windows.Forms.Panel pnlPagRashTop2LeftTop5;
+        private System.Windows.Forms.TextBox txtBoxRashDolRukOrg;
+        private System.Windows.Forms.Label lblRashDolRukOrg;
     }
 }
 

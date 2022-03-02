@@ -114,7 +114,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 if (base.Id != null)
                 {
                     DocumentRashod MyObj = this;
-                    //bool tt = Com.ProviderFarm.CurrentPrv.GetDocumentRashod(ref MyObj);
+                    bool tt = Com.ProviderFarm.CurrentPrv.GetDocumentRashod(ref MyObj);
                 }
             }
             catch (Exception ex)
@@ -149,14 +149,14 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         {
             try
             {
- //               if (Com.ProviderFarm.CurrentPrv.HashDocumentRashod(this))
- //               {
-//                    Com.ProviderFarm.CurrentPrv.UpdateDocumentRashod(this);
- //               }
-//                else  // Если нет то вставляем
- //               {
-//                    Com.ProviderFarm.CurrentPrv.SetDocumentRashod(this);
- //               }
+                if (Com.ProviderFarm.CurrentPrv.HashDocumentRashod(this))
+                {
+                    Com.ProviderFarm.CurrentPrv.UpdateDocumentRashod(this);
+                }
+                else  // Если нет то вставляем
+                {
+                    Com.ProviderFarm.CurrentPrv.SetDocumentRashod(this);
+                }
             }
             catch (Exception ex)
             {

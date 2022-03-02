@@ -246,5 +246,31 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         /// </summary>
         /// <param name="UpdDocumentPrihod">Сам объект данные которого нужно обновить</param>
         void UpdateDocumentPrihod(BLL.DocumentPlg.DocumentPrihod UpdDocumentPrihod);
+
+        /// <summary>
+        /// Проверка наличия информации объекта DocumentRashod
+        /// </summary>
+        /// <param name="DocumentRashod">Объект DocumentRashod который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        bool HashDocumentRashod(BLL.DocumentPlg.DocumentRashod DocumentRashod);
+
+        /// <summary>
+        /// Читаем информацию по объекту DocumentRashod
+        /// </summary>
+        /// <param name="DocumentRashod">Объект DocumentRashod который нужно прочитать в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли прочитать объект или нет</returns>
+        bool GetDocumentRashod(ref BLL.DocumentPlg.DocumentRashod DocumentRashod);
+
+        /// <summary>
+        /// Вставка новой информации в объект DocumentRashod
+        /// </summary>
+        /// <param name="NewDocumentRashod">Вставляем в базу информацию по объекту DocumentRashod</param>
+        void SetDocumentRashod(BLL.DocumentPlg.DocumentRashod NewDocumentRashod);
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту DocumentRashod
+        /// </summary>
+        /// <param name="UpdDocumentRashod">Сам объект данные которого нужно обновить</param>
+        void UpdateDocumentRashod(BLL.DocumentPlg.DocumentRashod UpdDocumentRashod);
     }
 }
