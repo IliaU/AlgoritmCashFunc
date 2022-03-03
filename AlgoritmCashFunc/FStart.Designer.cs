@@ -795,10 +795,12 @@
             // 
             // txtBoxPrihPrilozenie
             // 
+            this.txtBoxPrihPrilozenie.BackColor = System.Drawing.Color.White;
             this.txtBoxPrihPrilozenie.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtBoxPrihPrilozenie.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtBoxPrihPrilozenie.Location = new System.Drawing.Point(120, 0);
             this.txtBoxPrihPrilozenie.Name = "txtBoxPrihPrilozenie";
+            this.txtBoxPrihPrilozenie.ReadOnly = true;
             this.txtBoxPrihPrilozenie.Size = new System.Drawing.Size(536, 23);
             this.txtBoxPrihPrilozenie.TabIndex = 4;
             // 
@@ -1299,9 +1301,11 @@
             // 
             // txtBoxPrihDateDoc
             // 
+            this.txtBoxPrihDateDoc.BackColor = System.Drawing.Color.White;
             this.txtBoxPrihDateDoc.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtBoxPrihDateDoc.Location = new System.Drawing.Point(3, 57);
             this.txtBoxPrihDateDoc.Name = "txtBoxPrihDateDoc";
+            this.txtBoxPrihDateDoc.ReadOnly = true;
             this.txtBoxPrihDateDoc.Size = new System.Drawing.Size(107, 21);
             this.txtBoxPrihDateDoc.TabIndex = 1;
             // 
@@ -1673,10 +1677,12 @@
             // 
             // txtBoxRashPrilozenie
             // 
+            this.txtBoxRashPrilozenie.BackColor = System.Drawing.Color.White;
             this.txtBoxRashPrilozenie.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtBoxRashPrilozenie.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtBoxRashPrilozenie.Location = new System.Drawing.Point(120, 0);
             this.txtBoxRashPrilozenie.Name = "txtBoxRashPrilozenie";
+            this.txtBoxRashPrilozenie.ReadOnly = true;
             this.txtBoxRashPrilozenie.Size = new System.Drawing.Size(536, 23);
             this.txtBoxRashPrilozenie.TabIndex = 4;
             // 
@@ -1737,6 +1743,7 @@
             this.cmbBoxRashPaidRashReasons.Name = "cmbBoxRashPaidRashReasons";
             this.cmbBoxRashPaidRashReasons.Size = new System.Drawing.Size(454, 23);
             this.cmbBoxRashPaidRashReasons.TabIndex = 5;
+            this.cmbBoxRashPaidRashReasons.SelectedIndexChanged += new System.EventHandler(this.cmbBoxRashPaidRashReasons_SelectedIndexChanged);
             // 
             // lblRashPaidRashReasons
             // 
@@ -1910,6 +1917,7 @@
             this.txtBoxRashSumma.ReadOnly = true;
             this.txtBoxRashSumma.Size = new System.Drawing.Size(112, 26);
             this.txtBoxRashSumma.TabIndex = 2;
+            this.txtBoxRashSumma.TextChanged += new System.EventHandler(this.txtBoxRashSumma_TextChanged);
             // 
             // lblRashSumma
             // 

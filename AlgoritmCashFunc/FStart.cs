@@ -178,6 +178,8 @@ namespace AlgoritmCashFunc
                                 this.txtBoxPrihOKUD.ReadOnly = false;
                                 this.txtBoxPrihOrganization.ReadOnly = false;
                                 this.txtBoxPrichStructPodr.ReadOnly = false;
+                                this.txtBoxPrihDateDoc.ReadOnly = false;
+                                this.txtBoxPrihNumDoc.ReadOnly = false;
                                 this.txtBoxPrichDebetNomerSchet.ReadOnly = false;
                                 this.txtBoxPrihKreditKorSchet.ReadOnly = false;
                                 this.txtBoxPrihOsnovanie.ReadOnly = false;
@@ -197,14 +199,38 @@ namespace AlgoritmCashFunc
                             this.grBoxNdsPrih.Enabled = true;
                             this.txtBoxPrihPrilozenie.ReadOnly = false;
 
-
                             break;
                         // Расходный ордер
                         case 1:
-                            this.txtBoxRashOKPO.ReadOnly = false;
-                            this.txtBoxRashOKUD.ReadOnly = false;
-                            this.txtBoxRashOrganization.ReadOnly = false;
-                            this.txtBoxRashStructPodr.ReadOnly = false;
+                            // Делаем поля читаемыми только админу и менеджеру
+                            if (Com.UserFarm.CurrentUser.Role == RoleEn.Admin ||
+                                Com.UserFarm.CurrentUser.Role == RoleEn.Manager)
+                            {
+                                this.txtBoxRashOKPO.ReadOnly = false;
+                                this.txtBoxRashOKUD.ReadOnly = false;
+                                this.txtBoxRashOrganization.ReadOnly = false;
+                                this.txtBoxRashStructPodr.ReadOnly = false;
+                                this.txtBoxRashDateDoc.ReadOnly = false;
+                                this.txtBoxRashNumDoc.ReadOnly = false;
+                                this.txtBoxRashDebitKorSchet.ReadOnly = false;
+                                this.txtBoxRashKreditNomerSchet.ReadOnly = false;
+                                this.txtBoxRashDolRukOrg.ReadOnly = false;
+                                this.txtBoxRashRukFio.ReadOnly = false;
+                                this.txtBoxRashGlavBuh.ReadOnly = false;
+                            }
+
+                            // разрешено править всем
+                            this.cmbBoxRashKreditor.Enabled = true;             // Выдалкассир 
+                            this.cmbBoxRashDebitor.Enabled = true;              // Выдать
+                            this.cmbBoxRashPaidRashReasons.Enabled = true;      // Основание
+
+                            this.txtBoxRashDebitKodDivision.ReadOnly = false;
+                            this.txtBoxRashDebitKodAnalUch.ReadOnly = false;
+                            this.txtBoxRashSumma.ReadOnly = false;
+                            this.txtBoxRashKodNazn.ReadOnly = false;
+                            this.txtBoxRashPoDoc.ReadOnly = false;
+                            this.txtBoxRashPrilozenie.ReadOnly = false;
+
                             break;
                         // Кассовая книга
                         case 2:
@@ -264,6 +290,8 @@ namespace AlgoritmCashFunc
                             this.txtBoxPrihOKUD.ReadOnly = true;
                             this.txtBoxPrihOrganization.ReadOnly = true;
                             this.txtBoxPrichStructPodr.ReadOnly = true;
+                            this.txtBoxPrihDateDoc.ReadOnly = true;
+                            this.txtBoxPrihNumDoc.ReadOnly = true;
                             this.txtBoxPrichDebetNomerSchet.ReadOnly = true;
                             this.txtBoxPrihKreditKorSchet.ReadOnly = true;
                             this.txtBoxPrihOsnovanie.ReadOnly = true;
@@ -289,6 +317,26 @@ namespace AlgoritmCashFunc
                             this.txtBoxRashOKUD.ReadOnly = true;
                             this.txtBoxRashOrganization.ReadOnly = true;
                             this.txtBoxRashStructPodr.ReadOnly = true;
+                            this.txtBoxRashDateDoc.ReadOnly = true;
+                            this.txtBoxRashNumDoc.ReadOnly = true;
+                            this.txtBoxRashDebitKorSchet.ReadOnly = true;
+                            this.txtBoxRashKreditNomerSchet.ReadOnly = true;
+                            this.txtBoxRashDolRukOrg.ReadOnly = true;
+                            this.txtBoxRashRukFio.ReadOnly = true;
+                            this.txtBoxRashGlavBuh.ReadOnly = true;
+                            
+                            // разрешено править всем
+                            this.cmbBoxRashKreditor.Enabled = false;                // Выдалкассир 
+                            this.cmbBoxRashDebitor.Enabled = false;                 // Выдать
+                            this.cmbBoxRashPaidRashReasons.Enabled = false;         // Основание
+
+                            this.txtBoxRashDebitKodDivision.ReadOnly = true;
+                            this.txtBoxRashDebitKodAnalUch.ReadOnly = true;
+                            this.txtBoxRashSumma.ReadOnly = true;
+                            this.txtBoxRashKodNazn.ReadOnly = true;
+                            this.txtBoxRashPoDoc.ReadOnly = true;
+                            this.txtBoxRashPrilozenie.ReadOnly = true;
+
                             break;
                         // Кассовая книга
                         case 2:
@@ -379,7 +427,7 @@ namespace AlgoritmCashFunc
 
                         // Заполняем инфу по операции
                         BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)OperationFarm.CurOperationList["OperationPrihod"];
-                        txtBoxPrihOKUD.Text = (OperPrihod!=null && !string.IsNullOrWhiteSpace(OperPrihod.OKUD) ? OperPrihod.OKUD:"");
+                        this.txtBoxPrihOKUD.Text = (OperPrihod!=null && !string.IsNullOrWhiteSpace(OperPrihod.OKUD) ? OperPrihod.OKUD:"");
 
                         // Приход заполняем список принято от
                         if (this.cmbBoxPrihKreditor.Items.Count==0)
@@ -427,6 +475,54 @@ namespace AlgoritmCashFunc
                         this.txtBoxRashOrganization.Text = Kassa.Organization;
                         this.txtBoxRashStructPodr.Text = Kassa.StructPodrazdelenie;
                         this.txtBoxRashOKPO.Text = Kassa.OKPO;
+                        this.txtBoxRashDolRukOrg.Text = Kassa.DolRukOrg;
+                        this.txtBoxRashRukFio.Text = Kassa.RukFio;
+                        this.txtBoxRashGlavBuh.Text = Kassa.GlavBuhFio;
+
+
+                        // Заполняем инфу по операции
+                        BLL.OperationPlg.OperationRashod OperRashod = (BLL.OperationPlg.OperationRashod)OperationFarm.CurOperationList["OperationRashod"];
+                        this.txtBoxRashOKUD.Text = (OperRashod != null && !string.IsNullOrWhiteSpace(OperRashod.OKUD) ? OperRashod.OKUD : "");
+
+                        // Приход заполняем список выдать
+                        if (this.cmbBoxRashDebitor.Items.Count == 0)
+                        {
+                            foreach (Local item in LocalFarm.CurLocalEmployees)
+                            {
+                                this.cmbBoxRashDebitor.Items.Add(item.LocalName);
+                            }
+                        }
+
+                        // Заполняем выдал кассир
+                        if (this.cmbBoxRashKreditor.Items.Count == 0)
+                        {
+                            foreach (Local item in LocalFarm.CurLocalChiefCashiers)
+                            {
+                                this.cmbBoxRashKreditor.Items.Add(item.LocalName);
+                            }
+                        }
+
+                        // Основание
+                        if (this.cmbBoxRashPaidRashReasons.Items.Count == 0)
+                        {
+                            foreach (Local item in LocalFarm.CurLocalPaidRashReasons)
+                            {
+                                this.cmbBoxRashPaidRashReasons.Items.Add(item.LocalName);
+                            }
+                        }
+
+                        // Заполняем поле основание значенеие по умолчанию и зависимые поля
+                        this.cmbBoxRashPaidRashReasons_SelectedIndexChanged(null, null);
+                        this.cmbBoxRashDebitor.SelectedIndex = -1;
+                        this.cmbBoxRashKreditor.SelectedIndex = -1;
+
+                        this.txtBoxRashDebitKodDivision.Text = string.Empty;
+                        this.txtBoxRashDebitKodAnalUch.Text = string.Empty;
+                        this.txtBoxRashSumma.Text = string.Empty;
+                        this.txtBoxRashKodNazn.Text = string.Empty;
+                        this.txtBoxRashPoDoc.Text = string.Empty;
+                        this.txtBoxRashPrilozenie.Text = string.Empty;
+                        
                         break;
                     // Кассовая книга
                     case 2:
@@ -736,18 +832,95 @@ namespace AlgoritmCashFunc
                         Kassa.Organization = this.txtBoxRashOrganization.Text;
                         Kassa.StructPodrazdelenie = this.txtBoxRashStructPodr.Text;
                         Kassa.OKPO = this.txtBoxRashOKPO.Text;
+                        Kassa.DolRukOrg = this.txtBoxRashDolRukOrg.Text;
+                        Kassa.RukFio = this.txtBoxRashRukFio.Text;
+                        Kassa.GlavBuhFio = this.txtBoxRashGlavBuh.Text;
 
                         // Валидация заполненных данных по подразделению и сохранение в базе
                         ValidateKassa(Kassa);
 
                         // Валидация введённой даты
+                        if (string.IsNullOrWhiteSpace(this.txtBoxRashNumDoc.Text)) new ApplicationException("Поле номер документа не может быть пустым.");
+                        else
+                        {
+                            try { this.CurDoc.DocNum = int.Parse(this.txtBoxRashNumDoc.Text); }
+                            catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение номера документа {0} к числу.", this.txtBoxRashNumDoc.Text)); }
+                        }
+
+                        // Валидация введённой даты
                         try { this.CurDoc.UreDate = DateTime.Parse(this.txtBoxRashDateDoc.Text); }
                         catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxRashDateDoc.Text)); }
+
+                        // Валидация Дебитора
+                        if (this.cmbBoxRashDebitor.SelectedIndex == -1) throw new ApplicationException("Не указано кому выдать.");
+                        else
+                        {
+                            this.CurDoc.LocalDebitor = LocalFarm.CurLocalEmployees[this.cmbBoxRashDebitor.SelectedIndex];
+                        }
+
+                        // Валидация кредитора
+                        if (this.cmbBoxRashKreditor.SelectedIndex == -1) throw new ApplicationException("Не указано кто выдал.");
+                        else
+                        {
+                            this.CurDoc.LocalCreditor = LocalFarm.CurLocalChiefCashiers[this.cmbBoxRashKreditor.SelectedIndex];
+                        }
+
+                        ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).DebetKodDivision = this.txtBoxRashDebitKodDivision.Text;
+                        ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).DebetKodAnalUch = this.txtBoxRashDebitKodAnalUch.Text;
+                        //
+                        // Валидация суммы
+                        if (!string.IsNullOrWhiteSpace(this.txtBoxRashSumma.Text))
+                        {
+                            try
+                            {
+                                ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).Summa = decimal.Round(decimal.Parse(this.txtBoxRashSumma.Text), 2);
+                                ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).SummaStr = this.lblRashSummaString.Text.Replace("Сумма:", "").Trim();
+                            }
+                            catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение к сумме {0}.", this.txtBoxRashSumma.Text)); }
+                        }
+                        else ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).Summa = 0;
+                        //
+                        ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).KodNazn = this.txtBoxRashKodNazn.Text;
+
+
+                        // Валидация основание
+                        if (this.cmbBoxRashPaidRashReasons.SelectedIndex == -1) throw new ApplicationException("Не указано основание.");
+                        else
+                        {
+                            BLL.LocalPlg.LocalPaidRashReasons LoclPaidRashReasons = LocalFarm.CurLocalPaidRashReasons[this.cmbBoxRashPaidRashReasons.SelectedIndex];
+                            //
+                            LoclPaidRashReasons.DebetKorSchet = this.txtBoxRashDebitKorSchet.Text;
+                            ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).DebetKorSchet = this.txtBoxRashDebitKorSchet.Text;
+                            //
+                            LoclPaidRashReasons.KreditNomerSchet = this.txtBoxRashKreditNomerSchet.Text;
+                            ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).KreditNomerSchet = this.txtBoxRashKreditNomerSchet.Text;
+                            //
+                            LoclPaidRashReasons.Osnovanie = this.txtBoxRashOsnovanie.Text;
+                            ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).Osnovanie = this.txtBoxRashOsnovanie.Text;
+                            //
+                            ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).PoDoc = this.txtBoxRashPoDoc.Text;
+                            //
+                            ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).Prilozenie = this.txtBoxRashPrilozenie.Text;
+                            //
+                            ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).GlavBuh = this.txtBoxRashGlavBuh.Text;
+                            //
+                            ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).PaidRashReasons = LoclPaidRashReasons;
+                            LoclPaidRashReasons.Save();
+                        }
+                        
 
                         // Сохранение инфы в базе
                         Kassa.LastDocNumRash = int.Parse(this.txtBoxRashNumDoc.Text);
                         Kassa.Save();
-
+                                                
+                        // Заполняем инфу по операции
+                        BLL.OperationPlg.OperationRashod OperRashod = (BLL.OperationPlg.OperationRashod)this.CurDoc.CurOperation;
+                        OperRashod.OKUD = txtBoxRashOKUD.Text;
+                        OperRashod.Save();
+                        
+                        // Сохранение документа
+                        this.CurDoc.Save();
+                        
                         break;
                     // Кассовая книга
                     case 2:
@@ -908,8 +1081,7 @@ namespace AlgoritmCashFunc
                 throw ae;
             }
         }
-        
-
+     
         // Создаём новый документ
         private void btnNew_Click(object sender, EventArgs e)
         {
@@ -947,17 +1119,41 @@ namespace AlgoritmCashFunc
                         this.txtBoxPrihKredikKodAnalUch.Text = string.Empty;
                         this.txtBoxPrihSumma.Text = string.Empty;
                         this.txtBoxPrihKodNazn.Text = string.Empty;
+                        this.txtBoxPrihVtomChisle.Text = string.Empty;
+                        this.txtBoxPrihPrilozenie.Text = string.Empty;
 
                         break;
                     // Расходный ордер
                     case 1:
                         // Создаём пустой документ
-                        //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                        this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentRashod");
                         this.txtBoxRashNumDoc.Text = (Kassa.LastDocNumRash + 1).ToString();
+                        this.txtBoxRashDolRukOrg.Text = Kassa.DolRukOrg;
+                        this.txtBoxRashRukFio.Text = Kassa.RukFio;
+                        this.txtBoxRashGlavBuh.Text = Kassa.GlavBuhFio;
                         // Проверка на наличие ошибок при создании пустого документа
-                        //if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
+                        if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
                         //
                         this.txtBoxRashDateDoc.Text = DateTime.Now.Date.ToShortDateString();
+
+                        // Заполняем инфу по операции
+                        BLL.OperationPlg.OperationRashod OperRashod = (BLL.OperationPlg.OperationRashod)this.CurDoc.CurOperation;
+                        this.txtBoxRashOKUD.Text = OperRashod.OKUD;
+
+
+                        // Заполняем поле основание значенеие по умолчанию и зависимые поля
+                        this.cmbBoxRashPaidRashReasons_SelectedIndexChanged(null, null);
+
+                        this.cmbBoxRashDebitor.SelectedIndex = -1;
+                        this.cmbBoxRashKreditor.SelectedIndex = -1;
+
+                        this.txtBoxRashDebitKodDivision.Text = string.Empty;
+                        this.txtBoxRashDebitKodAnalUch.Text = string.Empty;
+                        this.txtBoxRashSumma.Text = string.Empty;
+                        this.txtBoxRashKodNazn.Text = string.Empty;
+                        this.txtBoxRashPoDoc.Text = string.Empty;
+                        this.txtBoxRashPrilozenie.Text = string.Empty;
+
                         break;
                     // Кассовая книга
                     case 2:
@@ -1039,6 +1235,61 @@ namespace AlgoritmCashFunc
 
         #region События связанные с выбором внутри элементов котороые к основной логике не имеют отношения
 
+        /// <summary>
+        /// Конвертация текстового значения суммы в строку для разных типов документов чтобы не дублировать код
+        /// </summary>
+        /// <param name="sumtxt">Сумма в виде строки которую переводим в рубли с копейками прописью</param>
+        /// <returns>Текст который подставляем во вкладках</returns>
+        private string KonvertSummToString(string sumtxt)
+        {
+            try
+            {
+                string rez = "Сумма:";
+
+                try
+                {
+                    // Получакем значение и преобразовываем к строке
+                    decimal summ = decimal.Parse(sumtxt);
+                    string tmp = decimal.Round(summ, 2).ToString().Replace(".", ",");
+
+                    // Создаём переменные для рублей и копеек
+                    int? sumR = null;
+                    int? sumK = null;
+
+                    // Проверка на наличие копеек
+                    if (tmp.IndexOf(',') > -1)
+                    {
+                        sumR = int.Parse(tmp.Substring(0, tmp.IndexOf(',')));
+                        sumK = int.Parse(tmp.Substring(tmp.IndexOf(',') + 1));
+                    }
+                    else sumR = (int)summ;
+
+                    // Получаей часть которая представляет из себя рубли
+                    string rub = string.Empty;
+                    if (sumR != null) rub = Utils.GetStringForInt((int)sumR, "рубль", "рубля", "рублей", false);
+
+                    // получаем часть которая представляет из себя копейки
+                    string kop = string.Empty;
+                    if (sumK != null) kop = Utils.GetStringForInt((int)sumK, "копейка", "копейки", "копеек", true).ToLower();
+
+                    rez = string.Format("Сумма: {0} {1}", rub, kop).Trim();
+                }
+                catch (Exception)
+                {
+                    rez = "Сумма:";
+                }
+
+                return rez;
+            }
+            catch (Exception)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при попытки превратить число в строку с ошибкой: ({0})", txtBoxPrihSumma, sumtxt));
+                Log.EventSave(ae.Message, string.Format("{0}.KonvertSummToString", GetType().Name), EventEn.Error, true, true);
+                throw ae;
+            }
+
+        }
+
         // В приходе пользователь выбирает основание, необходимо заполнить зависимые поля значениями по умолчанию
         private void cmbBoxPrihPaidInReasons_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1074,38 +1325,7 @@ namespace AlgoritmCashFunc
         {
             try
             {
-                try
-                {
-                    // Получакем значение и преобразовываем к строке
-                    decimal summ = decimal.Parse(this.txtBoxPrihSumma.Text);
-                    string tmp = decimal.Round(summ,2).ToString().Replace(".", ",");
-
-                    // Создаём переменные для рублей и копеек
-                    int? sumR=null;
-                    int? sumK=null;
-
-                    // Проверка на наличие копеек
-                    if (tmp.IndexOf(',') > -1)
-                    {
-                        sumR = int.Parse(tmp.Substring(0, tmp.IndexOf(',')));
-                        sumK = int.Parse(tmp.Substring(tmp.IndexOf(',')+1));
-                    }
-                    else sumR = (int)summ;
-
-                    // Получаей часть которая представляет из себя рубли
-                    string rub = string.Empty;
-                    if (sumR != null) rub = Utils.GetStringForInt((int) sumR, "рубль", "рубля", "рублей", false);
-
-                    // получаем часть которая представляет из себя копейки
-                    string kop = string.Empty;
-                    if (sumK != null) kop = Utils.GetStringForInt((int)sumK, "копейка", "копейки", "копеек", true).ToLower();
-
-                    this.lblPrihSummaString.Text = string.Format("Сумма: {0} {1}", rub, kop).Trim();
-                }
-                catch (Exception)
-                {
-                    this.lblPrihSummaString.Text = "Сумма:";
-                }
+                this.lblPrihSummaString.Text = this.KonvertSummToString(this.txtBoxPrihSumma.Text);
             }
             catch (Exception)
             {
@@ -1113,8 +1333,53 @@ namespace AlgoritmCashFunc
                 //Log.EventSave(ae.Message, string.Format("{0}.txtBoxPrihSumma_TextChanged", GetType().Name), EventEn.Error, true, true);
                 //throw ae;
             }
-
         }
+        
+        // В приходе пользователь выбирает основание, необходимо заполнить зависимые поля значениями по умолчанию
+        private void cmbBoxRashPaidRashReasons_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                // Сбрасываем все значения на пустоту
+                if (sender == null || this.cmbBoxRashPaidRashReasons.SelectedIndex == -1)
+                {
+                    this.txtBoxRashDebitKorSchet.Text = string.Empty;
+                    this.txtBoxRashKreditNomerSchet.Text = string.Empty;
+                    this.txtBoxRashOsnovanie.Text = string.Empty;
+                    this.cmbBoxRashPaidRashReasons.SelectedIndex = -1;
+                }
+                else
+                {
+                    // Получаем текущее основание
+                    BLL.LocalPlg.LocalPaidRashReasons LoclPaidRashReasons = LocalFarm.CurLocalPaidRashReasons[this.cmbBoxRashPaidRashReasons.SelectedIndex];
+                    this.txtBoxRashDebitKorSchet.Text = LoclPaidRashReasons.DebetKorSchet;
+                    this.txtBoxRashKreditNomerSchet.Text = LoclPaidRashReasons.KreditNomerSchet;
+                    this.txtBoxRashOsnovanie.Text = LoclPaidRashReasons.Osnovanie;
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при создании документа с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.btnNew_Click", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
+            }
+        }
+
+        // Пользователь вбил сумму нужно её перевести в текст
+        private void txtBoxRashSumma_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                this.lblRashSummaString.Text = this.KonvertSummToString(this.txtBoxRashSumma.Text);
+            }
+            catch (Exception)
+            {
+                //ApplicationException ae = new ApplicationException(string.Format("Упали при попытки превратить число в строку с ошибкой: ({0})", txtBoxPrihSumma, ex.Message));
+                //Log.EventSave(ae.Message, string.Format("{0}.txtBoxPrihSumma_TextChanged", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
+            }
+        }
+        
         #endregion
     }
 }
