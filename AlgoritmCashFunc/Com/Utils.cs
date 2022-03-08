@@ -151,12 +151,12 @@ namespace AlgoritmCashFunc.Com
                     {
                         case "01":
                         case "1":
-                            if (IsShen) rez += (rez == string.Empty ? "" : " ") + "одина";
+                            if (IsShen || parse3simvol.Count == 2) rez += (rez == string.Empty ? "" : " ") + "одина";
                             else rez += (rez == string.Empty ? "" : " ") + "один";
                             break;
                         case "02":
                         case "2":
-                            if (IsShen) rez += (rez == string.Empty ? "" : " ") + "две";
+                            if (IsShen || parse3simvol.Count == 2) rez += (rez == string.Empty ? "" : " ") + "две";
                             else rez += (rez == string.Empty ? "" : " ") + "два";
                             break;
                         case "03":
@@ -221,11 +221,11 @@ namespace AlgoritmCashFunc.Com
                             rez += (rez == string.Empty ? "" : " ") + "двадцать";
                             break;
                         case "21":
-                            if (IsShen) rez += (rez == string.Empty ? "" : " ") + "двадцать одина";
+                            if (IsShen || parse3simvol.Count == 2) rez += (rez == string.Empty ? "" : " ") + "двадцать одина";
                             else rez += (rez == string.Empty ? "" : " ") + "двадцать один";
                             break;
                         case "22":
-                            if (IsShen) rez += (rez == string.Empty ? "" : " ") + "двадцать две";
+                            if (IsShen || parse3simvol.Count == 2) rez += (rez == string.Empty ? "" : " ") + "двадцать две";
                             else rez += (rez == string.Empty ? "" : " ") + "двадцать два";
                             break;
                         case "23":
@@ -253,11 +253,11 @@ namespace AlgoritmCashFunc.Com
                             rez += (rez == string.Empty ? "" : " ") + "тридцать";
                             break;
                         case "31":
-                            if (IsShen) rez += (rez == string.Empty ? "" : " ") + "тридцать одина";
+                            if (IsShen || parse3simvol.Count == 2) rez += (rez == string.Empty ? "" : " ") + "тридцать одина";
                             else rez += (rez == string.Empty ? "" : " ") + "тридцать один";
                             break;
                         case "32":
-                            if (IsShen) rez += (rez == string.Empty ? "" : " ") + "тридцать две";
+                            if (IsShen || parse3simvol.Count == 2) rez += (rez == string.Empty ? "" : " ") + "тридцать две";
                             else rez += (rez == string.Empty ? "" : " ") + "тридцать два";
                             break;
                         case "33":
@@ -285,11 +285,11 @@ namespace AlgoritmCashFunc.Com
                             rez += (rez == string.Empty ? "" : " ") + "сорок";
                             break;
                         case "41":
-                            if (IsShen) rez += (rez == string.Empty ? "" : " ") + "сорок одина";
+                            if (IsShen || parse3simvol.Count == 2) rez += (rez == string.Empty ? "" : " ") + "сорок одина";
                             else rez += (rez == string.Empty ? "" : " ") + "сорок один";
                             break;
                         case "42":
-                            if (IsShen) rez += (rez == string.Empty ? "" : " ") + "сорок две";
+                            if (IsShen || parse3simvol.Count == 2) rez += (rez == string.Empty ? "" : " ") + "сорок две";
                             else rez += (rez == string.Empty ? "" : " ") + "сорок два";
                             break;
                         case "43":
@@ -317,11 +317,11 @@ namespace AlgoritmCashFunc.Com
                             rez += (rez == string.Empty ? "" : " ") + "пятьдесят";
                             break;
                         case "51":
-                            if (IsShen) rez += (rez == string.Empty ? "" : " ") + "пятьдесят одина";
+                            if (IsShen || parse3simvol.Count == 2) rez += (rez == string.Empty ? "" : " ") + "пятьдесят одина";
                             else rez += (rez == string.Empty ? "" : " ") + "пятьдесят один";
                             break;
                         case "52":
-                            if (IsShen) rez += (rez == string.Empty ? "" : " ") + "пятьдесят две";
+                            if (IsShen || parse3simvol.Count == 2) rez += (rez == string.Empty ? "" : " ") + "пятьдесят две";
                             else rez += (rez == string.Empty ? "" : " ") + "пятьдесят два";
                             break;
                         case "53":
@@ -349,11 +349,11 @@ namespace AlgoritmCashFunc.Com
                             rez += (rez == string.Empty ? "" : " ") + "шестьдесят";
                             break;
                         case "61":
-                            if (IsShen) rez += (rez == string.Empty ? "" : " ") + "шестьдесят одна";
+                            if (IsShen || parse3simvol.Count == 2) rez += (rez == string.Empty ? "" : " ") + "шестьдесят одна";
                             else rez += (rez == string.Empty ? "" : " ") + "шестьдесят один";
                             break;
                         case "62":
-                            if (IsShen) rez += (rez == string.Empty ? "" : " ") + "шестьдесят две";
+                            if (IsShen || parse3simvol.Count == 2) rez += (rez == string.Empty ? "" : " ") + "шестьдесят две";
                             else rez += (rez == string.Empty ? "" : " ") + "шестьдесят два";
                             break;
                         case "63":
@@ -381,11 +381,11 @@ namespace AlgoritmCashFunc.Com
                             rez += (rez == string.Empty ? "" : " ") + "семдесят";
                             break;
                         case "71":
-                            if (IsShen) rez += (rez == string.Empty ? "" : " ") + "семдесят одина";
+                            if (IsShen || parse3simvol.Count == 2) rez += (rez == string.Empty ? "" : " ") + "семдесят одина";
                             else rez += (rez == string.Empty ? "" : " ") + "семдесят один";
                             break;
                         case "72":
-                            if (IsShen) rez += (rez == string.Empty ? "" : " ") + "семдесят две";
+                            if (IsShen || parse3simvol.Count == 2) rez += (rez == string.Empty ? "" : " ") + "семдесят две";
                             else rez += (rez == string.Empty ? "" : " ") + "семдесят два";
                             break;
                         case "73":
@@ -413,11 +413,11 @@ namespace AlgoritmCashFunc.Com
                             rez += (rez == string.Empty ? "" : " ") + "восемьдесят";
                             break;
                         case "81":
-                            if (IsShen) rez += (rez == string.Empty ? "" : " ") + "восемьдесят одина";
+                            if (IsShen || parse3simvol.Count == 2) rez += (rez == string.Empty ? "" : " ") + "восемьдесят одина";
                             else rez += (rez == string.Empty ? "" : " ") + "восемьдесят один";
                             break;
                         case "82":
-                            if (IsShen) rez += (rez == string.Empty ? "" : " ") + "восемьдесят две";
+                            if (IsShen || parse3simvol.Count == 2) rez += (rez == string.Empty ? "" : " ") + "восемьдесят две";
                             else rez += (rez == string.Empty ? "" : " ") + "восемьдесят два";
                             break;
                         case "83":
@@ -445,11 +445,11 @@ namespace AlgoritmCashFunc.Com
                             rez += (rez == string.Empty ? "" : " ") + "девяносто";
                             break;
                         case "91":
-                            if (IsShen) rez += (rez == string.Empty ? "" : " ") + "девяносто одна";
+                            if (IsShen || parse3simvol.Count == 2) rez += (rez == string.Empty ? "" : " ") + "девяносто одна";
                             else rez += (rez == string.Empty ? "" : " ") + "девяносто один";
                             break;
                         case "92":
-                            if (IsShen) rez += (rez == string.Empty ? "" : " ") + "девяносто две";
+                            if (IsShen || parse3simvol.Count == 2) rez += (rez == string.Empty ? "" : " ") + "девяносто две";
                             else rez += (rez == string.Empty ? "" : " ") + "девяносто два";
                             break;
                         case "93":

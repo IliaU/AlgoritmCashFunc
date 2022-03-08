@@ -427,7 +427,7 @@ namespace AlgoritmCashFunc
 
                         // Заполняем инфу по операции
                         BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)OperationFarm.CurOperationList["OperationPrihod"];
-                        this.txtBoxPrihOKUD.Text = (OperPrihod!=null && !string.IsNullOrWhiteSpace(OperPrihod.OKUD) ? OperPrihod.OKUD:"");
+                        this.txtBoxPrihOKUD.Text = (OperPrihod!=null && !string.IsNullOrWhiteSpace(OperPrihod.OKUD) ? OperPrihod.OKUD: "0310001");
 
                         // Приход заполняем список принято от
                         if (this.cmbBoxPrihKreditor.Items.Count==0)
@@ -482,7 +482,7 @@ namespace AlgoritmCashFunc
 
                         // Заполняем инфу по операции
                         BLL.OperationPlg.OperationRashod OperRashod = (BLL.OperationPlg.OperationRashod)OperationFarm.CurOperationList["OperationRashod"];
-                        this.txtBoxRashOKUD.Text = (OperRashod != null && !string.IsNullOrWhiteSpace(OperRashod.OKUD) ? OperRashod.OKUD : "");
+                        this.txtBoxRashOKUD.Text = (OperRashod != null && !string.IsNullOrWhiteSpace(OperRashod.OKUD) ? OperRashod.OKUD : "0310002");
 
                         // Приход заполняем список выдать
                         if (this.cmbBoxRashDebitor.Items.Count == 0)
@@ -1106,8 +1106,7 @@ namespace AlgoritmCashFunc
                         
                         // Заполняем инфу по операции
                         BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)this.CurDoc.CurOperation;
-                        this.txtBoxPrihOKUD.Text = OperPrihod.OKUD;
-                        
+                        this.txtBoxPrihOKUD.Text = (OperPrihod != null && !string.IsNullOrWhiteSpace(OperPrihod.OKUD) ? OperPrihod.OKUD : "0310001");
 
                         // Заполняем поле основание значенеие по умолчанию и зависимые поля
                         this.cmbBoxPrihPaidInReasons_SelectedIndexChanged(null, null);
@@ -1138,7 +1137,7 @@ namespace AlgoritmCashFunc
 
                         // Заполняем инфу по операции
                         BLL.OperationPlg.OperationRashod OperRashod = (BLL.OperationPlg.OperationRashod)this.CurDoc.CurOperation;
-                        this.txtBoxRashOKUD.Text = OperRashod.OKUD;
+                        this.txtBoxRashOKUD.Text = (OperRashod != null && !string.IsNullOrWhiteSpace(OperRashod.OKUD) ? OperRashod.OKUD : "0310002");
 
 
                         // Заполняем поле основание значенеие по умолчанию и зависимые поля
