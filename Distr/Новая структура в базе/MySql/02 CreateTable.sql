@@ -12,6 +12,7 @@ CREATE TABLE `cashfunc_operation` (
 # 
 INSERT INTO `aks`.`CashFunc_Operation` (`Id`, `OpFullName`, `OperationName`, `KoefDebitor`, `KoefCreditor`) VALUES (1, 'OperationPrihod', 'Приходный ордер', 1, 0);
 INSERT INTO `aks`.`CashFunc_Operation` (`Id`, `OpFullName`, `OperationName`, `KoefDebitor`, `KoefCreditor`) VALUES (2, 'OperationRashod', 'Расходный ордер', -1, 0);
+INSERT INTO `aks`.`CashFunc_Operation` (`Id`, `OpFullName`, `OperationName`, `KoefDebitor`, `KoefCreditor`) VALUES (3, 'OperationKasBook', 'Кассовая книга', 0, 0);
 
 
 #Drop Table `aks`.`cashfunc_Operation_Prihod`;
@@ -26,6 +27,15 @@ CREATE TABLE `aks`.`cashfunc_Operation_Prihod` (
 #Drop Table `aks`.`cashfunc_Operation_Rashod`;
 #
 CREATE TABLE `aks`.`cashfunc_Operation_Rashod` (
+  `Id` int NOT NULL,
+  `OKUD` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+#
+
+#Drop Table `aks`.`cashfunc_Operation_KasBook`;
+#
+CREATE TABLE `aks`.`cashfunc_Operation_KasBook` (
   `Id` int NOT NULL,
   `OKUD` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`Id`)
@@ -58,6 +68,7 @@ INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`
 INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (10, 'LocalPaidRashReasons', 'Выдача денежных средств на размен', 1, 1, 0);
 INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (11, 'LocalPaidRashReasons', 'Инкассация', 1, 1, 0);
 INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (12, 'LocalPaidRashReasons', 'Прочий расход', 1, 1, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`) VALUES (13, 'LocalAccounters', 'Давыдова Ю.В.', 0, 0, 1);
 
 
 
@@ -186,6 +197,19 @@ CREATE TABLE `aks`.`cashfunc_document_Rashod` (
   `Osnovanie` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `Id_PaidRashReasons` int NULL,
   `Prilozenie` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `DolRukFio` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `RukFio` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `GlavBuh` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+#
+
+#Drop Table `aks`.`cashfunc_document_KasBook`;
+#
+CREATE TABLE `aks`.`cashfunc_document_KasBook` (
+  `Id` int NOT NULL,
+  `SummaStartDay` decimal(16,4) DEFAULT NULL,
+  `SummaEndDay` decimal(16,4) DEFAULT NULL,
   `DolRukFio` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `RukFio` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `GlavBuh` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,

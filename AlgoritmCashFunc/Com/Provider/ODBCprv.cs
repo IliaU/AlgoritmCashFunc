@@ -610,6 +610,148 @@ namespace AlgoritmCashFunc.Com.Provider
         }
 
         /// <summary>
+        /// Проверка наличия информации объекта OperationKasBook
+        /// </summary>
+        /// <param name="OperationKasBook">Объект OperationKasBook который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        public bool HashOperationKasBook(BLL.OperationPlg.OperationKasBook OperationKasBook)
+        {
+            try
+            {
+                bool rez = false;
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            rez = HashOperationKasBookORA(OperationKasBook);
+                            break;
+                        case "myodbc8a.dll":
+                            rez = HashOperationKasBookMySql(OperationKasBook);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return rez;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashOperationPrihod", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту OperationKasBook
+        /// </summary>
+        /// <param name="OperationKasBook">Объект OperationKasBook который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        public bool GetOperationKasBook(ref BLL.OperationPlg.OperationKasBook OperationKasBook)
+        {
+            try
+            {
+                bool rez = false;
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            rez = GetOperationKasBookORA(ref OperationKasBook);
+                            break;
+                        case "myodbc8a.dll":
+                            rez = GetOperationKasBookMySql(ref OperationKasBook);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return rez;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationPrihod", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект OperationKasBook
+        /// </summary>
+        /// <param name="NewOperationKasBook">Вставляем в базу информацию по объекту OperationKasBook</param>
+        public void SetOperationKasBook(BLL.OperationPlg.OperationKasBook NewOperationKasBook)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            SetOperationKasBookORA(NewOperationKasBook);
+                            break;
+                        case "myodbc8a.dll":
+                            SetOperationKasBookMySql(NewOperationKasBook);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetOperationPrihod", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту OperationKasBook
+        /// </summary>
+        /// <param name="UpdOperationKasBook">Сам объект данные которого нужно обновить</param>
+        public void UpdateOperationKasBook(BLL.OperationPlg.OperationKasBook UpdOperationKasBook)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            UpdateOperationKasBookORA(UpdOperationKasBook);
+                            break;
+                        case "myodbc8a.dll":
+                            UpdateOperationKasBookMySql(UpdOperationKasBook);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationPrihod", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <returns>Получает текущий список Local из базы данных</returns>
@@ -1536,6 +1678,148 @@ namespace AlgoritmCashFunc.Com.Provider
                 throw;
             }
         }
+
+        /// <summary>
+        /// Проверка наличия информации объекта DocumentKasBook
+        /// </summary>
+        /// <param name="DocumentKasBook">Объект DocumentKasBook который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        public bool HashDocumentKasBook(BLL.DocumentPlg.DocumentKasBook DocumentKasBook)
+        {
+            try
+            {
+                bool rez = false;
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            rez = HashDocumentKasBookORA(DocumentKasBook);
+                            break;
+                        case "myodbc8a.dll":
+                            rez = HashDocumentKasBookMySql(DocumentKasBook);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return rez;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashDocumentKasBook", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту DocumentKasBook
+        /// </summary>
+        /// <param name="DocumentKasBook">Объект DocumentKasBook который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        public bool GetDocumentKasBook(ref BLL.DocumentPlg.DocumentKasBook DocumentKasBook)
+        {
+            try
+            {
+                bool rez = false;
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            rez = GetDocumentKasBookORA(ref DocumentKasBook);
+                            break;
+                        case "myodbc8a.dll":
+                            rez = GetDocumentKasBookMySql(ref DocumentKasBook);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return rez;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".DocumentKasBook", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект DocumentKasBook
+        /// </summary>
+        /// <param name="NewDocumentKasBook">Вставляем в базу информацию по объекту DocumentKasBook</param>
+        public void SetDocumentKasBook(BLL.DocumentPlg.DocumentKasBook NewDocumentKasBook)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            SetDocumentKasBookORA(NewDocumentKasBook);
+                            break;
+                        case "myodbc8a.dll":
+                            SetDocumentKasBookMySql(NewDocumentKasBook);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentKasBook", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту DocumentKasBook
+        /// </summary>
+        /// <param name="UpdDocumentKasBook">Сам объект данные которого нужно обновить</param>
+        public void UpdateDocumentKasBook(BLL.DocumentPlg.DocumentKasBook UpdDocumentKasBook)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            UpdateDocumentKasBookORA(UpdDocumentKasBook);
+                            break;
+                        case "myodbc8a.dll":
+                            UpdateDocumentKasBookMySql(UpdDocumentKasBook);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentKasBook", EventEn.Error);
+                throw;
+            }
+        }
         #endregion
 
         #region Private metod
@@ -2180,6 +2464,164 @@ From aks.prizm_cust_porog");
             {
                 base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationRashodORA", EventEn.Error);
                 if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationRashodORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Проверка наличия информации объекта OperationKasBook
+        /// </summary>
+        /// <param name="OperationKasBook">Объект OperationKasBook который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        private bool HashOperationKasBookORA(BLL.OperationPlg.OperationKasBook OperationKasBook)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashOperationKasBookORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                return false;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashOperationKasBookORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashOperationKasBookORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashOperationKasBookORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashOperationKasBookORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту OperationKasBook
+        /// </summary>
+        /// <param name="OperationKasBook">Объект OperationKasBook который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        private bool GetOperationKasBookORA(ref BLL.OperationPlg.OperationKasBook OperationKasBook)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationKasBookORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                return false;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationKasBookORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationKasBookORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationKasBookORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationKasBookORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект OperationKasBook
+        /// </summary>
+        /// <param name="NewOperationKasBook">Вставляем в базу информацию по объекту OperationKasBook</param>
+        private void SetOperationKasBookORA(BLL.OperationPlg.OperationKasBook NewOperationKasBook)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetOperationKasBookORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetOperationKasBookORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetOperationKasBookORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetOperationKasBookORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetOperationKasBookORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту OperationKasBook
+        /// </summary>
+        /// <param name="UpdOperationKasBook">Сам объект данные которого нужно обновить</param>
+        private void UpdateOperationKasBookORA(BLL.OperationPlg.OperationKasBook UpdOperationKasBook)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationKasBookORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationKasBookORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationKasBookORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationKasBookORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationKasBookORA", EventEn.Dump);
                 throw;
             }
         }
@@ -3292,6 +3734,164 @@ From `aks`.`cashfunc_local`");
             }
         }
 
+        /// <summary>
+        /// Проверка наличия информации объекта DocumentKasBook
+        /// </summary>
+        /// <param name="DocumentKasBook">Объект DocumentKasBook который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        private bool HashDocumentKasBookORA(BLL.DocumentPlg.DocumentKasBook DocumentKasBook)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashDocumentKasBookORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                return false;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashDocumentKasBookORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashDocumentKasBookORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashDocumentKasBookORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashDocumentKasBookORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту DocumentKasBook
+        /// </summary>
+        /// <param name="DocumentKasBook">Объект DocumentKasBook который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        private bool GetDocumentKasBookORA(ref BLL.DocumentPlg.DocumentKasBook DocumentKasBook)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentKasBookORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                return false;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetDocumentKasBookORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentKasBookORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetDocumentKasBookORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentKasBookORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект DocumentKasBook
+        /// </summary>
+        /// <param name="NewDocumentKasBook">Вставляем в базу информацию по объекту DocumentKasBook</param>
+        private void SetDocumentKasBookORA(BLL.DocumentPlg.DocumentKasBook NewDocumentKasBook)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentKasBookORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentKasBookORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentKasBookORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentKasBookORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentKasBookORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту DocumentKasBook
+        /// </summary>
+        /// <param name="UpdDocumentKasBook">Сам объект данные которого нужно обновить</param>
+        private void UpdateDocumentKasBookORA(BLL.DocumentPlg.DocumentKasBook UpdDocumentKasBook)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentKasBookORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentKasBookORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentKasBookORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentKasBookORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentKasBookORA", EventEn.Dump);
+                throw;
+            }
+        }
+
         #endregion
 
         #region Private method MySql
@@ -4034,6 +4634,219 @@ Where Id={0}", UpdOperationRashod.Id,
             }
         }
 
+        /// <summary>
+        /// Проверка наличия информации объекта OperationKasBook
+        /// </summary>
+        /// <param name="OperationKasBook">Объект OperationKasBook который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        private bool HashOperationKasBookMySql(BLL.OperationPlg.OperationKasBook OperationKasBook)
+        {
+            if (OperationKasBook.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            bool rez = false;
+
+            string CommandSql = String.Format(@"Select *
+From `aks`.`cashfunc_Operation_KasBook`
+Where Id={0}", (int)OperationKasBook.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashOperationKasBookMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        //com.Parameters.Add(new OdbcParameter("Id", OdbcType.Int) { Value = (int)LocalKassa.Id });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                rez = true;
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashOperationKasBookMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashOperationKasBookMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashOperationKasBookMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashOperationKasBookMySql", EventEn.Dump);
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту OperationKasBook
+        /// </summary>
+        /// <param name="OperationKasBook">Объект OperationKasBook который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        private bool GetOperationKasBookMySql(ref BLL.OperationPlg.OperationKasBook OperationKasBook)
+        {
+            if (OperationKasBook.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            bool rez = false;
+
+            string CommandSql = String.Format(@"Select `OKUD`
+From `aks`.`cashfunc_Operation_KasBook`
+Where Id={0}", (int)OperationKasBook.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationKasBookMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        //com.Parameters.Add(new OdbcParameter("Id", OdbcType.Int) { Value = (int)LocalKassa.Id });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+
+                            if (dr.HasRows)
+                            {
+                                rez = true;
+
+                                // Получаем схему таблицы
+                                //DataTable tt = dr.GetSchemaTable();
+
+                                //foreach (DataRow item in tt.Rows)
+                                //{
+                                //    DataColumn ncol = new DataColumn(item["ColumnName"].ToString(), Type.GetType(item["DataType"].ToString()));
+                                //ncol.SetOrdinal(int.Parse(item["ColumnOrdinal"].ToString()));
+                                //ncol.MaxLength = (int.Parse(item["ColumnSize"].ToString()) < 300 ? 300 : int.Parse(item["ColumnSize"].ToString()));
+                                //rez.Columns.Add(ncol);
+                                //}
+
+                                // пробегаем по строкам
+                                while (dr.Read())
+                                {
+                                    if (!dr.IsDBNull(0)) OperationKasBook.OKUD = dr.GetString(0);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationKasBookMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationKasBookMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationKasBookMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationKasBookMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект OperationKasBook
+        /// </summary>
+        /// <param name="NewOperationKasBook">Вставляем в базу информацию по объекту OperationKasBook</param>
+        private void SetOperationKasBookMySql(BLL.OperationPlg.OperationKasBook NewOperationKasBook)
+        {
+            if (NewOperationKasBook.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            string CommandSql = String.Format(@"insert into `aks`.`cashfunc_Operation_KasBook`(id, `OKUD`) 
+Values({0}, {1})", NewOperationKasBook.Id,
+                (string.IsNullOrWhiteSpace(NewOperationKasBook.OKUD) ? "null" : string.Format("'{0}'", NewOperationKasBook.OKUD)));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetOperationKasBookMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetOperationKasBookMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetOperationKasBookMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetOperationKasBookMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetOperationKasBookMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту OperationKasBook
+        /// </summary>
+        /// <param name="UpdOperationKasBook">Сам объект данные которого нужно обновить</param>
+        private void UpdateOperationKasBookMySql(BLL.OperationPlg.OperationKasBook UpdOperationKasBook)
+        {
+            if (UpdOperationKasBook.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            string CommandSql = String.Format(@"update `aks`.`cashfunc_Operation_KasBook`
+Set `OKUD`={1}
+Where Id={0}", UpdOperationKasBook.Id,
+                (string.IsNullOrWhiteSpace(UpdOperationKasBook.OKUD) ? "null" : string.Format("'{0}'", UpdOperationKasBook.OKUD)));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationKasBookMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationKasBookMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationKasBookMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationKasBookMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationKasBookMySql", EventEn.Dump);
+                throw;
+            }
+        }
 
         /// <summary>
         /// Получаем список текущий Local
@@ -5732,6 +6545,241 @@ Where Id={0}", UpdDocumentRashod.Id,
             {
                 base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentRashodMySql", EventEn.Error);
                 if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentRashodMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Проверка наличия информации объекта DocumentKasBook
+        /// </summary>
+        /// <param name="DocumentKasBook">Объект DocumentKasBook который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        private bool HashDocumentKasBookMySql(BLL.DocumentPlg.DocumentKasBook DocumentKasBook)
+        {
+            if (DocumentKasBook.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            bool rez = false;
+
+            string CommandSql = String.Format(@"Select *
+From `aks`.`cashfunc_document_KasBook`
+Where Id={0}", (int)DocumentKasBook.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashDocumentKasBookMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        //com.Parameters.Add(new OdbcParameter("Id", OdbcType.Int) { Value = (int)LocalKassa.Id });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                rez = true;
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashDocumentKasBookaMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashDocumentKasBookMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashDocumentKasBookMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashDocumentKasBookMySql", EventEn.Dump);
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту DocumentKasBook
+        /// </summary>
+        /// <param name="DocumentKasBook">Объект DocumentKasBook который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        private bool GetDocumentKasBookMySql(ref BLL.DocumentPlg.DocumentKasBook DocumentKasBook)
+        {
+            if (DocumentKasBook.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            bool rez = false;
+
+            string CommandSql = String.Format(@"Select `SummaStartDay`, `SummaEndDay`, `DolRukFio`, `RukFio`, 
+    `GlavBuh`
+From `aks`.`cashfunc_document_KasBook`
+Where Id={0}", (int)DocumentKasBook.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentKasBookMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        //com.Parameters.Add(new OdbcParameter("Id", OdbcType.Int) { Value = (int)LocalKassa.Id });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+
+                            if (dr.HasRows)
+                            {
+                                rez = true;
+
+                                // Получаем схему таблицы
+                                //DataTable tt = dr.GetSchemaTable();
+
+                                //foreach (DataRow item in tt.Rows)
+                                //{
+                                //    DataColumn ncol = new DataColumn(item["ColumnName"].ToString(), Type.GetType(item["DataType"].ToString()));
+                                //ncol.SetOrdinal(int.Parse(item["ColumnOrdinal"].ToString()));
+                                //ncol.MaxLength = (int.Parse(item["ColumnSize"].ToString()) < 300 ? 300 : int.Parse(item["ColumnSize"].ToString()));
+                                //rez.Columns.Add(ncol);
+                                //}
+
+                                // пробегаем по строкам
+                                while (dr.Read())
+                                {
+                                    //BLL.LocalPlg.LocalKassa.LocalKassaForProviderInterface interf = new BLL.LocalPlg.LocalKassa.LocalKassaForProviderInterface();
+                                    if (!dr.IsDBNull(0)) DocumentKasBook.SummaStartDay = decimal.Parse(dr.GetValue(0).ToString());
+                                    if (!dr.IsDBNull(1)) DocumentKasBook.SummaEndDay = decimal.Parse(dr.GetValue(1).ToString());
+                                    if (!dr.IsDBNull(2)) DocumentKasBook.DolRukFio = dr.GetValue(2).ToString();
+                                    if (!dr.IsDBNull(3)) DocumentKasBook.RukFio = dr.GetValue(3).ToString();
+                                    //
+                                    if (!dr.IsDBNull(4)) DocumentKasBook.GlavBuh = dr.GetValue(4).ToString();
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetDocumentKasBookMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentKasBookMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetDocumentKasBookMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentKasBookMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект DocumentKasBook
+        /// </summary>
+        /// <param name="NewDocumentKasBook">Вставляем в базу информацию по объекту DocumentKasBook</param>
+        private void SetDocumentKasBookMySql(BLL.DocumentPlg.DocumentKasBook NewDocumentKasBook)
+        {
+            if (NewDocumentKasBook.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            string CommandSql = String.Format(@"insert into `aks`.`cashfunc_document_KasBook`(id, `SummaStartDay`, `SummaEndDay`, `DolRukFio`,
+    `RukFio`, `GlavBuh`) 
+Values({0}, {1}, {2}, {3},
+    {4}, {5})", (NewDocumentKasBook.Id == null ? "null" : NewDocumentKasBook.Id.ToString()),
+            NewDocumentKasBook.SummaStartDay.ToString().Replace(",", "."),
+            NewDocumentKasBook.SummaEndDay.ToString().Replace(",", "."),
+            (string.IsNullOrWhiteSpace(NewDocumentKasBook.DolRukFio) ? "null" : string.Format("'{0}'", NewDocumentKasBook.DolRukFio)),
+            //
+            (string.IsNullOrWhiteSpace(NewDocumentKasBook.RukFio) ? "null" : string.Format("'{0}'", NewDocumentKasBook.RukFio)),
+            (string.IsNullOrWhiteSpace(NewDocumentKasBook.GlavBuh)) ? "null" : string.Format("'{0}'", NewDocumentKasBook.GlavBuh));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentKasBookMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentKasBookMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentKasBookMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentKasBookMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentKasBookMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту DocumentKasBook
+        /// </summary>
+        /// <param name="UpdDocumentKasBook">Сам объект данные которого нужно обновить</param>
+        private void UpdateDocumentKasBookMySql(BLL.DocumentPlg.DocumentKasBook UpdDocumentKasBook)
+        {
+            if (UpdDocumentKasBook.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            string CommandSql = String.Format(@"update `aks`.`cashfunc_document_KasBook`
+    `SummaStartDay`={1}, `SummaEndDay`={2}, `DolRukFio`={3}, `RukFio`={4}, 
+    `GlavBuh`={5}
+Where Id={0}", UpdDocumentKasBook.Id,
+            //
+            UpdDocumentKasBook.SummaStartDay.ToString().Replace(",", "."),
+            UpdDocumentKasBook.SummaEndDay.ToString().Replace(",", "."),
+            (string.IsNullOrWhiteSpace(UpdDocumentKasBook.DolRukFio) ? "null" : string.Format("'{0}'", UpdDocumentKasBook.DolRukFio)),
+            (string.IsNullOrWhiteSpace(UpdDocumentKasBook.RukFio) ? "null" : string.Format("'{0}'", UpdDocumentKasBook.RukFio)),
+            //
+            (string.IsNullOrWhiteSpace(UpdDocumentKasBook.GlavBuh) ? "null" : string.Format("'{0}'", UpdDocumentKasBook.GlavBuh)));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentKasBookMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentKasBookMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentKasBookMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentKasBookMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentKasBookMySql", EventEn.Dump);
                 throw;
             }
         }

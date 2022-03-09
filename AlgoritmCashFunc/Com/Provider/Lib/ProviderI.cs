@@ -104,6 +104,32 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         void UpdateOperationRashod(BLL.OperationPlg.OperationRashod UpdOperationRashod);
 
         /// <summary>
+        /// Проверка наличия информации объекта OperationKasBook
+        /// </summary>
+        /// <param name="OperationKasBook">Объект OperationKasBook который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        bool HashOperationKasBook(BLL.OperationPlg.OperationKasBook OperationKasBook);
+
+        /// <summary>
+        /// Читаем информацию по объекту OperationKasBook
+        /// </summary>
+        /// <param name="OperationKasBook">Объект OperationKasBook который нужно прочитать в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли прочитать объект или нет</returns>
+        bool GetOperationKasBook(ref BLL.OperationPlg.OperationKasBook OperationKasBook);
+
+        /// <summary>
+        /// Вставка новой информации в объект OperationKasBook
+        /// </summary>
+        /// <param name="NewOperationKasBook">Вставляем в базу информацию по объекту OperationKasBook</param>
+        void SetOperationKasBook(BLL.OperationPlg.OperationKasBook NewOperationKasBook);
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту OperationKasBook
+        /// </summary>
+        /// <param name="UpdOperationKasBook">Сам объект данные которого нужно обновить</param>
+        void UpdateOperationKasBook(BLL.OperationPlg.OperationKasBook UpdOperationKasBook);
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <returns>Получает текущий список Local из базы данных</returns>
@@ -272,5 +298,31 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         /// </summary>
         /// <param name="UpdDocumentRashod">Сам объект данные которого нужно обновить</param>
         void UpdateDocumentRashod(BLL.DocumentPlg.DocumentRashod UpdDocumentRashod);
+
+        /// <summary>
+        /// Проверка наличия информации объекта DocumentKasBook
+        /// </summary>
+        /// <param name="DocumentKasBook">Объект DocumentKasBook который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        bool HashDocumentKasBook(BLL.DocumentPlg.DocumentKasBook DocumentKasBook);
+
+        /// <summary>
+        /// Читаем информацию по объекту DocumentKasBook
+        /// </summary>
+        /// <param name="DocumentKasBook">Объект DocumentKasBook который нужно прочитать в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли прочитать объект или нет</returns>
+        bool GetDocumentKasBook(ref BLL.DocumentPlg.DocumentKasBook DocumentKasBook);
+
+        /// <summary>
+        /// Вставка новой информации в объект DocumentKasBook
+        /// </summary>
+        /// <param name="NewDocumentKasBook">Вставляем в базу информацию по объекту DocumentKasBook</param>
+        void SetDocumentKasBook(BLL.DocumentPlg.DocumentKasBook NewDocumentKasBook);
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту DocumentKasBook
+        /// </summary>
+        /// <param name="UpdDocumentKasBook">Сам объект данные которого нужно обновить</param>
+        void UpdateDocumentKasBook(BLL.DocumentPlg.DocumentKasBook UpdDocumentKasBook);
     }
 }

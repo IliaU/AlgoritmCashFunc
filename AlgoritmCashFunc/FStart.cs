@@ -238,6 +238,16 @@ namespace AlgoritmCashFunc
                             this.txtBoxKasBookOKUD.ReadOnly = false;
                             this.txtBoxKasBookOrganization.ReadOnly = false;
                             this.txtBoxKasBookStructPodr.ReadOnly = false;
+                            this.txtBoxKasBookDateDoc.ReadOnly = false;
+
+                            // разрешено править всем
+                            this.cmbBoxKassBookBuh.Enabled = true;
+                            this.cmbBoxKassBookKasir.Enabled = true;
+
+                            this.txtBoxKasBookDolRukOrg.ReadOnly = false;
+                            this.txtBoxKasBookRukFio.ReadOnly = false;
+                            this.txtBoxKasBookGlavBuh.ReadOnly = false;
+                            
                             break;
                         // Акт о возврате денег
                         case 3:
@@ -344,6 +354,17 @@ namespace AlgoritmCashFunc
                             this.txtBoxKasBookOKUD.ReadOnly = true;
                             this.txtBoxKasBookOrganization.ReadOnly = true;
                             this.txtBoxKasBookStructPodr.ReadOnly = true;
+                            this.txtBoxKasBookDateDoc.ReadOnly = true;
+
+                            // разрешено править всем
+                            this.cmbBoxKassBookBuh.Enabled = false;
+                            this.cmbBoxKassBookKasir.Enabled = false;
+
+                            this.txtBoxKasBookDolRukOrg.ReadOnly = true;
+                            this.txtBoxKasBookRukFio.ReadOnly = true;
+                            this.txtBoxKasBookGlavBuh.ReadOnly = true;
+
+
                             break;
                         // Акт о возврате денег
                         case 3:
@@ -529,6 +550,37 @@ namespace AlgoritmCashFunc
                         this.txtBoxKasBookOrganization.Text = Kassa.Organization;
                         this.txtBoxKasBookStructPodr.Text = Kassa.StructPodrazdelenie;
                         this.txtBoxKasBookOKPO.Text = Kassa.OKPO;
+                        this.txtBoxKasBookDateDoc.Text = DateTime.Now.Date.ToShortDateString();
+                        this.txtBoxKasBookDolRukOrg.Text = Kassa.DolRukOrg;
+                        this.txtBoxKasBookRukFio.Text = Kassa.RukFio;
+                        this.txtBoxKasBookGlavBuh.Text = Kassa.GlavBuhFio;
+
+                        // Заполняем инфу по операции
+                        BLL.OperationPlg.OperationKasBook OperKasBook = (BLL.OperationPlg.OperationKasBook)OperationFarm.CurOperationList["OperationKasBook"];
+                        this.txtBoxKasBookOKUD.Text = (OperKasBook != null && !string.IsNullOrWhiteSpace(OperKasBook.OKUD) ? OperKasBook.OKUD : "0310004");
+
+                        // Заполняем Бухгалтер
+                        if (this.cmbBoxKassBookBuh.Items.Count == 0)
+                        {
+                            foreach (Local item in LocalFarm.CurLocalAccounters)
+                            {
+                                this.cmbBoxKassBookBuh.Items.Add(item.LocalName);
+                            }
+                        }
+
+                        // Заполняем получил кассир
+                        if (this.cmbBoxKassBookKasir.Items.Count == 0)
+                        {
+                            foreach (Local item in LocalFarm.CurLocalChiefCashiers)
+                            {
+                                this.cmbBoxKassBookKasir.Items.Add(item.LocalName);
+                            }
+                        }
+
+                        // Заполняем поле основание значенеие по умолчанию и зависимые поля
+                        this.cmbBoxKassBookBuh.SelectedIndex = -1;
+                        this.cmbBoxKassBookKasir.SelectedIndex = -1;
+                        
                         break;
                     // Акт о возврате денег
                     case 3:
@@ -1157,11 +1209,19 @@ namespace AlgoritmCashFunc
                     // Кассовая книга
                     case 2:
                         // Создаём пустой документ
-                        //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                        this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentKasBook");  // тут надо получить документ и список на день который указан если документа нет то создаём его и получаем список документов в этом дне с остатками на начало и конец для того чтобы можно было мостроить суммы на начало дня и конец выбранного дня
+                        this.CurDoc.DocNum = (Kassa.LastDocNumKasBook + 1);
+                        this.txtBoxKasBookDolRukOrg.Text = Kassa.DolRukOrg;
+                        this.txtBoxKasBookRukFio.Text = Kassa.RukFio;
+                        this.txtBoxKasBookGlavBuh.Text = Kassa.GlavBuhFio;
                         // Проверка на наличие ошибок при создании пустого документа
-                        //if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
+                        if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
                         //
                         this.txtBoxKasBookDateDoc.Text = DateTime.Now.Date.ToShortDateString();
+
+                        this.txtBoxKassBookStartDay.Text = "сумма на начало дня";
+                        this.txtBoxKassBookEndDay.Text = "сумма на конец дня";
+
                         break;
                     // Акт о возврате денег
                     case 3:

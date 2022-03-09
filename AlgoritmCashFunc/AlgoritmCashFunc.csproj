@@ -48,12 +48,14 @@
   <ItemGroup>
     <Compile Include="BLL\Document.cs" />
     <Compile Include="BLL\DocumentList.cs" />
+    <Compile Include="BLL\DocumentPlg\DocumentKasBook.cs" />
     <Compile Include="BLL\DocumentPlg\DocumentPrihod.cs" />
     <Compile Include="BLL\DocumentPlg\DocumentRashod.cs" />
     <Compile Include="BLL\DocumentPlg\Lib\DocumentBase.cs" />
     <Compile Include="BLL\DocumentPlg\Lib\DocumentInterface.cs" />
     <Compile Include="BLL\LocalList.cs" />
     <Compile Include="BLL\LocalPlg\Lib\LocalBase.cs" />
+    <Compile Include="BLL\LocalPlg\LocalAccounters.cs" />
     <Compile Include="BLL\LocalPlg\LocalChiefCashiers.cs" />
     <Compile Include="BLL\LocalPlg\LocalEmployees.cs" />
     <Compile Include="BLL\LocalPlg\LocalKassa.cs" />
@@ -66,6 +68,7 @@
     <Compile Include="BLL\Operation.cs" />
     <Compile Include="BLL\OperationList.cs" />
     <Compile Include="BLL\OperationPlg\Lib\OperationInterface.cs" />
+    <Compile Include="BLL\OperationPlg\OperationKasBook.cs" />
     <Compile Include="BLL\OperationPlg\OperationPrihod.cs" />
     <Compile Include="BLL\OperationPlg\OperationRashod.cs" />
     <Compile Include="Com\Config.cs" />
