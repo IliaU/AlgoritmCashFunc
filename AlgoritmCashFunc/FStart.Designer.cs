@@ -2833,6 +2833,7 @@
             this.txtBoxKasBookDateDoc.Name = "txtBoxKasBookDateDoc";
             this.txtBoxKasBookDateDoc.Size = new System.Drawing.Size(107, 21);
             this.txtBoxKasBookDateDoc.TabIndex = 1;
+            this.txtBoxKasBookDateDoc.TextChanged += new System.EventHandler(this.txtBoxKasBookDateDoc_TextChanged);
             // 
             // lblKasBookDateDoc
             // 

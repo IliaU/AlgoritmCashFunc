@@ -176,7 +176,7 @@ namespace AlgoritmCashFunc.Com
         /// <param name="IsDraft">Черновик</param>
         /// <param name="IsProcessed">Проведённый документ или нет</param>
         /// <returns>Возвращаем Local</returns>
-        public static Document CreateNewDocument(int Id, string DocFullName, DateTime? UreDate, DateTime CteateDate, DateTime ModifyDate, string ModifyUser, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, int DocNum, bool IsDraft, bool IsProcessed)
+        public static Document CreateNewDocument(int? Id, string DocFullName, DateTime? UreDate, DateTime CteateDate, DateTime ModifyDate, string ModifyUser, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, int DocNum, bool IsDraft, bool IsProcessed)
         {
             // Если списка документов ещё нет то создаём его
             ListDocumentName();

@@ -230,9 +230,17 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <param name="LastDay">Сколько последних дней грузить из базы данных если null значит весь период</param>
-        /// <param name="OperationId">Какая операция нас интересует, если </param>
+        /// <param name="OperationId">Какая операция нас интересует, если null значит все операции за эту дату</param>
         /// <returns>Получает список Document из базы данных удовлетворяющий фильтрам</returns>
         DocumentList GetDocumentListFromDB(int? LastDay, int? OperationId);
+
+        /// <summary>
+        /// Получаем список докуменитов
+        /// </summary>
+        /// <param name="Dt">За конкретную дату время будет отброшено</param>
+        /// <param name="OperationId">Какая операция нас интересует, если null значит все операции за эту дату</param>
+        /// <returns>Получает список Document из базы данных удовлетворяющий фильтрам</returns>
+        DocumentList GetDocumentListFromDB(DateTime? Dt, int? OperationId);
 
         /// <summary>
         /// Сохранение Document в базе

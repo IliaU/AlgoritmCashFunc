@@ -128,7 +128,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         /// <summary>
         /// Конструктор
         /// </summary>
-        public DocumentRashod() : this(null, DateTime.Now.Date, DateTime.Now, DateTime.Now, Com.UserFarm.CurrentUser.Logon, Com.OperationFarm.CurOperationList["OperationRashod"], null, null, Com.LocalFarm.CurLocalDepartament.LastDocNumPrih+1, true, false)
+        public DocumentRashod() : this(null, DateTime.Now.Date, DateTime.Now, DateTime.Now, Com.UserFarm.CurrentUser.Logon, Com.OperationFarm.CurOperationList["OperationRashod"], null, null, Com.LocalFarm.CurLocalDepartament.LastDocNumRash+1, true, false)
         {
             try
             {

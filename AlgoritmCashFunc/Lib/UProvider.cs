@@ -556,6 +556,17 @@ namespace AlgoritmCashFunc.Lib
         }
 
         /// <summary>
+        /// Получаем список докуменитов
+        /// </summary>
+        /// <param name="Dt">За конкретную дату время будет отброшено</param>
+        /// <param name="OperationId">Какая операция нас интересует, если null значит все операции за эту дату</param>
+        /// <returns>Получает список Document из базы данных удовлетворяющий фильтрам</returns>
+        public DocumentList GetDocumentListFromDB(DateTime? Dt, int? OperationId)
+        {
+            return this.PrvI.GetDocumentListFromDB(Dt, OperationId);
+        }
+
+        /// <summary>
         /// Сохранение Local в базе
         /// </summary>
         /// <param name="NewDocument">Новый документ который нужно сохранить</param>

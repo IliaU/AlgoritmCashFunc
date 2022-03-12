@@ -1323,6 +1323,43 @@ namespace AlgoritmCashFunc.Com.Provider
         }
 
         /// <summary>
+        /// Получаем список докуменитов
+        /// </summary>
+        /// <param name="Dt">За конкретную дату время будет отброшено</param>
+        /// <param name="OperationId">Какая операция нас интересует, если null значит все операции за эту дату</param>
+        /// <returns>Получает список Document из базы данных удовлетворяющий фильтрам</returns>
+        public DocumentList GetDocumentListFromDB(DateTime? Dt, int? OperationId)
+        {
+            try
+            {
+                // Если мы работаем в режиме без базы то выводим тестовые записи
+                if (!this.HashConnect()) throw new ApplicationException("Не установлено подключение с базой данных.");
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            return GetDocumentListFromDbORA(Dt, OperationId);
+                        case "myodbc8a.dll":
+                            return GetDocumentListFromDbMySql(Dt, OperationId);
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Логируем ошибку если её должен видеть пользователь или если взведён флаг трассировке в файле настройки программы
+                if (Com.Config.Trace) base.EventSave(ex.Message, "GetDocumentListFromDB", EventEn.Error);
+
+                throw ex;
+            }
+        }
+
+        /// <summary>
         /// Сохранение Document в базе
         /// </summary>
         /// <param name="NewDocument">Новый документ который нужно сохранить</param>
@@ -3265,6 +3302,87 @@ From `aks`.`cashfunc_local`");
         /// <param name="OperationId">Какая операция нас интересует, если </param>
         /// <returns>Получает список Document из базы данных удовлетворяющий фильтрам</returns>
         private DocumentList GetDocumentListFromDbORA(int? LastDay, int? OperationId)
+        {
+            string CommandSql = String.Format(@"Select `Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision` 
+From `aks`.`cashfunc_local`");
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentListFromDbORA", EventEn.Dump);
+
+                DocumentList rez = new DocumentList();
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+
+                            if (dr.HasRows)
+                            {
+                                // Получаем схему таблицы
+                                //DataTable tt = dr.GetSchemaTable();
+
+                                //foreach (DataRow item in tt.Rows)
+                                //{
+                                //    DataColumn ncol = new DataColumn(item["ColumnName"].ToString(), Type.GetType(item["DataType"].ToString()));
+                                //ncol.SetOrdinal(int.Parse(item["ColumnOrdinal"].ToString()));
+                                //ncol.MaxLength = (int.Parse(item["ColumnSize"].ToString()) < 300 ? 300 : int.Parse(item["ColumnSize"].ToString()));
+                                //rez.Columns.Add(ncol);
+                                //}
+
+                                // пробегаем по строкам
+                                while (dr.Read())
+                                {
+                                    int? TmpOperation = null;
+                                    string TmpDocFullName = null;
+                                    string TmpOperationName = null;
+                                    for (int i = 0; i < dr.FieldCount; i++)
+                                    {
+                                        if (!dr.IsDBNull(i) && dr.GetName(i).ToUpper() == ("Operation").ToUpper()) TmpOperation = int.Parse(dr.GetValue(i).ToString());
+                                        if (!dr.IsDBNull(i) && dr.GetName(i).ToUpper() == ("DocFullName").ToUpper()) TmpDocFullName = dr.GetValue(i).ToString();
+                                        if (!dr.IsDBNull(i) && dr.GetName(i).ToUpper() == ("OperationName").ToUpper()) TmpOperationName = dr.GetValue(i).ToString();
+                                    }
+
+                                    //Если данные есть то добавляем их в список
+                                    if (TmpOperation != null && !string.IsNullOrWhiteSpace(TmpDocFullName) && !string.IsNullOrWhiteSpace(TmpOperationName))
+                                    {
+                                        //OperationList.OperationListFarmBase.AddOperationToList(rez, new Operation((int)TmpOperation, TmpDocFullName, TmpOperationName));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetDocumentListFromDbORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentListFromDbORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetDocumentListFromDbORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentListFromDbORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Получаем список докуменитов
+        /// </summary>
+        /// <param name="Dt">За конкретную дату время будет отброшено</param>
+        /// <param name="OperationId">Какая операция нас интересует, если null значит все операции за эту дату</param>
+        /// <returns>Получает список Document из базы данных удовлетворяющий фильтрам</returns>
+        private DocumentList GetDocumentListFromDbORA(DateTime? Dt, int? OperationId)
         {
             string CommandSql = String.Format(@"Select `Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision` 
 From `aks`.`cashfunc_local`");
@@ -5747,7 +5865,12 @@ Where Id={0}", UpdLocalPaidRashReasons.Id, UpdLocalPaidRashReasons.Osnovanie, Up
         /// <returns>Получает список Document из базы данных удовлетворяющий фильтрам</returns>
         private DocumentList GetDocumentListFromDbMySql(int? LastDay, int? OperationId)
         {
-            string CommandSql = String.Format(@"Select `Id`, `DocFullName`, `UreDate`, `CteateDate`, `ModifyDate`, `ModifyUser`, `OperationId`, `LocalDebitorId`, `LocalCreditorId`, `DocNum`, `IsDraft`, `IsProcessed` From `aks`.`CashFunc_Document`");
+            string CommandSql = String.Format(@"Select `Id`, `DocFullName`, `UreDate`, `CteateDate`, `ModifyDate`, `ModifyUser`, `OperationId`, `LocalDebitorId`, `LocalCreditorId`, `DocNum`, `IsDraft`, `IsProcessed` 
+From `aks`.`CashFunc_Document`
+Where `UreDate`>={0} 
+    and `OperationId`={1}", (LastDay == null ? "`OperationId`" : string.Format("Str_To_Date('{0}', '%d.%m.%Y')", DateTime.Now.AddDays((double)LastDay*-1).ToShortDateString()))
+            , (OperationId == null ? "`OperationId`" : OperationId.ToString())
+            );
 
             try
             {
@@ -5845,6 +5968,120 @@ Where Id={0}", UpdLocalPaidRashReasons.Id, UpdLocalPaidRashReasons.Osnovanie, Up
                 throw;
             }
         }
+
+
+        /// <summary>
+        /// Получаем список докуменитов
+        /// </summary>
+        /// <param name="Dt">За конкретную дату время будет отброшено</param>
+        /// <param name="OperationId">Какая операция нас интересует, если null значит все операции за эту дату</param>
+        /// <returns>Получает список Document из базы данных удовлетворяющий фильтрам</returns>
+        private DocumentList GetDocumentListFromDbMySql(DateTime? Dt, int? OperationId)
+        {
+            string CommandSql = String.Format(@"Select `Id`, `DocFullName`, `UreDate`, `CteateDate`, `ModifyDate`, `ModifyUser`, `OperationId`, `LocalDebitorId`, `LocalCreditorId`, `DocNum`, `IsDraft`, `IsProcessed` 
+From `aks`.`CashFunc_Document`
+Where `UreDate`={0} 
+    and `OperationId`={1}", (Dt==null ? "`OperationId`" : string.Format("Str_To_Date('{0}', '%d.%m.%Y')", ((DateTime)Dt).ToShortDateString()))
+            , (OperationId==null ? "`OperationId`" : OperationId.ToString())
+            );
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentListFromDbMySql", EventEn.Dump);
+
+                DocumentList rez = new DocumentList();
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+
+                            if (dr.HasRows)
+                            {
+                                // Получаем схему таблицы
+                                //DataTable tt = dr.GetSchemaTable();
+
+                                //foreach (DataRow item in tt.Rows)
+                                //{
+                                //    DataColumn ncol = new DataColumn(item["ColumnName"].ToString(), Type.GetType(item["DataType"].ToString()));
+                                //ncol.SetOrdinal(int.Parse(item["ColumnOrdinal"].ToString()));
+                                //ncol.MaxLength = (int.Parse(item["ColumnSize"].ToString()) < 300 ? 300 : int.Parse(item["ColumnSize"].ToString()));
+                                //rez.Columns.Add(ncol);
+                                //}
+
+                                // пробегаем по строкам
+                                while (dr.Read())
+                                {
+                                    int? TmpId = null;
+                                    string TmpDocFullName = null;
+                                    DateTime? TmpUreDate = null;
+                                    DateTime? TmpCteateDate = null;
+                                    DateTime? TmpModifyDate = null;
+                                    string TmpModifyUser = null;
+                                    int? TmpOperationId = null;
+                                    int? TmpLocalDebitorId = null;
+                                    int? TmpLocalCreditorId = null;
+                                    int TmpDocNum = 0;
+                                    bool TmpIsDraft = true;
+                                    bool TmpIsProcessed = false;
+
+
+                                    if (!dr.IsDBNull(0)) TmpId = dr.GetInt32(0);
+                                    if (!dr.IsDBNull(1)) TmpDocFullName = dr.GetString(1);
+                                    if (!dr.IsDBNull(2)) TmpUreDate = dr.GetDateTime(2);
+                                    if (!dr.IsDBNull(3)) TmpCteateDate = dr.GetDateTime(3);
+                                    if (!dr.IsDBNull(4)) TmpModifyDate = dr.GetDateTime(4);
+                                    if (!dr.IsDBNull(5)) TmpModifyUser = dr.GetString(5);
+                                    if (!dr.IsDBNull(6)) TmpOperationId = dr.GetInt32(6);
+                                    if (!dr.IsDBNull(7)) TmpLocalDebitorId = dr.GetInt32(7);
+                                    if (!dr.IsDBNull(8)) TmpLocalCreditorId = dr.GetInt32(8);
+                                    if (!dr.IsDBNull(9)) TmpDocNum = dr.GetInt32(9);
+                                    if (!dr.IsDBNull(10)) TmpIsDraft = Boolean.Parse(dr.GetValue(10).ToString());
+                                    if (!dr.IsDBNull(11)) TmpIsProcessed = Boolean.Parse(dr.GetValue(11).ToString());
+
+
+                                    //Если данные есть то добавляем их в список
+                                    if (TmpId != null && !string.IsNullOrWhiteSpace(TmpDocFullName) && TmpCteateDate != null && TmpModifyDate != null && !string.IsNullOrWhiteSpace(TmpModifyUser) && TmpOperationId != null && TmpLocalDebitorId != null && TmpLocalCreditorId != null)
+                                    {
+                                        Operation TmpOper = OperationFarm.CurOperationList[TmpOperationId];
+                                        if (TmpOper == null) throw new ApplicationException(string.Format("Операции с идентификатором {0} в документе где id={1} не существует.", TmpOperationId, TmpId));
+
+                                        Local TmpDeb = LocalFarm.CurLocalList[TmpLocalDebitorId];
+                                        if (TmpDeb == null) throw new ApplicationException(string.Format("Дебитора с идентификатором {0} в документе где id={1} не существует.", TmpLocalDebitorId, TmpId));
+
+                                        Local TmpCred = LocalFarm.CurLocalList[TmpLocalCreditorId];
+                                        if (TmpCred == null) throw new ApplicationException(string.Format("Кредитора с идентификатором {0} в документе где id={1} не существует.", TmpLocalCreditorId, TmpId));
+
+                                        rez.Add(DocumentFarm.CreateNewDocument((int)TmpId, TmpDocFullName, TmpUreDate, (DateTime)TmpCteateDate, (DateTime)TmpModifyDate, TmpModifyUser, TmpOper, TmpDeb, TmpCred, TmpDocNum, TmpIsDraft, TmpIsProcessed));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetDocumentListFromDbMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentListFromDbMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetDocumentListFromDbMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentListFromDbMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
 
         /// <summary>
         /// Сохранение Document в базе

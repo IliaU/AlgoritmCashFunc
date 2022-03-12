@@ -354,7 +354,7 @@ namespace AlgoritmCashFunc
                             this.txtBoxKasBookOKUD.ReadOnly = true;
                             this.txtBoxKasBookOrganization.ReadOnly = true;
                             this.txtBoxKasBookStructPodr.ReadOnly = true;
-                            this.txtBoxKasBookDateDoc.ReadOnly = true;
+                            this.txtBoxKasBookDateDoc.ReadOnly = false;
 
                             // разрешено править всем
                             this.cmbBoxKassBookBuh.Enabled = false;
@@ -550,7 +550,7 @@ namespace AlgoritmCashFunc
                         this.txtBoxKasBookOrganization.Text = Kassa.Organization;
                         this.txtBoxKasBookStructPodr.Text = Kassa.StructPodrazdelenie;
                         this.txtBoxKasBookOKPO.Text = Kassa.OKPO;
-                        this.txtBoxKasBookDateDoc.Text = DateTime.Now.Date.ToShortDateString();
+                        if(string.IsNullOrWhiteSpace(this.txtBoxKasBookDateDoc.Text)) this.txtBoxKasBookDateDoc.Text = DateTime.Now.Date.ToShortDateString();
                         this.txtBoxKasBookDolRukOrg.Text = Kassa.DolRukOrg;
                         this.txtBoxKasBookRukFio.Text = Kassa.RukFio;
                         this.txtBoxKasBookGlavBuh.Text = Kassa.GlavBuhFio;
@@ -980,13 +980,62 @@ namespace AlgoritmCashFunc
                         Kassa.Organization = this.txtBoxKasBookOrganization.Text;
                         Kassa.StructPodrazdelenie = this.txtBoxKasBookStructPodr.Text;
                         Kassa.OKPO = this.txtBoxKasBookOKPO.Text;
+                        Kassa.DolRukOrg = this.txtBoxKasBookDolRukOrg.Text;
+                        Kassa.RukFio = this.txtBoxKasBookRukFio.Text;
+                        Kassa.GlavBuhFio = this.txtBoxRashGlavBuh.Text;
 
                         // Валидация заполненных данных по подразделению и сохранение в базе
                         ValidateKassa(Kassa);
+                                               
+                        // Валидация дебитора
+                        if (this.cmbBoxKassBookBuh.SelectedIndex == -1) throw new ApplicationException("Не указан бухгалтер.");
+                        else
+                        {
+                            this.CurDoc.LocalDebitor = LocalFarm.CurLocalAccounters[this.cmbBoxKassBookBuh.SelectedIndex];
+                        }
+
+                        // Валидация кассира
+                        if (this.cmbBoxKassBookKasir.SelectedIndex == -1) throw new ApplicationException("Не указан кассир.");
+                        else
+                        {
+                            this.CurDoc.LocalCreditor = LocalFarm.CurLocalChiefCashiers[this.cmbBoxKassBookKasir.SelectedIndex];
+                        }
+                        
+                        // Валидация суммы на начало дня
+                        if (!string.IsNullOrWhiteSpace(this.txtBoxKassBookStartDay.Text))
+                        {
+                            try
+                            {
+                                ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).SummaStartDay = decimal.Round(decimal.Parse(this.txtBoxKassBookStartDay.Text), 2);
+                            }
+                            catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение к сумме на начало дня {0}.", this.txtBoxKassBookStartDay.Text)); }
+                        }
+                        else ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).SummaStartDay = 0;
+
+                        // Валидация суммы на конец дня
+                        if (!string.IsNullOrWhiteSpace(this.txtBoxKassBookEndDay.Text))
+                        {
+                            try
+                            {
+                                ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).SummaEndDay = decimal.Round(decimal.Parse(this.txtBoxKassBookEndDay.Text), 2);
+                            }
+                            catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение к сумме на конец дня {0}.", this.txtBoxKassBookEndDay.Text)); }
+                        }
+                        else ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).SummaEndDay = 0;
+
+
+                        // Сохранение инфы в базе
+                        Kassa.LastDocNumKasBook = this.CurDoc.DocNum;
+                        Kassa.Save();
 
                         // Валидация введённой даты
                         try { this.CurDoc.UreDate = DateTime.Parse(this.txtBoxKasBookDateDoc.Text); }
                         catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxKasBookDateDoc.Text)); }
+                        
+                        // Заполняем инфу по операции
+                        BLL.OperationPlg.OperationKasBook OperKasBook = (BLL.OperationPlg.OperationKasBook)this.CurDoc.CurOperation;
+                        OperKasBook.OKUD = txtBoxKasBookOKUD.Text;
+                        OperKasBook.Save();
 
                         // Сохранение инфы в базе
                         Kassa.Save();
@@ -1208,19 +1257,48 @@ namespace AlgoritmCashFunc
                         break;
                     // Кассовая книга
                     case 2:
-                        // Создаём пустой документ
-                        this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentKasBook");  // тут надо получить документ и список на день который указан если документа нет то создаём его и получаем список документов в этом дне с остатками на начало и конец для того чтобы можно было мостроить суммы на начало дня и конец выбранного дня
-                        this.CurDoc.DocNum = (Kassa.LastDocNumKasBook + 1);
-                        this.txtBoxKasBookDolRukOrg.Text = Kassa.DolRukOrg;
-                        this.txtBoxKasBookRukFio.Text = Kassa.RukFio;
-                        this.txtBoxKasBookGlavBuh.Text = Kassa.GlavBuhFio;
-                        // Проверка на наличие ошибок при создании пустого документа
-                        if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
-                        //
-                        this.txtBoxKasBookDateDoc.Text = DateTime.Now.Date.ToShortDateString();
 
-                        this.txtBoxKassBookStartDay.Text = "сумма на начало дня";
-                        this.txtBoxKassBookEndDay.Text = "сумма на конец дня";
+                        // Если был передан конкретный документ который пользователь правит то заполняем полями из документа
+                        if (sender != null && e == null)
+                        {
+                            // Был найден документ в базе по этой причине нам надо не создаввать новый а править найденый документ
+                            this.CurDoc = (BLL.DocumentPlg.DocumentKasBook)sender;
+
+                            // !!!!!! Тут не факт что нужно что-то сохранять так как документ подтягивался сюда как раз с использованием этой даты в фильтре скорее всего дата будет всегда одна и таже
+                            this.txtBoxKasBookDateDoc.Text = ((DateTime)this.CurDoc.UreDate).ToShortDateString();
+
+                            this.txtBoxKasBookDolRukOrg.Text = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).DolRukFio;
+                            this.txtBoxKasBookRukFio.Text = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).RukFio;
+                            this.txtBoxKasBookGlavBuh.Text = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).GlavBuh;
+
+                            // Бухгалтер
+                            this.cmbBoxKassBookBuh.SelectedIndex = this.CurDoc.LocalDebitor.Index;
+                            // Кассир
+                            this.cmbBoxKassBookKasir.SelectedIndex = this.CurDoc.LocalCreditor.Index;
+                        }
+                        else
+                        {
+                            // Валидация введённой даты
+                            DateTime UreDt = DateTime.Now.Date;
+                            try { UreDt = DateTime.Parse(this.txtBoxKasBookDateDoc.Text); }
+                            catch (Exception) { }
+
+                            // Создаём пустой документ так как за эту дату документ не найден
+                            this.CurDoc = Com.DocumentFarm.CreateNewDocument(null, "DocumentKasBook", UreDt, DateTime.Now, DateTime.Now, Com.UserFarm.CurrentUser.Logon, Com.OperationFarm.CurOperationList["OperationKasBook"], null, null, Com.LocalFarm.CurLocalDepartament.LastDocNumKasBook + 1, true, false);  // тут надо получить документ и список на день который указан если документа нет то создаём его и получаем список документов в этом дне с остатками на начало и конец для того чтобы можно было мостроить суммы на начало дня и конец выбранного дня
+                            //this.CurDoc.DocNum = (Kassa.LastDocNumKasBook + 1);  // Номер документа получили при создании документа
+
+                            this.txtBoxKasBookDolRukOrg.Text = Kassa.DolRukOrg;
+                            this.txtBoxKasBookRukFio.Text = Kassa.RukFio;
+                            this.txtBoxKasBookGlavBuh.Text = Kassa.GlavBuhFio;
+                        }
+ 
+                        // Заполняем на начало и на конец дня исходя из значения в документе эта часть общая 
+                        this.txtBoxKassBookStartDay.Text = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).SummaStartDay.ToString();
+                        this.txtBoxKassBookEndDay.Text = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).SummaEndDay.ToString();
+
+                        // Тут похоже надо сообщить пользаку что документ надо бы сохранить иначе сумма в базе не будет совпадать с той что мы посчитали
+                        // Может цвет поменять в ячейке надо подумать
+                        if (((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).SaveValueNotValid) { }
 
                         break;
                     // Акт о возврате денег
@@ -1438,7 +1516,35 @@ namespace AlgoritmCashFunc
                 //throw ae;
             }
         }
-        
+
+        //В кассовой книге произошло изменение даты
+        private void txtBoxKasBookDateDoc_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                // Если текущая вкладка кассовая книга
+                if (this.tabCntOperation.SelectedIndex==2)
+                {
+                    // Валидация введённой даты
+                    DateTime KasBookDate;
+                    try { KasBookDate = DateTime.Parse(this.txtBoxKasBookDateDoc.Text); }
+                    catch (Exception) { return; }
+
+                    DocumentList DocL = Com.ProviderFarm.CurrentPrv.GetDocumentListFromDB(KasBookDate, Com.OperationFarm.CurOperationList["OperationKasBook"].Id);
+                    // Если текущего документа за данную дату нет то создаём его но пока без сохранения
+                    if (DocL.Count==0)
+                    {
+                        this.btnNew_Click(null, null);
+                    }
+                    else this.btnNew_Click(DocL[0], null);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         #endregion
     }
 }

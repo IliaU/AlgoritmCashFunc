@@ -38,7 +38,11 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         /// Главный бухгалтер
         /// </summary>
         public string GlavBuh;
-        
+
+        /// <summary>
+        /// Значение которое говорит что в базе либо значение на даты начала и конца не сохранениы либо не валидны если True значит проверка совпала с тем что сохранено в базе
+        /// </summary>
+        public bool SaveValueNotValid = false;
 
         /// <summary>
         /// Конструктор для загрузки из базы данных
@@ -71,7 +75,22 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 {
                     DocumentKasBook MyObj = this;
                     bool tt = Com.ProviderFarm.CurrentPrv.GetDocumentKasBook(ref MyObj);
+
+
+                    // На выбранную дату нужно получить остаток на начало даты и оборот на конец даты
+                    decimal TmpSummaStartDay = 0;
+                    decimal TmpSummaOborotDay = 0;
+                    
+                    // Сравниваем если данные в документе не равены данным в базе при пересчёте то нужно выставить влаг валидности в False и поправить сумму в документе чтобы пользователь сохранил изменения в базу и не забыл
+                    if (this.SummaStartDay != TmpSummaStartDay || this.SummaEndDay != (TmpSummaStartDay+ TmpSummaOborotDay))
+                    {
+                        this.SaveValueNotValid = false;
+                        this.SummaStartDay = TmpSummaStartDay;
+                        this.SummaEndDay = (TmpSummaStartDay + TmpSummaOborotDay);
+                    }
+                    else this.SaveValueNotValid = true;
                 }
+                else this.SaveValueNotValid = false;  // Документ ещё не сохранялся в базе он новый по этому ставим флаг что не совсем валидный может потом цветом подкрасим
             }
             catch (Exception ex)
             {
@@ -84,11 +103,14 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         /// <summary>
         /// Конструктор
         /// </summary>
-        public DocumentKasBook() : this(null, DateTime.Now.Date, DateTime.Now, DateTime.Now, Com.UserFarm.CurrentUser.Logon, Com.OperationFarm.CurOperationList["OperationKasBook"], null, null, Com.LocalFarm.CurLocalDepartament.LastDocNumPrih+1, true, false)
+        public DocumentKasBook() : this(null, DateTime.Now.Date, DateTime.Now, DateTime.Now, Com.UserFarm.CurrentUser.Logon, Com.OperationFarm.CurOperationList["OperationKasBook"], null, null, Com.LocalFarm.CurLocalDepartament.LastDocNumKasBook + 1, true, false)
         {
             try
             {
                 this.CurOperation = Com.OperationFarm.CurOperationList["OperationKasBook"];
+
+                // Документ ещё не сохранялся в базе он новый по этому ставим флаг что не совсем валидный может потом цветом подкрасим
+                this.SaveValueNotValid = false;
             }
             catch (Exception ex)
             {
