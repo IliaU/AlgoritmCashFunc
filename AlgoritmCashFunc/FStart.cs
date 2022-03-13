@@ -565,7 +565,8 @@ namespace AlgoritmCashFunc
                         this.txtBoxKasBookOrganization.Text = Kassa.Organization;
                         this.txtBoxKasBookStructPodr.Text = Kassa.StructPodrazdelenie;
                         this.txtBoxKasBookOKPO.Text = Kassa.OKPO;
-                        if(string.IsNullOrWhiteSpace(this.txtBoxKasBookDateDoc.Text)) this.txtBoxKasBookDateDoc.Text = DateTime.Now.Date.ToShortDateString();
+
+                        
                         this.txtBoxKasBookDolRukOrg.Text = Kassa.DolRukOrg;
                         this.txtBoxKasBookRukFio.Text = Kassa.RukFio;
                         this.txtBoxKasBookGlavBuh.Text = Kassa.GlavBuhFio;
@@ -595,7 +596,15 @@ namespace AlgoritmCashFunc
                         // Заполняем поле основание значенеие по умолчанию и зависимые поля
                         this.cmbBoxKassBookBuh.SelectedIndex = -1;
                         this.cmbBoxKassBookKasir.SelectedIndex = -1;
-                        
+
+                        // Если даты в строке небыло то не нужно чтобы сработала кнопка как при смене даты так как мы тут поменяем дату она и так сработает
+                        if (string.IsNullOrWhiteSpace(this.txtBoxKasBookDateDoc.Text))
+                        {
+                           
+                            this.txtBoxKasBookDateDoc.Text = DateTime.Now.Date.ToShortDateString();
+                        }
+                        else this.txtBoxKasBookDateDoc_TextChanged(null, null);
+
                         break;
                     // Акт о возврате денег
                     case 3:
