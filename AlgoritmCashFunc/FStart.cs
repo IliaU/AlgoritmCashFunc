@@ -1230,31 +1230,95 @@ namespace AlgoritmCashFunc
                 {
                     // Приходный ордер
                     case 0:
-                        // Создаём пустой документ
-                        this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
-                        this.txtBoxPrihNumDoc.Text = (Kassa.LastDocNumPrih + 1).ToString();
-                        this.txtBoxPrihGlavBuh.Text = Kassa.GlavBuhFio;
-                        // Проверка на наличие ошибок при создании пустого документа
-                        if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", "DocumentPrihod"));
-                        //
-                        this.txtBoxPrihDateDoc.Text = DateTime.Now.Date.ToShortDateString();
-                        
-                        // Заполняем инфу по операции
-                        BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)this.CurDoc.CurOperation;
-                        this.txtBoxPrihOKUD.Text = (OperPrihod != null && !string.IsNullOrWhiteSpace(OperPrihod.OKUD) ? OperPrihod.OKUD : "0310001");
+                        // Если был передан конкретный документ который пользователь правит то заполняем полями из документа
+                        if (sender != null && e == null)
+                        {
+                            this.CurDoc = (BLL.DocumentPlg.DocumentPrihod)sender;
+                            this.txtBoxPrihNumDoc.Text = this.CurDoc.DocNum.ToString();
+                            this.txtBoxPrihGlavBuh.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).GlavBuh;
+                            this.txtBoxPrihDateDoc.Text = ((DateTime)this.CurDoc.UreDate).ToShortDateString();
 
-                        // Заполняем поле основание значенеие по умолчанию и зависимые поля
-                        this.cmbBoxPrihPaidInReasons_SelectedIndexChanged(null, null);
+                            // Заполняем инфу по операции
+                            BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)this.CurDoc.CurOperation;
+                            this.txtBoxPrihOKUD.Text = (OperPrihod != null && !string.IsNullOrWhiteSpace(OperPrihod.OKUD) ? OperPrihod.OKUD : "0310001");
 
-                        this.cmbBoxPrihDebitor.SelectedIndex = -1;
-                        this.cmbBoxPrihKreditor.SelectedIndex = -1;
+                            // Заполняем поле основание значенеие по умолчанию и зависимые поля
+                            this.cmbBoxPrihPaidInReasons.SelectedIndexChanged -= cmbBoxPrihPaidInReasons_SelectedIndexChanged;
+                            //
+                            int selectIndexPaidInReasons = -1;
+                            for (int i = 0; i < LocalFarm.CurLocalPaidInReasons.Count; i++)
+                            {
+                                if (LocalFarm.CurLocalPaidInReasons[i].LocalName == ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).PaidInReasons.LocalName)
+                                {
+                                    selectIndexPaidInReasons = i;
+                                    break;
+                                }
+                            }
+                            this.cmbBoxPrihPaidInReasons.SelectedIndex = selectIndexPaidInReasons;
+                            //
+                            this.txtBoxPrichDebetNomerSchet.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).DebetNomerSchet;
+                            this.txtBoxPrihKreditKorSchet.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KredikKorSchet;
+                            this.txtBoxPrihOsnovanie.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).Osnovanie;
+                            this.cmbBoxPrihPaidInReasons.SelectedIndexChanged += cmbBoxPrihPaidInReasons_SelectedIndexChanged;
 
-                        this.txtBoxPrihKreditKodDivision.Text = string.Empty;
-                        this.txtBoxPrihKredikKodAnalUch.Text = string.Empty;
-                        this.txtBoxPrihSumma.Text = string.Empty;
-                        this.txtBoxPrihKodNazn.Text = string.Empty;
-                        this.txtBoxPrihVtomChisle.Text = string.Empty;
-                        this.txtBoxPrihPrilozenie.Text = string.Empty;
+                            // КредиторДебитор
+                            int selectIndexPrihKreditor = -1;
+                            for (int i = 0; i < LocalFarm.CurLocalEmployees.Count; i++)
+                            {
+                                if (LocalFarm.CurLocalEmployees[i].LocalName == (this.CurDoc.LocalCreditor.LocalName))
+                                {
+                                    selectIndexPrihKreditor = i;
+                                    break;
+                                }
+                            }
+                            this.cmbBoxPrihKreditor.SelectedIndex = selectIndexPrihKreditor;
+                            // 
+                            int selectIndexPrihDebitor = -1;
+                            for (int i = 0; i < LocalFarm.CurLocalChiefCashiers.Count; i++)
+                            {
+                                if (LocalFarm.CurLocalChiefCashiers[i].LocalName == (this.CurDoc.LocalDebitor.LocalName))
+                                {
+                                    selectIndexPrihDebitor = i;
+                                    break;
+                                }
+                            }
+                            this.cmbBoxPrihDebitor.SelectedIndex = selectIndexPrihDebitor;
+
+                            this.txtBoxPrihKreditKodDivision.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KreditKodDivision;
+                            this.txtBoxPrihKredikKodAnalUch.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KredikKodAnalUch;
+                            this.txtBoxPrihSumma.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).Summa.ToString();
+                            this.txtBoxPrihKodNazn.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KodNazn;
+                            this.txtBoxPrihVtomChisle.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).VtomChisle;
+                            this.txtBoxPrihPrilozenie.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).Prilozenie;
+                        }
+                        else
+                        {
+                            // Создаём пустой документ
+                            this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
+                            this.txtBoxPrihNumDoc.Text = (Kassa.LastDocNumPrih + 1).ToString();
+                            this.txtBoxPrihGlavBuh.Text = Kassa.GlavBuhFio;
+                            // Проверка на наличие ошибок при создании пустого документа
+                            if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", "DocumentPrihod"));
+                            //
+                            this.txtBoxPrihDateDoc.Text = DateTime.Now.Date.ToShortDateString();
+
+                            // Заполняем инфу по операции
+                            BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)this.CurDoc.CurOperation;
+                            this.txtBoxPrihOKUD.Text = (OperPrihod != null && !string.IsNullOrWhiteSpace(OperPrihod.OKUD) ? OperPrihod.OKUD : "0310001");
+
+                            // Заполняем поле основание значенеие по умолчанию и зависимые поля
+                            this.cmbBoxPrihPaidInReasons_SelectedIndexChanged(null, null);
+
+                            this.cmbBoxPrihDebitor.SelectedIndex = -1;
+                            this.cmbBoxPrihKreditor.SelectedIndex = -1;
+
+                            this.txtBoxPrihKreditKodDivision.Text = string.Empty;
+                            this.txtBoxPrihKredikKodAnalUch.Text = string.Empty;
+                            this.txtBoxPrihSumma.Text = string.Empty;
+                            this.txtBoxPrihKodNazn.Text = string.Empty;
+                            this.txtBoxPrihVtomChisle.Text = string.Empty;
+                            this.txtBoxPrihPrilozenie.Text = string.Empty;
+                        }
 
                         break;
                     // Расходный ордер
