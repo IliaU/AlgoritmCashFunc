@@ -570,10 +570,11 @@ namespace AlgoritmCashFunc.Lib
         /// </summary>
         /// <param name="Dt">За конкретную дату время будет отброшено</param>
         /// <param name="OperationId">Какая операция нас интересует, если null значит все операции за эту дату</param>
+        /// <param name="HasNotin">Если true то будет смотреть все операции кроме операции указанной в параметре OperationId</param>
         /// <returns>Получает список Document из базы данных удовлетворяющий фильтрам</returns>
-        public DocumentList GetDocumentListFromDB(DateTime? Dt, int? OperationId)
+        public DocumentList GetDocumentListFromDB(DateTime? Dt, int? OperationId, bool HasNotin)
         {
-            return this.PrvI.GetDocumentListFromDB(Dt, OperationId);
+            return this.PrvI.GetDocumentListFromDB(Dt, OperationId, HasNotin);
         }
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
     /// <summary>
     /// Класс который представляет из себя докимент расхода
     /// </summary>
-    public sealed class DocumentKasBook : Document
+    public sealed class DocumentKasBook : Document 
     {
         /// <summary>
         /// Сумма докмента на начало дня
@@ -76,7 +76,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 base.IsProcessed = IsProcessed;
 
                 // Получаем список документов
-                this.DocList = Com.ProviderFarm.CurrentPrv.GetDocumentListFromDB((UreDate == null ? DateTime.Now : (DateTime)UreDate), null);
+                this.DocList = Com.ProviderFarm.CurrentPrv.GetDocumentListFromDB((UreDate == null ? DateTime.Now : (DateTime)UreDate), CurOperation.Id, true);
 
                 // На выбранную дату нужно получить остаток на начало даты и оборот на конец даты
                 RezultForOstatokAndOborot OborotForDay = Com.ProviderFarm.CurrentPrv.GetOstatokAndOborotForDay((UreDate == null ? DateTime.Now : (DateTime)UreDate));

@@ -1010,16 +1010,19 @@ namespace AlgoritmCashFunc
                         break;
                     // Кассовая книга
                     case 2:
-                        // Запоминаем инфу по организации
-                        Kassa.Organization = this.txtBoxKasBookOrganization.Text;
-                        Kassa.StructPodrazdelenie = this.txtBoxKasBookStructPodr.Text;
-                        Kassa.OKPO = this.txtBoxKasBookOKPO.Text;
-                        Kassa.DolRukOrg = this.txtBoxKasBookDolRukOrg.Text;
-                        Kassa.RukFio = this.txtBoxKasBookRukFio.Text;
-                        Kassa.GlavBuhFio = this.txtBoxRashGlavBuh.Text;
+                        // Запоминаем инфу по организации только если документ в текущей дете если нет то это правка старого документа запоминать тогда не нужно
+                        if (DateTime.Parse(this.txtBoxKasBookDateDoc.Text).Date == DateTime.Now.Date)
+                        {
+                            Kassa.Organization = this.txtBoxKasBookOrganization.Text;
+                            Kassa.StructPodrazdelenie = this.txtBoxKasBookStructPodr.Text;
+                            Kassa.OKPO = this.txtBoxKasBookOKPO.Text;
+                            Kassa.DolRukOrg = this.txtBoxKasBookDolRukOrg.Text;
+                            Kassa.RukFio = this.txtBoxKasBookRukFio.Text;
+                            Kassa.GlavBuhFio = this.txtBoxRashGlavBuh.Text;
 
-                        // Валидация заполненных данных по подразделению и сохранение в базе
-                        ValidateKassa(Kassa);
+                            // Валидация заполненных данных по подразделению и сохранение в базе
+                            ValidateKassa(Kassa);
+                        }
                                                
                         // Валидация дебитора
                         if (this.cmbBoxKassBookBuh.SelectedIndex == -1) throw new ApplicationException("Не указан бухгалтер.");
@@ -1057,6 +1060,9 @@ namespace AlgoritmCashFunc
                         }
                         else ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).SummaEndDay = 0;
 
+                        ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).DolRukFio = this.txtBoxKasBookDolRukOrg.Text;
+                        ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).RukFio = this.txtBoxKasBookRukFio.Text;
+                        ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).GlavBuh = this.txtBoxKasBookGlavBuh.Text;
 
                         // Сохранение инфы в базе
                         Kassa.LastDocNumKasBook = this.CurDoc.DocNum;
@@ -1071,8 +1077,8 @@ namespace AlgoritmCashFunc
                         OperKasBook.OKUD = txtBoxKasBookOKUD.Text;
                         OperKasBook.Save();
 
-                        // Сохранение инфы в базе
-                        Kassa.Save();
+                        // Сохранение документа
+                        this.CurDoc.Save();
 
                         break;
                     // Акт о возврате денег
@@ -1222,6 +1228,13 @@ namespace AlgoritmCashFunc
         {
             try
             {
+
+                if (this.tabCntOperation.SelectedIndex==2 && sender!=null && e != null)
+                {
+                    txtBoxKasBookDateDoc_TextChanged(null, null);
+                    return;
+                }
+
                 // Получаем текущее подразделение
                 BLL.LocalPlg.LocalKassa Kassa = Com.LocalFarm.CurLocalDepartament;
 
@@ -1433,16 +1446,36 @@ namespace AlgoritmCashFunc
                             this.CurDoc = (BLL.DocumentPlg.DocumentKasBook)sender;
 
                             // !!!!!! Тут не факт что нужно что-то сохранять так как документ подтягивался сюда как раз с использованием этой даты в фильтре скорее всего дата будет всегда одна и таже
+                            this.txtBoxKasBookDateDoc.TextChanged -= txtBoxKasBookDateDoc_TextChanged;
                             this.txtBoxKasBookDateDoc.Text = ((DateTime)this.CurDoc.UreDate).ToShortDateString();
+                            this.txtBoxKasBookDateDoc.TextChanged += txtBoxKasBookDateDoc_TextChanged;
 
                             this.txtBoxKasBookDolRukOrg.Text = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).DolRukFio;
                             this.txtBoxKasBookRukFio.Text = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).RukFio;
                             this.txtBoxKasBookGlavBuh.Text = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).GlavBuh;
 
-                            // Бухгалтер
-                            this.cmbBoxKassBookBuh.SelectedIndex = this.CurDoc.LocalDebitor.Index;
-                            // Кассир
-                            this.cmbBoxKassBookKasir.SelectedIndex = this.CurDoc.LocalCreditor.Index;
+                            // Дебитор - Бухгалтер
+                            int selectIndexKassBookBuh = -1;
+                            for (int i = 0; i < LocalFarm.CurLocalAccounters.Count; i++)
+                            {
+                                if (LocalFarm.CurLocalAccounters[i].LocalName == (this.CurDoc.LocalDebitor.LocalName))
+                                {
+                                    selectIndexKassBookBuh = i;
+                                    break;
+                                }
+                            }
+                            this.cmbBoxKassBookBuh.SelectedIndex = selectIndexKassBookBuh;
+                            // Кредитор - Кассир
+                            int selectIndexKassBookKasir = -1;
+                            for (int i = 0; i < LocalFarm.CurLocalChiefCashiers.Count; i++)
+                            {
+                                if (LocalFarm.CurLocalChiefCashiers[i].LocalName == (this.CurDoc.LocalCreditor.LocalName))
+                                {
+                                    selectIndexKassBookKasir = i;
+                                    break;
+                                }
+                            }
+                            this.cmbBoxKassBookKasir.SelectedIndex = selectIndexKassBookKasir;
                         }
                         else
                         {
@@ -1743,7 +1776,7 @@ namespace AlgoritmCashFunc
                     try { KasBookDate = DateTime.Parse(this.txtBoxKasBookDateDoc.Text); }
                     catch (Exception) { return; }
 
-                    DocumentList DocL = Com.ProviderFarm.CurrentPrv.GetDocumentListFromDB(KasBookDate, Com.OperationFarm.CurOperationList["OperationKasBook"].Id);
+                    DocumentList DocL = Com.ProviderFarm.CurrentPrv.GetDocumentListFromDB(KasBookDate, Com.OperationFarm.CurOperationList["OperationKasBook"].Id, false);
                     // Если текущего документа за данную дату нет то создаём его но пока без сохранения
                     if (DocL.Count==0)
                     {

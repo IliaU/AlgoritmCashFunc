@@ -247,8 +247,9 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         /// </summary>
         /// <param name="Dt">За конкретную дату время будет отброшено</param>
         /// <param name="OperationId">Какая операция нас интересует, если null значит все операции за эту дату</param>
+        /// <param name="HasNotin">Если true то будет смотреть все операции кроме операции указанной в параметре OperationId</param>
         /// <returns>Получает список Document из базы данных удовлетворяющий фильтрам</returns>
-        DocumentList GetDocumentListFromDB(DateTime? Dt, int? OperationId);
+        DocumentList GetDocumentListFromDB(DateTime? Dt, int? OperationId, bool HasNotin);
 
         /// <summary>
         /// Сохранение Document в базе

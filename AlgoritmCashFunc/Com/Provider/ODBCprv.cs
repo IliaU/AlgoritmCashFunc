@@ -1363,8 +1363,9 @@ namespace AlgoritmCashFunc.Com.Provider
         /// </summary>
         /// <param name="Dt">За конкретную дату время будет отброшено</param>
         /// <param name="OperationId">Какая операция нас интересует, если null значит все операции за эту дату</param>
+        /// <param name="HasNotin">Если true то будет смотреть все операции кроме операции указанной в параметре OperationId</param>
         /// <returns>Получает список Document из базы данных удовлетворяющий фильтрам</returns>
-        public DocumentList GetDocumentListFromDB(DateTime? Dt, int? OperationId)
+        public DocumentList GetDocumentListFromDB(DateTime? Dt, int? OperationId, bool HasNotin)
         {
             try
             {
@@ -1377,9 +1378,9 @@ namespace AlgoritmCashFunc.Com.Provider
                     {
                         case "SQORA32.DLL":
                         case "SQORA64.DLL":
-                            return GetDocumentListFromDbORA(Dt, OperationId);
+                            return GetDocumentListFromDbORA(Dt, OperationId, HasNotin);
                         case "myodbc8a.dll":
-                            return GetDocumentListFromDbMySql(Dt, OperationId);
+                            return GetDocumentListFromDbMySql(Dt, OperationId, HasNotin);
                         default:
                             throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
                             //break;
@@ -3497,8 +3498,9 @@ From `aks`.`cashfunc_local`");
         /// </summary>
         /// <param name="Dt">За конкретную дату время будет отброшено</param>
         /// <param name="OperationId">Какая операция нас интересует, если null значит все операции за эту дату</param>
+        /// <param name="HasNotin">Если true то будет смотреть все операции кроме операции указанной в параметре OperationId</param>
         /// <returns>Получает список Document из базы данных удовлетворяющий фильтрам</returns>
-        private DocumentList GetDocumentListFromDbORA(DateTime? Dt, int? OperationId)
+        private DocumentList GetDocumentListFromDbORA(DateTime? Dt, int? OperationId, bool HasNotin)
         {
             string CommandSql = String.Format(@"Select `Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision` 
 From `aks`.`cashfunc_local`");
@@ -6191,13 +6193,15 @@ Where `UreDate`>={0}
         /// </summary>
         /// <param name="Dt">За конкретную дату время будет отброшено</param>
         /// <param name="OperationId">Какая операция нас интересует, если null значит все операции за эту дату</param>
+        /// <param name="HasNotin">Если true то будет смотреть все операции кроме операции указанной в параметре OperationId</param>
         /// <returns>Получает список Document из базы данных удовлетворяющий фильтрам</returns>
-        private DocumentList GetDocumentListFromDbMySql(DateTime? Dt, int? OperationId)
+        private DocumentList GetDocumentListFromDbMySql(DateTime? Dt, int? OperationId, bool HasNotin)
         {
             string CommandSql = String.Format(@"Select `Id`, `DocFullName`, `UreDate`, `CteateDate`, `ModifyDate`, `ModifyUser`, `OperationId`, `LocalDebitorId`, `LocalCreditorId`, `DocNum`, `IsDraft`, `IsProcessed` 
 From `aks`.`CashFunc_Document`
 Where `UreDate`={0} 
-    and `OperationId`={1}", (Dt==null ? "`OperationId`" : string.Format("Str_To_Date('{0}', '%d.%m.%Y')", ((DateTime)Dt).ToShortDateString()))
+    and `OperationId`{1}{2}", (Dt==null ? "`OperationId`" : string.Format("Str_To_Date('{0}', '%d.%m.%Y')", ((DateTime)Dt).ToShortDateString()))
+            , (HasNotin?"<>":"=")
             , (OperationId==null ? "`OperationId`" : OperationId.ToString())
             );
 
@@ -7196,7 +7200,7 @@ Values({0}, {1}, {2}, {3},
             if (UpdDocumentKasBook.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
 
             string CommandSql = String.Format(@"update `aks`.`cashfunc_document_KasBook`
-    `SummaStartDay`={1}, `SummaEndDay`={2}, `DolRukFio`={3}, `RukFio`={4}, 
+Set `SummaStartDay`={1}, `SummaEndDay`={2}, `DolRukFio`={3}, `RukFio`={4}, 
     `GlavBuh`={5}
 Where Id={0}", UpdDocumentKasBook.Id,
             //
