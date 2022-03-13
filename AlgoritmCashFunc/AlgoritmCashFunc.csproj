@@ -194,8 +194,11 @@
   <ItemGroup>
     <Content Include="Icon.ico" />
     <Content Include="Pic\AKS.jpg" />
+    <Content Include="Pic\clipart.png" />
     <Content Include="Pic\DB.jpg" />
+    <Content Include="Pic\download.jpg" />
     <Content Include="Pic\New.jpg" />
+    <Content Include="Pic\red-x.png" />
     <None Include="Pic\print.png" />
     <Content Include="Pic\Prism.png" />
   </ItemGroup>

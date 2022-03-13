@@ -23,6 +23,7 @@ namespace AlgoritmCashFunc
 
         private DataTable dtDocKassBook = new DataTable("dtDocKassBook");
         private DataView dvDocKassBook;
+        private List<Document> TagDocKassBook = new List<Document>();  // Для хранения документов для того чтобы кнопка могла потом выбранный документ передать на редактирование
 
         /// <summary>
         /// Для того чтобы статус в нижней части работал последлвательно
@@ -807,14 +808,17 @@ namespace AlgoritmCashFunc
                 {
                     // Приходный ордер
                     case 0:
-                        // Запоминаем инфу по организации
-                        Kassa.Organization = this.txtBoxPrihOrganization.Text;
-                        Kassa.StructPodrazdelenie = this.txtBoxPrichStructPodr.Text;
-                        Kassa.OKPO = this.txtBoxPrihOKPO.Text;
-                        Kassa.GlavBuhFio = this.txtBoxPrihGlavBuh.Text;
+                        // Запоминаем инфу по организации только если документ в текущей дете если нет то это правка старого документа запоминать тогда не нужно
+                        if (DateTime.Parse(this.txtBoxPrihDateDoc.Text).Date == DateTime.Now.Date)
+                        {
+                            Kassa.Organization = this.txtBoxPrihOrganization.Text;
+                            Kassa.StructPodrazdelenie = this.txtBoxPrichStructPodr.Text;
+                            Kassa.OKPO = this.txtBoxPrihOKPO.Text;
+                            Kassa.GlavBuhFio = this.txtBoxPrihGlavBuh.Text;
 
-                        // Валидация заполненных данных по подразделению и сохранение в базе
-                        ValidateKassa(Kassa);
+                            // Валидация заполненных данных по подразделению и сохранение в базе
+                            ValidateKassa(Kassa);
+                        }
 
                         // Валидация введённой даты
                         if (string.IsNullOrWhiteSpace(this.txtBoxPrihNumDoc.Text)) new ApplicationException("Поле номер документа не может быть пустым.");
@@ -904,16 +908,20 @@ namespace AlgoritmCashFunc
                         break;
                     // Расходный ордер
                     case 1:
-                        // Запоминаем инфу по организации
-                        Kassa.Organization = this.txtBoxRashOrganization.Text;
-                        Kassa.StructPodrazdelenie = this.txtBoxRashStructPodr.Text;
-                        Kassa.OKPO = this.txtBoxRashOKPO.Text;
-                        Kassa.DolRukOrg = this.txtBoxRashDolRukOrg.Text;
-                        Kassa.RukFio = this.txtBoxRashRukFio.Text;
-                        Kassa.GlavBuhFio = this.txtBoxRashGlavBuh.Text;
+                        // Запоминаем инфу по организации только если документ в текущей дете если нет то это правка старого документа запоминать тогда не нужно
+                        if (DateTime.Parse(this.txtBoxRashDateDoc.Text).Date==DateTime.Now.Date)
+                        { 
+                            Kassa.Organization = this.txtBoxRashOrganization.Text;
+                            Kassa.StructPodrazdelenie = this.txtBoxRashStructPodr.Text;
+                            Kassa.OKPO = this.txtBoxRashOKPO.Text;
+                            Kassa.DolRukOrg = this.txtBoxRashDolRukOrg.Text;
+                            Kassa.RukFio = this.txtBoxRashRukFio.Text;
+                            Kassa.GlavBuhFio = this.txtBoxRashGlavBuh.Text;
 
-                        // Валидация заполненных данных по подразделению и сохранение в базе
-                        ValidateKassa(Kassa);
+                            // Валидация заполненных данных по подразделению и сохранение в базе
+                            ValidateKassa(Kassa);
+                        }
+                        
 
                         // Валидация введённой даты
                         if (string.IsNullOrWhiteSpace(this.txtBoxRashNumDoc.Text)) new ApplicationException("Поле номер документа не может быть пустым.");
@@ -974,16 +982,18 @@ namespace AlgoritmCashFunc
                             LoclPaidRashReasons.Osnovanie = this.txtBoxRashOsnovanie.Text;
                             ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).Osnovanie = this.txtBoxRashOsnovanie.Text;
                             //
-                            ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).PoDoc = this.txtBoxRashPoDoc.Text;
-                            //
-                            ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).Prilozenie = this.txtBoxRashPrilozenie.Text;
-                            //
-                            ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).GlavBuh = this.txtBoxRashGlavBuh.Text;
-                            //
                             ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).PaidRashReasons = LoclPaidRashReasons;
                             LoclPaidRashReasons.Save();
+
                         }
-                        
+
+                        // Сохраняем осталдьные параметры документа
+                        ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).PoDoc = this.txtBoxRashPoDoc.Text;
+                        ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).Prilozenie = this.txtBoxRashPrilozenie.Text;
+                        ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).DolRukFio = this.txtBoxRashDolRukOrg.Text;
+                        ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).RukFio = this.txtBoxRashRukFio.Text;
+                        ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).GlavBuh = this.txtBoxRashGlavBuh.Text;
+
 
                         // Сохранение инфы в базе
                         Kassa.LastDocNumRash = int.Parse(this.txtBoxRashNumDoc.Text);
@@ -1249,34 +1259,104 @@ namespace AlgoritmCashFunc
                         break;
                     // Расходный ордер
                     case 1:
-                        // Создаём пустой документ
-                        this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentRashod");
-                        this.txtBoxRashNumDoc.Text = (Kassa.LastDocNumRash + 1).ToString();
-                        this.txtBoxRashDolRukOrg.Text = Kassa.DolRukOrg;
-                        this.txtBoxRashRukFio.Text = Kassa.RukFio;
-                        this.txtBoxRashGlavBuh.Text = Kassa.GlavBuhFio;
-                        // Проверка на наличие ошибок при создании пустого документа
-                        if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
-                        //
-                        this.txtBoxRashDateDoc.Text = DateTime.Now.Date.ToShortDateString();
 
-                        // Заполняем инфу по операции
-                        BLL.OperationPlg.OperationRashod OperRashod = (BLL.OperationPlg.OperationRashod)this.CurDoc.CurOperation;
-                        this.txtBoxRashOKUD.Text = (OperRashod != null && !string.IsNullOrWhiteSpace(OperRashod.OKUD) ? OperRashod.OKUD : "0310002");
+                        // Если был передан конкретный документ который пользователь правит то заполняем полями из документа
+                        if (sender != null && e == null)
+                        {
+                            this.CurDoc = (BLL.DocumentPlg.DocumentRashod)sender;
+                            this.txtBoxRashNumDoc.Text = this.CurDoc.DocNum.ToString();
+                            this.txtBoxRashDolRukOrg.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).DolRukFio;
+                            this.txtBoxRashRukFio.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).RukFio;
+                            this.txtBoxRashGlavBuh.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).GlavBuh;
+                            this.txtBoxRashDateDoc.Text = ((DateTime)this.CurDoc.UreDate).ToShortDateString();
+
+                            // Заполняем инфу по операции
+                            BLL.OperationPlg.OperationRashod OperRashod = (BLL.OperationPlg.OperationRashod)this.CurDoc.CurOperation;
+                            this.txtBoxRashOKUD.Text = (OperRashod != null && !string.IsNullOrWhiteSpace(OperRashod.OKUD) ? OperRashod.OKUD : "0310002");
+
+                            // Заполняем поле основание значенеие по умолчанию и зависимые поля
+                            this.cmbBoxRashPaidRashReasons.SelectedIndexChanged -= CmbBoxRashPaidRashReasons_SelectedIndexChanged;
+                            //
+                            int selectIndexPaidRashReasons = -1;
+                            for (int i = 0; i < LocalFarm.CurLocalPaidRashReasons.Count; i++)
+                            {
+                                if (LocalFarm.CurLocalPaidRashReasons[i].LocalName == ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).PaidRashReasons.LocalName)
+                                {
+                                    selectIndexPaidRashReasons = i;
+                                    break;
+                                }
+                            }
+                            this.cmbBoxRashPaidRashReasons.SelectedIndex = selectIndexPaidRashReasons;
+                            //
+                            this.txtBoxRashDebitKorSchet.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).DebetKorSchet;
+                            this.txtBoxRashKreditNomerSchet.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).KreditNomerSchet;
+                            this.txtBoxRashOsnovanie.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).Osnovanie;
+                            this.cmbBoxRashPaidRashReasons.SelectedIndexChanged += CmbBoxRashPaidRashReasons_SelectedIndexChanged;
 
 
-                        // Заполняем поле основание значенеие по умолчанию и зависимые поля
-                        this.cmbBoxRashPaidRashReasons_SelectedIndexChanged(null, null);
+                            // Дебитор
+                            int selectIndexRashDebitor = -1;
+                            for (int i = 0; i < LocalFarm.CurLocalEmployees.Count; i++)
+                            {
+                                if (LocalFarm.CurLocalEmployees[i].LocalName == (this.CurDoc.LocalDebitor.LocalName))
+                                {
+                                    selectIndexRashDebitor = i;
+                                    break;
+                                }
+                            }
+                            this.cmbBoxRashDebitor.SelectedIndex = selectIndexRashDebitor;
+                            // Кредитор
+                            int selectIndexRashKreditor = -1;
+                            for (int i = 0; i < LocalFarm.CurLocalChiefCashiers.Count; i++)
+                            {
+                                if (LocalFarm.CurLocalChiefCashiers[i].LocalName == (this.CurDoc.LocalCreditor.LocalName))
+                                {
+                                    selectIndexRashKreditor = i;
+                                    break;
+                                }
+                            }
+                            this.cmbBoxRashKreditor.SelectedIndex = selectIndexRashKreditor;
 
-                        this.cmbBoxRashDebitor.SelectedIndex = -1;
-                        this.cmbBoxRashKreditor.SelectedIndex = -1;
+                            
 
-                        this.txtBoxRashDebitKodDivision.Text = string.Empty;
-                        this.txtBoxRashDebitKodAnalUch.Text = string.Empty;
-                        this.txtBoxRashSumma.Text = string.Empty;
-                        this.txtBoxRashKodNazn.Text = string.Empty;
-                        this.txtBoxRashPoDoc.Text = string.Empty;
-                        this.txtBoxRashPrilozenie.Text = string.Empty;
+                            this.txtBoxRashDebitKodDivision.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).DebetKodDivision;
+                            this.txtBoxRashDebitKodAnalUch.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).DebetKodAnalUch;
+                            this.txtBoxRashSumma.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).Summa.ToString();
+                            this.txtBoxRashKodNazn.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).KodNazn;
+                            this.txtBoxRashPoDoc.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).PoDoc;
+                            this.txtBoxRashPrilozenie.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).Prilozenie;
+                        }
+                        else
+                        {
+                            // Создаём пустой документ
+                            this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentRashod");
+                            this.txtBoxRashNumDoc.Text = (Kassa.LastDocNumRash + 1).ToString();
+                            this.txtBoxRashDolRukOrg.Text = Kassa.DolRukOrg;
+                            this.txtBoxRashRukFio.Text = Kassa.RukFio;
+                            this.txtBoxRashGlavBuh.Text = Kassa.GlavBuhFio;
+                            // Проверка на наличие ошибок при создании пустого документа
+                            if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
+                            //
+                            this.txtBoxRashDateDoc.Text = DateTime.Now.Date.ToShortDateString();
+
+                            // Заполняем инфу по операции
+                            BLL.OperationPlg.OperationRashod OperRashod = (BLL.OperationPlg.OperationRashod)this.CurDoc.CurOperation;
+                            this.txtBoxRashOKUD.Text = (OperRashod != null && !string.IsNullOrWhiteSpace(OperRashod.OKUD) ? OperRashod.OKUD : "0310002");
+
+
+                            // Заполняем поле основание значенеие по умолчанию и зависимые поля
+                            this.cmbBoxRashPaidRashReasons_SelectedIndexChanged(null, null);
+
+                            this.cmbBoxRashDebitor.SelectedIndex = -1;
+                            this.cmbBoxRashKreditor.SelectedIndex = -1;
+
+                            this.txtBoxRashDebitKodDivision.Text = string.Empty;
+                            this.txtBoxRashDebitKodAnalUch.Text = string.Empty;
+                            this.txtBoxRashSumma.Text = string.Empty;
+                            this.txtBoxRashKodNazn.Text = string.Empty;
+                            this.txtBoxRashPoDoc.Text = string.Empty;
+                            this.txtBoxRashPrilozenie.Text = string.Empty;
+                        }
 
                         break;
                     // Кассовая книга
@@ -1320,6 +1400,7 @@ namespace AlgoritmCashFunc
                         DocumentList DocListKassBock = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).DocList;
                         //
                         this.dtDocKassBook.Rows.Clear();
+                        this.TagDocKassBook = new List<Document>();
                         //
                         foreach (Document itemDocKassBook in DocListKassBock)
                         {
@@ -1347,6 +1428,7 @@ namespace AlgoritmCashFunc
                                 }
 
                                 this.dtDocKassBook.Rows.Add(nrow);
+                                this.TagDocKassBook.Add(itemDocKassBook);   // По этому списку будем искать тот документ который выбрал пользователь и именно выбранный передадим на редактирование
                             }
                         }
  
@@ -1425,6 +1507,11 @@ namespace AlgoritmCashFunc
                 //throw ae;
             }
         }
+
+        private void CmbBoxRashPaidRashReasons_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
 
@@ -1496,7 +1583,7 @@ namespace AlgoritmCashFunc
                     this.txtBoxPrichDebetNomerSchet.Text = string.Empty;
                     this.txtBoxPrihKreditKorSchet.Text = string.Empty;
                     this.txtBoxPrihOsnovanie.Text = string.Empty;
-                    this.cmbBoxPrihPaidInReasons.SelectedIndex = -1;
+                    //this.cmbBoxPrihPaidInReasons.SelectedIndex = -1;
                 }
                 else
                 {
@@ -1535,13 +1622,15 @@ namespace AlgoritmCashFunc
         {
             try
             {
+                //this.cmbBoxRashPaidRashReasons.SelectedIndexChanged -= cmbBoxRashPaidRashReasons_SelectedIndexChanged;
+
                 // Сбрасываем все значения на пустоту
                 if (sender == null || this.cmbBoxRashPaidRashReasons.SelectedIndex == -1)
                 {
                     this.txtBoxRashDebitKorSchet.Text = string.Empty;
                     this.txtBoxRashKreditNomerSchet.Text = string.Empty;
                     this.txtBoxRashOsnovanie.Text = string.Empty;
-                    this.cmbBoxRashPaidRashReasons.SelectedIndex = -1;
+                    //this.cmbBoxRashPaidRashReasons.SelectedIndex = -1;
                 }
                 else
                 {
@@ -1551,11 +1640,13 @@ namespace AlgoritmCashFunc
                     this.txtBoxRashKreditNomerSchet.Text = LoclPaidRashReasons.KreditNomerSchet;
                     this.txtBoxRashOsnovanie.Text = LoclPaidRashReasons.Osnovanie;
                 }
+
+                //this.cmbBoxRashPaidRashReasons.SelectedIndexChanged += cmbBoxRashPaidRashReasons_SelectedIndexChanged;
             }
             catch (Exception ex)
             {
                 ApplicationException ae = new ApplicationException(string.Format("Упали при создании документа с ошибкой: ({0})", ex.Message));
-                Log.EventSave(ae.Message, string.Format("{0}.btnNew_Click", GetType().Name), EventEn.Error, true, true);
+                Log.EventSave(ae.Message, string.Format("{0}.cmbBoxRashPaidRashReasons_SelectedIndexChanged", GetType().Name), EventEn.Error, true, true);
                 //throw ae;
             }
         }
@@ -1575,7 +1666,7 @@ namespace AlgoritmCashFunc
             }
         }
 
-        //В кассовой книге произошло изменение даты
+        // В кассовой книге произошло изменение даты
         private void txtBoxKasBookDateDoc_TextChanged(object sender, EventArgs e)
         {
             try
@@ -1597,12 +1688,50 @@ namespace AlgoritmCashFunc
                     else this.btnNew_Click(DocL[0], null);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
+        
+        // Пользователь выбрал документ в кассовой книге для редактирования
+        private void btnKassBookEdit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Если текущая вкладка кассовая книга
+                if (this.tabCntOperation.SelectedIndex == 2 && this.TagDocKassBook.Count>0)
+                {
+                    // Если у пользователя выделана ячейка
+                    if (dtGridKassBook.SelectedCells.Count > 0)
+                    {
+                        int tIndex = dtGridKassBook.SelectedCells[0].RowIndex;
+
+                        //this.tabCntOperation.Selected -= TabCntOperation_Selected;
+                        switch (this.TagDocKassBook[tIndex].DocFullName)
+                        {
+                            case "DocumentPrihod":
+                                this.tabCntOperation.SelectedIndex = 0;
+                                break;
+                            case "DocumentRashod":
+                                this.tabCntOperation.SelectedIndex = 1;
+                                break;
+                            default:
+                                break;
+                        }
+                        //this.tabCntOperation.Selected += TabCntOperation_Selected;
+                        this.btnNew_Click(this.TagDocKassBook[tIndex], null);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        
         #endregion
     }
 }

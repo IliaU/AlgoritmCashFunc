@@ -6397,9 +6397,9 @@ Set `UreDate`=?, `ModifyDate`=?, `ModifyUser`='{1}', `LocalDebitorId` = {2},
     `LocalCreditorId`={3}, `IsProcessed`={4}, `DocNum`={5}, `IsDraft`={6}
 Where Id={0}", UpdDocument.Id,
                    UpdDocument.ModifyUser,
-                   UpdDocument.LocalDebitor,
+                   UpdDocument.LocalDebitor.Id,
                    //
-                   UpdDocument.LocalCreditor,
+                   UpdDocument.LocalCreditor.Id,
                    (UpdDocument.IsProcessed ? 1 : 0),
                    UpdDocument.DocNum,
                    (UpdDocument.IsDraft ? 1 : 0));
