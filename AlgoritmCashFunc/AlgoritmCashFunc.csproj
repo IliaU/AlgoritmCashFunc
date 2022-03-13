@@ -133,6 +133,7 @@
     <Compile Include="Lib\EventProviderFarm.cs" />
     <Compile Include="Lib\EventUser.cs" />
     <Compile Include="Lib\LibBase\UserBase.cs" />
+    <Compile Include="Lib\RezultForOstatokAndOborot.cs" />
     <Compile Include="Lib\RoleEn.cs" />
     <Compile Include="Lib\UProvider.cs" />
     <Compile Include="Lib\User.cs" />

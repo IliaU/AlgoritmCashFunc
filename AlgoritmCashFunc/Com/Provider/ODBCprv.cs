@@ -1286,6 +1286,42 @@ namespace AlgoritmCashFunc.Com.Provider
         }
 
         /// <summary>
+        /// Получение остатка на начало заданной даты и оборота за день
+        /// </summary>
+        /// <param name="Dt">Дата на которую ищем данные</param>
+        /// <returns>Результат остаток на начало даты и оборот за эту дату</returns>
+        public RezultForOstatokAndOborot GetOstatokAndOborotForDay(DateTime Dt)
+        {
+            try
+            {
+                // Если мы работаем в режиме без базы то выводим тестовые записи
+                if (!this.HashConnect()) throw new ApplicationException("Не установлено подключение с базой данных.");
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            return GetOstatokAndOborotForDayORA(Dt);
+                        case "myodbc8a.dll":
+                            return GetOstatokAndOborotForDayMySql(Dt);
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Логируем ошибку если её должен видеть пользователь или если взведён флаг трассировке в файле настройки программы
+                if (Com.Config.Trace) base.EventSave(ex.Message, "GetOstatokAndOborotForDay", EventEn.Error);
+
+                throw ex;
+            }
+        }
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <param name="LastDay">Сколько последних дней грузить из базы данных если null значит весь период</param>
@@ -3294,7 +3330,87 @@ From `aks`.`cashfunc_local`");
                 throw;
             }
         }
-        
+
+        /// <summary>
+        /// Получение остатка на начало заданной даты и оборота за день
+        /// </summary>
+        /// <param name="Dt">Дата на которую ищем данные</param>
+        /// <returns>Результат остаток на начало даты и оборот за эту дату</returns>
+        private RezultForOstatokAndOborot GetOstatokAndOborotForDayORA(DateTime Dt)
+        {
+            string CommandSql = String.Format(@"Select `Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision` 
+From `aks`.`cashfunc_local`");
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOstatokAndOborotForDayORA", EventEn.Dump);
+
+                RezultForOstatokAndOborot rez = new RezultForOstatokAndOborot();
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+
+                            if (dr.HasRows)
+                            {
+                                // Получаем схему таблицы
+                                //DataTable tt = dr.GetSchemaTable();
+
+                                //foreach (DataRow item in tt.Rows)
+                                //{
+                                //    DataColumn ncol = new DataColumn(item["ColumnName"].ToString(), Type.GetType(item["DataType"].ToString()));
+                                //ncol.SetOrdinal(int.Parse(item["ColumnOrdinal"].ToString()));
+                                //ncol.MaxLength = (int.Parse(item["ColumnSize"].ToString()) < 300 ? 300 : int.Parse(item["ColumnSize"].ToString()));
+                                //rez.Columns.Add(ncol);
+                                //}
+
+                                // пробегаем по строкам
+                                while (dr.Read())
+                                {
+                                    int? TmpOperation = null;
+                                    string TmpDocFullName = null;
+                                    string TmpOperationName = null;
+                                    for (int i = 0; i < dr.FieldCount; i++)
+                                    {
+                                        if (!dr.IsDBNull(i) && dr.GetName(i).ToUpper() == ("Operation").ToUpper()) TmpOperation = int.Parse(dr.GetValue(i).ToString());
+                                        if (!dr.IsDBNull(i) && dr.GetName(i).ToUpper() == ("DocFullName").ToUpper()) TmpDocFullName = dr.GetValue(i).ToString();
+                                        if (!dr.IsDBNull(i) && dr.GetName(i).ToUpper() == ("OperationName").ToUpper()) TmpOperationName = dr.GetValue(i).ToString();
+                                    }
+
+                                    //Если данные есть то добавляем их в список
+                                    if (TmpOperation != null && !string.IsNullOrWhiteSpace(TmpDocFullName) && !string.IsNullOrWhiteSpace(TmpOperationName))
+                                    {
+                                        //OperationList.OperationListFarmBase.AddOperationToList(rez, new Operation((int)TmpOperation, TmpDocFullName, TmpOperationName));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOstatokAndOborotForDayORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOstatokAndOborotForDayORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOstatokAndOborotForDayORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOstatokAndOborotForDayORA", EventEn.Dump);
+                throw;
+            }
+        }
+
         /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
@@ -5858,6 +5974,107 @@ Where Id={0}", UpdLocalPaidRashReasons.Id, UpdLocalPaidRashReasons.Osnovanie, Up
         }
 
         /// <summary>
+        /// Получение остатка на начало заданной даты и оборота за день
+        /// </summary>
+        /// <param name="Dt">Дата на которую ищем данные</param>
+        /// <returns>Результат остаток на начало даты и оборот за эту дату</returns>
+        private RezultForOstatokAndOborot GetOstatokAndOborotForDayMySql(DateTime Dt)
+        {
+            string CommandSql = String.Format(@"With T As (Select Str_To_Date('{0}','%d.%m.%Y') As FindDt),
+    # Получаем дату начиная с которой нужно искать документы и если есть ближайший кассовый документ то подтягиваем из него дату и остаток на начало дня который потом будем использовать как стартовое значение суммы
+    Conf As (Select Coalesce(Trim(Max(D.`UreDate`)), (Select Trim(Min(`UreDate`)) From `aks`.`cashfunc_document`) ) As FindStart
+        , (Select Trim(Min(FindDt)) From T) As FindDt
+        , Coalesce(Min(`SummaStartDay`),0) As StartSumm
+      From `aks`.`cashfunc_document` D
+        inner join `aks`.`cashfunc_document_kasbook` K On D.Id=K.Id
+      where D.`UreDate` < (Select Min(FindDt) From T)
+        and D.`DocFullName`='DocumentKasBook'),
+    # Получаем список отфильтрованных документов с признаком даты на которую ищем и стартовой суммой
+    Doc As (Select C.FindDt, C.StartSumm, D.Id, Trim(D.UreDate) As UreDate, O.KoefDebitor
+      From Conf C
+        inner join `aks`.`cashfunc_document` D On D.UreDate>=C.FindStart
+        inner join `aks`.`cashfunc_operation` O On D.OperationId=O.Id
+      Where D.`DocFullName` in ('DocumentPrihod', 'DocumentRashod')
+        and D.`UreDate`>=C.FindStart
+        and D.`UreDate`<Date_Add(FindDt,interval 1 day)),
+    # Считаем по документу прихода
+    DocPrihod As (Select Sum(case when D.FindDt=D.UreDate Then 0 else DP.Summa*D.KoefDebitor end) As Ostatok
+        , Sum(case when D.FindDt=D.UreDate Then DP.Summa*D.KoefDebitor else 0 end) As Oborot
+      From Doc D
+        inner join `aks`.`cashfunc_document_prihod` DP On D.Id=DP.Id),
+    # Считаем по документам расхода
+    DocRash As (Select Sum(case when D.FindDt=D.UreDate Then 0 else DP.Summa*D.KoefDebitor end) As Ostatok
+        , Sum(case when D.FindDt=D.UreDate Then DP.Summa*D.KoefDebitor else 0 end) As Oborot
+      From Doc D
+        inner join `aks`.`cashfunc_document_rashod` DP On D.Id=DP.Id),
+    # Соединяем все документы
+    DocUnion As (Select Max(StartSumm) As Ostatok, 0 As Oborot From Conf
+        Union All
+        Select * From DocPrihod
+        Union All
+        Select * From DocRash)
+# Считаем результат
+Select Sum(Ostatok) As Ostatok, Sum(Oborot) As Oborot
+From  DocUnion ",  Dt.ToShortDateString());
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOstatokAndOborotForDayMySql", EventEn.Dump);
+
+                RezultForOstatokAndOborot rez = new RezultForOstatokAndOborot();
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+
+                            if (dr.HasRows)
+                            {
+                                // Получаем схему таблицы
+                                //DataTable tt = dr.GetSchemaTable();
+
+                                //foreach (DataRow item in tt.Rows)
+                                //{
+                                //    DataColumn ncol = new DataColumn(item["ColumnName"].ToString(), Type.GetType(item["DataType"].ToString()));
+                                //ncol.SetOrdinal(int.Parse(item["ColumnOrdinal"].ToString()));
+                                //ncol.MaxLength = (int.Parse(item["ColumnSize"].ToString()) < 300 ? 300 : int.Parse(item["ColumnSize"].ToString()));
+                                //rez.Columns.Add(ncol);
+                                //}
+
+                                // пробегаем по строкам
+                                while (dr.Read())
+                                {
+                                    if (!dr.IsDBNull(0)) rez.Ostatok = decimal.Parse(dr.GetValue(0).ToString());
+                                    if (!dr.IsDBNull(1)) rez.Oborot = decimal.Parse(dr.GetValue(1).ToString());
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOstatokAndOborotForDayMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOstatokAndOborotForDayMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOstatokAndOborotForDayMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOstatokAndOborotForDayMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <param name="LastDay">Сколько последних дней грузить из базы данных если null значит весь период</param>
@@ -5968,7 +6185,6 @@ Where `UreDate`>={0}
                 throw;
             }
         }
-
 
         /// <summary>
         /// Получаем список докуменитов

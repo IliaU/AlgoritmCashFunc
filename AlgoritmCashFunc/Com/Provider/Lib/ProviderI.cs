@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using System.Windows.Forms;
 using AlgoritmCashFunc.BLL;
+using AlgoritmCashFunc.Lib;
 
 namespace AlgoritmCashFunc.Com.Provider.Lib
 {
@@ -225,6 +226,13 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         /// </summary>
         /// <param name="UpdLocalPaidRashReasons">Сам объект данные которого нужно обновить</param>
         void UpdateLocalPaidRashReasons(BLL.LocalPlg.LocalPaidRashReasons UpdLocalPaidRashReasons);
+
+        /// <summary>
+        /// Получение остатка на начало заданной даты и оборота за день
+        /// </summary>
+        /// <param name="Dt">Дата на которую ищем данные</param>
+        /// <returns>Результат остаток на начало даты и оборот за эту дату</returns>
+        RezultForOstatokAndOborot GetOstatokAndOborotForDay(DateTime Dt);
 
         /// <summary>
         /// Получаем список текущий докуменитов

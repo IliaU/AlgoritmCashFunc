@@ -543,7 +543,17 @@ namespace AlgoritmCashFunc.Lib
         {
             this.PrvI.UpdateLocalPaidRashReasons(UpdLocalPaidRashReasons);
         }
-        
+
+        /// <summary>
+        /// Получение остатка на начало заданной даты и оборота за день
+        /// </summary>
+        /// <param name="Dt">Дата на которую ищем данные</param>
+        /// <returns>Результат остаток на начало даты и оборот за эту дату</returns>
+        public RezultForOstatokAndOborot GetOstatokAndOborotForDay(DateTime Dt)
+        {
+            return this.PrvI.GetOstatokAndOborotForDay(Dt);
+        }
+
         /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>

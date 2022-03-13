@@ -159,6 +159,8 @@ CREATE TABLE `aks`.`CashFunc_Document` (
   `IsDeleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci; 
+#
+ALTER TABLE aks.cashfunc_document  ADD INDEX Ix_cashfunc_document (UreDate desc, DocFullName);
 
 
 #Drop Table `aks`.`cashfunc_document_Prihod`;
