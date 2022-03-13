@@ -21,6 +21,9 @@ namespace AlgoritmCashFunc
 
         private BLL.Document CurDoc;
 
+        private DataTable dtDocKassBook = new DataTable("dtDocKassBook");
+        private DataView dvDocKassBook;
+
         /// <summary>
         /// Для того чтобы статус в нижней части работал последлвательно
         /// </summary>
@@ -66,7 +69,19 @@ namespace AlgoritmCashFunc
                     this.TSMItemLic.Visible = false;
                 }
                 else this.TSMItemLic.Visible = true;
-
+                                
+                // Наполняем таблицу данными и подключаем к гриду
+                if (dtDocKassBook.Rows.Count==0)
+                {
+                    this.dtDocKassBook.Columns.Add(new DataColumn("Id", typeof(string)));
+                    this.dtDocKassBook.Columns.Add(new DataColumn("NoDoc", typeof(string)));
+                    this.dtDocKassBook.Columns.Add(new DataColumn("FromTo", typeof(string)));
+                    this.dtDocKassBook.Columns.Add(new DataColumn("KorShet", typeof(string)));
+                    this.dtDocKassBook.Columns.Add(new DataColumn("Prihod", typeof(string)));
+                    this.dtDocKassBook.Columns.Add(new DataColumn("Rashod", typeof(string)));
+                }
+                this.dvDocKassBook = new DataView(dtDocKassBook);
+                this.dtGridKassBook.DataSource = this.dvDocKassBook;
 
                 // Подписываемся на события
                 Com.Log.onEventLog += Log_onEventLog;
@@ -1291,11 +1306,45 @@ namespace AlgoritmCashFunc
                             this.txtBoxKasBookRukFio.Text = Kassa.RukFio;
                             this.txtBoxKasBookGlavBuh.Text = Kassa.GlavBuhFio;
                         }
+
+                        // Заполняем список документов
+                        DocumentList DocListKassBock = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).DocList;
+                        //
+                        this.dtDocKassBook.Rows.Clear();
+                        //
+                        foreach (Document itemDocKassBook in DocListKassBock)
+                        {
+                            if (itemDocKassBook.DocFullName == "DocumentPrihod"
+                                || itemDocKassBook.DocFullName == "DocumentRashod")
+                            {
+                                DataRow nrow = this.dtDocKassBook.NewRow();
+                                nrow["Id"] = itemDocKassBook.Id;
+                                nrow["FromTo"] = itemDocKassBook.LocalDebitor.LocalName;
+
+                                switch (itemDocKassBook.DocFullName)
+                                {
+                                    case "DocumentPrihod":
+                                        nrow["NoDoc"] = string.Format("no{0}",itemDocKassBook.DocNum);
+                                        nrow["KorShet"] = ((BLL.DocumentPlg.DocumentPrihod)itemDocKassBook).KredikKorSchet;
+                                        nrow["Prihod"] = ((BLL.DocumentPlg.DocumentPrihod)itemDocKassBook).Summa;
+                                        break;
+                                    case "DocumentRashod":
+                                        nrow["NoDoc"] = string.Format("po{0}", itemDocKassBook.DocNum);
+                                        nrow["KorShet"] = ((BLL.DocumentPlg.DocumentRashod)itemDocKassBook).DebetKorSchet;
+                                        nrow["Rashod"] = ((BLL.DocumentPlg.DocumentRashod)itemDocKassBook).Summa;
+                                        break;
+                                    default:
+                                        break;
+                                }
+
+                                this.dtDocKassBook.Rows.Add(nrow);
+                            }
+                        }
  
                         // Заполняем на начало и на конец дня исходя из значения в документе эта часть общая 
                         this.txtBoxKassBookStartDay.Text = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).SummaStartDay.ToString();
                         this.txtBoxKassBookEndDay.Text = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).SummaEndDay.ToString();
-
+            
                         // Тут похоже надо сообщить пользаку что документ надо бы сохранить иначе сумма в базе не будет совпадать с той что мы посчитали
                         // Может цвет поменять в ячейке надо подумать
                         if (((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).SaveValueNotValid) { }

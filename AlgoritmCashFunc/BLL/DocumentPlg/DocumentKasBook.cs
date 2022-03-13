@@ -45,6 +45,11 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         public bool SaveValueNotValid = false;
 
         /// <summary>
+        /// Список документов за этот день
+        /// </summary>
+        public DocumentList DocList;
+
+        /// <summary>
         /// Конструктор для загрузки из базы данных
         /// </summary>
         /// <param name="Id">Идентификатор в базе данных</param>
@@ -70,6 +75,8 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 base.IsDraft = IsDraft;
                 base.IsProcessed = IsProcessed;
 
+                // Получаем список документов
+                this.DocList = Com.ProviderFarm.CurrentPrv.GetDocumentListFromDB((UreDate == null ? DateTime.Now : (DateTime)UreDate), null);
 
                 // На выбранную дату нужно получить остаток на начало даты и оборот на конец даты
                 RezultForOstatokAndOborot OborotForDay = Com.ProviderFarm.CurrentPrv.GetOstatokAndOborotForDay((UreDate == null ? DateTime.Now : (DateTime)UreDate));
