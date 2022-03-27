@@ -201,7 +201,9 @@ CREATE TABLE `aks`.`cashfunc_document_Rashod` (
   `Prilozenie` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `DolRukFio` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `RukFio` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL,
-  `GlavBuh` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `GlavBuh` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `Debitor` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `Kreditor` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 #

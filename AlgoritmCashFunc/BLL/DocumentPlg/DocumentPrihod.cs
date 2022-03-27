@@ -80,6 +80,16 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         public string GlavBuh;
 
         /// <summary>
+        /// Дебитор который ввели вручную не из списка
+        /// </summary>
+        public string OtherDebitor;
+
+        /// <summary>
+        /// Кредитор который ввели вручную не из списка
+        /// </summary>
+        public string OtherKreditor;
+
+        /// <summary>
         /// Конструктор для загрузки из базы данных
         /// </summary>
         /// <param name="Id">Идентификатор в базе данных</param>

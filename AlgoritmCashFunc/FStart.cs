@@ -936,14 +936,30 @@ namespace AlgoritmCashFunc
                         catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxRashDateDoc.Text)); }
 
                         // Валидация Дебитора
-                        if (this.cmbBoxRashDebitor.SelectedIndex == -1) throw new ApplicationException("Не указано кому выдать.");
+                        if (this.cmbBoxRashDebitor.SelectedIndex == -1)
+                        {
+                            if(string.IsNullOrWhiteSpace(this.cmbBoxRashDebitor.Text)) throw new ApplicationException("Не указано кому выдать.");
+                            else
+                            {
+                                this.CurDoc.LocalDebitor = null;
+                                ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).OtherDebitor = this.cmbBoxRashDebitor.Text.Trim();
+                            }
+                        }
                         else
                         {
                             this.CurDoc.LocalDebitor = LocalFarm.CurLocalEmployees[this.cmbBoxRashDebitor.SelectedIndex];
                         }
 
                         // Валидация кредитора
-                        if (this.cmbBoxRashKreditor.SelectedIndex == -1) throw new ApplicationException("Не указано кто выдал.");
+                        if (this.cmbBoxRashKreditor.SelectedIndex == -1)
+                        {
+                            if (string.IsNullOrWhiteSpace(this.cmbBoxRashKreditor.Text)) throw new ApplicationException("Не указано кто выдал.");
+                            else
+                            {
+                                this.CurDoc.LocalCreditor = null;
+                                ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).OtherKreditor = this.cmbBoxRashKreditor.Text.Trim();
+                            }
+                        }
                         else
                         {
                             this.CurDoc.LocalCreditor = LocalFarm.CurLocalChiefCashiers[this.cmbBoxRashKreditor.SelectedIndex];
@@ -1352,7 +1368,7 @@ namespace AlgoritmCashFunc
                             this.txtBoxRashOKUD.Text = (OperRashod != null && !string.IsNullOrWhiteSpace(OperRashod.OKUD) ? OperRashod.OKUD : "0310002");
 
                             // Заполняем поле основание значенеие по умолчанию и зависимые поля
-                            this.cmbBoxRashPaidRashReasons.SelectedIndexChanged -= CmbBoxRashPaidRashReasons_SelectedIndexChanged;
+                            this.cmbBoxRashPaidRashReasons.SelectedIndexChanged -= cmbBoxRashPaidRashReasons_SelectedIndexChanged;
                             //
                             int selectIndexPaidRashReasons = -1;
                             for (int i = 0; i < LocalFarm.CurLocalPaidRashReasons.Count; i++)
@@ -1368,33 +1384,42 @@ namespace AlgoritmCashFunc
                             this.txtBoxRashDebitKorSchet.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).DebetKorSchet;
                             this.txtBoxRashKreditNomerSchet.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).KreditNomerSchet;
                             this.txtBoxRashOsnovanie.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).Osnovanie;
-                            this.cmbBoxRashPaidRashReasons.SelectedIndexChanged += CmbBoxRashPaidRashReasons_SelectedIndexChanged;
+                            this.cmbBoxRashPaidRashReasons.SelectedIndexChanged += cmbBoxRashPaidRashReasons_SelectedIndexChanged;
 
 
                             // Дебитор
                             int selectIndexRashDebitor = -1;
-                            for (int i = 0; i < LocalFarm.CurLocalEmployees.Count; i++)
+                            if (this.CurDoc.LocalDebitor != null)
                             {
-                                if (LocalFarm.CurLocalEmployees[i].LocalName == (this.CurDoc.LocalDebitor.LocalName))
+                                for (int i = 0; i < LocalFarm.CurLocalEmployees.Count; i++)
                                 {
-                                    selectIndexRashDebitor = i;
-                                    break;
+                                    if (LocalFarm.CurLocalEmployees[i].LocalName == (this.CurDoc.LocalDebitor.LocalName))
+                                    {
+                                        selectIndexRashDebitor = i;
+                                        break;
+                                    }
                                 }
                             }
-                            this.cmbBoxRashDebitor.SelectedIndex = selectIndexRashDebitor;
+                            if (selectIndexRashDebitor > -1) this.cmbBoxRashDebitor.SelectedIndex = selectIndexRashDebitor;
+                            else this.cmbBoxRashDebitor.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).OtherDebitor;
                             // Кредитор
                             int selectIndexRashKreditor = -1;
-                            for (int i = 0; i < LocalFarm.CurLocalChiefCashiers.Count; i++)
+                            if (this.CurDoc.LocalCreditor != null)
                             {
-                                if (LocalFarm.CurLocalChiefCashiers[i].LocalName == (this.CurDoc.LocalCreditor.LocalName))
+                                for (int i = 0; i < LocalFarm.CurLocalChiefCashiers.Count; i++)
                                 {
-                                    selectIndexRashKreditor = i;
-                                    break;
+                                    if (LocalFarm.CurLocalChiefCashiers[i].LocalName == (this.CurDoc.LocalCreditor.LocalName))
+                                    {
+                                        selectIndexRashKreditor = i;
+                                        break;
+                                    }
                                 }
                             }
-                            this.cmbBoxRashKreditor.SelectedIndex = selectIndexRashKreditor;
+                            if (selectIndexRashKreditor > -1) this.cmbBoxRashKreditor.SelectedIndex = selectIndexRashKreditor;
+                            else this.cmbBoxRashKreditor.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).OtherKreditor;
 
-                            
+
+
 
                             this.txtBoxRashDebitKodDivision.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).DebetKodDivision;
                             this.txtBoxRashDebitKodAnalUch.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).DebetKodAnalUch;
@@ -1506,7 +1531,21 @@ namespace AlgoritmCashFunc
                             {
                                 DataRow nrow = this.dtDocKassBook.NewRow();
                                 nrow["Id"] = itemDocKassBook.Id;
-                                nrow["FromTo"] = itemDocKassBook.LocalDebitor.LocalName;
+                                if (itemDocKassBook.LocalDebitor != null) nrow["FromTo"] = itemDocKassBook.LocalDebitor.LocalName;
+                                else
+                                {
+                                    switch (itemDocKassBook.DocFullName)
+                                    {
+                                        case "DocumentPrihod":
+                                            nrow["FromTo"] = ((BLL.DocumentPlg.DocumentPrihod)itemDocKassBook).OtherDebitor;
+                                            break;
+                                        case "DocumentRashod":
+                                            nrow["FromTo"] = ((BLL.DocumentPlg.DocumentRashod)itemDocKassBook).OtherDebitor;
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }
 
                                 switch (itemDocKassBook.DocFullName)
                                 {
@@ -1605,10 +1644,7 @@ namespace AlgoritmCashFunc
             }
         }
 
-        private void CmbBoxRashPaidRashReasons_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+
         #endregion
 
 
