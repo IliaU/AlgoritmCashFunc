@@ -100,21 +100,23 @@ namespace AlgoritmCashFunc.Com
                         // получаем параметры конструктора  
                         ParameterInfo[] parameters = ctor.GetParameters();
                         
-                        // если в этом конструктаре 11 параметров то проверяем тип и имя параметра 
-                        if (parameters.Length == 11)
+                        // если в этом конструктаре 13 параметров то проверяем тип и имя параметра 
+                        if (parameters.Length == 13)
                         {
                             bool flag2 = true;
-                            if (parameters[0].ParameterType.Name != "Nullable`1" || parameters[0].Name != "Id") flag = false;
-                            if (parameters[1].ParameterType.Name != "DateTime" || parameters[1].Name != "UreDate") flag = false;
-                            if (parameters[2].ParameterType.Name != "DateTime" || parameters[2].Name != "CteateDate") flag = false;
-                            if (parameters[3].ParameterType.Name != "DateTime" || parameters[3].Name != "ModifyDate") flag = false;
-                            if (parameters[4].ParameterType.Name != "String" || parameters[4].Name != "ModifyUser") flag = false;
-                            if (parameters[5].ParameterType.Name != "Operation" || parameters[5].Name != "CurOperation") flag = false;
-                            if (parameters[6].ParameterType.Name != "Local" || parameters[6].Name != "LocalDebitor") flag = false;
-                            if (parameters[7].ParameterType.Name != "Local" || parameters[7].Name != "LocalCreditor") flag = false;
-                            if (parameters[8].ParameterType.Name != "Int32" || parameters[8].Name != "DocNum") flag = false;
-                            if (parameters[9].ParameterType.Name != "Boolean" || parameters[9].Name != "IsDraft") flag = false;
-                            if (parameters[10].ParameterType.Name != "Boolean" || parameters[10].Name != "IsProcessed") flag = false;
+                            if (parameters[0].ParameterType.Name != "Nullable`1" || parameters[0].Name != "Id") flag2 = false;
+                            if (parameters[1].ParameterType.Name != "Nullable`1" || parameters[1].Name != "UreDate") flag2 = false;
+                            if (parameters[2].ParameterType.Name != "DateTime" || parameters[2].Name != "CteateDate") flag2 = false;
+                            if (parameters[3].ParameterType.Name != "DateTime" || parameters[3].Name != "ModifyDate") flag2 = false;
+                            if (parameters[4].ParameterType.Name != "String" || parameters[4].Name != "ModifyUser") flag2 = false;
+                            if (parameters[5].ParameterType.Name != "Operation" || parameters[5].Name != "CurOperation") flag2 = false;
+                            if (parameters[6].ParameterType.Name != "Local" || parameters[6].Name != "LocalDebitor") flag2 = false;
+                            if (parameters[7].ParameterType.Name != "Local" || parameters[7].Name != "LocalCreditor") flag2 = false;
+                            if (parameters[8].ParameterType.Name != "String" || parameters[8].Name != "OtherDebitor") flag2 = false;
+                            if (parameters[9].ParameterType.Name != "String" || parameters[9].Name != "OtherKreditor") flag2 = false;
+                            if (parameters[10].ParameterType.Name != "Int32" || parameters[10].Name != "DocNum") flag2 = false;
+                            if (parameters[11].ParameterType.Name != "Boolean" || parameters[11].Name != "IsDraft") flag2 = false;
+                            if (parameters[12].ParameterType.Name != "Boolean" || parameters[12].Name != "IsProcessed") flag2 = false;
                             flag = flag2;
                         }
                         
@@ -172,11 +174,13 @@ namespace AlgoritmCashFunc.Com
         /// <param name="CurOperation">Операция к которой относится этот документ</param>
         /// <param name="LocalDebitor">Дебитор</param>
         /// <param name="LocalCreditor">Кредитор</param>
+        /// <param name="OtherDebitor">Дебитор который ввели вручную не из списка</param>
+        /// <param name="OtherKreditor">Кредитор который ввели вручную не из списка</param>
         /// <param name="DocNum"> Черновик</param>
         /// <param name="IsDraft">Черновик</param>
         /// <param name="IsProcessed">Проведённый документ или нет</param>
         /// <returns>Возвращаем Local</returns>
-        public static Document CreateNewDocument(int? Id, string DocFullName, DateTime? UreDate, DateTime CteateDate, DateTime ModifyDate, string ModifyUser, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, int DocNum, bool IsDraft, bool IsProcessed)
+        public static Document CreateNewDocument(int? Id, string DocFullName, DateTime? UreDate, DateTime CteateDate, DateTime ModifyDate, string ModifyUser, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, string OtherDebitor, string OtherKreditor, int DocNum, bool IsDraft, bool IsProcessed)
         {
             // Если списка документов ещё нет то создаём его
             ListDocumentName();
@@ -191,7 +195,7 @@ namespace AlgoritmCashFunc.Com
                     Type myType = Type.GetType("AlgoritmCashFunc.BLL.DocumentPlg." + DocFullName.Trim(), false, true);
 
                     // Создаём экземпляр объекта  
-                    object[] targ = {Id, UreDate, CteateDate, ModifyDate,  ModifyUser, CurOperation, LocalDebitor, LocalCreditor, DocNum, IsDraft, IsProcessed};
+                    object[] targ = {Id, UreDate, CteateDate, ModifyDate,  ModifyUser, CurOperation, LocalDebitor, LocalCreditor, OtherDebitor, OtherKreditor, DocNum, IsDraft, IsProcessed};
                     rez = (Document)Activator.CreateInstance(myType, targ);
 
                     break;

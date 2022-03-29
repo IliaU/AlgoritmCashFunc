@@ -6084,7 +6084,7 @@ From  DocUnion ",  Dt.ToShortDateString());
         /// <returns>Получает список Document из базы данных удовлетворяющий фильтрам</returns>
         private DocumentList GetDocumentListFromDbMySql(int? LastDay, int? OperationId)
         {
-            string CommandSql = String.Format(@"Select `Id`, `DocFullName`, `UreDate`, `CteateDate`, `ModifyDate`, `ModifyUser`, `OperationId`, `LocalDebitorId`, `LocalCreditorId`, `DocNum`, `IsDraft`, `IsProcessed` 
+            string CommandSql = String.Format(@"Select `Id`, `DocFullName`, `UreDate`, `CteateDate`, `ModifyDate`, `ModifyUser`, `OperationId`, `LocalDebitorId`, `LocalCreditorId`, `OtherDebitor`, `OtherKreditor`, `DocNum`, `IsDraft`, `IsProcessed` 
 From `aks`.`CashFunc_Document`
 Where `UreDate`>={0} 
     and `OperationId`={1}", (LastDay == null ? "`OperationId`" : string.Format("Str_To_Date('{0}', '%d.%m.%Y')", DateTime.Now.AddDays((double)LastDay*-1).ToShortDateString()))
@@ -6133,6 +6133,8 @@ Where `UreDate`>={0}
                                     int? TmpOperationId = null;
                                     int? TmpLocalDebitorId = null;
                                     int? TmpLocalCreditorId = null;
+                                    string TmpOtherDebitor = null;
+                                    string TmpOtherKreditor = null;
                                     int TmpDocNum = 0;
                                     bool TmpIsDraft = true;
                                     bool TmpIsProcessed = false;
@@ -6147,9 +6149,11 @@ Where `UreDate`>={0}
                                     if (!dr.IsDBNull(6)) TmpOperationId = dr.GetInt32(6);
                                     if (!dr.IsDBNull(7)) TmpLocalDebitorId = dr.GetInt32(7);
                                     if (!dr.IsDBNull(8)) TmpLocalCreditorId = dr.GetInt32(8);
-                                    if (!dr.IsDBNull(9)) TmpDocNum = dr.GetInt32(9);
-                                    if (!dr.IsDBNull(10)) TmpIsDraft = Boolean.Parse(dr.GetValue(10).ToString());
-                                    if (!dr.IsDBNull(11)) TmpIsProcessed = Boolean.Parse(dr.GetValue(11).ToString());
+                                    if (!dr.IsDBNull(9)) TmpOtherDebitor = dr.GetString(9);
+                                    if (!dr.IsDBNull(10)) TmpOtherKreditor = dr.GetString(10);
+                                    if (!dr.IsDBNull(11)) TmpDocNum = dr.GetInt32(11);
+                                    if (!dr.IsDBNull(12)) TmpIsDraft = Boolean.Parse(dr.GetValue(12).ToString());
+                                    if (!dr.IsDBNull(13)) TmpIsProcessed = Boolean.Parse(dr.GetValue(13).ToString());
 
 
                                     //Если данные есть то добавляем их в список
@@ -6173,7 +6177,7 @@ Where `UreDate`>={0}
                                             if (TmpCred == null) throw new ApplicationException(string.Format("Кредитора с идентификатором {0} в документе где id={1} не существует.", TmpLocalCreditorId, TmpId));
                                         }
                                         
-                                        rez.Add(DocumentFarm.CreateNewDocument((int)TmpId, TmpDocFullName, TmpUreDate, (DateTime)TmpCteateDate, (DateTime)TmpModifyDate, TmpModifyUser, TmpOper, TmpDeb, TmpCred, TmpDocNum, TmpIsDraft, TmpIsProcessed));
+                                        rez.Add(DocumentFarm.CreateNewDocument((int)TmpId, TmpDocFullName, TmpUreDate, (DateTime)TmpCteateDate, (DateTime)TmpModifyDate, TmpModifyUser, TmpOper, TmpDeb, TmpCred, TmpOtherDebitor, TmpOtherKreditor, TmpDocNum, TmpIsDraft, TmpIsProcessed));
                                     }
                                 }
                             }
@@ -6206,7 +6210,7 @@ Where `UreDate`>={0}
         /// <returns>Получает список Document из базы данных удовлетворяющий фильтрам</returns>
         private DocumentList GetDocumentListFromDbMySql(DateTime? Dt, int? OperationId, bool HasNotin)
         {
-            string CommandSql = String.Format(@"Select `Id`, `DocFullName`, `UreDate`, `CteateDate`, `ModifyDate`, `ModifyUser`, `OperationId`, `LocalDebitorId`, `LocalCreditorId`, `DocNum`, `IsDraft`, `IsProcessed` 
+            string CommandSql = String.Format(@"Select `Id`, `DocFullName`, `UreDate`, `CteateDate`, `ModifyDate`, `ModifyUser`, `OperationId`, `LocalDebitorId`, `LocalCreditorId`, `OtherDebitor`, `OtherKreditor`, `DocNum`, `IsDraft`, `IsProcessed` 
 From `aks`.`CashFunc_Document`
 Where `UreDate`={0} 
     and `OperationId`{1}{2}", (Dt==null ? "`OperationId`" : string.Format("Str_To_Date('{0}', '%d.%m.%Y')", ((DateTime)Dt).ToShortDateString()))
@@ -6256,6 +6260,8 @@ Where `UreDate`={0}
                                     int? TmpOperationId = null;
                                     int? TmpLocalDebitorId = null;
                                     int? TmpLocalCreditorId = null;
+                                    string TmpOtherDebitor = null;
+                                    string TmpOtherKreditor = null;
                                     int TmpDocNum = 0;
                                     bool TmpIsDraft = true;
                                     bool TmpIsProcessed = false;
@@ -6270,9 +6276,11 @@ Where `UreDate`={0}
                                     if (!dr.IsDBNull(6)) TmpOperationId = dr.GetInt32(6);
                                     if (!dr.IsDBNull(7)) TmpLocalDebitorId = dr.GetInt32(7);
                                     if (!dr.IsDBNull(8)) TmpLocalCreditorId = dr.GetInt32(8);
-                                    if (!dr.IsDBNull(9)) TmpDocNum = dr.GetInt32(9);
-                                    if (!dr.IsDBNull(10)) TmpIsDraft = Boolean.Parse(dr.GetValue(10).ToString());
-                                    if (!dr.IsDBNull(11)) TmpIsProcessed = Boolean.Parse(dr.GetValue(11).ToString());
+                                    if (!dr.IsDBNull(9)) TmpOtherDebitor = dr.GetString(9);
+                                    if (!dr.IsDBNull(10)) TmpOtherKreditor = dr.GetString(10);
+                                    if (!dr.IsDBNull(11)) TmpDocNum = dr.GetInt32(11);
+                                    if (!dr.IsDBNull(12)) TmpIsDraft = Boolean.Parse(dr.GetValue(12).ToString());
+                                    if (!dr.IsDBNull(13)) TmpIsProcessed = Boolean.Parse(dr.GetValue(13).ToString());
 
 
                                     //Если данные есть то добавляем их в список
@@ -6295,7 +6303,7 @@ Where `UreDate`={0}
                                             if (TmpCred == null) throw new ApplicationException(string.Format("Кредитора с идентификатором {0} в документе где id={1} не существует.", TmpLocalCreditorId, TmpId));
                                         }
 
-                                        rez.Add(DocumentFarm.CreateNewDocument((int)TmpId, TmpDocFullName, TmpUreDate, (DateTime)TmpCteateDate, (DateTime)TmpModifyDate, TmpModifyUser, TmpOper, TmpDeb, TmpCred, TmpDocNum, TmpIsDraft, TmpIsProcessed));
+                                        rez.Add(DocumentFarm.CreateNewDocument((int)TmpId, TmpDocFullName, TmpUreDate, (DateTime)TmpCteateDate, (DateTime)TmpModifyDate, TmpModifyUser, TmpOper, TmpDeb, TmpCred, TmpOtherDebitor, TmpOtherKreditor, TmpDocNum, TmpIsDraft, TmpIsProcessed));
                                     }
                                 }
                             }
@@ -6319,7 +6327,6 @@ Where `UreDate`={0}
             }
         }
 
-
         /// <summary>
         /// Сохранение Document в базе
         /// </summary>
@@ -6331,11 +6338,11 @@ Where `UreDate`={0}
 
             string CommandSql = String.Format(@"insert into `aks`.`CashFunc_Document`(`DocFullName`, `UreDate`, `CteateDate`, `ModifyDate`,
     `ModifyUser`, `OperationId`, `LocalDebitorId`, `LocalCreditorId`, 
-    `DocNum`, `IsDraft`
+    `OtherDebitor`, `OtherKreditor`, `DocNum`, `IsDraft`
 )
 Values(?, ?, ?, ?, 
     ?, ?, ?, ?,
-    ?, ?)");
+    ?, ?, ?, ?)");
             string CommandSql2 = "SELECT LAST_INSERT_ID()  As Id";
 
 
@@ -6360,6 +6367,8 @@ Values(?, ?, ?, ?,
                         com.Parameters.Add(new OdbcParameter("LocalDebitorId", OdbcType.Int) { Value = (NewDocument.LocalDebitor==null?-1:NewDocument.LocalDebitor.Id) });
                         com.Parameters.Add(new OdbcParameter("LocalCreditorId", OdbcType.Int) { Value = (NewDocument.LocalCreditor==null?-1:NewDocument.LocalCreditor.Id) });
                         //
+                        com.Parameters.Add(new OdbcParameter("OtherDebitor", OdbcType.VarChar, 200) { Value = NewDocument.OtherDebitor });
+                        com.Parameters.Add(new OdbcParameter("OtherKreditor", OdbcType.VarChar, 200) { Value = NewDocument.OtherKreditor });
                         com.Parameters.Add(new OdbcParameter("DocNum", OdbcType.Int) { Value = NewDocument.DocNum });
                         com.Parameters.Add(new OdbcParameter("IsDraft", OdbcType.Bit) { Value = NewDocument.IsDraft });
 
@@ -6415,13 +6424,17 @@ Values(?, ?, ?, ?,
 
             string CommandSql = String.Format(@"Update `aks`.`CashFunc_Document`
 Set `UreDate`=?, `ModifyDate`=?, `ModifyUser`='{1}', `LocalDebitorId` = {2}, 
-    `LocalCreditorId`={3}, `IsProcessed`={4}, `DocNum`={5}, `IsDraft`={6}
+    `LocalCreditorId`={3}, `OtherDebitor`={4}, `OtherKreditor`={5}, `IsProcessed`={6}, 
+    `DocNum`={7}, `IsDraft`={8}
 Where Id={0}", UpdDocument.Id,
                    UpdDocument.ModifyUser,
                    (UpdDocument.LocalDebitor == null ? -1: UpdDocument.LocalDebitor.Id),
                    //
                    (UpdDocument.LocalCreditor == null ? -1 :UpdDocument.LocalCreditor.Id),
+                   (string.IsNullOrWhiteSpace(UpdDocument.OtherDebitor) ? "null" : string.Format("'{0}'", UpdDocument.OtherDebitor)),
+                   (string.IsNullOrWhiteSpace(UpdDocument.OtherKreditor) ? "null" : string.Format("'{0}'", UpdDocument.OtherKreditor)),
                    (UpdDocument.IsProcessed ? 1 : 0),
+                    //
                    UpdDocument.DocNum,
                    (UpdDocument.IsDraft ? 1 : 0));
 
@@ -6809,7 +6822,7 @@ Where Id={0}", (int)DocumentRashod.Id);
             string CommandSql = String.Format(@"Select `DebetKodDivision`, `DebetKorSchet`, `DebetKodAnalUch`, `KreditNomerSchet`,
     `Summa`, `SummaStr`, `KodNazn`, `PoDoc`,
     `Osnovanie`, `Id_PaidRashReasons`, `Prilozenie`, `DolRukFio`,
-    `RukFio`, `GlavBuh`, `Debitor`, `Kreditor`
+    `RukFio`, `GlavBuh`
 From `aks`.`cashfunc_document_rashod`
 Where Id={0}", (int)DocumentRashod.Id);
 
@@ -6874,8 +6887,6 @@ Where Id={0}", (int)DocumentRashod.Id);
                                     if (!dr.IsDBNull(11)) DocumentRashod.DolRukFio =  dr.GetValue(11).ToString();
                                     if (!dr.IsDBNull(12)) DocumentRashod.RukFio = dr.GetValue(12).ToString();
                                     if (!dr.IsDBNull(13)) DocumentRashod.GlavBuh = dr.GetValue(13).ToString();
-                                    if (!dr.IsDBNull(14)) DocumentRashod.OtherDebitor = dr.GetValue(14).ToString();
-                                    if (!dr.IsDBNull(15)) DocumentRashod.OtherKreditor = dr.GetValue(15).ToString();
                                 }
                             }
                         }
@@ -6909,13 +6920,11 @@ Where Id={0}", (int)DocumentRashod.Id);
             string CommandSql = String.Format(@"insert into `aks`.`cashfunc_document_rashod`(id, `DebetKodDivision`, `DebetKorSchet`, `DebetKodAnalUch`, 
     `KreditNomerSchet`, `Summa`, `SummaStr`, `KodNazn`, 
     `PoDoc`, `Osnovanie`, `Id_PaidRashReasons`, `Prilozenie`, 
-    `DolRukFio`,`RukFio`, `GlavBuh`,`Debitor`,
-    `Kreditor`) 
+    `DolRukFio`,`RukFio`, `GlavBuh`) 
 Values({0}, {1}, {2}, {3},
     {4}, {5}, {6}, {7}, 
     {8}, {9}, {10}, {11}, 
-    {12}, {13}, {14}, {15},
-    {16})", (NewDocumentRashod.Id == null ? "null" : NewDocumentRashod.Id.ToString()),
+    {12}, {13}, {14})", (NewDocumentRashod.Id == null ? "null" : NewDocumentRashod.Id.ToString()),
             (string.IsNullOrWhiteSpace(NewDocumentRashod.DebetKodDivision) ? "null" : string.Format("'{0}'", NewDocumentRashod.DebetKodDivision)),
             (string.IsNullOrWhiteSpace(NewDocumentRashod.DebetKorSchet) ? "null" : string.Format("'{0}'", NewDocumentRashod.DebetKorSchet)),
             (string.IsNullOrWhiteSpace(NewDocumentRashod.DebetKodAnalUch) ? "null" : string.Format("'{0}'", NewDocumentRashod.DebetKodAnalUch)),
@@ -6932,10 +6941,7 @@ Values({0}, {1}, {2}, {3},
             //
             (string.IsNullOrWhiteSpace(NewDocumentRashod.DolRukFio) ? "null" : string.Format("'{0}'", NewDocumentRashod.DolRukFio)),
             (string.IsNullOrWhiteSpace(NewDocumentRashod.RukFio) ? "null" : string.Format("'{0}'", NewDocumentRashod.RukFio)),
-            (string.IsNullOrWhiteSpace(NewDocumentRashod.GlavBuh) ? "null" : string.Format("'{0}'", NewDocumentRashod.GlavBuh)),
-            (string.IsNullOrWhiteSpace(NewDocumentRashod.OtherDebitor) ? "null" : string.Format("'{0}'", NewDocumentRashod.OtherDebitor)),
-            //
-            (string.IsNullOrWhiteSpace(NewDocumentRashod.OtherKreditor) ? "null" : string.Format("'{0}'", NewDocumentRashod.OtherKreditor)));
+            (string.IsNullOrWhiteSpace(NewDocumentRashod.GlavBuh) ? "null" : string.Format("'{0}'", NewDocumentRashod.GlavBuh)));
 
             try
             {
@@ -6979,7 +6985,7 @@ Values({0}, {1}, {2}, {3},
 Set `DebetKodDivision`={1}, `DebetKorSchet`={2}, `DebetKodAnalUch`={3}, `KreditNomerSchet`={4}, 
     `Summa`={5}, `SummaStr`={6}, `KodNazn`={7}, `PoDoc`={8},
     `Osnovanie`={9}, `Id_PaidRashReasons`={10}, `Prilozenie`={11}, `DolRukFio`={12},
-    `RukFio`={13}, `GlavBuh`={14}, `Debitor`={15}, `Kreditor`={16}
+    `RukFio`={13}, `GlavBuh`={14}
 Where Id={0}", UpdDocumentRashod.Id,
             //
             (string.IsNullOrWhiteSpace(UpdDocumentRashod.DebetKodDivision) ? "null" : string.Format("'{0}'", UpdDocumentRashod.DebetKodDivision)),
@@ -6998,9 +7004,7 @@ Where Id={0}", UpdDocumentRashod.Id,
             (string.IsNullOrWhiteSpace(UpdDocumentRashod.DolRukFio) ? "null" : string.Format("'{0}'", UpdDocumentRashod.DolRukFio)),
             //
             (string.IsNullOrWhiteSpace(UpdDocumentRashod.RukFio) ? "null" : string.Format("'{0}'", UpdDocumentRashod.RukFio)),
-            (string.IsNullOrWhiteSpace(UpdDocumentRashod.GlavBuh) ? "null" : string.Format("'{0}'", UpdDocumentRashod.GlavBuh)),
-            (string.IsNullOrWhiteSpace(UpdDocumentRashod.OtherDebitor) ? "null" : string.Format("'{0}'", UpdDocumentRashod.OtherDebitor)),
-            (string.IsNullOrWhiteSpace(UpdDocumentRashod.OtherKreditor) ? "null" : string.Format("'{0}'", UpdDocumentRashod.OtherKreditor)));
+            (string.IsNullOrWhiteSpace(UpdDocumentRashod.GlavBuh) ? "null" : string.Format("'{0}'", UpdDocumentRashod.GlavBuh)));
 
             try
             {

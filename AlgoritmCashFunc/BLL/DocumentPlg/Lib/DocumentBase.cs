@@ -65,6 +65,16 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
         public Local LocalCreditor { get; set; } = null;
 
         /// <summary>
+        /// Дебитор который ввели вручную не из списка
+        /// </summary>
+        public string OtherDebitor;
+
+        /// <summary>
+        /// Кредитор который ввели вручную не из списка
+        /// </summary>
+        public string OtherKreditor;
+
+        /// <summary>
         /// Номер документа
         /// </summary>
         public int DocNum { get; set; }
@@ -86,9 +96,11 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
         /// <param name="CurOperation">Операция к которой относится этот документ</param>
         /// <param name="LocalDebitor">Дебитор</param>
         /// <param name="LocalCreditor">Кредитор</param>
+        /// <param name="OtherDebitor">Дебитор который ввели вручную не из списка</param>
+        /// <param name="OtherKreditor">Кредитор который ввели вручную не из списка</param>
         /// <param name="DocNum"> Черновик</param>
         /// <param name="IsDraft"> Черновик</param>
-        public DocumentBase(string DocFullName, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, int DocNum, bool IsDraft)
+        public DocumentBase(string DocFullName, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, string OtherDebitor, string OtherKreditor, int DocNum, bool IsDraft)
         {
             try
             {
@@ -96,6 +108,8 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
                 this.CurOperation = CurOperation;
                 this.LocalDebitor = LocalDebitor;
                 this.LocalCreditor = LocalCreditor;
+                this.OtherDebitor = OtherDebitor;
+                this.OtherKreditor = OtherKreditor;
                 this.DocNum = DocNum;
                 this.IsDraft = IsDraft;
             }

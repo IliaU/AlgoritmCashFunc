@@ -69,6 +69,9 @@ namespace AlgoritmCashFunc.BLL
                     // Предварительно проверяем на уникальность имя
                     if (Com.LocalFarm.CurLocalList[base.LocalName] != null) throw new ApplicationException("С таким именем Local уже существует. Это уникальное поле.");
 
+                    // Убираем признак того что это черновик
+                    base.IsDraft = false;
+
                     // Вставляем новую запись и сохраняем идентификатор
                     int id = Com.ProviderFarm.CurrentPrv.SetLocal(this);
                     base.Id = id;
@@ -89,6 +92,24 @@ namespace AlgoritmCashFunc.BLL
             {
                 ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
                 Com.Log.EventSave(ae.Message, string.Format("{0}.Save", GetType().Name), EventEn.Error);
+                throw ae;
+            }
+        }
+
+        /// <summary>
+        /// Удаление из базы данных
+        /// </summary>
+        public void Deleted()
+        {
+            try
+            {
+                base.IsDraft = true;
+                this.Save();
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при инициализации конструктора с ошибкой: ({0})", ex.Message));
+                Com.Log.EventSave(ae.Message, string.Format("{0}.Deleted", GetType().Name), EventEn.Error);
                 throw ae;
             }
         }

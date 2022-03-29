@@ -81,7 +81,7 @@ namespace AlgoritmCashFunc.BLL.LocalPlg.Lib
                 throw ae;
             }
         }
-       
+
         /// <summary>
         /// Представляет из себя список продуктов
         /// </summary>
@@ -207,6 +207,39 @@ namespace AlgoritmCashFunc.BLL.LocalPlg.Lib
                 }
             }
 
+            /*
+            /// <summary>
+            /// Удаление объекта из справочника
+            /// </summary>
+            /// <param name="dLocal">Элемент который хотим удалить</param>
+            public void Delete(Local dLocal)
+            {
+                try
+                {
+                    // Добавляет продукт в список
+                    lock (_LocalL)
+                    {
+                        if (dLocal.Id != null)
+                        {
+                            Local d = this[dLocal.Id];
+
+                            _LocalL.RemoveAt(d.Index);
+                            for (int i = d.Index; i < _LocalL.Count; i++)
+                            {
+                                _LocalL[i].Index = i;
+                            }
+
+                            d.Deleted();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Com.Log.EventSave(string.Format("Произошла ошибка: ({0})", ex.Message), string.Format("{0}.OperationBase.Add(Operation nOperation)", GetType().Name), EventEn.Error, true, false);
+                    throw ex;
+                }
+            }*/
+
             /// <summary>
             /// Для обращения по индексатору
             /// </summary>
@@ -219,5 +252,6 @@ namespace AlgoritmCashFunc.BLL.LocalPlg.Lib
                 }
             }
         }
+        
     }
 }

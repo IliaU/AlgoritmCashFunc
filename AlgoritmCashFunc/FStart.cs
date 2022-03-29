@@ -467,22 +467,20 @@ namespace AlgoritmCashFunc
                         this.txtBoxPrihOKUD.Text = (OperPrihod!=null && !string.IsNullOrWhiteSpace(OperPrihod.OKUD) ? OperPrihod.OKUD: "0310001");
 
                         // Приход заполняем список принято от
-                        if (this.cmbBoxPrihKreditor.Items.Count==0)
+                        this.cmbBoxPrihKreditor.Items.Clear();
+                        foreach (Local item in LocalFarm.CurLocalEmployees)
                         {
-                            foreach (Local item in LocalFarm.CurLocalEmployees)
-                            {
-                                this.cmbBoxPrihKreditor.Items.Add(item.LocalName);
-                            }
+                            this.cmbBoxPrihKreditor.Items.Add(item.LocalName);
                         }
 
+
                         // Заполняем получил кассир
-                        if (this.cmbBoxPrihDebitor.Items.Count == 0)
+                        this.cmbBoxPrihDebitor.Items.Clear();
+                        foreach (Local item in LocalFarm.CurLocalChiefCashiers)
                         {
-                            foreach (Local item in LocalFarm.CurLocalChiefCashiers)
-                            {
-                                this.cmbBoxPrihDebitor.Items.Add(item.LocalName);
-                            }
+                            this.cmbBoxPrihDebitor.Items.Add(item.LocalName);
                         }
+                        
 
                         // Основание
                         if (this.cmbBoxPrihPaidInReasons.Items.Count == 0)
@@ -522,21 +520,18 @@ namespace AlgoritmCashFunc
                         this.txtBoxRashOKUD.Text = (OperRashod != null && !string.IsNullOrWhiteSpace(OperRashod.OKUD) ? OperRashod.OKUD : "0310002");
 
                         // Приход заполняем список выдать
-                        if (this.cmbBoxRashDebitor.Items.Count == 0)
+                        this.cmbBoxRashDebitor.Items.Clear();
+                        foreach (Local item in LocalFarm.CurLocalEmployees)
                         {
-                            foreach (Local item in LocalFarm.CurLocalEmployees)
-                            {
-                                this.cmbBoxRashDebitor.Items.Add(item.LocalName);
-                            }
+                            this.cmbBoxRashDebitor.Items.Add(item.LocalName);
                         }
 
+
                         // Заполняем выдал кассир
-                        if (this.cmbBoxRashKreditor.Items.Count == 0)
+                        this.cmbBoxRashKreditor.Items.Clear();
+                        foreach (Local item in LocalFarm.CurLocalChiefCashiers)
                         {
-                            foreach (Local item in LocalFarm.CurLocalChiefCashiers)
-                            {
-                                this.cmbBoxRashKreditor.Items.Add(item.LocalName);
-                            }
+                            this.cmbBoxRashKreditor.Items.Add(item.LocalName);
                         }
 
                         // Основание
@@ -577,21 +572,17 @@ namespace AlgoritmCashFunc
                         this.txtBoxKasBookOKUD.Text = (OperKasBook != null && !string.IsNullOrWhiteSpace(OperKasBook.OKUD) ? OperKasBook.OKUD : "0310004");
 
                         // Заполняем Бухгалтер
-                        if (this.cmbBoxKassBookBuh.Items.Count == 0)
+                        this.cmbBoxKassBookBuh.Items.Clear();
+                        foreach (Local item in LocalFarm.CurLocalAccounters)
                         {
-                            foreach (Local item in LocalFarm.CurLocalAccounters)
-                            {
-                                this.cmbBoxKassBookBuh.Items.Add(item.LocalName);
-                            }
+                            this.cmbBoxKassBookBuh.Items.Add(item.LocalName);
                         }
 
                         // Заполняем получил кассир
-                        if (this.cmbBoxKassBookKasir.Items.Count == 0)
+                        this.cmbBoxKassBookKasir.Items.Clear();
+                        foreach (Local item in LocalFarm.CurLocalChiefCashiers)
                         {
-                            foreach (Local item in LocalFarm.CurLocalChiefCashiers)
-                            {
-                                this.cmbBoxKassBookKasir.Items.Add(item.LocalName);
-                            }
+                            this.cmbBoxKassBookKasir.Items.Add(item.LocalName);
                         }
 
                         // Заполняем поле основание значенеие по умолчанию и зависимые поля
@@ -740,6 +731,24 @@ namespace AlgoritmCashFunc
                 Com.Log.EventSave(string.Format(@"Ошибка в методе {0}:""{1}""", "TSMItemLic_Click", ex.Message), this.GetType().FullName, EventEn.Error, true, true);
             }
         }
+
+        // Пользователь вызвал список старших кассиров для правки
+        private void TSMItemLocalChiefCashiers_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (FListLocalChiefCashiers Frm = new FListLocalChiefCashiers())
+                {
+                    Frm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при работе со списком старших кассиров с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.TSMItemLocalChiefCashiers", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
+            }
+        }
         #endregion
 
         #region События вызванные выбором в верхнем меню
@@ -831,20 +840,37 @@ namespace AlgoritmCashFunc
                         // Валидация введённой даты
                         try { this.CurDoc.UreDate = DateTime.Parse(this.txtBoxPrihDateDoc.Text);}
                         catch (Exception){ throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxPrihDateDoc.Text));}
+                        
+                        // Валидация Дебитора
+                        if (this.cmbBoxPrihDebitor.SelectedIndex == -1)
+                        {
+                            if (string.IsNullOrWhiteSpace(this.cmbBoxPrihDebitor.Text)) throw new ApplicationException("Не указано кто получил.");
+                            else
+                            {
+                                this.CurDoc.LocalDebitor = null;
+                                this.CurDoc.OtherDebitor= this.cmbBoxPrihDebitor.Text.Trim();
+                            }
+                        }
+                        else
+                        {
+                            this.CurDoc.LocalDebitor = LocalFarm.CurLocalChiefCashiers[this.cmbBoxPrihDebitor.SelectedIndex];
+                        }
 
                         // Валидация кредитора
-                        if (this.cmbBoxPrihKreditor.SelectedIndex == -1) throw new ApplicationException("Не указано от кого принято.");
+                        if (this.cmbBoxPrihKreditor.SelectedIndex == -1)
+                        {
+                            if (string.IsNullOrWhiteSpace(this.cmbBoxPrihKreditor.Text)) throw new ApplicationException("Не указано от кого принято.");
+                            else
+                            {
+                                this.CurDoc.LocalCreditor = null;
+                                CurDoc.OtherKreditor = this.cmbBoxPrihKreditor.Text.Trim();
+                            }
+                        }
                         else
                         {
                             this.CurDoc.LocalCreditor = LocalFarm.CurLocalEmployees[this.cmbBoxPrihKreditor.SelectedIndex];
                         }
 
-                        // Валидация Дебитора
-                        if (this.cmbBoxPrihDebitor.SelectedIndex == -1) throw new ApplicationException("Не указано кто получил.");
-                        else
-                        {
-                            this.CurDoc.LocalDebitor = LocalFarm.CurLocalChiefCashiers[this.cmbBoxPrihDebitor.SelectedIndex];
-                        }
 
                         ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KreditKodDivision = this.txtBoxPrihKreditKodDivision.Text;
                         ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KredikKodAnalUch = this.txtBoxPrihKredikKodAnalUch.Text;
@@ -942,7 +968,7 @@ namespace AlgoritmCashFunc
                             else
                             {
                                 this.CurDoc.LocalDebitor = null;
-                                ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).OtherDebitor = this.cmbBoxRashDebitor.Text.Trim();
+                                this.CurDoc.OtherDebitor = this.cmbBoxRashDebitor.Text.Trim();
                             }
                         }
                         else
@@ -957,7 +983,7 @@ namespace AlgoritmCashFunc
                             else
                             {
                                 this.CurDoc.LocalCreditor = null;
-                                ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).OtherKreditor = this.cmbBoxRashKreditor.Text.Trim();
+                                this.CurDoc.OtherKreditor = this.cmbBoxRashKreditor.Text.Trim();
                             }
                         }
                         else
@@ -1038,22 +1064,39 @@ namespace AlgoritmCashFunc
 
                             // Валидация заполненных данных по подразделению и сохранение в базе
                             ValidateKassa(Kassa);
+                        }               
+                        
+                        // Валидация Дебитора
+                        if (this.cmbBoxKassBookBuh.SelectedIndex == -1)
+                        {
+                            if (string.IsNullOrWhiteSpace(this.cmbBoxKassBookBuh.Text)) throw new ApplicationException("Не указан бухгалтер.");
+                            else
+                            {
+                                this.CurDoc.LocalDebitor = null;
+                                this.CurDoc.OtherDebitor = this.cmbBoxKassBookBuh.Text.Trim();
+                            }
                         }
-                                               
-                        // Валидация дебитора
-                        if (this.cmbBoxKassBookBuh.SelectedIndex == -1) throw new ApplicationException("Не указан бухгалтер.");
                         else
                         {
                             this.CurDoc.LocalDebitor = LocalFarm.CurLocalAccounters[this.cmbBoxKassBookBuh.SelectedIndex];
                         }
 
-                        // Валидация кассира
-                        if (this.cmbBoxKassBookKasir.SelectedIndex == -1) throw new ApplicationException("Не указан кассир.");
+                        // Валидация кредитора - кассира
+                        if (this.cmbBoxKassBookKasir.SelectedIndex == -1)
+                        {
+                            if (string.IsNullOrWhiteSpace(this.cmbBoxKassBookKasir.Text)) throw new ApplicationException("Не указано кто выдал.");
+                            else
+                            {
+                                this.CurDoc.LocalCreditor = null;
+                                this.CurDoc.OtherKreditor = this.cmbBoxKassBookKasir.Text.Trim();
+                            }
+                        }
                         else
                         {
                             this.CurDoc.LocalCreditor = LocalFarm.CurLocalChiefCashiers[this.cmbBoxKassBookKasir.SelectedIndex];
                         }
-                        
+
+
                         // Валидация суммы на начало дня
                         if (!string.IsNullOrWhiteSpace(this.txtBoxKassBookStartDay.Text))
                         {
@@ -1290,29 +1333,38 @@ namespace AlgoritmCashFunc
                             this.txtBoxPrihOsnovanie.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).Osnovanie;
                             this.cmbBoxPrihPaidInReasons.SelectedIndexChanged += cmbBoxPrihPaidInReasons_SelectedIndexChanged;
 
-                            // КредиторДебитор
-                            int selectIndexPrihKreditor = -1;
-                            for (int i = 0; i < LocalFarm.CurLocalEmployees.Count; i++)
-                            {
-                                if (LocalFarm.CurLocalEmployees[i].LocalName == (this.CurDoc.LocalCreditor.LocalName))
-                                {
-                                    selectIndexPrihKreditor = i;
-                                    break;
-                                }
-                            }
-                            this.cmbBoxPrihKreditor.SelectedIndex = selectIndexPrihKreditor;
-                            // 
-                            int selectIndexPrihDebitor = -1;
-                            for (int i = 0; i < LocalFarm.CurLocalChiefCashiers.Count; i++)
-                            {
-                                if (LocalFarm.CurLocalChiefCashiers[i].LocalName == (this.CurDoc.LocalDebitor.LocalName))
-                                {
-                                    selectIndexPrihDebitor = i;
-                                    break;
-                                }
-                            }
-                            this.cmbBoxPrihDebitor.SelectedIndex = selectIndexPrihDebitor;
 
+                            // Дебитор
+                            int selectIndexPrihKreditor = -1;
+                            if (this.CurDoc.LocalDebitor != null)
+                            {
+                                for (int i = 0; i < LocalFarm.CurLocalChiefCashiers.Count; i++)
+                                {
+                                    if (LocalFarm.CurLocalChiefCashiers[i].LocalName == (this.CurDoc.LocalDebitor.LocalName))
+                                    {
+                                        selectIndexPrihKreditor = i;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (selectIndexPrihKreditor > -1) this.cmbBoxPrihKreditor.SelectedIndex = selectIndexPrihKreditor;
+                            else this.cmbBoxPrihKreditor.Text = this.CurDoc.OtherDebitor;
+                            // Кредитор
+                            int selectIndexPrihDebitor = -1;
+                            if (this.CurDoc.LocalCreditor != null)
+                            {
+                                for (int i = 0; i < LocalFarm.CurLocalEmployees.Count; i++)
+                                {
+                                    if (LocalFarm.CurLocalEmployees[i].LocalName == (this.CurDoc.LocalCreditor.LocalName))
+                                    {
+                                        selectIndexPrihDebitor = i;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (selectIndexPrihDebitor > -1) this.cmbBoxPrihDebitor.SelectedIndex = selectIndexPrihDebitor;
+                            else this.cmbBoxPrihDebitor.Text = this.CurDoc.OtherKreditor;
+                            
                             this.txtBoxPrihKreditKodDivision.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KreditKodDivision;
                             this.txtBoxPrihKredikKodAnalUch.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KredikKodAnalUch;
                             this.txtBoxPrihSumma.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).Summa.ToString();
@@ -1401,7 +1453,7 @@ namespace AlgoritmCashFunc
                                 }
                             }
                             if (selectIndexRashDebitor > -1) this.cmbBoxRashDebitor.SelectedIndex = selectIndexRashDebitor;
-                            else this.cmbBoxRashDebitor.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).OtherDebitor;
+                            else this.cmbBoxRashDebitor.Text = this.CurDoc.OtherDebitor;
                             // Кредитор
                             int selectIndexRashKreditor = -1;
                             if (this.CurDoc.LocalCreditor != null)
@@ -1416,7 +1468,7 @@ namespace AlgoritmCashFunc
                                 }
                             }
                             if (selectIndexRashKreditor > -1) this.cmbBoxRashKreditor.SelectedIndex = selectIndexRashKreditor;
-                            else this.cmbBoxRashKreditor.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).OtherKreditor;
+                            else this.cmbBoxRashKreditor.Text = this.CurDoc.OtherKreditor;
 
 
 
@@ -1478,29 +1530,37 @@ namespace AlgoritmCashFunc
                             this.txtBoxKasBookDolRukOrg.Text = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).DolRukFio;
                             this.txtBoxKasBookRukFio.Text = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).RukFio;
                             this.txtBoxKasBookGlavBuh.Text = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).GlavBuh;
-
+                            
                             // Дебитор - Бухгалтер
                             int selectIndexKassBookBuh = -1;
-                            for (int i = 0; i < LocalFarm.CurLocalAccounters.Count; i++)
+                            if (this.CurDoc.LocalDebitor != null)
                             {
-                                if (LocalFarm.CurLocalAccounters[i].LocalName == (this.CurDoc.LocalDebitor.LocalName))
+                                for (int i = 0; i < LocalFarm.CurLocalAccounters.Count; i++)
                                 {
-                                    selectIndexKassBookBuh = i;
-                                    break;
+                                    if (LocalFarm.CurLocalAccounters[i].LocalName == (this.CurDoc.LocalDebitor.LocalName))
+                                    {
+                                        selectIndexKassBookBuh = i;
+                                        break;
+                                    }
                                 }
                             }
-                            this.cmbBoxKassBookBuh.SelectedIndex = selectIndexKassBookBuh;
+                            if (selectIndexKassBookBuh > -1) this.cmbBoxKassBookBuh.SelectedIndex = selectIndexKassBookBuh;
+                            else this.cmbBoxKassBookBuh.Text = this.CurDoc.OtherDebitor;
                             // Кредитор - Кассир
                             int selectIndexKassBookKasir = -1;
-                            for (int i = 0; i < LocalFarm.CurLocalChiefCashiers.Count; i++)
+                            if (this.CurDoc.LocalCreditor != null)
                             {
-                                if (LocalFarm.CurLocalChiefCashiers[i].LocalName == (this.CurDoc.LocalCreditor.LocalName))
+                                for (int i = 0; i < LocalFarm.CurLocalChiefCashiers.Count; i++)
                                 {
-                                    selectIndexKassBookKasir = i;
-                                    break;
+                                    if (LocalFarm.CurLocalChiefCashiers[i].LocalName == (this.CurDoc.LocalCreditor.LocalName))
+                                    {
+                                        selectIndexKassBookKasir = i;
+                                        break;
+                                    }
                                 }
                             }
-                            this.cmbBoxKassBookKasir.SelectedIndex = selectIndexKassBookKasir;
+                            if (selectIndexKassBookKasir > -1) this.cmbBoxKassBookKasir.SelectedIndex = selectIndexKassBookKasir;
+                            else this.cmbBoxKassBookKasir.Text = this.CurDoc.OtherKreditor;
                         }
                         else
                         {
@@ -1510,7 +1570,7 @@ namespace AlgoritmCashFunc
                             catch (Exception) { }
 
                             // Создаём пустой документ так как за эту дату документ не найден
-                            this.CurDoc = Com.DocumentFarm.CreateNewDocument(null, "DocumentKasBook", UreDt, DateTime.Now, DateTime.Now, Com.UserFarm.CurrentUser.Logon, Com.OperationFarm.CurOperationList["OperationKasBook"], null, null, Com.LocalFarm.CurLocalDepartament.LastDocNumKasBook + 1, true, false);  // тут надо получить документ и список на день который указан если документа нет то создаём его и получаем список документов в этом дне с остатками на начало и конец для того чтобы можно было мостроить суммы на начало дня и конец выбранного дня
+                            this.CurDoc = Com.DocumentFarm.CreateNewDocument(null, "DocumentKasBook", UreDt, DateTime.Now, DateTime.Now, Com.UserFarm.CurrentUser.Logon, Com.OperationFarm.CurOperationList["OperationKasBook"], null, null, null, null, Com.LocalFarm.CurLocalDepartament.LastDocNumKasBook + 1, true, false);  // тут надо получить документ и список на день который указан если документа нет то создаём его и получаем список документов в этом дне с остатками на начало и конец для того чтобы можно было мостроить суммы на начало дня и конец выбранного дня
                             //this.CurDoc.DocNum = (Kassa.LastDocNumKasBook + 1);  // Номер документа получили при создании документа
 
                             this.txtBoxKasBookDolRukOrg.Text = Kassa.DolRukOrg;
@@ -1643,11 +1703,8 @@ namespace AlgoritmCashFunc
                 //throw ae;
             }
         }
-
-
         #endregion
-
-
+        
         #region События связанные с выбором внутри элементов котороые к основной логике не имеют отношения
 
         /// <summary>
@@ -1864,7 +1921,8 @@ namespace AlgoritmCashFunc
                 throw ex;
             }
         }
-        
+
         #endregion
+
     }
 }

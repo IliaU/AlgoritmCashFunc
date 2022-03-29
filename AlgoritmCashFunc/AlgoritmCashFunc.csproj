@@ -106,6 +106,12 @@
     <Compile Include="FLic.Designer.cs">
       <DependentUpon>FLic.cs</DependentUpon>
     </Compile>
+    <Compile Include="FListLocalChiefCashiers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FListLocalChiefCashiers.Designer.cs">
+      <DependentUpon>FListLocalChiefCashiers.cs</DependentUpon>
+    </Compile>
     <Compile Include="FLogon.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +160,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FLic.resx">
       <DependentUpon>FLic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FListLocalChiefCashiers.resx">
+      <DependentUpon>FListLocalChiefCashiers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FLogon.resx">
       <DependentUpon>FLogon.cs</DependentUpon>

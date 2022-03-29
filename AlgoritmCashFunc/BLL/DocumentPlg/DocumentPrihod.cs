@@ -100,10 +100,12 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         /// <param name="CurOperation">Операция к которой относится этот документ</param>
         /// <param name="LocalDebitor">Дебитор</param>
         /// <param name="LocalCreditor">Кредитор</param>
+        /// <param name="OtherDebitor">Дебитор который ввели вручную не из списка</param>
+        /// <param name="OtherKreditor">Кредитор который ввели вручную не из списка</param>
         /// <param name="DocNum"> Черновик</param>
         /// <param name="IsDraft">Черновик</param>
         /// <param name="IsProcessed">Проведённый документ или нет</param>
-        public DocumentPrihod(int? Id, DateTime? UreDate, DateTime CteateDate, DateTime ModifyDate, string ModifyUser, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, int DocNum, bool IsDraft, bool IsProcessed) : base("DocumentPrihod", CurOperation, LocalDebitor, LocalCreditor, DocNum, IsProcessed)
+        public DocumentPrihod(int? Id, DateTime? UreDate, DateTime CteateDate, DateTime ModifyDate, string ModifyUser, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, string OtherDebitor, string OtherKreditor, int DocNum, bool IsDraft, bool IsProcessed) : base("DocumentPrihod", CurOperation, LocalDebitor, LocalCreditor, OtherDebitor, OtherKreditor, DocNum, IsProcessed)
         {
             try
             {
@@ -133,7 +135,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         /// <summary>
         /// Конструктор
         /// </summary>
-        public DocumentPrihod() : this(null, DateTime.Now.Date, DateTime.Now, DateTime.Now, Com.UserFarm.CurrentUser.Logon, Com.OperationFarm.CurOperationList["OperationPrihod"], null, null, Com.LocalFarm.CurLocalDepartament.LastDocNumPrih+1, true, false)
+        public DocumentPrihod() : this(null, DateTime.Now.Date, DateTime.Now, DateTime.Now, Com.UserFarm.CurrentUser.Logon, Com.OperationFarm.CurOperationList["OperationPrihod"], null, null, null, null, Com.LocalFarm.CurLocalDepartament.LastDocNumPrih+1, true, false)
         {
             try
             {

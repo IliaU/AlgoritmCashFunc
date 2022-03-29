@@ -414,6 +414,8 @@
             this.TSMItemConfigPrv = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemConfigUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemLic = new System.Windows.Forms.ToolStripMenuItem();
+            this.справочникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMItemLocalChiefCashiers = new System.Windows.Forms.ToolStripMenuItem();
             this.localBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pnlTop.SuspendLayout();
             this.pnlTopFill.SuspendLayout();
@@ -4808,7 +4810,8 @@
             this.TSMItemAboutRep,
             this.TSMItemConfigPrv,
             this.TSMItemConfigUsers,
-            this.TSMItemLic});
+            this.TSMItemLic,
+            this.справочникиToolStripMenuItem});
             this.TSMItemSetup.Name = "TSMItemSetup";
             this.TSMItemSetup.Size = new System.Drawing.Size(78, 20);
             this.TSMItemSetup.Text = "Настройка";
@@ -4839,6 +4842,21 @@
             this.TSMItemLic.Size = new System.Drawing.Size(291, 22);
             this.TSMItemLic.Text = "Информация по лицензии";
             this.TSMItemLic.Click += new System.EventHandler(this.TSMItemLic_Click);
+            // 
+            // справочникиToolStripMenuItem
+            // 
+            this.справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMItemLocalChiefCashiers});
+            this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
+            this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(291, 22);
+            this.справочникиToolStripMenuItem.Text = "Справочники";
+            // 
+            // TSMItemLocalChiefCashiers
+            // 
+            this.TSMItemLocalChiefCashiers.Name = "TSMItemLocalChiefCashiers";
+            this.TSMItemLocalChiefCashiers.Size = new System.Drawing.Size(174, 22);
+            this.TSMItemLocalChiefCashiers.Text = "Старшие кассиры";
+            this.TSMItemLocalChiefCashiers.Click += new System.EventHandler(this.TSMItemLocalChiefCashiers_Click);
             // 
             // localBindingSource
             // 
@@ -5498,6 +5516,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn KorShet;
         private System.Windows.Forms.DataGridViewTextBoxColumn Prihod;
         private System.Windows.Forms.DataGridViewTextBoxColumn Rashod;
+        private System.Windows.Forms.ToolStripMenuItem справочникиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem TSMItemLocalChiefCashiers;
     }
 }
 
