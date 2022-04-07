@@ -2706,6 +2706,7 @@
             this.btnKassBookTitle.Text = "Обложка ";
             this.btnKassBookTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnKassBookTitle.UseVisualStyleBackColor = true;
+            this.btnKassBookTitle.Click += new System.EventHandler(this.btnKassBookTitle_Click);
             // 
             // btnKassBookDelete
             // 

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using AlgoritmCashFunc.Com;
 using AlgoritmCashFunc.BLL;
 using AlgoritmCashFunc.Lib;
+using WordDotx;
 
 namespace AlgoritmCashFunc
 {
@@ -1848,10 +1849,10 @@ namespace AlgoritmCashFunc
             {
                 this.lblRashSummaString.Text = this.KonvertSummToString(this.txtBoxRashSumma.Text);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //ApplicationException ae = new ApplicationException(string.Format("Упали при попытки превратить число в строку с ошибкой: ({0})", txtBoxPrihSumma, ex.Message));
-                //Log.EventSave(ae.Message, string.Format("{0}.txtBoxPrihSumma_TextChanged", GetType().Name), EventEn.Error, true, true);
+                ApplicationException ae = new ApplicationException(string.Format("Упали при создании документа с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.txtBoxRashSumma_TextChanged", GetType().Name), EventEn.Error, true, true);
                 //throw ae;
             }
         }
@@ -1880,8 +1881,9 @@ namespace AlgoritmCashFunc
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                ApplicationException ae = new ApplicationException(string.Format("Упали при создании документа с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.txtBoxKasBookDateDoc_TextChanged", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
             }
         }
         
@@ -1917,12 +1919,289 @@ namespace AlgoritmCashFunc
             }
             catch (Exception ex)
             {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при создании документа с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.btnKassBookEdit_Click", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
+            }
+        }
 
-                throw ex;
+        // Пользователь решил напечатать документ
+        private void btnKassBookTitle_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Document SelectDocument = null;
+
+                // Если текущая вкладка кассовая книга
+                if (this.tabCntOperation.SelectedIndex == 2 && this.TagDocKassBook.Count > 0)
+                {
+                    // Если у пользователя выделана ячейка
+                    if (dtGridKassBook.SelectedCells.Count > 0)
+                    {
+                        int tIndex = dtGridKassBook.SelectedCells[0].RowIndex;
+
+                        foreach (Document item in this.TagDocKassBook)
+                        {
+                            if (item.Id != null && item.Id.ToString()== dtGridKassBook.Rows[tIndex].Cells["Id"].Value.ToString())
+                            {
+                                SelectDocument = item;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                // Если документ найден
+                if(SelectDocument!=null)
+                {
+                    // Получаем текущее подразделение
+                    BLL.LocalPlg.LocalKassa Kassa = Com.LocalFarm.CurLocalDepartament;
+
+                    // Создаём таблицу с которой потом будем работать
+                    TableList TabL = new TableList();
+
+                    string SourceFile = string.Format(@"{0}\Dotx\Title.xlsx", Environment.CurrentDirectory);
+                    string TargetFile = string.Format(@"{0}\Report\{1}Title.xlsx", Environment.CurrentDirectory, ((int)SelectDocument.Id).ToString());
+                    switch (SelectDocument.DocFullName)
+                    {
+                        case "DocumentPrihod":
+
+                            // Создаём временную таблицу
+                            DataTable TabTmpPrihod = new DataTable();
+                            //
+                            TabTmpPrihod.Columns.Add(new DataColumn("A", typeof(string)));
+                            DataRow nrowPrihodOKUD = TabTmpPrihod.NewRow();
+                            nrowPrihodOKUD["A"] = ((BLL.OperationPlg.OperationPrihod)((BLL.DocumentPlg.DocumentPrihod)SelectDocument).CurOperation).OKUD;
+                            TabTmpPrihod.Rows.Add(nrowPrihodOKUD);
+                            DataRow nrowPrihodOKPO = TabTmpPrihod.NewRow();
+                            nrowPrihodOKPO["A"] = Kassa.OKPO;
+                            TabTmpPrihod.Rows.Add(nrowPrihodOKPO);
+
+                            // Добавлем эту таблицу в наш класс
+                            Table Tab0 = new Table("1|BQ6", TabTmpPrihod);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                            TabL.Add(Tab0, true);
+
+                            // Добавлем эту таблицу в наш класс
+                            Table Tab1 = new Table("1|BQ24", TabTmpPrihod);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                            TabL.Add(Tab1, true);
+
+                            //////////////////////////////////////
+
+                            // Создаём временную таблицу
+                            DataTable TabTmpPrihodGlavBuh = new DataTable();
+                            //
+                            TabTmpPrihodGlavBuh.Columns.Add(new DataColumn("A", typeof(string)));
+                            DataRow nrowPrihodGlavBuh = TabTmpPrihodGlavBuh.NewRow();
+                            nrowPrihodGlavBuh["A"] = ((BLL.DocumentPlg.DocumentPrihod)SelectDocument).GlavBuh;
+                            TabTmpPrihodGlavBuh.Rows.Add(nrowPrihodGlavBuh);
+
+                            // Добавлем эту таблицу в наш класс
+                            Table TabPrihodGlavBuh = new Table("1|AR46", TabTmpPrihodGlavBuh);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                            TabL.Add(TabPrihodGlavBuh, true);
+
+                            break;
+                        case "DocumentRashod":
+
+                            // Создаём временную таблицу
+                            DataTable TabTmpRashod = new DataTable();
+                            //
+                            TabTmpRashod.Columns.Add(new DataColumn("A", typeof(string)));
+                            DataRow nrowRashodOKUD = TabTmpRashod.NewRow();
+                            nrowRashodOKUD["A"] = ((BLL.OperationPlg.OperationPrihod)((BLL.DocumentPlg.DocumentPrihod)SelectDocument).CurOperation).OKUD;
+                            TabTmpRashod.Rows.Add(nrowRashodOKUD);
+                            DataRow nrowRashodOKPO = TabTmpRashod.NewRow();
+                            nrowRashodOKPO["A"] = Kassa.OKPO;
+                            TabTmpRashod.Rows.Add(nrowRashodOKPO);
+
+                            // Добавлем эту таблицу в наш класс
+                            Table TabRashod0 = new Table("1|BQ6", TabTmpRashod);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                            TabL.Add(TabRashod0, true);
+
+                            // Добавлем эту таблицу в наш класс
+                            Table TabRashod1 = new Table("1|BQ24", TabTmpRashod);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                            TabL.Add(TabRashod1, true);
+
+                            //////////////////////////////////////
+
+                            // Создаём временную таблицу
+                            DataTable TabTmpRashodGlavBuh = new DataTable();
+                            //
+                            TabTmpRashodGlavBuh.Columns.Add(new DataColumn("A", typeof(string)));
+                            DataRow nrowRashodGlavBuh = TabTmpRashodGlavBuh.NewRow();
+                            nrowRashodGlavBuh["A"] = ((BLL.DocumentPlg.DocumentPrihod)SelectDocument).GlavBuh;
+                            TabTmpRashodGlavBuh.Rows.Add(nrowRashodGlavBuh);
+
+                            // Добавлем эту таблицу в наш класс
+                            Table TabRashodGlavBuh = new Table("1|AR46", TabTmpRashodGlavBuh);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                            TabL.Add(TabRashodGlavBuh, true);
+
+                            break;
+                        default:
+                            break;
+                    }
+
+                    
+                    // Создаём временную таблицу
+                    DataTable TabTmpOrg = new DataTable();
+                    //
+                    TabTmpOrg.Columns.Add(new DataColumn("A", typeof(string)));
+                    DataRow nrowOrg = TabTmpOrg.NewRow();
+                    nrowOrg["A"] = Kassa.Organization;
+                    TabTmpOrg.Rows.Add(nrowOrg);
+
+                    // Добавлем эту таблицу в наш класс
+                    Table TabOrg0 = new Table("1|A7", TabTmpOrg);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                    TabL.Add(TabOrg0, true);
+
+                    // Добавлем эту таблицу в наш класс
+                    Table TabOrg1 = new Table("1|A25", TabTmpOrg);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                    TabL.Add(TabOrg1, true);
+                    //////////////////////////////////////
+
+                    // Создаём временную таблицу
+                    DataTable TabTmpStructPodrazdelenie = new DataTable();
+                    //
+                    TabTmpStructPodrazdelenie.Columns.Add(new DataColumn("A", typeof(string)));
+                    DataRow nrowStructPodrazdelenie = TabTmpStructPodrazdelenie.NewRow();
+                    nrowStructPodrazdelenie["A"] = Kassa.StructPodrazdelenie;
+                    TabTmpStructPodrazdelenie.Rows.Add(nrowStructPodrazdelenie);
+
+                    // Добавлем эту таблицу в наш класс
+                    Table TabStructPodrazdelenie0 = new Table("1|A9", TabTmpStructPodrazdelenie);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                    TabL.Add(TabStructPodrazdelenie0, true);
+
+                    // Добавлем эту таблицу в наш класс
+                    Table TabStructPodrazdelenie1 = new Table("1|A27", TabTmpStructPodrazdelenie);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                    TabL.Add(TabStructPodrazdelenie1, true);
+
+                    //////////////////////////////////////
+
+                    // Создаём временную таблицу
+                    DataTable TabTmpDolRukOrg = new DataTable();
+                    //
+                    TabTmpDolRukOrg.Columns.Add(new DataColumn("A", typeof(string)));
+                    DataRow nrowDolRukOrg = TabTmpDolRukOrg.NewRow();
+                    nrowDolRukOrg["A"] = Kassa.DolRukOrg;
+                    TabTmpDolRukOrg.Rows.Add(nrowDolRukOrg);
+
+                    // Добавлем эту таблицу в наш класс
+                    Table TabDolRukOrg = new Table("1|AI43", TabTmpDolRukOrg);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                    TabL.Add(TabDolRukOrg, true);
+
+                    //////////////////////////////////////
+
+                    // Создаём временную таблицу
+                    DataTable TabTmpRukFio = new DataTable();
+                    //
+                    TabTmpRukFio.Columns.Add(new DataColumn("A", typeof(string)));
+                    DataRow nrowRukFio = TabTmpRukFio.NewRow();
+                    nrowRukFio["A"] = Kassa.RukFio;
+                    TabTmpRukFio.Rows.Add(nrowRukFio);
+
+                    // Добавлем эту таблицу в наш класс
+                    Table TabRukFio = new Table("1|BJ43", TabTmpRukFio);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                    TabL.Add(TabRukFio, true);
+
+                    //////////////////////////////////////
+
+                    // Создаём временную таблицу
+                    DataTable TabTmpMon = new DataTable();
+                    //
+                    TabTmpMon.Columns.Add(new DataColumn("A", typeof(string)));
+                    DataRow nrowMon = TabTmpMon.NewRow();
+                    switch (((DateTime)SelectDocument.UreDate).Month)
+                    {
+                        case 1:
+                            nrowMon["A"] = "Январь";
+                            break;
+                        case 2:
+                            nrowMon["A"] = "Февраль";
+                            break;
+                        case 3:
+                            nrowMon["A"] = "Март";
+                            break;
+                        case 4:
+                            nrowMon["A"] = "Апрель";
+                            break;
+                        case 5:
+                            nrowMon["A"] = "Май";
+                            break;
+                        case 6:
+                            nrowMon["A"] = "Июнь";
+                            break;
+                        case 7:
+                            nrowMon["A"] = "Июль";
+                            break;
+                        case 8:
+                            nrowMon["A"] = "Август";
+                            break;
+                        case 9:
+                            nrowMon["A"] = "Сентябрь";
+                            break;
+                        case 10:
+                            nrowMon["A"] = "Октябрь";
+                            break;
+                        case 11:
+                            nrowMon["A"] = "Ноябрь";
+                            break;
+                        case 12:
+                            nrowMon["A"] = "Декабрь";
+                            break;
+                        default:
+                            break;
+                    }
+
+                    TabTmpMon.Rows.Add(nrowMon);
+
+                    // Добавлем эту таблицу в наш класс
+                    Table TabMon0 = new Table("1|AD16", TabTmpMon);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                    TabL.Add(TabMon0, true);
+
+                    // Добавлем эту таблицу в наш класс
+                    Table TabMon1 = new Table("1|AD34", TabTmpMon);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                    TabL.Add(TabMon1, true);
+
+                    //////////////////////////////////////
+
+                    // Создаём временную таблицу
+                    DataTable TabTmpYear = new DataTable();
+                    //
+                    TabTmpYear.Columns.Add(new DataColumn("A", typeof(string)));
+                    DataRow nrowYear = TabTmpYear.NewRow();
+                    nrowYear["A"] = ((DateTime)SelectDocument.UreDate).Year;
+                    TabTmpYear.Rows.Add(nrowYear);
+
+                    // Добавлем эту таблицу в наш класс
+                    Table TabYear0 = new Table("1|AT16", TabTmpYear);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                    TabL.Add(TabYear0, true);
+
+                    // Добавлем эту таблицу в наш класс
+                    Table TabYear1 = new Table("1|AT34", TabTmpYear);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                    TabL.Add(TabYear1, true);
+
+                    //////////////////////////////////////
+
+                    // Создаём задание
+                    TaskExcel Tsk = new TaskExcel(SourceFile, TargetFile, TabL, true);
+
+                    // Можно создать отдельный екземпляр который сможет работать асинхронно со своими параметрами
+                    ExcelServer SrvStatic = new ExcelServer(string.Format(@"{0}\Dotx", Environment.CurrentDirectory), string.Format(@"{0}\Report", Environment.CurrentDirectory));
+
+                    // Запускаем формирование отчёта в синхронном режиме
+                    SrvStatic.StartCreateReport(Tsk);
+
+                    // открываем приложение Excel
+                    SrvStatic.OlpenReport(Tsk);
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при создании документа с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.btnKassBookTitle_Click", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
             }
         }
 
         #endregion
-
     }
 }
