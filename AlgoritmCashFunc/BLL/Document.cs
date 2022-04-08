@@ -93,5 +93,22 @@ namespace AlgoritmCashFunc.BLL
                 throw ae;
             }
         }
+
+        /// <summary>
+        /// Печать документа
+        /// </summary>
+        public virtual void Print()
+        {
+            try
+            {
+                Com.Log.EventSave("В наследуемомо классе не предусмотрена печать документа", string.Format("{0}.SaveChildron", GetType().Name), EventEn.Warning);
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
+                Com.Log.EventSave(ae.Message, string.Format("{0}.Print", GetType().Name), EventEn.Error);
+                throw ae;
+            }
+        }
     }
 }
