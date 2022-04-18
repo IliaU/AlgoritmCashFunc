@@ -171,9 +171,9 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         }
 
         /// <summary>
-        /// Печать документа
+        /// Печать документа Title
         /// </summary>
-        public override void Print()
+        public override void PrintTitle()
         {
             try
             {
@@ -376,7 +376,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
             catch (Exception ex)
             {
                 ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
-                Com.Log.EventSave(ae.Message, string.Format("{0}.Print", GetType().Name), EventEn.Error);
+                Com.Log.EventSave(ae.Message, string.Format("{0}.PrintTitle", GetType().Name), EventEn.Error);
                 throw ae;
             }
         }

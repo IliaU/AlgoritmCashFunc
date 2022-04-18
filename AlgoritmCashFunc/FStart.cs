@@ -423,15 +423,39 @@ namespace AlgoritmCashFunc
                     }
                 }
                 //
-                if (((ButtonTagStatus)this.btnPrint.Tag).Stat == ButtonStatusEn.Active) this.btnPrint.ForeColor = Color.Black;
-                else this.btnPrint.ForeColor = Color.Silver;
+                if (((ButtonTagStatus)this.btnPrint.Tag).Stat == ButtonStatusEn.Active
+                    || (this.CurDoc != null && this.CurDoc.Id != null))
+                {
+                    this.btnPrint.ForeColor = Color.Black;
+                    this.btnPrint.Enabled = true;
+                }
+                else
+                {
+                    this.btnPrint.ForeColor = Color.Silver;
+                    this.btnPrint.Enabled = false;
+                }
                 //
-                if (((ButtonTagStatus)this.btnOperator.Tag).Stat == ButtonStatusEn.Active) this.btnOperator.ForeColor = Color.Black;
-                else this.btnOperator.ForeColor = Color.Silver;
+                if (((ButtonTagStatus)this.btnOperator.Tag).Stat == ButtonStatusEn.Active)
+                {
+                    this.btnOperator.ForeColor = Color.Black;
+                    this.btnOperator.Enabled = true;
+                }
+                else
+                {
+                    this.btnOperator.ForeColor = Color.Silver;
+                    this.btnOperator.Enabled = false;
+                }
                 //
-                if (((ButtonTagStatus)this.btnExit.Tag).Stat == ButtonStatusEn.Active) this.btnExit.ForeColor = Color.Black;
-                else this.btnExit.ForeColor = Color.Silver;
-                
+                if (((ButtonTagStatus)this.btnExit.Tag).Stat == ButtonStatusEn.Active)
+                {
+                    this.btnExit.ForeColor = Color.Black;
+                    this.btnExit.Enabled = true;
+                }
+                else
+                {
+                    this.btnExit.ForeColor = Color.Silver;
+                    this.btnExit.Enabled = false;
+                }
             }
             catch (Exception ex)
             {
@@ -1239,7 +1263,7 @@ namespace AlgoritmCashFunc
                     default:
                         break;
                 }
-                
+
                 // Пишем успех но не в лог просто чтобы пользователь увидел что у него всё ок
                 Log.EventSave(string.Format("Документ №{0} успешно сохранён ({1}).", this.CurDoc.DocNum, this.CurDoc.DocFullName), string.Format("{0}.btnSave_Click", GetType().Name), EventEn.Message, false, false);
 
@@ -1760,7 +1784,6 @@ namespace AlgoritmCashFunc
                 Log.EventSave(ae.Message, string.Format("{0}.KonvertSummToString", GetType().Name), EventEn.Error, true, true);
                 throw ae;
             }
-
         }
 
         // В приходе пользователь выбирает основание, необходимо заполнить зависимые поля значениями по умолчанию
@@ -1954,7 +1977,7 @@ namespace AlgoritmCashFunc
                 // Если документ найден
                 if(SelectDocument!=null)
                 {
-                    SelectDocument.Print();
+                    SelectDocument.PrintTitle();
                 }
             }
             catch (Exception ex)
@@ -1965,6 +1988,34 @@ namespace AlgoritmCashFunc
             }
         }
 
+        // Печать документа
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Document SelectDocument = null;
+
+                // Если текущая вкладка кассовая книга
+                if (this.tabCntOperation.SelectedIndex == 2 && this.TagDocKassBook.Count > 0)
+                {
+                    if (this.CurDoc != null) SelectDocument = this.CurDoc;
+                }
+
+                // Если документ найден
+                if (SelectDocument != null)
+                {
+                    SelectDocument.PrintDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при создании документа с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.btnPrint_Click", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
+            }
+        }
         #endregion
+
+
     }
 }

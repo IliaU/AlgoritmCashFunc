@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using AlgoritmCashFunc.BLL.DocumentPlg.Lib;
 using AlgoritmCashFunc.Lib;
+using System.Data;
+using WordDotx;
 
 namespace AlgoritmCashFunc.BLL.DocumentPlg
 {
@@ -20,7 +22,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         public decimal SummaStartDay;
 
         /// <summary>
-        /// Сумма докмента на начало дня
+        /// Сумма документа на конец дня
         /// </summary>
         public decimal SummaEndDay;
         
@@ -151,5 +153,152 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
             }
         }
 
+
+        /// <summary>
+        /// Печать документа PrintDefault
+        /// </summary>
+        public override void PrintDefault()
+        {
+            try
+            {
+                // Получаем текущее подразделение
+                BLL.LocalPlg.LocalKassa Kassa = Com.LocalFarm.CurLocalDepartament;
+
+                // Создаём таблицу с которой потом будем работать
+                TableList TabL = new TableList();
+                //
+                DataTable TabTmp = new DataTable();
+                TabTmp.Columns.Add(new DataColumn("A1", typeof(string)));
+                TabTmp.Columns.Add(new DataColumn("A2", typeof(string)));
+                TabTmp.Columns.Add(new DataColumn("A3", typeof(string)));
+                TabTmp.Columns.Add(new DataColumn("A4", typeof(string)));
+                TabTmp.Columns.Add(new DataColumn("A5", typeof(string)));
+                int CountPrich = 0;
+                int CountRash = 0;
+                foreach (Document item in this.DocList)
+                {
+                    DataRow nrow = TabTmp.NewRow();
+                    switch (item.DocFullName)
+                    {
+                        case "DocumentPrihod":
+                            nrow["A1"] = string.Format("no{0}", item.DocNum);
+                            nrow["A2"] = item.LocalDebitor.LocalName;
+                            nrow["A3"] = ((DocumentPrihod)item).KredikKorSchet;
+                            nrow["A4"] = ((DocumentPrihod)item).Summa;
+                            CountPrich++;
+                            break;
+                        case "DocumentRashod":
+                            nrow["A1"] = string.Format("po{0}", item.DocNum);
+                            nrow["A2"] = item.LocalDebitor.LocalName;
+                            nrow["A3"] = ((DocumentRashod)item).DebetKorSchet;
+                            nrow["A5"] = ((DocumentRashod)item).Summa;
+                            CountRash++;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    TabTmp.Rows.Add(nrow);
+                }
+                //
+                Table Tab = new Table("Tab", TabTmp);
+                Tab.TtlList.Add(new Total("Total0", "f"), true); // {@DTab.T0}
+                //
+                TabL.Add(Tab, true);
+
+
+                // Создаём список Закладок
+                BookmarkList BmL = new BookmarkList();
+                //
+                Bookmark BmDay = new Bookmark("BmD", ((DateTime)this.UreDate).Day.ToString());
+                BmL.Add(BmDay, true);
+                //
+                Bookmark BmMount = null;
+                switch (((DateTime)this.UreDate).Month)
+                {
+                    case 1:
+                        BmMount = new Bookmark("BmM", "Январь");
+                        break;
+                    case 2:
+                        BmMount = new Bookmark("BmM", "Февраль");
+                        break;
+                    case 3:
+                        BmMount = new Bookmark("BmM", "Март");
+                        break;
+                    case 4:
+                        BmMount = new Bookmark("BmM", "Апрель");
+                        break;
+                    case 5:
+                        BmMount = new Bookmark("BmM", "Май");
+                        break;
+                    case 6:
+                        BmMount = new Bookmark("BmM", "Июнь");
+                        break;
+                    case 7:
+                        BmMount = new Bookmark("BmM", "Июль");
+                        break;
+                    case 8:
+                        BmMount = new Bookmark("BmM", "Август");
+                        break;
+                    case 9:
+                        BmMount = new Bookmark("BmM", "Сентябрь");
+                        break;
+                    case 10:
+                        BmMount = new Bookmark("BmM", "Октябрь");
+                        break;
+                    case 11:
+                        BmMount = new Bookmark("BmM", "Ноябрь");
+                        break;
+                    case 12:
+                        BmMount = new Bookmark("BmM", "Декабрь");
+                        break;
+                    default:
+                        break;
+                }
+                BmL.Add(BmMount, true);
+                //
+                Bookmark BmY = new Bookmark("BmY", ((DateTime)this.UreDate).Year.ToString());
+                BmL.Add(BmY, true);
+                //
+                Bookmark BmStart = new Bookmark("BmStart", this.SummaStartDay.ToString());
+                BmL.Add(BmStart, true);
+                //
+                Bookmark BmEnd = new Bookmark("BmEnd", this.SummaEndDay.ToString());
+                BmL.Add(BmEnd, true);
+                //
+                Bookmark BmCPrih = new Bookmark("BmCPrih", Com.Utils.GetStringForInt(CountPrich, "", "", "", false).ToLower());
+                BmL.Add(BmCPrih, true);
+                //
+                Bookmark BmCRash = new Bookmark("BmCRash", Com.Utils.GetStringForInt(CountRash, "", "", "", false).ToLower());
+                BmL.Add(BmCRash, true);
+                //
+                Bookmark BmKassir= new Bookmark("BmKassir", this.LocalCreditor.LocalName);
+                BmL.Add(BmKassir, true);
+                //
+                Bookmark BmBuhg = new Bookmark("BmBuhg", this.GlavBuh);
+                BmL.Add(BmBuhg, true);
+                
+
+                //////////////////////////////////////
+
+                // Создаём задание
+                TaskWord Tsk = new TaskWord(@"KasBookDefault.dotx", null, BmL, TabL);
+
+                // Можно создать отдельный екземпляр который сможет работать асинхронно со своими параметрами
+                WordDotxServer SrvStatic = new WordDotxServer(string.Format(@"{0}\Dotx", Environment.CurrentDirectory), string.Format(@"{0}\Report", Environment.CurrentDirectory));
+
+                // Запускаем формирование отчёта в синхронном режиме
+                SrvStatic.StartCreateReport(Tsk);
+
+                // открываем приложение Excel
+                //SrvStatic.OlpenReport(Tsk);
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
+                Com.Log.EventSave(ae.Message, string.Format("{0}.PrintPrintDefault", GetType().Name), EventEn.Error);
+                throw ae;
+            }
+        }
     }
 }
