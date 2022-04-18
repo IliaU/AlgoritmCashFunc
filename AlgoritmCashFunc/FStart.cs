@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Globalization;
 using AlgoritmCashFunc.Com;
 using AlgoritmCashFunc.BLL;
 using AlgoritmCashFunc.Lib;
@@ -1392,7 +1393,7 @@ namespace AlgoritmCashFunc
                             
                             this.txtBoxPrihKreditKodDivision.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KreditKodDivision;
                             this.txtBoxPrihKredikKodAnalUch.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KredikKodAnalUch;
-                            this.txtBoxPrihSumma.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).Summa.ToString();
+                            this.txtBoxPrihSumma.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).Summa.ToString("#.00", CultureInfo.CurrentCulture);
                             this.txtBoxPrihKodNazn.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KodNazn;
                             this.txtBoxPrihVtomChisle.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).VtomChisle;
                             this.txtBoxPrihPrilozenie.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).Prilozenie;
@@ -1500,7 +1501,7 @@ namespace AlgoritmCashFunc
 
                             this.txtBoxRashDebitKodDivision.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).DebetKodDivision;
                             this.txtBoxRashDebitKodAnalUch.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).DebetKodAnalUch;
-                            this.txtBoxRashSumma.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).Summa.ToString();
+                            this.txtBoxRashSumma.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).Summa.ToString("#.00", CultureInfo.CurrentCulture);
                             this.txtBoxRashKodNazn.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).KodNazn;
                             this.txtBoxRashPoDoc.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).PoDoc;
                             this.txtBoxRashPrilozenie.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).Prilozenie;
@@ -1637,12 +1638,12 @@ namespace AlgoritmCashFunc
                                     case "DocumentPrihod":
                                         nrow["NoDoc"] = string.Format("no{0}",itemDocKassBook.DocNum);
                                         nrow["KorShet"] = ((BLL.DocumentPlg.DocumentPrihod)itemDocKassBook).KredikKorSchet;
-                                        nrow["Prihod"] = ((BLL.DocumentPlg.DocumentPrihod)itemDocKassBook).Summa;
+                                        nrow["Prihod"] = ((BLL.DocumentPlg.DocumentPrihod)itemDocKassBook).Summa.ToString("#.00", CultureInfo.CurrentCulture);
                                         break;
                                     case "DocumentRashod":
                                         nrow["NoDoc"] = string.Format("po{0}", itemDocKassBook.DocNum);
                                         nrow["KorShet"] = ((BLL.DocumentPlg.DocumentRashod)itemDocKassBook).DebetKorSchet;
-                                        nrow["Rashod"] = ((BLL.DocumentPlg.DocumentRashod)itemDocKassBook).Summa;
+                                        nrow["Rashod"] = ((BLL.DocumentPlg.DocumentRashod)itemDocKassBook).Summa.ToString("#.00", CultureInfo.CurrentCulture);
                                         break;
                                     default:
                                         break;
@@ -1654,9 +1655,9 @@ namespace AlgoritmCashFunc
                         }
  
                         // Заполняем на начало и на конец дня исходя из значения в документе эта часть общая 
-                        this.txtBoxKassBookStartDay.Text = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).SummaStartDay.ToString();
-                        this.txtBoxKassBookEndDay.Text = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).SummaEndDay.ToString();
-            
+                        this.txtBoxKassBookStartDay.Text = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).SummaStartDay.ToString("#.00", CultureInfo.CurrentCulture);
+                        this.txtBoxKassBookEndDay.Text = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).SummaEndDay.ToString("#.00", CultureInfo.CurrentCulture);
+
                         // Тут похоже надо сообщить пользаку что документ надо бы сохранить иначе сумма в базе не будет совпадать с той что мы посчитали
                         // Может цвет поменять в ячейке надо подумать
                         if (((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).SaveValueNotValid) { }
@@ -1993,7 +1994,7 @@ namespace AlgoritmCashFunc
         {
             try
             {
-                Document SelectDocument = null;
+                Document SelectDocument = this.CurDoc;
 
                 // Если текущая вкладка кассовая книга
                 if (this.tabCntOperation.SelectedIndex == 2 && this.TagDocKassBook.Count > 0)
@@ -2015,7 +2016,5 @@ namespace AlgoritmCashFunc
             }
         }
         #endregion
-
-
     }
 }

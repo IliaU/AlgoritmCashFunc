@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Globalization;
 using AlgoritmCashFunc.BLL.DocumentPlg.Lib;
 using AlgoritmCashFunc.Lib;
 using System.Data;
@@ -152,8 +153,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 throw ae;
             }
         }
-
-
+        
         /// <summary>
         /// Печать документа PrintDefault
         /// </summary>
@@ -184,14 +184,14 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                             nrow["A1"] = string.Format("no{0}", item.DocNum);
                             nrow["A2"] = item.LocalDebitor.LocalName;
                             nrow["A3"] = ((DocumentPrihod)item).KredikKorSchet;
-                            nrow["A4"] = ((DocumentPrihod)item).Summa;
+                            nrow["A4"] = ((DocumentPrihod)item).Summa.ToString("#.00", CultureInfo.CurrentCulture); 
                             CountPrich++;
                             break;
                         case "DocumentRashod":
                             nrow["A1"] = string.Format("po{0}", item.DocNum);
                             nrow["A2"] = item.LocalDebitor.LocalName;
                             nrow["A3"] = ((DocumentRashod)item).DebetKorSchet;
-                            nrow["A5"] = ((DocumentRashod)item).Summa;
+                            nrow["A5"] = ((DocumentRashod)item).Summa.ToString("#.00", CultureInfo.CurrentCulture);
                             CountRash++;
                             break;
                         default:
@@ -260,10 +260,10 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 Bookmark BmY = new Bookmark("BmY", ((DateTime)this.UreDate).Year.ToString());
                 BmL.Add(BmY, true);
                 //
-                Bookmark BmStart = new Bookmark("BmStart", this.SummaStartDay.ToString());
+                Bookmark BmStart = new Bookmark("BmStart", this.SummaStartDay.ToString("#.00", CultureInfo.CurrentCulture));
                 BmL.Add(BmStart, true);
                 //
-                Bookmark BmEnd = new Bookmark("BmEnd", this.SummaEndDay.ToString());
+                Bookmark BmEnd = new Bookmark("BmEnd", this.SummaEndDay.ToString("#.00", CultureInfo.CurrentCulture));
                 BmL.Add(BmEnd, true);
                 //
                 Bookmark BmCPrih = new Bookmark("BmCPrih", Com.Utils.GetStringForInt(CountPrich, "", "", "", false).ToLower());
@@ -296,7 +296,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
             catch (Exception ex)
             {
                 ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
-                Com.Log.EventSave(ae.Message, string.Format("{0}.PrintPrintDefault", GetType().Name), EventEn.Error);
+                Com.Log.EventSave(ae.Message, string.Format("{0}.PrintDefault", GetType().Name), EventEn.Error);
                 throw ae;
             }
         }
