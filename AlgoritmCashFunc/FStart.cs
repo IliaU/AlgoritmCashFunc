@@ -1989,6 +1989,46 @@ namespace AlgoritmCashFunc
             }
         }
 
+        // Пользователь стукнул на конкретном документе и решил выгрузить документ в 1C
+        private void btnKassBookExport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Document SelectDocument = null;
+
+                // Если текущая вкладка кассовая книга
+                if (this.tabCntOperation.SelectedIndex == 2 && this.TagDocKassBook.Count > 0)
+                {
+                    // Если у пользователя выделана ячейка
+                    if (dtGridKassBook.SelectedCells.Count > 0)
+                    {
+                        int tIndex = dtGridKassBook.SelectedCells[0].RowIndex;
+
+                        foreach (Document item in this.TagDocKassBook)
+                        {
+                            if (item.Id != null && item.Id.ToString() == dtGridKassBook.Rows[tIndex].Cells["Id"].Value.ToString())
+                            {
+                                SelectDocument = item;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                // Если документ найден
+                if (SelectDocument != null)
+                {
+                    SelectDocument.ExportTo1C();
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при создании документа с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.btnKassBookExport_Click", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
+            }
+        }
+
         // Печать документа
         private void btnPrint_Click(object sender, EventArgs e)
         {
@@ -2016,5 +2056,7 @@ namespace AlgoritmCashFunc
             }
         }
         #endregion
+
+
     }
 }

@@ -101,7 +101,7 @@ namespace AlgoritmCashFunc.BLL
         {
             try
             {
-                Com.Log.EventSave("В наследуемомо классе не предусмотрена печать документа", string.Format("{0}.SaveChildron", GetType().Name), EventEn.Warning);
+                Com.Log.EventSave(string.Format("В наследуемомо классе не предусмотрена печать документа ({0})", base.DocFullName), string.Format("{0}.PrintTitle", GetType().Name), EventEn.Warning);
             }
             catch (Exception ex)
             {
@@ -118,12 +118,29 @@ namespace AlgoritmCashFunc.BLL
         {
             try
             {
-                Com.Log.EventSave("В наследуемомо классе не предусмотрена печать документа", string.Format("{0}.SaveChildron", GetType().Name), EventEn.Warning);
+                Com.Log.EventSave(string.Format("В наследуемомо классе не предусмотрена печать документа ({0})", base.DocFullName), string.Format("{0}.PrintDefaul", GetType().Name), EventEn.Warning);
             }
             catch (Exception ex)
             {
                 ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
                 Com.Log.EventSave(ae.Message, string.Format("{0}.PrintDefault", GetType().Name), EventEn.Error);
+                throw ae;
+            }
+        }
+
+        /// <summary>
+        /// Экспорт документа в 1С
+        /// </summary>
+        public virtual void ExportTo1C()
+        {
+            try
+            {
+                Com.Log.EventSave(string.Format("В наследуемомо классе не предусмотрен экспорт документа в 1С ({0})",base.DocFullName), string.Format("{0}.ExportTo1C", GetType().Name), EventEn.Warning);
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
+                Com.Log.EventSave(ae.Message, string.Format("{0}.ExportTo1C", GetType().Name), EventEn.Error);
                 throw ae;
             }
         }

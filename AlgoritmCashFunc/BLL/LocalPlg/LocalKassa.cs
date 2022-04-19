@@ -114,6 +114,16 @@ namespace AlgoritmCashFunc.BLL.LocalPlg
         public string ZavDivisionFio;
 
         /// <summary>
+        /// Код компании
+        /// </summary>
+        public string CompanyCode;
+
+        /// <summary>
+        /// Код магазина
+        /// </summary>
+        public string StoreCode;
+
+        /// <summary>
         /// Конструктор для загрузки из базы данных
         /// </summary>
         /// <param name="Id">Идентификатор в базе данных</param>

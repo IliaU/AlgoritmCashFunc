@@ -2694,6 +2694,7 @@
             this.btnKassBookExport.Text = "Выгрузка";
             this.btnKassBookExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnKassBookExport.UseVisualStyleBackColor = true;
+            this.btnKassBookExport.Click += new System.EventHandler(this.btnKassBookExport_Click);
             // 
             // btnKassBookTitle
             // 

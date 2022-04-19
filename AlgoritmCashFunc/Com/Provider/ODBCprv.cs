@@ -5363,7 +5363,8 @@ Where Id={0}", (int)LocalKassa.Id);
     `LastDocNumPrih`, `LastDocNumRash`, `LastDocNumKasBook`, `LastDocNumActVozv`, 
     `LastDocNumReportKas`, `LastDocNumScetKkm`, `LastDocNumVerifNal`, `LastDocNumInvent`,
     `INN`, `ZavodKKM`, `RegKKM`, `GlavBuhFio`,
-    `KkmName`, `DolRukOrg`, `RukFio`, `ZavDivisionFio`
+    `KkmName`, `DolRukOrg`, `RukFio`, `ZavDivisionFio`,
+    `CompanyCode`, `StoreCode`
 From `aks`.`cashfunc_local_kassa`
 Where Id={0}", (int)LocalKassa.Id);
 
@@ -5423,6 +5424,8 @@ Where Id={0}", (int)LocalKassa.Id);
                                     if (!dr.IsDBNull(17)) LocalKassa.DolRukOrg = dr.GetString(17);
                                     if (!dr.IsDBNull(18)) LocalKassa.RukFio = dr.GetString(18);
                                     if (!dr.IsDBNull(19)) LocalKassa.ZavDivisionFio = dr.GetString(19);
+                                    if (!dr.IsDBNull(20)) LocalKassa.CompanyCode = dr.GetString(20);
+                                    if (!dr.IsDBNull(21)) LocalKassa.StoreCode = dr.GetString(21);
                                 }
                             }
                         }
@@ -5457,15 +5460,18 @@ Where Id={0}", (int)LocalKassa.Id);
     `LastDocNumPrih`, `LastDocNumRash`, `LastDocNumKasBook`, `LastDocNumActVozv`, 
     `LastDocNumReportKas`, `LastDocNumScetKkm`, `LastDocNumVerifNal`, `LastDocNumInvent`,
     `INN`, `ZavodKKM`, `RegKKM`, `GlavBuhFio`,
-    `KkmName`, `DolRukOrg`, `RukFio`, `ZavDivisionFio`) 
+    `KkmName`, `DolRukOrg`, `RukFio`, `ZavDivisionFio`,
+    `CompanyCode`, `StoreCode`) 
 Values({0}, '{1}', '{2}', '{3}', '{4}',
     `{5}`, `{6}`, `{7}`, `{8}`,
     `{9}`, `{10}`, `{11}`, `{12}`, 
-    `{13}`, `{14}`, `{15}`, `{16}`)", NewLocalKassa.Id, NewLocalKassa.HostName, NewLocalKassa.Organization, NewLocalKassa.StructPodrazdelenie, NewLocalKassa.OKPO,
+    `{13}`, `{14}`, `{15}`, `{16}`,
+    `{17}`, `{18}`)", NewLocalKassa.Id, NewLocalKassa.HostName, NewLocalKassa.Organization, NewLocalKassa.StructPodrazdelenie, NewLocalKassa.OKPO,
                             NewLocalKassa.LastDocNumPrih, NewLocalKassa.LastDocNumRash, NewLocalKassa.LastDocNumKasBook, NewLocalKassa.LastDocNumActVozv,
                             NewLocalKassa.LastDocNumReportKas, NewLocalKassa.LastDocNumScetKkm, NewLocalKassa.LastDocNumVerifNal, NewLocalKassa.LastDocNumInvent,
                             NewLocalKassa.INN, NewLocalKassa.ZavodKKM, NewLocalKassa.RegKKM, NewLocalKassa.GlavBuhFio,
-                            NewLocalKassa.KkmName, NewLocalKassa.DolRukOrg, NewLocalKassa.RukFio, NewLocalKassa.ZavDivisionFio);
+                            NewLocalKassa.KkmName, NewLocalKassa.DolRukOrg, NewLocalKassa.RukFio, NewLocalKassa.ZavDivisionFio,
+                            NewLocalKassa.CompanyCode, NewLocalKassa.StoreCode);
 
             try
             {
@@ -5510,12 +5516,14 @@ Set `Organization`='{1}', `StructPodr`='{2}', `OKPO`='{3}',
     `LastDocNumPrih`={4}, `LastDocNumRash`={5}, `LastDocNumKasBook`={6}, `LastDocNumActVozv`={7}, 
     `LastDocNumReportKas`={8}, `LastDocNumScetKkm`={9}, `LastDocNumVerifNal`={10}, `LastDocNumInvent`={11},
     `INN`='{12}', `ZavodKKM`='{13}', `RegKKM`='{14}', `GlavBuhFio`='{15}',
-    `KkmName`='{16}', `DolRukOrg`='{17}', `RukFio`='{18}', `ZavDivisionFio`='{19}'
+    `KkmName`='{16}', `DolRukOrg`='{17}', `RukFio`='{18}', `ZavDivisionFio`='{19}',
+    `CompanyCode`='{20}', `StoreCode`='{21}'
 Where Id={0}", UpdLocalKassa.Id, UpdLocalKassa.Organization, UpdLocalKassa.StructPodrazdelenie, UpdLocalKassa.OKPO,
             UpdLocalKassa.LastDocNumPrih, UpdLocalKassa.LastDocNumRash, UpdLocalKassa.LastDocNumKasBook, UpdLocalKassa.LastDocNumActVozv,
             UpdLocalKassa.LastDocNumReportKas, UpdLocalKassa.LastDocNumScetKkm, UpdLocalKassa.LastDocNumVerifNal, UpdLocalKassa.LastDocNumInvent,
             UpdLocalKassa.INN, UpdLocalKassa.ZavodKKM, UpdLocalKassa.RegKKM, UpdLocalKassa.GlavBuhFio,
-            UpdLocalKassa.KkmName, UpdLocalKassa.DolRukOrg, UpdLocalKassa.RukFio, UpdLocalKassa.ZavDivisionFio);
+            UpdLocalKassa.KkmName, UpdLocalKassa.DolRukOrg, UpdLocalKassa.RukFio, UpdLocalKassa.ZavDivisionFio,
+            UpdLocalKassa.CompanyCode, UpdLocalKassa.StoreCode);
 
             try
             {
