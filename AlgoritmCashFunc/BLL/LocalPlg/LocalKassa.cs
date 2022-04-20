@@ -124,6 +124,11 @@ namespace AlgoritmCashFunc.BLL.LocalPlg
         public string StoreCode;
 
         /// <summary>
+        /// Путь к папке куда будем сохранять файлы для 1С
+        /// </summary>
+        public string Upload1CDir;
+
+        /// <summary>
         /// Конструктор для загрузки из базы данных
         /// </summary>
         /// <param name="Id">Идентификатор в базе данных</param>

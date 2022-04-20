@@ -9,6 +9,7 @@ using AlgoritmCashFunc.BLL.DocumentPlg.Lib;
 using AlgoritmCashFunc.Lib;
 using System.Data;
 using WordDotx;
+using Wrd = WordDotx;
 
 namespace AlgoritmCashFunc.BLL.DocumentPlg
 {
@@ -825,6 +826,101 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
             {
                 ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
                 Com.Log.EventSave(ae.Message, string.Format("{0}.PrintDefault", GetType().Name), EventEn.Error);
+                throw ae;
+            }
+        }
+
+        /// <summary>
+        /// Заявление на возврат
+        /// </summary>
+        /// <param name="DocNumber">Номер документа инвентаризации</param>
+        public void PrintReportReturnBlankWrd(int DocNumber)
+        {
+            try
+            {
+                // Создаём запрос для получения списка закладок
+                DataTable TblBkm = Com.ProviderFarm.CurrentPrv.getData(string.Format(@"with r as (Select coalesce(ref_sale_sid, sid) As sid, d.return_subtotal_with_tax
+    From `rpsods`.`document` d
+    where d.`sid` = {0})
+select date_format(d.post_date, '%d') as fd,
+    case when date_format(d.post_date, '%m') = '01' then 'января'
+		when date_format(d.post_date, '%m') = '02' then 'февраля'
+        when date_format(d.post_date, '%m') = '03' then 'марта'
+        when date_format(d.post_date, '%m') = '04' then 'апреля'
+        when date_format(d.post_date, '%m') = '05' then 'мая'
+        when date_format(d.post_date, '%m') = '06' then 'июня'
+        when date_format(d.post_date, '%m') = '07' then 'июля'
+        when date_format(d.post_date, '%m') = '08' then 'августа'
+        when date_format(d.post_date, '%m') = '09' then 'сентября'
+        when date_format(d.post_date, '%m') = '10' then 'октября'
+        when date_format(d.post_date, '%m') = '11' then 'ноября'
+        else 'декабря' end as fm, 
+	substr(date_format(d.post_date, '%Y'),1,3) as fy, 
+    substr(date_format(d.post_date, '%Y'),4,1)  as y,
+    coalesce(convert(d.doc_no, char),'--') as fr_no, 
+    date_format(d.post_date,'%d.%m.%Y') fr_data, 
+    convert(round((Select return_subtotal_with_tax From r),2), char) As fr_summa,
+    convert(round((Select return_subtotal_with_tax From r),2), char) As fr_nal,
+    convert(round(0,2), char) fr_bnal,
+    date_format(sysdate(),'%d.%m.%Y') As curdate
+From `rpsods`.`document` d
+	inner join `rpsods`.`tender` t on d.sid = t.doc_sid
+where d.`sid` = (Select sid From r)
+group by d.`sid`, d.post_date", DocNumber));
+
+                if (TblBkm == null) throw new ApplicationException(string.Format("Документ с номером документа {0} не найден.", DocNumber));
+
+                // Создаём список закладок
+                Wrd.BookmarkList BkmL = new Wrd.BookmarkList();
+                if (TblBkm.Rows.Count == 1)
+                {
+                    BkmL.Add(new Wrd.Bookmark("fd", TblBkm.Rows[0]["fd"].ToString()), true);
+                    BkmL.Add(new Wrd.Bookmark("fm", TblBkm.Rows[0]["fm"].ToString()), true);
+                    BkmL.Add(new Wrd.Bookmark("fy", TblBkm.Rows[0]["fy"].ToString()), true);
+                    BkmL.Add(new Wrd.Bookmark("y", TblBkm.Rows[0]["y"].ToString()), true);
+                    BkmL.Add(new Wrd.Bookmark("fr_no", TblBkm.Rows[0]["fr_no"].ToString()), true);
+                    BkmL.Add(new Wrd.Bookmark("fr_data", TblBkm.Rows[0]["fr_data"].ToString()), true);
+                    BkmL.Add(new Wrd.Bookmark("fr_summa", TblBkm.Rows[0]["fr_summa"].ToString()), true);
+                    BkmL.Add(new Wrd.Bookmark("fr_nal", TblBkm.Rows[0]["fr_nal"].ToString()), true);
+                    BkmL.Add(new Wrd.Bookmark("fr_bnal", TblBkm.Rows[0]["fr_bnal"].ToString()), true);
+                    BkmL.Add(new Wrd.Bookmark("curdate", TblBkm.Rows[0]["curdate"].ToString()), true);
+                }
+
+                // Создаём запрос для получения таблицы
+                DataTable TblVal = Com.ProviderFarm.CurrentPrv.getData(string.Format(@"with r as (Select coalesce(ref_sale_sid, sid) As sid
+    From `rpsods`.`document` d
+    where d.`sid` = {0})
+select p.description2 as C0, 
+	Concat(coalesce(p.description1,''), ' ' , coalesce(p.attribute,'')) as C1, 
+	p.item_size as C2,
+	case when row_number() over() = count(*) over() Then'' else ',' end As C3
+From `rpsods`.`document` d
+	inner join `rpsods`.`document_item` i on d.sid=i.doc_sid and i.returned_item_qty>0
+    inner join `rpsods`.invn_sbs_item p on i.invn_sbs_item_sid=p.sid
+where d.`sid` = (Select sid From r)
+order by i.item_pos", DocNumber));
+
+                // Создаём список таблиц
+                Wrd.TableList TblL = new Wrd.TableList();
+                TblL.Add(new Wrd.Table("T1", TblVal), true);
+
+                // Создаём список итогов
+                Wrd.TotalList Ttl = new Wrd.TotalList();
+
+                // Создаём задание и получаем объект которым будем смотреть результат
+                Wrd.TaskWord Tsk = new Wrd.TaskWord(@"Заявления на возврат.docx", null, BkmL, TblL);
+
+                // Можно создать отдельный екземпляр который сможет работать асинхронно со своими параметрами
+                Wrd.WordDotxServer SrvStatic = new WordDotxServer(@"Заявления на возврат.docx", null);
+                
+                // Запускаем формирование отчёта в синхронном режиме
+                SrvStatic.StartCreateReport(Tsk);
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при формировании отчёта с ошибкой: {0}", ex.Message));
+
+                Com.Log.EventSave(ae.Message, string.Format("{0}.CreateReportReturnBlankWrd", GetType().Name), EventEn.Error);
                 throw ae;
             }
         }

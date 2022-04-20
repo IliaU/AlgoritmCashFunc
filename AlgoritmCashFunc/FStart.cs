@@ -2055,6 +2055,50 @@ namespace AlgoritmCashFunc
                 //throw ae;
             }
         }
+
+        // Печать бланка возврата документа
+        private void btnRashReportReturnBlank_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                BLL.DocumentPlg.DocumentRashod SelectDocument = null;
+
+                // Если текущая вкладка возврат
+                if (this.tabCntOperation.SelectedIndex == 1)
+                {
+                    if (this.CurDoc != null) SelectDocument = (BLL.DocumentPlg.DocumentRashod)this.CurDoc;
+                }
+
+                // Если документ найден
+                if (SelectDocument != null)
+                {
+                    if (SelectDocument.PaidRashReasons == null) throw new ApplicationException("Не выбрано основание возврата.");
+                    if (!SelectDocument.PaidRashReasons.FlagFormReturn) throw new ApplicationException("Для этого обоснования не рассчитана печатная форма.");
+
+                    int DocNumber = 0;
+                    using (FRequestDocNumber Frm = new FRequestDocNumber(SelectDocument))
+                    {
+                        Frm.ShowDialog();
+
+                        if(Frm.DialogResult == DialogResult.OK)
+                        {
+                            DocNumber = Frm.DocNumber;
+                        }
+                    }
+
+                    if (DocNumber != 0)
+                    {
+                        SelectDocument.PrintReportReturnBlankWrd(DocNumber);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при создании документа с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.btnPrint_Click", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
+            }
+        }
         #endregion
 
 

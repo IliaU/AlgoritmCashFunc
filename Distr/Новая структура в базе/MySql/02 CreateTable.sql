@@ -99,6 +99,7 @@ CREATE TABLE `aks`.`cashfunc_local_kassa` (
   `ZavDivisionFio` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `CompanyCode` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `StoreCode` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `Upload1CDir` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `UIX_local_kassa_HostName` (`HostName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -130,6 +131,7 @@ CREATE TABLE `aks`.`cashfunc_local_PaidRashReasons` (
   `Osnovanie` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `KreditNomerSchet` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `DebetKorSchet` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `FlagFormReturn` int not null default(0);
   PRIMARY KEY (`Id`),
   UNIQUE KEY `UIX_local_PaidRashReasons` (`Osnovanie`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -138,7 +140,7 @@ INSERT INTO `aks`.`cashfunc_local_PaidRashReasons` (`Id`, `Osnovanie`, `KreditNo
 INSERT INTO `aks`.`cashfunc_local_PaidRashReasons` (`Id`, `Osnovanie`, `KreditNomerSchet`, `DebetKorSchet`) VALUES (9, '203', '50.01', '62.01');
 INSERT INTO `aks`.`cashfunc_local_PaidRashReasons` (`Id`, `Osnovanie`, `KreditNomerSchet`, `DebetKorSchet`) VALUES (10, '204', '50.01', '73.04');
 INSERT INTO `aks`.`cashfunc_local_PaidRashReasons` (`Id`, `Osnovanie`, `KreditNomerSchet`, `DebetKorSchet`) VALUES (11, '205', '50.01', '57.01');
-INSERT INTO `aks`.`cashfunc_local_PaidRashReasons` (`Id`, `Osnovanie`, `KreditNomerSchet`, `DebetKorSchet`) VALUES (12, '206', '50.01', '91.02');
+INSERT INTO `aks`.`cashfunc_local_PaidRashReasons` (`Id`, `Osnovanie`, `KreditNomerSchet`, `DebetKorSchet`, `FlagFormReturn`) VALUES (12, '206', '50.01', '91.02', 1);
 
 
 

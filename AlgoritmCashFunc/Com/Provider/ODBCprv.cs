@@ -11,13 +11,14 @@ using AlgoritmCashFunc.Com.Provider.Lib;
 using AlgoritmCashFunc.Lib;
 using System.Threading;
 using AlgoritmCashFunc.BLL;
+using AlgoritmCashFunc.BLL_Prizm;
 
 namespace AlgoritmCashFunc.Com.Provider
 {
     /// <summary>
     /// Провайдер для работы по подключению типа ODBC
     /// </summary>
-    public sealed class ODBCprv : ProviderBase, ProviderI
+    public sealed class ODBCprv : ProviderBase, ProviderI, ProviderPrizmI
     {
         #region Private Param
         private string ServerVersion;
@@ -1891,6 +1892,42 @@ namespace AlgoritmCashFunc.Com.Provider
             catch (Exception ex)
             {
                 base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentKasBook", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Получаем документ по его номеру
+        /// </summary>
+        /// <param name="DocNumber">Номер документа</param>
+        /// <returns>Документ</returns>
+        public Check GetCheck(int DocNumber)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            //GetCheckORA(DocNumber);
+                            break;
+                        case "myodbc8a.dll":
+                            //GetCheckMySql(DocNumber);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetCheck", EventEn.Error);
                 throw;
             }
         }
@@ -5364,7 +5401,7 @@ Where Id={0}", (int)LocalKassa.Id);
     `LastDocNumReportKas`, `LastDocNumScetKkm`, `LastDocNumVerifNal`, `LastDocNumInvent`,
     `INN`, `ZavodKKM`, `RegKKM`, `GlavBuhFio`,
     `KkmName`, `DolRukOrg`, `RukFio`, `ZavDivisionFio`,
-    `CompanyCode`, `StoreCode`
+    `CompanyCode`, `StoreCode`, `Upload1CDir`
 From `aks`.`cashfunc_local_kassa`
 Where Id={0}", (int)LocalKassa.Id);
 
@@ -5426,6 +5463,7 @@ Where Id={0}", (int)LocalKassa.Id);
                                     if (!dr.IsDBNull(19)) LocalKassa.ZavDivisionFio = dr.GetString(19);
                                     if (!dr.IsDBNull(20)) LocalKassa.CompanyCode = dr.GetString(20);
                                     if (!dr.IsDBNull(21)) LocalKassa.StoreCode = dr.GetString(21);
+                                    if (!dr.IsDBNull(22)) LocalKassa.Upload1CDir = dr.GetString(22);
                                 }
                             }
                         }
@@ -5461,17 +5499,17 @@ Where Id={0}", (int)LocalKassa.Id);
     `LastDocNumReportKas`, `LastDocNumScetKkm`, `LastDocNumVerifNal`, `LastDocNumInvent`,
     `INN`, `ZavodKKM`, `RegKKM`, `GlavBuhFio`,
     `KkmName`, `DolRukOrg`, `RukFio`, `ZavDivisionFio`,
-    `CompanyCode`, `StoreCode`) 
+    `CompanyCode`, `StoreCode`, `Upload1CDir`) 
 Values({0}, '{1}', '{2}', '{3}', '{4}',
     `{5}`, `{6}`, `{7}`, `{8}`,
     `{9}`, `{10}`, `{11}`, `{12}`, 
     `{13}`, `{14}`, `{15}`, `{16}`,
-    `{17}`, `{18}`)", NewLocalKassa.Id, NewLocalKassa.HostName, NewLocalKassa.Organization, NewLocalKassa.StructPodrazdelenie, NewLocalKassa.OKPO,
+    `{17}`, `{18}`, `{19}`)", NewLocalKassa.Id, NewLocalKassa.HostName, NewLocalKassa.Organization, NewLocalKassa.StructPodrazdelenie, NewLocalKassa.OKPO,
                             NewLocalKassa.LastDocNumPrih, NewLocalKassa.LastDocNumRash, NewLocalKassa.LastDocNumKasBook, NewLocalKassa.LastDocNumActVozv,
                             NewLocalKassa.LastDocNumReportKas, NewLocalKassa.LastDocNumScetKkm, NewLocalKassa.LastDocNumVerifNal, NewLocalKassa.LastDocNumInvent,
                             NewLocalKassa.INN, NewLocalKassa.ZavodKKM, NewLocalKassa.RegKKM, NewLocalKassa.GlavBuhFio,
                             NewLocalKassa.KkmName, NewLocalKassa.DolRukOrg, NewLocalKassa.RukFio, NewLocalKassa.ZavDivisionFio,
-                            NewLocalKassa.CompanyCode, NewLocalKassa.StoreCode);
+                            NewLocalKassa.CompanyCode, NewLocalKassa.StoreCode, NewLocalKassa.Upload1CDir);
 
             try
             {
@@ -5517,13 +5555,13 @@ Set `Organization`='{1}', `StructPodr`='{2}', `OKPO`='{3}',
     `LastDocNumReportKas`={8}, `LastDocNumScetKkm`={9}, `LastDocNumVerifNal`={10}, `LastDocNumInvent`={11},
     `INN`='{12}', `ZavodKKM`='{13}', `RegKKM`='{14}', `GlavBuhFio`='{15}',
     `KkmName`='{16}', `DolRukOrg`='{17}', `RukFio`='{18}', `ZavDivisionFio`='{19}',
-    `CompanyCode`='{20}', `StoreCode`='{21}'
+    `CompanyCode`='{20}', `StoreCode`='{21}', `Upload1CDir`='{22}'
 Where Id={0}", UpdLocalKassa.Id, UpdLocalKassa.Organization, UpdLocalKassa.StructPodrazdelenie, UpdLocalKassa.OKPO,
             UpdLocalKassa.LastDocNumPrih, UpdLocalKassa.LastDocNumRash, UpdLocalKassa.LastDocNumKasBook, UpdLocalKassa.LastDocNumActVozv,
             UpdLocalKassa.LastDocNumReportKas, UpdLocalKassa.LastDocNumScetKkm, UpdLocalKassa.LastDocNumVerifNal, UpdLocalKassa.LastDocNumInvent,
             UpdLocalKassa.INN, UpdLocalKassa.ZavodKKM, UpdLocalKassa.RegKKM, UpdLocalKassa.GlavBuhFio,
             UpdLocalKassa.KkmName, UpdLocalKassa.DolRukOrg, UpdLocalKassa.RukFio, UpdLocalKassa.ZavDivisionFio,
-            UpdLocalKassa.CompanyCode, UpdLocalKassa.StoreCode);
+            UpdLocalKassa.CompanyCode, UpdLocalKassa.StoreCode, UpdLocalKassa.Upload1CDir);
 
             try
             {
@@ -5836,7 +5874,7 @@ Where Id={0}", (int)LocalPaidRashReasons.Id);
 
             bool rez = false;
 
-            string CommandSql = String.Format(@"Select `Osnovanie`, `KreditNomerSchet`, `DebetKorSchet`
+            string CommandSql = String.Format(@"Select `Osnovanie`, `KreditNomerSchet`, `DebetKorSchet`, `FlagFormReturn`
 From `aks`.`cashfunc_local_PaidRashReasons`
 Where Id={0}", (int)LocalPaidRashReasons.Id);
 
@@ -5878,6 +5916,8 @@ Where Id={0}", (int)LocalPaidRashReasons.Id);
                                     if (!dr.IsDBNull(0)) LocalPaidRashReasons.Osnovanie = dr.GetString(0);
                                     if (!dr.IsDBNull(1)) LocalPaidRashReasons.KreditNomerSchet = dr.GetString(1);
                                     if (!dr.IsDBNull(2)) LocalPaidRashReasons.DebetKorSchet = dr.GetString(2);
+                                    if (!dr.IsDBNull(3) && dr.GetInt32(3) == 0) LocalPaidRashReasons.FlagFormReturn = false;
+                                    else LocalPaidRashReasons.FlagFormReturn = true;
                                 }
                             }
                         }
@@ -5908,8 +5948,11 @@ Where Id={0}", (int)LocalPaidRashReasons.Id);
         {
             if (NewLocalPaidRashReasons.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
 
-            string CommandSql = String.Format(@"insert into `aks`.`cashfunc_local_PaidRashReasons`(id, `Osnovanie`, `KreditNomerSchet`, `DebetKorSchet`) 
-Values({0}, '{1}', '{2}', '{3}')", NewLocalPaidRashReasons.Id, NewLocalPaidRashReasons.Osnovanie, NewLocalPaidRashReasons.KreditNomerSchet, NewLocalPaidRashReasons.DebetKorSchet);
+            string CommandSql = String.Format(@"insert into `aks`.`cashfunc_local_PaidRashReasons`(id, `Osnovanie`, `KreditNomerSchet`, `DebetKorSchet`, 
+`FlagFormReturn`) 
+Values({0}, '{1}', '{2}', '{3}',
+    {4})", NewLocalPaidRashReasons.Id, NewLocalPaidRashReasons.Osnovanie, NewLocalPaidRashReasons.KreditNomerSchet, NewLocalPaidRashReasons.DebetKorSchet,
+        (NewLocalPaidRashReasons.FlagFormReturn?1:0));
 
             try
             {
@@ -5950,8 +5993,10 @@ Values({0}, '{1}', '{2}', '{3}')", NewLocalPaidRashReasons.Id, NewLocalPaidRashR
             if (UpdLocalPaidRashReasons.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
 
             string CommandSql = String.Format(@"update `aks`.`cashfunc_local_PaidRashReasons`
-Set `Osnovanie`='{1}', `KreditNomerSchet`='{2}', `DebetKorSchet`='{3}'
-Where Id={0}", UpdLocalPaidRashReasons.Id, UpdLocalPaidRashReasons.Osnovanie, UpdLocalPaidRashReasons.KreditNomerSchet, UpdLocalPaidRashReasons.DebetKorSchet);
+Set `Osnovanie`='{1}', `KreditNomerSchet`='{2}', `DebetKorSchet`='{3}', `FlagFormReturn`={4}
+Where Id={0}", UpdLocalPaidRashReasons.Id, 
+            UpdLocalPaidRashReasons.Osnovanie, UpdLocalPaidRashReasons.KreditNomerSchet, UpdLocalPaidRashReasons.DebetKorSchet,
+            (UpdLocalPaidRashReasons.FlagFormReturn?1:0));
 
             try
             {

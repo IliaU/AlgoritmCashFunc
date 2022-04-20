@@ -10,14 +10,16 @@ using System.Reflection;
 using System.Threading;
 using AlgoritmCashFunc.Com.Provider.Lib;
 using AlgoritmCashFunc.BLL;
+using AlgoritmCashFunc.BLL_Prizm;
 
 namespace AlgoritmCashFunc.Lib
 {
     /// <summary>
     /// Универсальный провайдер
     /// </summary>
-    public class UProvider : ProviderBase.UProviderBase, ProviderI
+    public class UProvider : ProviderBase.UProviderBase, ProviderI, ProviderPrizmI
     {
+        #region UProviderBase
         /// <summary>
         /// Базовый провайдер
         /// </summary>
@@ -27,6 +29,11 @@ namespace AlgoritmCashFunc.Lib
         /// Интерфейс провайдера
         /// </summary>
         private ProviderI PrvI;
+
+        /// <summary>
+        /// Интерфейс провайдера для призма
+        /// </summary>
+        private ProviderPrizmI PrvPrizmI;
 
         /// <summary>
         /// Тип провайдера
@@ -116,11 +123,14 @@ namespace AlgoritmCashFunc.Lib
 
             // Проверяем реализовывает ли класс наш интерфейс если да то это провайдер который можно подкрузить
             bool flagI = false;
+            bool flagPrizmI = false;
             foreach (Type i in myType.GetInterfaces())
             {
                 if (i.FullName == "AlgoritmCashFunc.Com.Provider.Lib.ProviderI") flagI = true;
+                if (i.FullName == "AlgoritmCashFunc.Com.Provider.Lib.ProviderPrizmI") flagPrizmI = true;
             }
             if (!flagI) throw new ApplicationException("Класс который вы грузите не реализовывает интерфейс (ProviderI)");
+            if (!flagPrizmI) throw new ApplicationException("Класс который вы грузите не реализовывает интерфейс (ProviderPrizmI)");
 
             // Проверяем что наш клас наследует PlugInBase 
             bool flagB = false;
@@ -156,6 +166,7 @@ namespace AlgoritmCashFunc.Lib
             object obj = Activator.CreateInstance(myType, targ);
             this.PrvB = (ProviderBase)obj;
             this.PrvI = (ProviderI)obj;
+            this.PrvPrizmI = (ProviderPrizmI)obj;
 
             base.UPoviderSetupForProviderBase(this.PrvB, this);
         }
@@ -230,7 +241,9 @@ namespace AlgoritmCashFunc.Lib
 
             return ProviderName;
         }
+        #endregion
 
+        #region ProviderI
         /// <summary>
         /// Процедура вызывающая настройку подключения
         /// </summary>
@@ -709,5 +722,20 @@ namespace AlgoritmCashFunc.Lib
         {
             this.PrvI.UpdateDocumentKasBook(UpdDocumentKasBook);
         }
+
+        #endregion
+
+        #region ProviderPrizmI
+
+        /// <summary>
+        /// Получаем документ по его номеру
+        /// </summary>
+        /// <param name="DocNumber">Номер документа</param>
+        /// <returns>Документ</returns>
+        public Check GetCheck(int DocNumber)
+        {
+            return PrvPrizmI.GetCheck(DocNumber);
+        }
+        #endregion
     }
 }

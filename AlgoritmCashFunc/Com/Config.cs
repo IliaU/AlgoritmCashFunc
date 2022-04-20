@@ -29,11 +29,6 @@ namespace AlgoritmCashFunc.Com
         private static bool _Trace = false;
 
         /// <summary>
-        /// Путь к папке в которую выгружаются документы для 1С
-        /// </summary>
-        private static string _Upload1CDir = @"c:\1S_Documents";
-
-        /// <summary>
         /// Объект XML файла
         /// </summary>
         private static XmlDocument Document = new XmlDocument();
@@ -81,23 +76,6 @@ namespace AlgoritmCashFunc.Com
                 xmlRoot.SetAttribute("Trace", value.ToString());
                 Save();
                 _Trace = value;
-            }
-        }
-
-        /// <summary>
-        /// Путь к папке в которую выгружаются документы для 1С
-        /// </summary>
-        public static string Upload1CDir
-        {
-            get
-            {
-                return _Upload1CDir;
-            }
-            set
-            {
-                xmlRoot.SetAttribute("Upload1CDir", value);
-                Save();
-                _Upload1CDir = value;
             }
         }
         #endregion
@@ -212,7 +190,6 @@ namespace AlgoritmCashFunc.Com
                     XmlElement xmlMain = Document.CreateElement("AlgoritmCashFunc");
                     xmlMain.SetAttribute("Version", _Version.ToString());
                     xmlMain.SetAttribute("Trace", _Trace.ToString());
-                    xmlMain.SetAttribute("Upload1CDir", _Upload1CDir);
                     xmlMain.SetAttribute("PrvFullName", null);
                     xmlMain.SetAttribute("ConnectionString", "");
                     Document.AppendChild(xmlMain);
@@ -260,7 +237,6 @@ namespace AlgoritmCashFunc.Com
                     for (int i = 0; i < xmlRoot.Attributes.Count; i++)
                     {
                         if (xmlRoot.Attributes[i].Name == "Trace") try { _Trace = bool.Parse(xmlRoot.Attributes[i].Value.ToString()); } catch (Exception) { }
-                        if (xmlRoot.Attributes[i].Name == "Upload1CDir") _Upload1CDir = xmlRoot.Attributes[i].Value;
                         if (xmlRoot.Attributes[i].Name == "PrvFullName") PrvFullName = xmlRoot.Attributes[i].Value.ToString();
                         try { if (xmlRoot.Attributes[i].Name == "ConnectionString") ConnectionString = Com.Lic.DeCode(xmlRoot.Attributes[i].Value.ToString()); }
                         catch (Exception) { }

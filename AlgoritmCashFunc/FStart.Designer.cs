@@ -417,6 +417,7 @@
             this.справочникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemLocalChiefCashiers = new System.Windows.Forms.ToolStripMenuItem();
             this.localBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnRashReportReturnBlank = new System.Windows.Forms.Button();
             this.pnlTop.SuspendLayout();
             this.pnlTopFill.SuspendLayout();
             this.pnlTopRight.SuspendLayout();
@@ -1564,6 +1565,7 @@
             // 
             // pnlPagRashTop2
             // 
+            this.pnlPagRashTop2.Controls.Add(this.btnRashReportReturnBlank);
             this.pnlPagRashTop2.Controls.Add(this.panel6);
             this.pnlPagRashTop2.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlPagRashTop2.Location = new System.Drawing.Point(3, 299);
@@ -4865,6 +4867,20 @@
             // 
             this.localBindingSource.DataSource = typeof(AlgoritmCashFunc.BLL.Local);
             // 
+            // btnRashReportReturnBlank
+            // 
+            this.btnRashReportReturnBlank.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnRashReportReturnBlank.Image = global::AlgoritmCashFunc.Properties.Resources.print;
+            this.btnRashReportReturnBlank.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRashReportReturnBlank.Location = new System.Drawing.Point(699, 21);
+            this.btnRashReportReturnBlank.Name = "btnRashReportReturnBlank";
+            this.btnRashReportReturnBlank.Size = new System.Drawing.Size(203, 36);
+            this.btnRashReportReturnBlank.TabIndex = 5;
+            this.btnRashReportReturnBlank.Text = "Бланк возврата";
+            this.btnRashReportReturnBlank.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRashReportReturnBlank.UseVisualStyleBackColor = true;
+            this.btnRashReportReturnBlank.Click += new System.EventHandler(this.btnRashReportReturnBlank_Click);
+            // 
             // FStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5521,6 +5537,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Rashod;
         private System.Windows.Forms.ToolStripMenuItem справочникиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TSMItemLocalChiefCashiers;
+        private System.Windows.Forms.Button btnRashReportReturnBlank;
     }
 }
 

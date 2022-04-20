@@ -29,6 +29,11 @@ namespace AlgoritmCashFunc.BLL.LocalPlg
         public string DebetKorSchet;
 
         /// <summary>
+        /// Разрешить печать заявления на возврат
+        /// </summary>
+        public bool FlagFormReturn;
+
+        /// <summary>
         /// Конструктор для загрузки из базы данных
         /// </summary>
         /// <param name="Id">Идентификатор в базе данных</param>

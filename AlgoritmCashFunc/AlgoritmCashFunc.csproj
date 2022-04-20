@@ -74,6 +74,8 @@
     <Compile Include="BLL\OperationPlg\OperationKasBook.cs" />
     <Compile Include="BLL\OperationPlg\OperationPrihod.cs" />
     <Compile Include="BLL\OperationPlg\OperationRashod.cs" />
+    <Compile Include="BLL_Prizm\Check.cs" />
+    <Compile Include="BLL_Prizm\CheckItem.cs" />
     <Compile Include="Com\Config.cs" />
     <Compile Include="Com\DocumentFarm.cs" />
     <Compile Include="Com\Lic.cs" />
@@ -88,6 +90,7 @@
     <Compile Include="Com\ProviderFarm.cs" />
     <Compile Include="Com\Provider\Lib\ProviderBase.cs" />
     <Compile Include="Com\Provider\Lib\ProviderI.cs" />
+    <Compile Include="Com\Provider\Lib\ProviderPrizmI.cs" />
     <Compile Include="Com\Provider\ODBCprv.cs" />
     <Compile Include="Com\Provider\ODBC\FInfo.cs">
       <SubType>Form</SubType>
@@ -126,6 +129,12 @@
     </Compile>
     <Compile Include="FProviderSetup.Designer.cs">
       <DependentUpon>FProviderSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FRequestDocNumber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FRequestDocNumber.Designer.cs">
+      <DependentUpon>FRequestDocNumber.cs</DependentUpon>
     </Compile>
     <Compile Include="FUsers.cs">
       <SubType>Form</SubType>
@@ -172,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FProviderSetup.resx">
       <DependentUpon>FProviderSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRequestDocNumber.resx">
+      <DependentUpon>FRequestDocNumber.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FUsers.resx">
       <DependentUpon>FUsers.cs</DependentUpon>
