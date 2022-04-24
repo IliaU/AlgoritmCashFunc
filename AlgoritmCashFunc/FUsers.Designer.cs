@@ -52,6 +52,8 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblLogonEdit = new System.Windows.Forms.Label();
+            this.lblEmploeEdit = new System.Windows.Forms.Label();
+            this.cmbBoxEmploeeEdit = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.pnlLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGViewLogon)).BeginInit();
@@ -163,6 +165,7 @@
             // 
             // pnlFillFill
             // 
+            this.pnlFillFill.Controls.Add(this.cmbBoxEmploeeEdit);
             this.pnlFillFill.Controls.Add(this.txtBoxLogonEdit);
             this.pnlFillFill.Controls.Add(this.cmbBoxRoleEdit);
             this.pnlFillFill.Controls.Add(this.txtBoxDescriptionEdit);
@@ -194,10 +197,10 @@
             // 
             // txtBoxDescriptionEdit
             // 
-            this.txtBoxDescriptionEdit.Location = new System.Drawing.Point(6, 83);
+            this.txtBoxDescriptionEdit.Location = new System.Drawing.Point(6, 110);
             this.txtBoxDescriptionEdit.Multiline = true;
             this.txtBoxDescriptionEdit.Name = "txtBoxDescriptionEdit";
-            this.txtBoxDescriptionEdit.Size = new System.Drawing.Size(261, 116);
+            this.txtBoxDescriptionEdit.Size = new System.Drawing.Size(261, 88);
             this.txtBoxDescriptionEdit.TabIndex = 3;
             this.txtBoxDescriptionEdit.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
@@ -213,6 +216,7 @@
             // 
             // pnlFillLeft
             // 
+            this.pnlFillLeft.Controls.Add(this.lblEmploeEdit);
             this.pnlFillLeft.Controls.Add(this.lblDescriptionEdit);
             this.pnlFillLeft.Controls.Add(this.lblPasswordEditPnlTop);
             this.pnlFillLeft.Controls.Add(this.lblRoleEdit);
@@ -227,7 +231,7 @@
             // lblDescriptionEdit
             // 
             this.lblDescriptionEdit.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblDescriptionEdit.Location = new System.Drawing.Point(3, 83);
+            this.lblDescriptionEdit.Location = new System.Drawing.Point(3, 110);
             this.lblDescriptionEdit.Name = "lblDescriptionEdit";
             this.lblDescriptionEdit.Size = new System.Drawing.Size(127, 20);
             this.lblDescriptionEdit.TabIndex = 4;
@@ -315,6 +319,25 @@
             this.lblLogonEdit.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.lblLogonEdit.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
+            // lblEmploeEdit
+            // 
+            this.lblEmploeEdit.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblEmploeEdit.Location = new System.Drawing.Point(3, 82);
+            this.lblEmploeEdit.Name = "lblEmploeEdit";
+            this.lblEmploeEdit.Size = new System.Drawing.Size(127, 20);
+            this.lblEmploeEdit.TabIndex = 5;
+            this.lblEmploeEdit.Text = "Кассир по умолчанию";
+            this.lblEmploeEdit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cmbBoxEmploeeEdit
+            // 
+            this.cmbBoxEmploeeEdit.Enabled = false;
+            this.cmbBoxEmploeeEdit.FormattingEnabled = true;
+            this.cmbBoxEmploeeEdit.Location = new System.Drawing.Point(6, 83);
+            this.cmbBoxEmploeeEdit.Name = "cmbBoxEmploeeEdit";
+            this.cmbBoxEmploeeEdit.Size = new System.Drawing.Size(261, 21);
+            this.cmbBoxEmploeeEdit.TabIndex = 4;
+            // 
             // FUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -369,5 +392,7 @@
         private System.Windows.Forms.ToolStripMenuItem TSMItemAddUser;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.ComboBox cmbBoxEmploeeEdit;
+        private System.Windows.Forms.Label lblEmploeEdit;
     }
 }

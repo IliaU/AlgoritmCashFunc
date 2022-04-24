@@ -147,7 +147,7 @@ namespace AlgoritmCashFunc
                             else
                             {
                                 // Авторизуемся под системной учёткой
-                                Lib.User consUsr = new Lib.User("Console", "123456", "Console", Lib.RoleEn.Admin);
+                                Lib.User consUsr = new Lib.User("Console", "123456", "Console", Lib.RoleEn.Admin, null);
                                 Com.UserFarm.List.Add(consUsr, true, false);
                                 Com.UserFarm.SetupCurrentUser(consUsr, "123456");
 

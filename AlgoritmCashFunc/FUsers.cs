@@ -58,6 +58,12 @@ namespace AlgoritmCashFunc
             if (fa != -1 && this.cmbBoxRoleEdit.Items.Count > fa && Com.UserFarm.List.Count >= 0 && UserFarm.CurrentUser.Role == RoleEn.Admin) this.cmbBoxRoleEdit.SelectedIndex = fa;
             if (fa != -1 && this.cmbBoxRoleEdit.Items.Count > fa && Com.UserFarm.List.Count == 0) this.cmbBoxRoleEdit.SelectedIndex = fa;
 
+            this.cmbBoxEmploeeEdit.Items.Clear();
+            foreach (BLL.LocalPlg.LocalEmployees item in Com.LocalFarm.CurLocalEmployees)
+            {
+                this.cmbBoxEmploeeEdit.Items.Add(string.Format("({0}) {1}", item.Id, item.LocalName));
+            }
+
             this.dvLogon = new DataView(dtLogon);
             this.dGViewLogon.DataSource = this.dvLogon;
 
@@ -172,6 +178,23 @@ namespace AlgoritmCashFunc
                     }
                     if (fCurR > -1) this.cmbBoxRoleEdit.SelectedIndex = fCurR;
 
+
+                    fCurR = -1;
+                    for (int i = 0; i < this.cmbBoxEmploeeEdit.Items.Count; i++)
+                    {
+                        if (editUser.EmploeeId != null)
+                        {
+                            foreach (BLL.LocalPlg.LocalEmployees item in Com.LocalFarm.CurLocalEmployees)
+                            {
+                                if (string.Format("({0}) {1}", item.Id, item.LocalName)== this.cmbBoxEmploeeEdit.Items[i].ToString())
+                                {
+                                    fCurR = i;
+                                }
+                            }
+                        }
+                    }
+                    this.cmbBoxEmploeeEdit.SelectedIndex = fCurR;
+
                     if (Com.UserFarm.List.Count == 0) this.txtBoxPasswordEdit.ReadOnly = false;
                     else this.txtBoxPasswordEdit.ReadOnly = true;
                 }
@@ -183,12 +206,14 @@ namespace AlgoritmCashFunc
                 {
                     this.txtBoxPasswordEdit.ReadOnly = false;
                     this.cmbBoxRoleEdit.Enabled = true;
+                    this.cmbBoxEmploeeEdit.Enabled = true;
                     this.txtBoxDescriptionEdit.ReadOnly = false;
                 }
                 else
                 {
                     this.txtBoxPasswordEdit.ReadOnly = true;
                     this.cmbBoxRoleEdit.Enabled = false;
+                    this.cmbBoxEmploeeEdit.Enabled = false;
                     this.txtBoxDescriptionEdit.ReadOnly = true;
                 }
             }
@@ -233,7 +258,19 @@ namespace AlgoritmCashFunc
                 try { editUser = Com.UserFarm.List.GetUser(dGViewLogon.Rows[this.selectedLogon].Cells["Logon"].Value.ToString()); }
                 catch (Exception) { }
 
-                User nUser = new User(this.txtBoxLogonEdit.Text, this.txtBoxPasswordEdit.Text, this.txtBoxDescriptionEdit.Text, Lib.EventConvertor.Convert(this.cmbBoxRoleEdit.Text, RoleEn.Operator));
+                int? EmploeeId = null;
+                if (cmbBoxEmploeeEdit.SelectedIndex > -1)
+                {
+                    foreach (BLL.LocalPlg.LocalEmployees item in Com.LocalFarm.CurLocalEmployees)
+                    {
+                        if (string.Format("({0}) {1}", item.Id, item.LocalName) == cmbBoxEmploeeEdit.Items[cmbBoxEmploeeEdit.SelectedIndex].ToString())
+                        {
+                            EmploeeId = item.Id;
+                        }
+                    }
+                }
+
+                User nUser = new User(this.txtBoxLogonEdit.Text, this.txtBoxPasswordEdit.Text, this.txtBoxDescriptionEdit.Text, Lib.EventConvertor.Convert(this.cmbBoxRoleEdit.Text, RoleEn.Operator), EmploeeId);
 
                 //Добавление нового пользователя
                 if (editUser == null)

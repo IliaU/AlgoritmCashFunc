@@ -839,9 +839,11 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
             try
             {
                 // Создаём запрос для получения списка закладок
-                DataTable TblBkm = Com.ProviderFarm.CurrentPrv.getData(string.Format(@"with r as (Select coalesce(ref_sale_sid, sid) As sid, d.return_subtotal_with_tax
+                DataTable TblBkm = Com.ProviderFarm.CurrentPrv.getData(string.Format(@"with r as (Select coalesce(ref_sale_sid, sid) As sid, d.return_subtotal_with_tax, d.doc_no
     From `rpsods`.`document` d
-    where d.`sid` = {0})
+    where d.`doc_no` = {0}
+      and d.receipt_type=1
+      and d.has_return=1)
 select date_format(d.post_date, '%d') as fd,
     case when date_format(d.post_date, '%m') = '01' then 'января'
 		when date_format(d.post_date, '%m') = '02' then 'февраля'
@@ -887,15 +889,17 @@ group by d.`sid`, d.post_date", DocNumber));
                 }
 
                 // Создаём запрос для получения таблицы
-                DataTable TblVal = Com.ProviderFarm.CurrentPrv.getData(string.Format(@"with r as (Select coalesce(ref_sale_sid, sid) As sid
+                DataTable TblVal = Com.ProviderFarm.CurrentPrv.getData(string.Format(@"with r as (Select coalesce(ref_sale_sid, sid) As sid, d.`doc_no`
     From `rpsods`.`document` d
-    where d.`sid` = {0})
+    where d.`doc_no` = {0}
+      and d.receipt_type=1
+      and d.has_return=1)
 select p.description2 as C0, 
 	Concat(coalesce(p.description1,''), ' ' , coalesce(p.attribute,'')) as C1, 
 	p.item_size as C2,
 	case when row_number() over() = count(*) over() Then'' else ',' end As C3
 From `rpsods`.`document` d
-	inner join `rpsods`.`document_item` i on d.sid=i.doc_sid and i.returned_item_qty>0
+	inner join `rpsods`.`document_item` i on d.sid=i.doc_sid
     inner join `rpsods`.invn_sbs_item p on i.invn_sbs_item_sid=p.sid
 where d.`sid` = (Select sid From r)
 order by i.item_pos", DocNumber));
@@ -908,10 +912,10 @@ order by i.item_pos", DocNumber));
                 Wrd.TotalList Ttl = new Wrd.TotalList();
 
                 // Создаём задание и получаем объект которым будем смотреть результат
-                Wrd.TaskWord Tsk = new Wrd.TaskWord(@"Заявления на возврат.docx", null, BkmL, TblL);
+                Wrd.TaskWord Tsk = new Wrd.TaskWord(string.Format(@"{0}\Dotx\Заявления на возврат.docx", Environment.CurrentDirectory), null, BkmL, TblL);
 
                 // Можно создать отдельный екземпляр который сможет работать асинхронно со своими параметрами
-                Wrd.WordDotxServer SrvStatic = new WordDotxServer(@"Заявления на возврат.docx", null);
+                Wrd.WordDotxServer SrvStatic = new WordDotxServer(string.Format(@"{0}\Dotx", Environment.CurrentDirectory), null);
                 
                 // Запускаем формирование отчёта в синхронном режиме
                 SrvStatic.StartCreateReport(Tsk);

@@ -188,6 +188,12 @@ namespace AlgoritmCashFunc.Lib.LibBase
                             UserL[ubpIndex].Description = updUser.Description;
                             UserL[ubpIndex].Role = updUser.Role;
 
+                            try
+                            {
+                                ((User)UserL[ubpIndex]).EmploeeId = ((User)updUser).EmploeeId;
+                            }
+                            catch (Exception) {}
+
                             rez = true;
                         }
                     }

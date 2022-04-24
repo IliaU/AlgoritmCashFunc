@@ -312,11 +312,14 @@ namespace AlgoritmCashFunc.Com
                                     string Password = null;
                                     string Description = null;
                                     Lib.RoleEn Role = RoleEn.None;
+                                    int? EmploeeId = null;
+
                                     foreach (XmlAttribute auser in xuser.Attributes)
                                     {
                                         if (auser.Name == "Password") Password = Com.Lic.DeCode(xuser.GetAttribute(auser.Name));
                                         if (auser.Name == "Description") Description = xuser.GetAttribute(auser.Name);
                                         if (auser.Name == "Role") Role = Lib.EventConvertor.Convert(xuser.GetAttribute(auser.Name), Role);
+                                        if (auser.Name == "EmploeeId" && !string.IsNullOrWhiteSpace(xuser.GetAttribute(auser.Name))) EmploeeId = int.Parse(xuser.GetAttribute(auser.Name));
                                     }
 
                                     // Если пароль не указан, то пользователя всё равно нужно добавить, просто при запуске он должен будет придумать пароль
@@ -324,7 +327,7 @@ namespace AlgoritmCashFunc.Com
                                     {
                                         try
                                         {
-                                            UserFarm.List.Add(new Lib.User(Logon, Password, Description, Role), true, false);
+                                            UserFarm.List.Add(new Lib.User(Logon, Password, Description, Role, EmploeeId), true, false);
                                         }
                                         catch (Exception ex)
                                         {
@@ -476,6 +479,8 @@ namespace AlgoritmCashFunc.Com
                     if (e.Password != null) u.SetAttribute("Password", Com.Lic.InCode(e.Password));
                     if (e.Description != null) u.SetAttribute("Description", e.Description);
                     if (e.Role != RoleEn.None) u.SetAttribute("Role", e.Role.ToString());
+                    u.SetAttribute("EmploeeId", string.Format("{0}", e.EmploeeId));
+
                     xmlUsers.AppendChild(u);
 
                     Save();
@@ -533,6 +538,7 @@ namespace AlgoritmCashFunc.Com
                             if (e.Password != null) item.SetAttribute("Password", Com.Lic.InCode(e.Password));
                             if (e.Description != null) item.SetAttribute("Description", e.Description);
                             if (e.Role != RoleEn.None) item.SetAttribute("Role", e.Role.ToString());
+                            item.SetAttribute("EmploeeId", string.Format("{0}",e.EmploeeId)); 
                         }
                     }
 

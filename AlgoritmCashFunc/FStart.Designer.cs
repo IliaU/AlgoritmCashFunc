@@ -115,6 +115,7 @@
             this.txtBoxPrihOKUD = new System.Windows.Forms.TextBox();
             this.tabPageRashod = new System.Windows.Forms.TabPage();
             this.pnlPagRashTop2 = new System.Windows.Forms.Panel();
+            this.btnRashReportReturnBlank = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pnlPagRashTop2LeftTop8 = new System.Windows.Forms.Panel();
             this.cmbBoxRashKreditor = new System.Windows.Forms.ComboBox();
@@ -417,7 +418,6 @@
             this.справочникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemLocalChiefCashiers = new System.Windows.Forms.ToolStripMenuItem();
             this.localBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnRashReportReturnBlank = new System.Windows.Forms.Button();
             this.pnlTop.SuspendLayout();
             this.pnlTopFill.SuspendLayout();
             this.pnlTopRight.SuspendLayout();
@@ -1572,6 +1572,20 @@
             this.pnlPagRashTop2.Name = "pnlPagRashTop2";
             this.pnlPagRashTop2.Size = new System.Drawing.Size(1180, 243);
             this.pnlPagRashTop2.TabIndex = 3;
+            // 
+            // btnRashReportReturnBlank
+            // 
+            this.btnRashReportReturnBlank.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnRashReportReturnBlank.Image = global::AlgoritmCashFunc.Properties.Resources.print;
+            this.btnRashReportReturnBlank.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRashReportReturnBlank.Location = new System.Drawing.Point(699, 21);
+            this.btnRashReportReturnBlank.Name = "btnRashReportReturnBlank";
+            this.btnRashReportReturnBlank.Size = new System.Drawing.Size(203, 36);
+            this.btnRashReportReturnBlank.TabIndex = 5;
+            this.btnRashReportReturnBlank.Text = "Бланк возврата";
+            this.btnRashReportReturnBlank.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRashReportReturnBlank.UseVisualStyleBackColor = true;
+            this.btnRashReportReturnBlank.Click += new System.EventHandler(this.btnRashReportReturnBlank_Click);
             // 
             // panel6
             // 
@@ -4866,20 +4880,6 @@
             // localBindingSource
             // 
             this.localBindingSource.DataSource = typeof(AlgoritmCashFunc.BLL.Local);
-            // 
-            // btnRashReportReturnBlank
-            // 
-            this.btnRashReportReturnBlank.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnRashReportReturnBlank.Image = global::AlgoritmCashFunc.Properties.Resources.print;
-            this.btnRashReportReturnBlank.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRashReportReturnBlank.Location = new System.Drawing.Point(699, 21);
-            this.btnRashReportReturnBlank.Name = "btnRashReportReturnBlank";
-            this.btnRashReportReturnBlank.Size = new System.Drawing.Size(203, 36);
-            this.btnRashReportReturnBlank.TabIndex = 5;
-            this.btnRashReportReturnBlank.Text = "Бланк возврата";
-            this.btnRashReportReturnBlank.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRashReportReturnBlank.UseVisualStyleBackColor = true;
-            this.btnRashReportReturnBlank.Click += new System.EventHandler(this.btnRashReportReturnBlank_Click);
             // 
             // FStart
             // 

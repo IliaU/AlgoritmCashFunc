@@ -48,7 +48,7 @@ namespace AlgoritmCashFunc
                     // Даём возможность зайти под системной учётной записью, только если нет заведённых админов в системе
                     if (!Com.UserFarm.HashRoleUsers(Lib.RoleEn.Admin) && this.cmbBoxLogon.Text == "Admin" && this.txtBoxPassword.Text == "12345")
                     {
-                        CurUser = new User("Admin", "12345", "Системная учётная запись.", RoleEn.Admin);
+                        CurUser = new User("Admin", "12345", "Системная учётная запись.", RoleEn.Admin, null);
                         Com.UserFarm.List.Add(CurUser);
                     }
                 }
@@ -60,7 +60,7 @@ namespace AlgoritmCashFunc
                 if (string.IsNullOrWhiteSpace(CurUser.Password))
                 {
                     if (string.IsNullOrWhiteSpace(this.txtBoxPassword.Text)) throw new ApplicationException("Вы должны задать пароль, выбранному пользователю.");
-                    else Com.UserFarm.List.Update(new User(CurUser.Logon, this.txtBoxPassword.Text.Trim(), CurUser.Description, CurUser.Role));
+                    else Com.UserFarm.List.Update(new User(CurUser.Logon, this.txtBoxPassword.Text.Trim(), CurUser.Description, CurUser.Role, CurUser.EmploeeId));
                 }
 
                 // Пытаемся авторизоваться в системе подвыбранным пользователем и с введённым паролем
