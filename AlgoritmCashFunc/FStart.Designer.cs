@@ -32,14 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FStart));
             this.pnlTop = new System.Windows.Forms.Panel();
             this.pnlTopFill = new System.Windows.Forms.Panel();
-            this.btnPrint = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
             this.pnlTopRight = new System.Windows.Forms.Panel();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.btnOperator = new System.Windows.Forms.Button();
-            this.picBoxAKS = new System.Windows.Forms.PictureBox();
-            this.picBoxPrizm = new System.Windows.Forms.PictureBox();
             this.pnlFill = new System.Windows.Forms.Panel();
             this.tabCntOperation = new System.Windows.Forms.TabControl();
             this.tabPagePrihod = new System.Windows.Forms.TabPage();
@@ -115,7 +108,6 @@
             this.txtBoxPrihOKUD = new System.Windows.Forms.TextBox();
             this.tabPageRashod = new System.Windows.Forms.TabPage();
             this.pnlPagRashTop2 = new System.Windows.Forms.Panel();
-            this.btnRashReportReturnBlank = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pnlPagRashTop2LeftTop8 = new System.Windows.Forms.Panel();
             this.cmbBoxRashKreditor = new System.Windows.Forms.ComboBox();
@@ -215,10 +207,6 @@
             this.lblKassBookDolRukOrg = new System.Windows.Forms.Label();
             this.pnlPagKassBookTop2LeftTop0 = new System.Windows.Forms.Panel();
             this.pnlPagKassBookTop1 = new System.Windows.Forms.Panel();
-            this.btnKassBookExport = new System.Windows.Forms.Button();
-            this.btnKassBookTitle = new System.Windows.Forms.Button();
-            this.btnKassBookDelete = new System.Windows.Forms.Button();
-            this.btnKassBookEdit = new System.Windows.Forms.Button();
             this.pnlPagKassBookTop1Left = new System.Windows.Forms.Panel();
             this.dtGridKassBook = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -420,12 +408,24 @@
             this.TSMItemLocalAccounters = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemLocalChiefCashiers = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemLocalKassa = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnRashReportReturnBlank = new System.Windows.Forms.Button();
+            this.btnKassBookExport = new System.Windows.Forms.Button();
+            this.btnKassBookTitle = new System.Windows.Forms.Button();
+            this.btnKassBookDelete = new System.Windows.Forms.Button();
+            this.btnKassBookEdit = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnOperator = new System.Windows.Forms.Button();
+            this.picBoxAKS = new System.Windows.Forms.PictureBox();
+            this.picBoxPrizm = new System.Windows.Forms.PictureBox();
+            this.TSMItemLocalPaidInReasons = new System.Windows.Forms.ToolStripMenuItem();
             this.localBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.TSMItemLocalPaidRashReasons = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlTop.SuspendLayout();
             this.pnlTopFill.SuspendLayout();
             this.pnlTopRight.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoxAKS)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoxPrizm)).BeginInit();
             this.pnlFill.SuspendLayout();
             this.tabCntOperation.SuspendLayout();
             this.tabPagePrihod.SuspendLayout();
@@ -575,6 +575,8 @@
             this.pnlBottom.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxAKS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxPrizm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.localBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -601,51 +603,6 @@
             this.pnlTopFill.Size = new System.Drawing.Size(566, 42);
             this.pnlTopFill.TabIndex = 3;
             // 
-            // btnPrint
-            // 
-            this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
-            this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPrint.Location = new System.Drawing.Point(260, 3);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(114, 36);
-            this.btnPrint.TabIndex = 2;
-            this.btnPrint.Text = "Печать  ";
-            this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(119, 3);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(135, 36);
-            this.btnSave.TabIndex = 1;
-            this.btnSave.Text = "Сохранить";
-            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            this.btnSave.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
-            // 
-            // btnNew
-            // 
-            this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnNew.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnNew.Image = ((System.Drawing.Image)(resources.GetObject("btnNew.Image")));
-            this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNew.Location = new System.Drawing.Point(6, 3);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(107, 36);
-            this.btnNew.TabIndex = 0;
-            this.btnNew.Text = "Новый  ";
-            this.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnNew.UseVisualStyleBackColor = true;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            this.btnNew.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
-            // 
             // pnlTopRight
             // 
             this.pnlTopRight.Controls.Add(this.btnExit);
@@ -655,60 +612,6 @@
             this.pnlTopRight.Name = "pnlTopRight";
             this.pnlTopRight.Size = new System.Drawing.Size(324, 42);
             this.pnlTopRight.TabIndex = 2;
-            // 
-            // btnExit
-            // 
-            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
-            this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(204, 3);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(108, 36);
-            this.btnExit.TabIndex = 2;
-            this.btnExit.Text = "Выход  ";
-            this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            this.btnExit.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
-            // 
-            // btnOperator
-            // 
-            this.btnOperator.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnOperator.Image = ((System.Drawing.Image)(resources.GetObject("btnOperator.Image")));
-            this.btnOperator.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnOperator.Location = new System.Drawing.Point(6, 3);
-            this.btnOperator.Name = "btnOperator";
-            this.btnOperator.Size = new System.Drawing.Size(192, 36);
-            this.btnOperator.TabIndex = 1;
-            this.btnOperator.Text = "Смена оператора  ";
-            this.btnOperator.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnOperator.UseVisualStyleBackColor = true;
-            this.btnOperator.Click += new System.EventHandler(this.btnOperator_Click);
-            this.btnOperator.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
-            // 
-            // picBoxAKS
-            // 
-            this.picBoxAKS.Dock = System.Windows.Forms.DockStyle.Left;
-            this.picBoxAKS.Image = ((System.Drawing.Image)(resources.GetObject("picBoxAKS.Image")));
-            this.picBoxAKS.Location = new System.Drawing.Point(152, 0);
-            this.picBoxAKS.Name = "picBoxAKS";
-            this.picBoxAKS.Size = new System.Drawing.Size(152, 42);
-            this.picBoxAKS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBoxAKS.TabIndex = 1;
-            this.picBoxAKS.TabStop = false;
-            this.picBoxAKS.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
-            // 
-            // picBoxPrizm
-            // 
-            this.picBoxPrizm.Dock = System.Windows.Forms.DockStyle.Left;
-            this.picBoxPrizm.Image = ((System.Drawing.Image)(resources.GetObject("picBoxPrizm.Image")));
-            this.picBoxPrizm.Location = new System.Drawing.Point(0, 0);
-            this.picBoxPrizm.Name = "picBoxPrizm";
-            this.picBoxPrizm.Size = new System.Drawing.Size(152, 42);
-            this.picBoxPrizm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBoxPrizm.TabIndex = 0;
-            this.picBoxPrizm.TabStop = false;
-            this.picBoxPrizm.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
             // pnlFill
             // 
@@ -1575,20 +1478,6 @@
             this.pnlPagRashTop2.Name = "pnlPagRashTop2";
             this.pnlPagRashTop2.Size = new System.Drawing.Size(1180, 243);
             this.pnlPagRashTop2.TabIndex = 3;
-            // 
-            // btnRashReportReturnBlank
-            // 
-            this.btnRashReportReturnBlank.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnRashReportReturnBlank.Image = global::AlgoritmCashFunc.Properties.Resources.print;
-            this.btnRashReportReturnBlank.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRashReportReturnBlank.Location = new System.Drawing.Point(699, 21);
-            this.btnRashReportReturnBlank.Name = "btnRashReportReturnBlank";
-            this.btnRashReportReturnBlank.Size = new System.Drawing.Size(203, 36);
-            this.btnRashReportReturnBlank.TabIndex = 5;
-            this.btnRashReportReturnBlank.Text = "Бланк возврата";
-            this.btnRashReportReturnBlank.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRashReportReturnBlank.UseVisualStyleBackColor = true;
-            this.btnRashReportReturnBlank.Click += new System.EventHandler(this.btnRashReportReturnBlank_Click);
             // 
             // panel6
             // 
@@ -2700,61 +2589,6 @@
             this.pnlPagKassBookTop1.Name = "pnlPagKassBookTop1";
             this.pnlPagKassBookTop1.Size = new System.Drawing.Size(1180, 223);
             this.pnlPagKassBookTop1.TabIndex = 2;
-            // 
-            // btnKassBookExport
-            // 
-            this.btnKassBookExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnKassBookExport.Image = ((System.Drawing.Image)(resources.GetObject("btnKassBookExport.Image")));
-            this.btnKassBookExport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnKassBookExport.Location = new System.Drawing.Point(972, 146);
-            this.btnKassBookExport.Name = "btnKassBookExport";
-            this.btnKassBookExport.Size = new System.Drawing.Size(203, 36);
-            this.btnKassBookExport.TabIndex = 5;
-            this.btnKassBookExport.Text = "Выгрузка";
-            this.btnKassBookExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnKassBookExport.UseVisualStyleBackColor = true;
-            this.btnKassBookExport.Click += new System.EventHandler(this.btnKassBookExport_Click);
-            // 
-            // btnKassBookTitle
-            // 
-            this.btnKassBookTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnKassBookTitle.Image = global::AlgoritmCashFunc.Properties.Resources.print;
-            this.btnKassBookTitle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnKassBookTitle.Location = new System.Drawing.Point(972, 104);
-            this.btnKassBookTitle.Name = "btnKassBookTitle";
-            this.btnKassBookTitle.Size = new System.Drawing.Size(203, 36);
-            this.btnKassBookTitle.TabIndex = 4;
-            this.btnKassBookTitle.Text = "Обложка ";
-            this.btnKassBookTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnKassBookTitle.UseVisualStyleBackColor = true;
-            this.btnKassBookTitle.Click += new System.EventHandler(this.btnKassBookTitle_Click);
-            // 
-            // btnKassBookDelete
-            // 
-            this.btnKassBookDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnKassBookDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnKassBookDelete.Image")));
-            this.btnKassBookDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnKassBookDelete.Location = new System.Drawing.Point(972, 62);
-            this.btnKassBookDelete.Name = "btnKassBookDelete";
-            this.btnKassBookDelete.Size = new System.Drawing.Size(203, 36);
-            this.btnKassBookDelete.TabIndex = 3;
-            this.btnKassBookDelete.Text = "Удалить";
-            this.btnKassBookDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnKassBookDelete.UseVisualStyleBackColor = true;
-            // 
-            // btnKassBookEdit
-            // 
-            this.btnKassBookEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnKassBookEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnKassBookEdit.Image")));
-            this.btnKassBookEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnKassBookEdit.Location = new System.Drawing.Point(972, 20);
-            this.btnKassBookEdit.Name = "btnKassBookEdit";
-            this.btnKassBookEdit.Size = new System.Drawing.Size(203, 36);
-            this.btnKassBookEdit.TabIndex = 2;
-            this.btnKassBookEdit.Text = "Изменить  ";
-            this.btnKassBookEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnKassBookEdit.UseVisualStyleBackColor = true;
-            this.btnKassBookEdit.Click += new System.EventHandler(this.btnKassBookEdit_Click);
             // 
             // pnlPagKassBookTop1Left
             // 
@@ -4871,7 +4705,9 @@
             this.TSMItemLocalEmployees,
             this.TSMItemLocalAccounters,
             this.TSMItemLocalChiefCashiers,
-            this.TSMItemLocalKassa});
+            this.TSMItemLocalKassa,
+            this.TSMItemLocalPaidInReasons,
+            this.TSMItemLocalPaidRashReasons});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
             this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(291, 22);
             this.справочникиToolStripMenuItem.Text = "Справочники";
@@ -4879,34 +4715,216 @@
             // TSMItemLocalEmployees
             // 
             this.TSMItemLocalEmployees.Name = "TSMItemLocalEmployees";
-            this.TSMItemLocalEmployees.Size = new System.Drawing.Size(174, 22);
+            this.TSMItemLocalEmployees.Size = new System.Drawing.Size(248, 22);
             this.TSMItemLocalEmployees.Text = "Кассиры";
             this.TSMItemLocalEmployees.Click += new System.EventHandler(this.TSMItemLocalEmployees_Click);
             // 
             // TSMItemLocalAccounters
             // 
             this.TSMItemLocalAccounters.Name = "TSMItemLocalAccounters";
-            this.TSMItemLocalAccounters.Size = new System.Drawing.Size(174, 22);
+            this.TSMItemLocalAccounters.Size = new System.Drawing.Size(248, 22);
             this.TSMItemLocalAccounters.Text = "Бухгалтеры";
             this.TSMItemLocalAccounters.Click += new System.EventHandler(this.TSMItemLocalAccounters_Click);
             // 
             // TSMItemLocalChiefCashiers
             // 
             this.TSMItemLocalChiefCashiers.Name = "TSMItemLocalChiefCashiers";
-            this.TSMItemLocalChiefCashiers.Size = new System.Drawing.Size(174, 22);
+            this.TSMItemLocalChiefCashiers.Size = new System.Drawing.Size(248, 22);
             this.TSMItemLocalChiefCashiers.Text = "Старшие кассиры";
             this.TSMItemLocalChiefCashiers.Click += new System.EventHandler(this.TSMItemLocalChiefCashiers_Click);
             // 
             // TSMItemLocalKassa
             // 
             this.TSMItemLocalKassa.Name = "TSMItemLocalKassa";
-            this.TSMItemLocalKassa.Size = new System.Drawing.Size(174, 22);
+            this.TSMItemLocalKassa.Size = new System.Drawing.Size(248, 22);
             this.TSMItemLocalKassa.Text = "Настрока кассы";
             this.TSMItemLocalKassa.Click += new System.EventHandler(this.TSMItemLocalKassa_Click);
+            // 
+            // btnRashReportReturnBlank
+            // 
+            this.btnRashReportReturnBlank.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnRashReportReturnBlank.Image = global::AlgoritmCashFunc.Properties.Resources.print;
+            this.btnRashReportReturnBlank.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRashReportReturnBlank.Location = new System.Drawing.Point(699, 21);
+            this.btnRashReportReturnBlank.Name = "btnRashReportReturnBlank";
+            this.btnRashReportReturnBlank.Size = new System.Drawing.Size(203, 36);
+            this.btnRashReportReturnBlank.TabIndex = 5;
+            this.btnRashReportReturnBlank.Text = "Бланк возврата";
+            this.btnRashReportReturnBlank.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRashReportReturnBlank.UseVisualStyleBackColor = true;
+            this.btnRashReportReturnBlank.Click += new System.EventHandler(this.btnRashReportReturnBlank_Click);
+            // 
+            // btnKassBookExport
+            // 
+            this.btnKassBookExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnKassBookExport.Image = ((System.Drawing.Image)(resources.GetObject("btnKassBookExport.Image")));
+            this.btnKassBookExport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnKassBookExport.Location = new System.Drawing.Point(972, 146);
+            this.btnKassBookExport.Name = "btnKassBookExport";
+            this.btnKassBookExport.Size = new System.Drawing.Size(203, 36);
+            this.btnKassBookExport.TabIndex = 5;
+            this.btnKassBookExport.Text = "Выгрузка";
+            this.btnKassBookExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnKassBookExport.UseVisualStyleBackColor = true;
+            this.btnKassBookExport.Click += new System.EventHandler(this.btnKassBookExport_Click);
+            // 
+            // btnKassBookTitle
+            // 
+            this.btnKassBookTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnKassBookTitle.Image = global::AlgoritmCashFunc.Properties.Resources.print;
+            this.btnKassBookTitle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnKassBookTitle.Location = new System.Drawing.Point(972, 104);
+            this.btnKassBookTitle.Name = "btnKassBookTitle";
+            this.btnKassBookTitle.Size = new System.Drawing.Size(203, 36);
+            this.btnKassBookTitle.TabIndex = 4;
+            this.btnKassBookTitle.Text = "Обложка ";
+            this.btnKassBookTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnKassBookTitle.UseVisualStyleBackColor = true;
+            this.btnKassBookTitle.Click += new System.EventHandler(this.btnKassBookTitle_Click);
+            // 
+            // btnKassBookDelete
+            // 
+            this.btnKassBookDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnKassBookDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnKassBookDelete.Image")));
+            this.btnKassBookDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnKassBookDelete.Location = new System.Drawing.Point(972, 62);
+            this.btnKassBookDelete.Name = "btnKassBookDelete";
+            this.btnKassBookDelete.Size = new System.Drawing.Size(203, 36);
+            this.btnKassBookDelete.TabIndex = 3;
+            this.btnKassBookDelete.Text = "Удалить";
+            this.btnKassBookDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnKassBookDelete.UseVisualStyleBackColor = true;
+            // 
+            // btnKassBookEdit
+            // 
+            this.btnKassBookEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnKassBookEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnKassBookEdit.Image")));
+            this.btnKassBookEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnKassBookEdit.Location = new System.Drawing.Point(972, 20);
+            this.btnKassBookEdit.Name = "btnKassBookEdit";
+            this.btnKassBookEdit.Size = new System.Drawing.Size(203, 36);
+            this.btnKassBookEdit.TabIndex = 2;
+            this.btnKassBookEdit.Text = "Изменить  ";
+            this.btnKassBookEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnKassBookEdit.UseVisualStyleBackColor = true;
+            this.btnKassBookEdit.Click += new System.EventHandler(this.btnKassBookEdit_Click);
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
+            this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPrint.Location = new System.Drawing.Point(260, 3);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(114, 36);
+            this.btnPrint.TabIndex = 2;
+            this.btnPrint.Text = "Печать  ";
+            this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSave.Location = new System.Drawing.Point(119, 3);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(135, 36);
+            this.btnSave.TabIndex = 1;
+            this.btnSave.Text = "Сохранить";
+            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
+            // 
+            // btnNew
+            // 
+            this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnNew.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnNew.Image = ((System.Drawing.Image)(resources.GetObject("btnNew.Image")));
+            this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNew.Location = new System.Drawing.Point(6, 3);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(107, 36);
+            this.btnNew.TabIndex = 0;
+            this.btnNew.Text = "Новый  ";
+            this.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            this.btnNew.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
+            // 
+            // btnExit
+            // 
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
+            this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExit.Location = new System.Drawing.Point(204, 3);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(108, 36);
+            this.btnExit.TabIndex = 2;
+            this.btnExit.Text = "Выход  ";
+            this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnExit.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
+            // 
+            // btnOperator
+            // 
+            this.btnOperator.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnOperator.Image = ((System.Drawing.Image)(resources.GetObject("btnOperator.Image")));
+            this.btnOperator.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnOperator.Location = new System.Drawing.Point(6, 3);
+            this.btnOperator.Name = "btnOperator";
+            this.btnOperator.Size = new System.Drawing.Size(192, 36);
+            this.btnOperator.TabIndex = 1;
+            this.btnOperator.Text = "Смена оператора  ";
+            this.btnOperator.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnOperator.UseVisualStyleBackColor = true;
+            this.btnOperator.Click += new System.EventHandler(this.btnOperator_Click);
+            this.btnOperator.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
+            // 
+            // picBoxAKS
+            // 
+            this.picBoxAKS.Dock = System.Windows.Forms.DockStyle.Left;
+            this.picBoxAKS.Image = ((System.Drawing.Image)(resources.GetObject("picBoxAKS.Image")));
+            this.picBoxAKS.Location = new System.Drawing.Point(152, 0);
+            this.picBoxAKS.Name = "picBoxAKS";
+            this.picBoxAKS.Size = new System.Drawing.Size(152, 42);
+            this.picBoxAKS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBoxAKS.TabIndex = 1;
+            this.picBoxAKS.TabStop = false;
+            this.picBoxAKS.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
+            // 
+            // picBoxPrizm
+            // 
+            this.picBoxPrizm.Dock = System.Windows.Forms.DockStyle.Left;
+            this.picBoxPrizm.Image = ((System.Drawing.Image)(resources.GetObject("picBoxPrizm.Image")));
+            this.picBoxPrizm.Location = new System.Drawing.Point(0, 0);
+            this.picBoxPrizm.Name = "picBoxPrizm";
+            this.picBoxPrizm.Size = new System.Drawing.Size(152, 42);
+            this.picBoxPrizm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBoxPrizm.TabIndex = 0;
+            this.picBoxPrizm.TabStop = false;
+            this.picBoxPrizm.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
+            // 
+            // TSMItemLocalPaidInReasons
+            // 
+            this.TSMItemLocalPaidInReasons.Name = "TSMItemLocalPaidInReasons";
+            this.TSMItemLocalPaidInReasons.Size = new System.Drawing.Size(248, 22);
+            this.TSMItemLocalPaidInReasons.Text = "Список оснований для прихода";
+            this.TSMItemLocalPaidInReasons.Click += new System.EventHandler(this.TSMItemLocalPaidInReasons_Click);
             // 
             // localBindingSource
             // 
             this.localBindingSource.DataSource = typeof(AlgoritmCashFunc.BLL.Local);
+            // 
+            // TSMItemLocalPaidRashReasons
+            // 
+            this.TSMItemLocalPaidRashReasons.Name = "TSMItemLocalPaidRashReasons";
+            this.TSMItemLocalPaidRashReasons.Size = new System.Drawing.Size(248, 22);
+            this.TSMItemLocalPaidRashReasons.Text = "Список оснований для расхода";
+            this.TSMItemLocalPaidRashReasons.Click += new System.EventHandler(this.TSMItemLocalPaidRashReasons_Click);
             // 
             // FStart
             // 
@@ -4925,8 +4943,6 @@
             this.pnlTop.ResumeLayout(false);
             this.pnlTopFill.ResumeLayout(false);
             this.pnlTopRight.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picBoxAKS)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoxPrizm)).EndInit();
             this.pnlFill.ResumeLayout(false);
             this.tabCntOperation.ResumeLayout(false);
             this.tabPagePrihod.ResumeLayout(false);
@@ -5169,6 +5185,8 @@
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxAKS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxPrizm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.localBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -5568,6 +5586,8 @@
         private System.Windows.Forms.ToolStripMenuItem TSMItemLocalAccounters;
         private System.Windows.Forms.ToolStripMenuItem TSMItemLocalKassa;
         private System.Windows.Forms.ToolStripMenuItem TSMItemLocalChiefCashiers;
+        private System.Windows.Forms.ToolStripMenuItem TSMItemLocalPaidInReasons;
+        private System.Windows.Forms.ToolStripMenuItem TSMItemLocalPaidRashReasons;
     }
 }
 

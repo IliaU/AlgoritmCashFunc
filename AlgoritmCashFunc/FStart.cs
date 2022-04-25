@@ -832,6 +832,42 @@ namespace AlgoritmCashFunc
                 //throw ae;
             }
         }
+
+        // Список орснований для пихода
+        private void TSMItemLocalPaidInReasons_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (FListLocalPaidInReasons Frm = new FListLocalPaidInReasons())
+                {
+                    Frm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при работе со списком старших кассиров с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.TSMItemLocalPaidInReasons_Click", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
+            }
+        }
+
+        // Список орснований для расхода
+        private void TSMItemLocalPaidRashReasons_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (FListLocalPaidRashReasons Frm = new FListLocalPaidRashReasons())
+                {
+                    Frm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при работе со списком старших кассиров с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.TSMItemLocalPaidRashReasons_Click", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
+            }
+        }
         #endregion
 
         #region События вызванные выбором в верхнем меню
@@ -1811,7 +1847,7 @@ namespace AlgoritmCashFunc
             }
         }
         #endregion
-        
+
         #region События связанные с выбором внутри элементов котороые к основной логике не имеют отношения
 
         /// <summary>
@@ -2181,8 +2217,9 @@ namespace AlgoritmCashFunc
             }
         }
 
+
+
         #endregion
 
-        
     }
 }
