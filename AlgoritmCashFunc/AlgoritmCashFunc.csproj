@@ -112,11 +112,29 @@
     <Compile Include="FLic.Designer.cs">
       <DependentUpon>FLic.cs</DependentUpon>
     </Compile>
+    <Compile Include="FListLocalAccounters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FListLocalAccounters.Designer.cs">
+      <DependentUpon>FListLocalAccounters.cs</DependentUpon>
+    </Compile>
     <Compile Include="FListLocalChiefCashiers.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FListLocalChiefCashiers.Designer.cs">
       <DependentUpon>FListLocalChiefCashiers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FListLocalEmployees.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FListLocalEmployees.Designer.cs">
+      <DependentUpon>FListLocalEmployees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FListLocalKassa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FListLocalKassa.Designer.cs">
+      <DependentUpon>FListLocalKassa.cs</DependentUpon>
     </Compile>
     <Compile Include="FLogon.cs">
       <SubType>Form</SubType>
@@ -173,8 +191,17 @@
     <EmbeddedResource Include="FLic.resx">
       <DependentUpon>FLic.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FListLocalAccounters.resx">
+      <DependentUpon>FListLocalAccounters.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FListLocalChiefCashiers.resx">
       <DependentUpon>FListLocalChiefCashiers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FListLocalEmployees.resx">
+      <DependentUpon>FListLocalEmployees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FListLocalKassa.resx">
+      <DependentUpon>FListLocalKassa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FLogon.resx">
       <DependentUpon>FLogon.cs</DependentUpon>

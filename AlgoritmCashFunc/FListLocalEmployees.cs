@@ -16,7 +16,7 @@ using AlgoritmCashFunc.BLL;
 
 namespace AlgoritmCashFunc
 {
-    public partial class FListLocalChiefCashiers : Form
+    public partial class FListLocalEmployees : Form
     {
         DataTable dtData = null;
         DataView dvData = null;
@@ -24,7 +24,7 @@ namespace AlgoritmCashFunc
         /// <summary>
         /// Конструктор
         /// </summary>
-        public FListLocalChiefCashiers()
+        public FListLocalEmployees()
         {
             try
             {
@@ -37,7 +37,7 @@ namespace AlgoritmCashFunc
                     this.dtData.Columns.Add(new DataColumn("CId", typeof(int)));
                     this.dtData.Columns.Add(new DataColumn("ColData", typeof(string)));
 
-                    foreach (LocalChiefCashiers item in Com.LocalFarm.CurLocalChiefCashiers)
+                    foreach (LocalEmployees item in Com.LocalFarm.CurLocalEmployees)
                     {
                         if (!item.IsDraft)
                         {
@@ -53,7 +53,7 @@ namespace AlgoritmCashFunc
             }
             catch (Exception ex)
             {
-                ApplicationException ae = new ApplicationException(string.Format("Упали при загрузке формы FListLocalChiefCashiers с ошибкой: ({0})", ex.Message));
+                ApplicationException ae = new ApplicationException(string.Format("Упали при загрузке формы FListLocalEmployees с ошибкой: ({0})", ex.Message));
                 Log.EventSave(ae.Message, GetType().Name, EventEn.Error);
                 throw ae;
             }
@@ -65,12 +65,12 @@ namespace AlgoritmCashFunc
             try
             {
                 // Находим что нужно удалить
-                foreach (LocalChiefCashiers item in LocalFarm.CurLocalChiefCashiers)
+                foreach (LocalEmployees item in LocalFarm.CurLocalEmployees)
                 {
                     bool IsDelete = true;
                     for (int i = 0; i < this.dtData.Rows.Count; i++)
                     {
-                        if (item.Id!=null 
+                        if (item.Id != null
                             && !string.IsNullOrWhiteSpace(this.dtData.Rows[i]["CId"].ToString())
                             && ((int)item.Id).ToString() == this.dtData.Rows[i]["CId"].ToString())
                         {
@@ -92,7 +92,7 @@ namespace AlgoritmCashFunc
                     Local updLocal = null;
                     if (!string.IsNullOrWhiteSpace(this.dtData.Rows[i]["CId"].ToString()))
                     {
-                        foreach (Local item in LocalFarm.CurLocalChiefCashiers)
+                        foreach (Local item in LocalFarm.CurLocalEmployees)
                         {
                             if (item.Id == int.Parse(this.dtData.Rows[i]["CId"].ToString())) updLocal = item;
                         }
@@ -101,13 +101,13 @@ namespace AlgoritmCashFunc
                     // Проверка на уникальность
                     string TmpColData = this.dtData.Rows[i]["ColData"].ToString();
                     bool Unic = true;
-                    foreach (Local item in LocalFarm.CurLocalChiefCashiers)
+                    foreach (Local item in LocalFarm.CurLocalEmployees)
                     {
                         if (item.LocalName == TmpColData)
                         {
-                            if ((updLocal!=null && (int)updLocal.Id != item.Id)
+                            if ((updLocal != null && (int)updLocal.Id != item.Id)
                                 || updLocal == null)
-                            Unic = false;
+                                Unic = false;
                         }
                     }
                     if (!Unic) throw new ApplicationException(string.Format("Значение {0} не является уникальным", TmpColData));
@@ -123,7 +123,7 @@ namespace AlgoritmCashFunc
                     }
                     else
                     {
-                        Local newLocal = LocalFarm.CreateNewLocal("LocalChiefCashiers");
+                        Local newLocal = LocalFarm.CreateNewLocal("LocalEmployees");
                         newLocal.LocalName = TmpColData;
                         newLocal.Save();
                     }

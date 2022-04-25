@@ -416,7 +416,10 @@
             this.TSMItemConfigUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemLic = new System.Windows.Forms.ToolStripMenuItem();
             this.справочникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMItemLocalEmployees = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMItemLocalAccounters = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemLocalChiefCashiers = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMItemLocalKassa = new System.Windows.Forms.ToolStripMenuItem();
             this.localBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pnlTop.SuspendLayout();
             this.pnlTopFill.SuspendLayout();
@@ -4865,10 +4868,27 @@
             // справочникиToolStripMenuItem
             // 
             this.справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMItemLocalChiefCashiers});
+            this.TSMItemLocalEmployees,
+            this.TSMItemLocalAccounters,
+            this.TSMItemLocalChiefCashiers,
+            this.TSMItemLocalKassa});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
             this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(291, 22);
             this.справочникиToolStripMenuItem.Text = "Справочники";
+            // 
+            // TSMItemLocalEmployees
+            // 
+            this.TSMItemLocalEmployees.Name = "TSMItemLocalEmployees";
+            this.TSMItemLocalEmployees.Size = new System.Drawing.Size(174, 22);
+            this.TSMItemLocalEmployees.Text = "Кассиры";
+            this.TSMItemLocalEmployees.Click += new System.EventHandler(this.TSMItemLocalEmployees_Click);
+            // 
+            // TSMItemLocalAccounters
+            // 
+            this.TSMItemLocalAccounters.Name = "TSMItemLocalAccounters";
+            this.TSMItemLocalAccounters.Size = new System.Drawing.Size(174, 22);
+            this.TSMItemLocalAccounters.Text = "Бухгалтеры";
+            this.TSMItemLocalAccounters.Click += new System.EventHandler(this.TSMItemLocalAccounters_Click);
             // 
             // TSMItemLocalChiefCashiers
             // 
@@ -4876,6 +4896,13 @@
             this.TSMItemLocalChiefCashiers.Size = new System.Drawing.Size(174, 22);
             this.TSMItemLocalChiefCashiers.Text = "Старшие кассиры";
             this.TSMItemLocalChiefCashiers.Click += new System.EventHandler(this.TSMItemLocalChiefCashiers_Click);
+            // 
+            // TSMItemLocalKassa
+            // 
+            this.TSMItemLocalKassa.Name = "TSMItemLocalKassa";
+            this.TSMItemLocalKassa.Size = new System.Drawing.Size(174, 22);
+            this.TSMItemLocalKassa.Text = "Настрока кассы";
+            this.TSMItemLocalKassa.Click += new System.EventHandler(this.TSMItemLocalKassa_Click);
             // 
             // localBindingSource
             // 
@@ -5536,8 +5563,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Prihod;
         private System.Windows.Forms.DataGridViewTextBoxColumn Rashod;
         private System.Windows.Forms.ToolStripMenuItem справочникиToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem TSMItemLocalChiefCashiers;
         private System.Windows.Forms.Button btnRashReportReturnBlank;
+        private System.Windows.Forms.ToolStripMenuItem TSMItemLocalEmployees;
+        private System.Windows.Forms.ToolStripMenuItem TSMItemLocalAccounters;
+        private System.Windows.Forms.ToolStripMenuItem TSMItemLocalKassa;
+        private System.Windows.Forms.ToolStripMenuItem TSMItemLocalChiefCashiers;
     }
 }
 

@@ -99,6 +99,9 @@ namespace AlgoritmCashFunc
                 this.btnExit.Tag = new ButtonTagStatus(ButtonStatusEn.Active);
                 this.RenderButtonStyle();
 
+                // Делаем активной вкладку кассовая книга
+                this.tabCntOperation.SelectTab(2);
+
                 // При загрузке не срабатывает событие выбора вкладки по этой причине загрузка основных полей вызывается при старте в ручную потом поля будут заполняться автоматом
                 this.TabCntOperation_Selected(null, null);
             }
@@ -775,6 +778,60 @@ namespace AlgoritmCashFunc
                 //throw ae;
             }
         }
+
+        // Пользователь вызвал список кассиров
+        private void TSMItemLocalEmployees_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (FListLocalEmployees Frm = new FListLocalEmployees())
+                {
+                    Frm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при работе со списком старших кассиров с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.TSMItemLocalEmployees_Click", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
+            }
+        }
+
+        // Пользователь вызвал список бухгалтеров
+        private void TSMItemLocalAccounters_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (FListLocalAccounters Frm = new FListLocalAccounters())
+                {
+                    Frm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при работе со списком старших кассиров с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.TSMItemLocalAccounters_Click", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
+            }
+        }
+
+        // Настройка кассы
+        private void TSMItemLocalKassa_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (FListLocalKassa Frm = new FListLocalKassa())
+                {
+                    Frm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при работе со списком старших кассиров с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.TSMItemLocalKassa_Click", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
+            }
+        }
         #endregion
 
         #region События вызванные выбором в верхнем меню
@@ -1425,6 +1482,18 @@ namespace AlgoritmCashFunc
                             this.txtBoxPrihKodNazn.Text = string.Empty;
                             this.txtBoxPrihVtomChisle.Text = string.Empty;
                             this.txtBoxPrihPrilozenie.Text = string.Empty;
+
+                            // Если указано значение по умолчению то выставляем его
+                            if (Com.UserFarm.CurrentUser.EmploeeId!=null)
+                            {
+                                for (int i = 0; i < Com.LocalFarm.CurLocalEmployees.Count; i++)
+                                {
+                                    if (Com.LocalFarm.CurLocalEmployees[i].Id== Com.UserFarm.CurrentUser.EmploeeId)
+                                    {
+                                        this.cmbBoxPrihKreditor.SelectedIndex = i;
+                                    }
+                                }
+                            }
                         }
 
                         break;
@@ -1536,6 +1605,18 @@ namespace AlgoritmCashFunc
                             this.txtBoxRashKodNazn.Text = string.Empty;
                             this.txtBoxRashPoDoc.Text = string.Empty;
                             this.txtBoxRashPrilozenie.Text = string.Empty;
+
+                            // Если указано значение по умолчению то выставляем его
+                            if (Com.UserFarm.CurrentUser.EmploeeId != null)
+                            {
+                                for (int i = 0; i < Com.LocalFarm.CurLocalEmployees.Count; i++)
+                                {
+                                    if (Com.LocalFarm.CurLocalEmployees[i].Id == Com.UserFarm.CurrentUser.EmploeeId)
+                                    {
+                                        this.cmbBoxRashDebitor.SelectedIndex = i;
+                                    }
+                                }
+                            }
                         }
 
                         break;
@@ -2099,8 +2180,9 @@ namespace AlgoritmCashFunc
                 //throw ae;
             }
         }
+
         #endregion
 
-
+        
     }
 }
