@@ -142,7 +142,6 @@ namespace AlgoritmCashFunc.Com.Provider
             }
         }
 
-
         /// <summary>
         /// Получение любых данных из источника например чтобы плагины могли что-то дополнительно читать
         /// </summary>
@@ -748,6 +747,148 @@ namespace AlgoritmCashFunc.Com.Provider
             catch (Exception ex)
             {
                 base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationPrihod", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Проверка наличия информации объекта OperationInvent
+        /// </summary>
+        /// <param name="OperationInvent">Объект OperationInvent который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        public bool HashOperationInvent(BLL.OperationPlg.OperationInvent OperationInvent)
+        {
+            try
+            {
+                bool rez = false;
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            rez = HashOperationInventORA(OperationInvent);
+                            break;
+                        case "myodbc8a.dll":
+                            rez = HashOperationInventMySql(OperationInvent);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return rez;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashOperationInvent", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту OperationInvent
+        /// </summary>
+        /// <param name="OperationInvent">Объект OperationInvent который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        public bool GetOperationInvent(ref BLL.OperationPlg.OperationInvent OperationInvent)
+        {
+            try
+            {
+                bool rez = false;
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            rez = GetOperationInventORA(ref OperationInvent);
+                            break;
+                        case "myodbc8a.dll":
+                            rez = GetOperationInventMySql(ref OperationInvent);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return rez;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationInvent", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект OperationInvent
+        /// </summary>
+        /// <param name="NewOperationInvent">Вставляем в базу информацию по объекту OperationInvent</param>
+        public void SetOperationInvent(BLL.OperationPlg.OperationInvent NewOperationInvent)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            SetOperationInventORA(NewOperationInvent);
+                            break;
+                        case "myodbc8a.dll":
+                            SetOperationInventMySql(NewOperationInvent);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetOperationInvent", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту OperationInvent
+        /// </summary>
+        /// <param name="UpdOperationInvent">Сам объект данные которого нужно обновить</param>
+        public void UpdateOperationInvent(BLL.OperationPlg.OperationInvent UpdOperationInvent)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            UpdateOperationInventORA(UpdOperationInvent);
+                            break;
+                        case "myodbc8a.dll":
+                            UpdateOperationInventMySql(UpdOperationInvent);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationInvent", EventEn.Error);
                 throw;
             }
         }
@@ -1897,6 +2038,148 @@ namespace AlgoritmCashFunc.Com.Provider
         }
 
         /// <summary>
+        /// Проверка наличия информации объекта DocumentInvent
+        /// </summary>
+        /// <param name="DocumentInvent">Объект DocumentInvent который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        public bool HashDocumentInvent(BLL.DocumentPlg.DocumentInvent DocumentInvent)
+        {
+            try
+            {
+                bool rez = false;
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            rez = HashDocumentInventORA(DocumentInvent);
+                            break;
+                        case "myodbc8a.dll":
+                            rez = HashDocumentInventMySql(DocumentInvent);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return rez;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashDocumentInvent", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту DocumentInvent
+        /// </summary>
+        /// <param name="DocumentInvent">Объект DocumentInvent который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        public bool GetDocumentInvent(ref BLL.DocumentPlg.DocumentInvent DocumentInvent)
+        {
+            try
+            {
+                bool rez = false;
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            rez = GetDocumentInventORA(ref DocumentInvent);
+                            break;
+                        case "myodbc8a.dll":
+                            rez = GetDocumentInventMySql(ref DocumentInvent);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return rez;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".DocumentInvent", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект DocumentInvent
+        /// </summary>
+        /// <param name="NewDocumentInvent">Вставляем в базу информацию по объекту DocumentInvent</param>
+        public void SetDocumentInvent(BLL.DocumentPlg.DocumentInvent NewDocumentInvent)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            SetDocumentInventORA(NewDocumentInvent);
+                            break;
+                        case "myodbc8a.dll":
+                            SetDocumentInventMySql(NewDocumentInvent);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentInvent", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту DocumentInvent
+        /// </summary>
+        /// <param name="UpdDocumentInvent">Сам объект данные которого нужно обновить</param>
+        public void UpdateDocumentInvent(BLL.DocumentPlg.DocumentInvent UpdDocumentInvent)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            UpdateDocumentInventORA(UpdDocumentInvent);
+                            break;
+                        case "myodbc8a.dll":
+                            UpdateDocumentInventMySql(UpdDocumentInvent);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentInvent", EventEn.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Получаем документ по его номеру
         /// </summary>
         /// <param name="DocNumber">Номер документа</param>
@@ -2733,6 +3016,164 @@ From aks.prizm_cust_porog");
             {
                 base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationKasBookORA", EventEn.Error);
                 if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationKasBookORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Проверка наличия информации объекта OperationInvent
+        /// </summary>
+        /// <param name="OperationInvent">Объект OperationInvent который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        private bool HashOperationInventORA(BLL.OperationPlg.OperationInvent OperationInvent)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashOperationInventORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                return false;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashOperationInventORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashOperationInventORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashOperationInventORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashOperationInventORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту OperationInvent
+        /// </summary>
+        /// <param name="OperationInvent">Объект OperationInvent который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        private bool GetOperationInventORA(ref BLL.OperationPlg.OperationInvent OperationInvent)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationInventORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                return false;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationInventORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationInventORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationInventORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationInventORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект OperationInvent
+        /// </summary>
+        /// <param name="NewOperationInvent">Вставляем в базу информацию по объекту OperationInvent</param>
+        private void SetOperationInventORA(BLL.OperationPlg.OperationInvent NewOperationInvent)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetOperationInventORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetOperationInventORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetOperationInventORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetOperationInventORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetOperationInventORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту OperationInvent
+        /// </summary>
+        /// <param name="UpdOperationInvent">Сам объект данные которого нужно обновить</param>
+        private void UpdateOperationInventORA(BLL.OperationPlg.OperationInvent UpdOperationInvent)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationInventORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationInventORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationInventORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationInventORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationInventORA", EventEn.Dump);
                 throw;
             }
         }
@@ -4165,6 +4606,163 @@ From `aks`.`cashfunc_local`");
             }
         }
 
+        /// <summary>
+        /// Проверка наличия информации объекта DocumentInvent
+        /// </summary>
+        /// <param name="DocumentInvent">Объект DocumentInvent который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        private bool HashDocumentInventORA(BLL.DocumentPlg.DocumentInvent DocumentInvent)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashDocumentInventORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                return false;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashDocumentInventORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashDocumentInventORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashDocumentInventORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashDocumentInventORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту DocumentInvent
+        /// </summary>
+        /// <param name="DocumentInvent">Объект DocumentInvent который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        private bool GetDocumentInventORA(ref BLL.DocumentPlg.DocumentInvent DocumentInvent)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentInventORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                return false;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetDocumentInventORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentInventORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetDocumentInventORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentInventORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект DocumentInvent
+        /// </summary>
+        /// <param name="NewDocumentInvent">Вставляем в базу информацию по объекту DocumentInvent</param>
+        private void SetDocumentInventORA(BLL.DocumentPlg.DocumentInvent NewDocumentInvent)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentInventORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentInventORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentInventORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentInventORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentInventORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту DocumentInvent
+        /// </summary>
+        /// <param name="UpdDocumentInvent">Сам объект данные которого нужно обновить</param>
+        private void UpdateDocumentInventORA(BLL.DocumentPlg.DocumentInvent UpdDocumentInvent)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentInventORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentInventORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentInventORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentInventORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentInventORA", EventEn.Dump);
+                throw;
+            }
+        }
         #endregion
 
         #region Private method MySql
@@ -4276,7 +4874,6 @@ From `aks`.`cashfunc_local`");
                 throw;
             }
         }
-
 
         /// <summary>
         /// Получение списка операций из базы данных 
@@ -5117,6 +5714,220 @@ Where Id={0}", UpdOperationKasBook.Id,
             {
                 base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationKasBookMySql", EventEn.Error);
                 if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationKasBookMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Проверка наличия информации объекта OperationInvent
+        /// </summary>
+        /// <param name="OperationInvent">Объект OperationInvent который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        private bool HashOperationInventMySql(BLL.OperationPlg.OperationInvent OperationInvent)
+        {
+            if (OperationInvent.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            bool rez = false;
+
+            string CommandSql = String.Format(@"Select *
+From `aks`.`cashfunc_Operation_Invent`
+Where Id={0}", (int)OperationInvent.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashOperationInventMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        //com.Parameters.Add(new OdbcParameter("Id", OdbcType.Int) { Value = (int)LocalKassa.Id });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                rez = true;
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashOperationInventMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashOperationInventMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashOperationInventMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashOperationInventMySql", EventEn.Dump);
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту OperationInvent
+        /// </summary>
+        /// <param name="OperationInvent">Объект OperationInvent который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        private bool GetOperationInventMySql(ref BLL.OperationPlg.OperationInvent OperationInvent)
+        {
+            if (OperationInvent.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            bool rez = false;
+
+            string CommandSql = String.Format(@"Select `OKUD`
+From `aks`.`cashfunc_Operation_Invent`
+Where Id={0}", (int)OperationInvent.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationInventMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        //com.Parameters.Add(new OdbcParameter("Id", OdbcType.Int) { Value = (int)LocalKassa.Id });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+
+                            if (dr.HasRows)
+                            {
+                                rez = true;
+
+                                // Получаем схему таблицы
+                                //DataTable tt = dr.GetSchemaTable();
+
+                                //foreach (DataRow item in tt.Rows)
+                                //{
+                                //    DataColumn ncol = new DataColumn(item["ColumnName"].ToString(), Type.GetType(item["DataType"].ToString()));
+                                //ncol.SetOrdinal(int.Parse(item["ColumnOrdinal"].ToString()));
+                                //ncol.MaxLength = (int.Parse(item["ColumnSize"].ToString()) < 300 ? 300 : int.Parse(item["ColumnSize"].ToString()));
+                                //rez.Columns.Add(ncol);
+                                //}
+
+                                // пробегаем по строкам
+                                while (dr.Read())
+                                {
+                                    if (!dr.IsDBNull(0)) OperationInvent.OKUD = dr.GetString(0);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationInventMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationInventMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetOperationInventMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetOperationInventMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект OperationInvent
+        /// </summary>
+        /// <param name="NewOperationInvent">Вставляем в базу информацию по объекту OperationInvent</param>
+        private void SetOperationInventMySql(BLL.OperationPlg.OperationInvent NewOperationInvent)
+        {
+            if (NewOperationInvent.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            string CommandSql = String.Format(@"insert into `aks`.`cashfunc_Operation_Invent`(id, `OKUD`) 
+Values({0}, {1})", NewOperationInvent.Id,
+                (string.IsNullOrWhiteSpace(NewOperationInvent.OKUD) ? "null" : string.Format("'{0}'", NewOperationInvent.OKUD)));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetOperationInventMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetOperationInventMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetOperationInventMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetOperationInventMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetOperationInventMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту OperationInvent
+        /// </summary>
+        /// <param name="UpdOperationInvent">Сам объект данные которого нужно обновить</param>
+        private void UpdateOperationInventMySql(BLL.OperationPlg.OperationInvent UpdOperationInvent)
+        {
+            if (UpdOperationInvent.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            string CommandSql = String.Format(@"update `aks`.`cashfunc_Operation_Invent`
+Set `OKUD`={1}
+Where Id={0}", UpdOperationInvent.Id,
+                (string.IsNullOrWhiteSpace(UpdOperationInvent.OKUD) ? "null" : string.Format("'{0}'", UpdOperationInvent.OKUD)));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationInventMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationInventMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationInventMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateOperationInventMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateOperationInventMySql", EventEn.Dump);
                 throw;
             }
         }
@@ -7323,7 +8134,336 @@ Where Id={0}", UpdDocumentKasBook.Id,
                 throw;
             }
         }
-        #endregion
 
+        /// <summary>
+        /// Проверка наличия информации объекта DocumentInvent
+        /// </summary>
+        /// <param name="DocumentInvent">Объект DocumentInvent который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        private bool HashDocumentInventMySql(BLL.DocumentPlg.DocumentInvent DocumentInvent)
+        {
+            if (DocumentInvent.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            bool rez = false;
+
+            string CommandSql = String.Format(@"Select *
+From `aks`.`cashfunc_document_Invent`
+Where Id={0}", (int)DocumentInvent.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashDocumentInventMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        //com.Parameters.Add(new OdbcParameter("Id", OdbcType.Int) { Value = (int)LocalKassa.Id });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                rez = true;
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashDocumentInventMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashDocumentInventMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".HashDocumentInventMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".HashDocumentInventMySql", EventEn.Dump);
+                throw;
+            }
+
+        }
+        
+        /// <summary>
+        /// Читаем информацию по объекту DocumentInvent
+        /// </summary>
+        /// <param name="DocumentInvent">Объект DocumentInvent который нужно обновить в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли обновить объект или нет</returns>
+        private bool GetDocumentInventMySql(ref BLL.DocumentPlg.DocumentInvent DocumentInvent)
+        {
+            if (DocumentInvent.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            bool rez = false;
+
+            string CommandSql = String.Format(@"Select `FactStr1`, `FactStr2`, `FactStr3`, `FactStr4`,
+    `FactStr5`, `FactVal1`, `FactVal2`, `FactVal3`,
+    `FactVal4`, `FactVal5`, `ItogPoUchDan`, `LastPrihodNum`,
+    `LastRashodNum`, `PrikazTypAndDocNum`, `PrikazUreDate`, `PrikazDolMatOtv`,
+    `PrikazDecodeMatOtv`, `KomissionStr1`, `KomissionStr2`, `KomissionStr3`, 
+    `KomissionStr4`, `KomissionDecode1`, `KomissionDecode2`, `KomissionDecode3`, 
+    `KomissionDecode4`
+From `aks`.`cashfunc_document_Invent`
+Where Id={0}", (int)DocumentInvent.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentInventMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        //com.Parameters.Add(new OdbcParameter("Id", OdbcType.Int) { Value = (int)LocalKassa.Id });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+
+                            if (dr.HasRows)
+                            {
+                                rez = true;
+
+                                // Получаем схему таблицы
+                                //DataTable tt = dr.GetSchemaTable();
+
+                                //foreach (DataRow item in tt.Rows)
+                                //{
+                                //    DataColumn ncol = new DataColumn(item["ColumnName"].ToString(), Type.GetType(item["DataType"].ToString()));
+                                //ncol.SetOrdinal(int.Parse(item["ColumnOrdinal"].ToString()));
+                                //ncol.MaxLength = (int.Parse(item["ColumnSize"].ToString()) < 300 ? 300 : int.Parse(item["ColumnSize"].ToString()));
+                                //rez.Columns.Add(ncol);
+                                //}
+
+                                // пробегаем по строкам
+                                while (dr.Read())
+                                {
+                                    //BLL.LocalPlg.LocalKassa.LocalKassaForProviderInterface interf = new BLL.LocalPlg.LocalKassa.LocalKassaForProviderInterface();
+                                    if (!dr.IsDBNull(0)) DocumentInvent.FactStr1 = dr.GetString(0);
+                                    if (!dr.IsDBNull(1)) DocumentInvent.FactStr2 = dr.GetString(1);
+                                    if (!dr.IsDBNull(2)) DocumentInvent.FactStr3 = dr.GetString(2);
+                                    if (!dr.IsDBNull(3)) DocumentInvent.FactStr4 = dr.GetString(3);
+                                    //
+                                    if (!dr.IsDBNull(4)) DocumentInvent.FactStr5 = dr.GetString(4);
+                                    if (!dr.IsDBNull(5)) DocumentInvent.FactVal1 = decimal.Parse(dr.GetValue(5).ToString());
+                                    if (!dr.IsDBNull(6)) DocumentInvent.FactVal2 = decimal.Parse(dr.GetValue(6).ToString());
+                                    if (!dr.IsDBNull(7)) DocumentInvent.FactVal3 = decimal.Parse(dr.GetValue(7).ToString());
+                                    //
+                                    if (!dr.IsDBNull(8)) DocumentInvent.FactVal4 = decimal.Parse(dr.GetValue(8).ToString());
+                                    if (!dr.IsDBNull(9)) DocumentInvent.FactVal5 = decimal.Parse(dr.GetValue(9).ToString());
+                                    if (!dr.IsDBNull(10)) DocumentInvent.ItogPoUchDan = decimal.Parse(dr.GetValue(10).ToString());
+                                    if (!dr.IsDBNull(11)) DocumentInvent.LastPrihodNum = int.Parse(dr.GetValue(11).ToString());
+                                    //
+                                    if (!dr.IsDBNull(12)) DocumentInvent.LastRashodNum = int.Parse(dr.GetValue(12).ToString());
+                                    if (!dr.IsDBNull(13)) DocumentInvent.PrikazTypAndDocNum = dr.GetString(13);
+                                    if (!dr.IsDBNull(14)) DocumentInvent.PrikazUreDate = dr.GetDateTime(14);
+                                    if (!dr.IsDBNull(15)) DocumentInvent.PrikazDolMatOtv = dr.GetString(15);
+                                    //
+                                    if (!dr.IsDBNull(16)) DocumentInvent.PrikazDecodeMatOtv = dr.GetString(16);
+                                    if (!dr.IsDBNull(17)) DocumentInvent.KomissionStr1 = dr.GetString(17);
+                                    if (!dr.IsDBNull(18)) DocumentInvent.KomissionStr2 = dr.GetString(18);
+                                    if (!dr.IsDBNull(19)) DocumentInvent.KomissionStr3 = dr.GetString(19);
+                                    //
+                                    if (!dr.IsDBNull(20)) DocumentInvent.KomissionStr4 = dr.GetString(20);
+                                    if (!dr.IsDBNull(21)) DocumentInvent.KomissionDecode1 = dr.GetString(21);
+                                    if (!dr.IsDBNull(22)) DocumentInvent.KomissionDecode2 = dr.GetString(22);
+                                    if (!dr.IsDBNull(23)) DocumentInvent.KomissionDecode3 = dr.GetString(23);
+                                    //
+                                    if (!dr.IsDBNull(24)) DocumentInvent.KomissionDecode4 = dr.GetString(24);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetDocumentInventMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentInventMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".GetDocumentInventMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".GetDocumentInventMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект DocumentInvent
+        /// </summary>
+        /// <param name="NewDocumentInvent">Вставляем в базу информацию по объекту DocumentInvent</param>
+        private void SetDocumentInventMySql(BLL.DocumentPlg.DocumentInvent NewDocumentInvent)
+        {
+            if (NewDocumentInvent.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            string CommandSql = String.Format(@"insert into `aks`.`cashfunc_document_Invent`(`id`, `FactStr1`, `FactStr2`, `FactStr3`, 
+    `FactStr4`, `FactStr5`, `FactVal1`, `FactVal2`, 
+    `FactVal3`, `FactVal4`, `FactVal5`, `ItogPoUchDan`, 
+    `LastPrihodNum`, `LastRashodNum`, `PrikazTypAndDocNum`, `PrikazUreDate`, `PrikazDolMatOtv`, 
+    `PrikazDecodeMatOtv`, `KomissionStr1`, `KomissionStr2`, `KomissionStr3`, 
+    `KomissionStr4`, `KomissionDecode1`, `KomissionDecode2`, `KomissionDecode3`, 
+    `KomissionDecode4`) 
+Values({0}, {1}, {2}, {3},
+    {4}, {5}, {6}, {7}, 
+    {8}, {9}, {10}, {11}, 
+    {12}, {13}, {14}, ?, {15}, 
+    {16}, {17}, {18}, {19}, 
+    {20}, {21}, {22}, {23}, 
+    {24})", (NewDocumentInvent.Id == null ? "null" : NewDocumentInvent.Id.ToString()),
+            (string.IsNullOrWhiteSpace(NewDocumentInvent.FactStr1) ? "null" : string.Format("'{0}'", NewDocumentInvent.FactStr1)),
+            (string.IsNullOrWhiteSpace(NewDocumentInvent.FactStr2) ? "null" : string.Format("'{0}'", NewDocumentInvent.FactStr2)),
+            (string.IsNullOrWhiteSpace(NewDocumentInvent.FactStr3) ? "null" : string.Format("'{0}'", NewDocumentInvent.FactStr3)),
+            //
+            (string.IsNullOrWhiteSpace(NewDocumentInvent.FactStr4) ? "null" : string.Format("'{0}'", NewDocumentInvent.FactStr4)),
+            (string.IsNullOrWhiteSpace(NewDocumentInvent.FactStr5) ? "null" : string.Format("'{0}'", NewDocumentInvent.FactStr5)),
+            NewDocumentInvent.FactVal1.ToString().Replace(",", "."),
+            NewDocumentInvent.FactVal2.ToString().Replace(",", "."),
+            //
+            NewDocumentInvent.FactVal3.ToString().Replace(",", "."),
+            NewDocumentInvent.FactVal4.ToString().Replace(",", "."),
+            NewDocumentInvent.FactVal5.ToString().Replace(",", "."),
+            NewDocumentInvent.ItogPoUchDan.ToString().Replace(",", "."),
+            //
+            NewDocumentInvent.LastPrihodNum.ToString(),
+            NewDocumentInvent.LastRashodNum.ToString(),
+            (string.IsNullOrWhiteSpace(NewDocumentInvent.PrikazTypAndDocNum) ? "null" : string.Format("'{0}'", NewDocumentInvent.PrikazTypAndDocNum)),
+            (string.IsNullOrWhiteSpace(NewDocumentInvent.PrikazDolMatOtv) ? "null" : string.Format("'{0}'", NewDocumentInvent.PrikazDolMatOtv)),
+            //
+            (string.IsNullOrWhiteSpace(NewDocumentInvent.PrikazDecodeMatOtv) ? "null" : string.Format("'{0}'", NewDocumentInvent.PrikazDecodeMatOtv)),
+            (string.IsNullOrWhiteSpace(NewDocumentInvent.KomissionStr1) ? "null" : string.Format("'{0}'", NewDocumentInvent.KomissionStr1)),
+            (string.IsNullOrWhiteSpace(NewDocumentInvent.KomissionStr2) ? "null" : string.Format("'{0}'", NewDocumentInvent.KomissionStr2)),
+            (string.IsNullOrWhiteSpace(NewDocumentInvent.KomissionStr3) ? "null" : string.Format("'{0}'", NewDocumentInvent.KomissionStr3)),
+            //
+            (string.IsNullOrWhiteSpace(NewDocumentInvent.KomissionStr4) ? "null" : string.Format("'{0}'", NewDocumentInvent.KomissionStr4)),
+            (string.IsNullOrWhiteSpace(NewDocumentInvent.KomissionDecode1) ? "null" : string.Format("'{0}'", NewDocumentInvent.KomissionDecode1)),
+            (string.IsNullOrWhiteSpace(NewDocumentInvent.KomissionDecode2) ? "null" : string.Format("'{0}'", NewDocumentInvent.KomissionDecode2)),
+            (string.IsNullOrWhiteSpace(NewDocumentInvent.KomissionDecode3) ? "null" : string.Format("'{0}'", NewDocumentInvent.KomissionDecode3)),
+            //
+            (string.IsNullOrWhiteSpace(NewDocumentInvent.KomissionDecode4) ? "null" : string.Format("'{0}'", NewDocumentInvent.KomissionDecode4)));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentInventMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.Parameters.Add(new OdbcParameter("PrikazUreDate", OdbcType.Date) { Value = NewDocumentInvent.PrikazUreDate });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentInventMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentInventMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocumentInventMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocumentInventMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту DocumentInvent
+        /// </summary>
+        /// <param name="UpdDocumentInvent">Сам объект данные которого нужно обновить</param>
+        private void UpdateDocumentInventMySql(BLL.DocumentPlg.DocumentInvent UpdDocumentInvent)
+        {
+            if (UpdDocumentInvent.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            string CommandSql = String.Format(@"update `aks`.`cashfunc_document_Invent`
+Set `FactStr1`={1}, `FactStr2`={2}, `FactStr3`={3}, `FactStr4`={4},
+    `FactStr5`={5}, `FactVal1`={6}, `FactVal2`={7}, `FactVal3`={8},
+    `FactVal4`={9}, `FactVal5`={10}, `ItogPoUchDan`={11}, `LastPrihodNum`={12},
+    `LastRashodNum`={13}, `PrikazTypAndDocNum`={14}, `PrikazUreDate`=?, `PrikazDolMatOtv`={15}, `PrikazDecodeMatOtv` = {16},
+    `KomissionStr1`={17}, `KomissionStr2`={18}, `KomissionStr3`={19}, `KomissionStr4`={20},
+    `KomissionDecode1`={21}, `KomissionDecode2`={22}, `KomissionDecode3`={23}, `KomissionDecode4`={24}
+Where Id={0}", UpdDocumentInvent.Id,
+            //
+            (string.IsNullOrWhiteSpace(UpdDocumentInvent.FactStr1) ? "null" : string.Format("'{0}'", UpdDocumentInvent.FactStr1)),
+            (string.IsNullOrWhiteSpace(UpdDocumentInvent.FactStr2) ? "null" : string.Format("'{0}'", UpdDocumentInvent.FactStr2)),
+            (string.IsNullOrWhiteSpace(UpdDocumentInvent.FactStr3) ? "null" : string.Format("'{0}'", UpdDocumentInvent.FactStr3)),
+            (string.IsNullOrWhiteSpace(UpdDocumentInvent.FactStr4) ? "null" : string.Format("'{0}'", UpdDocumentInvent.FactStr4)),
+            //
+            (string.IsNullOrWhiteSpace(UpdDocumentInvent.FactStr5) ? "null" : string.Format("'{0}'", UpdDocumentInvent.FactStr5)),
+            UpdDocumentInvent.FactVal1.ToString().Replace(",", "."),
+            UpdDocumentInvent.FactVal2.ToString().Replace(",", "."),
+            UpdDocumentInvent.FactVal3.ToString().Replace(",", "."),
+            //
+            UpdDocumentInvent.FactVal4.ToString().Replace(",", "."),
+            UpdDocumentInvent.FactVal5.ToString().Replace(",", "."),
+            UpdDocumentInvent.ItogPoUchDan.ToString().Replace(",", "."),
+            UpdDocumentInvent.LastPrihodNum.ToString(),
+            //
+            UpdDocumentInvent.LastRashodNum.ToString(),
+            (string.IsNullOrWhiteSpace(UpdDocumentInvent.PrikazTypAndDocNum) ? "null" : string.Format("'{0}'", UpdDocumentInvent.PrikazTypAndDocNum)),
+            (string.IsNullOrWhiteSpace(UpdDocumentInvent.PrikazDolMatOtv) ? "null" : string.Format("'{0}'", UpdDocumentInvent.PrikazDolMatOtv)),
+            (string.IsNullOrWhiteSpace(UpdDocumentInvent.PrikazDecodeMatOtv) ? "null" : string.Format("'{0}'", UpdDocumentInvent.PrikazDecodeMatOtv)),
+            //
+            (string.IsNullOrWhiteSpace(UpdDocumentInvent.KomissionStr1) ? "null" : string.Format("'{0}'", UpdDocumentInvent.KomissionStr1)),
+            (string.IsNullOrWhiteSpace(UpdDocumentInvent.KomissionStr2) ? "null" : string.Format("'{0}'", UpdDocumentInvent.KomissionStr2)),
+            (string.IsNullOrWhiteSpace(UpdDocumentInvent.KomissionStr3) ? "null" : string.Format("'{0}'", UpdDocumentInvent.KomissionStr3)),
+            (string.IsNullOrWhiteSpace(UpdDocumentInvent.KomissionStr4) ? "null" : string.Format("'{0}'", UpdDocumentInvent.KomissionStr4)),
+            //
+            (string.IsNullOrWhiteSpace(UpdDocumentInvent.KomissionDecode1) ? "null" : string.Format("'{0}'", UpdDocumentInvent.KomissionDecode1)),
+            (string.IsNullOrWhiteSpace(UpdDocumentInvent.KomissionDecode2) ? "null" : string.Format("'{0}'", UpdDocumentInvent.KomissionDecode2)),
+            (string.IsNullOrWhiteSpace(UpdDocumentInvent.KomissionDecode3) ? "null" : string.Format("'{0}'", UpdDocumentInvent.KomissionDecode3)),
+            (string.IsNullOrWhiteSpace(UpdDocumentInvent.KomissionDecode4) ? "null" : string.Format("'{0}'", UpdDocumentInvent.KomissionDecode4)));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentInventMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.Parameters.Add(new OdbcParameter("PrikazUreDate", OdbcType.Date) { Value = UpdDocumentInvent.PrikazUreDate });
+
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentInventMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentInventMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateDocumentInventMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateDocumentInventMySql", EventEn.Dump);
+                throw;
+            }
+        }
+        #endregion
     }
 }

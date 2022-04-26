@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="BLL\Document.cs" />
     <Compile Include="BLL\DocumentList.cs" />
+    <Compile Include="BLL\DocumentPlg\DocumentInvent.cs" />
     <Compile Include="BLL\DocumentPlg\DocumentKasBook.cs" />
     <Compile Include="BLL\DocumentPlg\DocumentPrihod.cs" />
     <Compile Include="BLL\DocumentPlg\DocumentRashod.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="BLL\Operation.cs" />
     <Compile Include="BLL\OperationList.cs" />
     <Compile Include="BLL\OperationPlg\Lib\OperationInterface.cs" />
+    <Compile Include="BLL\OperationPlg\OperationInvent.cs" />
     <Compile Include="BLL\OperationPlg\OperationKasBook.cs" />
     <Compile Include="BLL\OperationPlg\OperationPrihod.cs" />
     <Compile Include="BLL\OperationPlg\OperationRashod.cs" />

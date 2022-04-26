@@ -131,6 +131,32 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         void UpdateOperationKasBook(BLL.OperationPlg.OperationKasBook UpdOperationKasBook);
 
         /// <summary>
+        /// Проверка наличия информации объекта OperationInvent
+        /// </summary>
+        /// <param name="OperationInvent">Объект OperationInvent который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        bool HashOperationInvent(BLL.OperationPlg.OperationInvent OperationInvent);
+
+        /// <summary>
+        /// Читаем информацию по объекту OperationInvent
+        /// </summary>
+        /// <param name="OperationInvent">Объект OperationInvent который нужно прочитать в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли прочитать объект или нет</returns>
+        bool GetOperationInvent(ref BLL.OperationPlg.OperationInvent OperationInvent);
+
+        /// <summary>
+        /// Вставка новой информации в объект OperationInvent
+        /// </summary>
+        /// <param name="NewOperationInvent">Вставляем в базу информацию по объекту OperationInvent</param>
+        void SetOperationInvent(BLL.OperationPlg.OperationInvent NewOperationInvent);
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту OperationInvent
+        /// </summary>
+        /// <param name="UpdOperationInvent">Сам объект данные которого нужно обновить</param>
+        void UpdateOperationInvent(BLL.OperationPlg.OperationInvent UpdOperationInvent);
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <returns>Получает текущий список Local из базы данных</returns>
@@ -341,5 +367,31 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         /// </summary>
         /// <param name="UpdDocumentKasBook">Сам объект данные которого нужно обновить</param>
         void UpdateDocumentKasBook(BLL.DocumentPlg.DocumentKasBook UpdDocumentKasBook);
+
+        /// <summary>
+        /// Проверка наличия информации объекта DocumentInvent
+        /// </summary>
+        /// <param name="DocumentInvent">Объект DocumentInvent который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        bool HashDocumentInvent(BLL.DocumentPlg.DocumentInvent DocumentInvent);
+
+        /// <summary>
+        /// Читаем информацию по объекту DocumentInvent
+        /// </summary>
+        /// <param name="DocumentInvent">Объект DocumentInvent который нужно прочитать в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли прочитать объект или нет</returns>
+        bool GetDocumentInvent(ref BLL.DocumentPlg.DocumentInvent DocumentInvent);
+
+        /// <summary>
+        /// Вставка новой информации в объект DocumentInvent
+        /// </summary>
+        /// <param name="NewDocumentInvent">Вставляем в базу информацию по объекту DocumentInvent</param>
+        void SetDocumentInvent(BLL.DocumentPlg.DocumentInvent NewDocumentInvent);
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту DocumentInvent
+        /// </summary>
+        /// <param name="UpdDocumentInvent">Сам объект данные которого нужно обновить</param>
+        void UpdateDocumentInvent(BLL.DocumentPlg.DocumentInvent UpdDocumentInvent);
     }
 }

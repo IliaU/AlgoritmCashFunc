@@ -13,6 +13,7 @@ CREATE TABLE `cashfunc_operation` (
 INSERT INTO `aks`.`CashFunc_Operation` (`Id`, `OpFullName`, `OperationName`, `KoefDebitor`, `KoefCreditor`) VALUES (1, 'OperationPrihod', 'Приходный ордер', 1, 0);
 INSERT INTO `aks`.`CashFunc_Operation` (`Id`, `OpFullName`, `OperationName`, `KoefDebitor`, `KoefCreditor`) VALUES (2, 'OperationRashod', 'Расходный ордер', -1, 0);
 INSERT INTO `aks`.`CashFunc_Operation` (`Id`, `OpFullName`, `OperationName`, `KoefDebitor`, `KoefCreditor`) VALUES (3, 'OperationKasBook', 'Кассовая книга', 0, 0);
+INSERT INTO `aks`.`CashFunc_Operation` (`Id`, `OpFullName`, `OperationName`, `KoefDebitor`, `KoefCreditor`) VALUES (4, 'OperationInvent', 'Акт инвентаризации', 0, 0);
 
 
 #Drop Table `aks`.`cashfunc_Operation_Prihod`;
@@ -42,6 +43,14 @@ CREATE TABLE `aks`.`cashfunc_Operation_KasBook` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 #
 
+#Drop Table `aks`.`cashfunc_Operation_Invent`;
+#
+CREATE TABLE `aks`.`cashfunc_Operation_Invent` (
+  `Id` int NOT NULL,
+  `OKUD` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+#
 
 #Drop Table `aks`.`CashFunc_Local`;
 #
@@ -224,3 +233,36 @@ CREATE TABLE `aks`.`cashfunc_document_KasBook` (
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 #	
+
+#Drop Table `aks`.`cashfunc_document_Invent`;
+#
+CREATE TABLE `aks`.`cashfunc_document_Invent` (
+  `Id` int NOT NULL,
+  `FactStr1` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `FactStr2` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `FactStr3` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `FactStr4` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `FactStr5` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `FactVal1` decimal(16,4) DEFAULT NULL,
+  `FactVal2` decimal(16,4) DEFAULT NULL,
+  `FactVal3` decimal(16,4) DEFAULT NULL,
+  `FactVal4` decimal(16,4) DEFAULT NULL,
+  `FactVal5` decimal(16,4) DEFAULT NULL,
+  `ItogPoUchDan` decimal(16,4) DEFAULT NULL,
+  `LastPrihodNum` int DEFAULT NULL,
+  `LastRashodNum` int DEFAULT NULL,
+  `PrikazTypAndDocNum` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `PrikazUreDate` Date NOT NULL,
+  `PrikazDolMatOtv` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `PrikazDecodeMatOtv` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `KomissionStr1` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `KomissionStr2` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `KomissionStr3` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `KomissionStr4` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `KomissionDecode1` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,  
+  `KomissionDecode2` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `KomissionDecode3` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `KomissionDecode4` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+#

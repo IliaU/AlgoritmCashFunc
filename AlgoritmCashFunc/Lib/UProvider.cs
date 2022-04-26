@@ -416,6 +416,44 @@ namespace AlgoritmCashFunc.Lib
         }
 
         /// <summary>
+        /// Проверка наличия информации объекта OperationInvent
+        /// </summary>
+        /// <param name="OperationInvent">Объект OperationInvent который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        public bool HashOperationInvent(BLL.OperationPlg.OperationInvent OperationInvent)
+        {
+            return this.PrvI.HashOperationInvent(OperationInvent);
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту OperationInvent
+        /// </summary>
+        /// <param name="OperationInvent">Объект OperationInvent который нужно прочитать в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли проччитать объект или нет</returns>
+        public bool GetOperationInvent(ref BLL.OperationPlg.OperationInvent OperationInvent)
+        {
+            return this.PrvI.GetOperationInvent(ref OperationInvent);
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект OperationInvent
+        /// </summary>
+        /// <param name="NewOperationInvent">Вставляем в базу информацию по объекту OperationInvent</param>
+        public void SetOperationInvent(BLL.OperationPlg.OperationInvent NewOperationInvent)
+        {
+            this.PrvI.SetOperationInvent(NewOperationInvent);
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту OperationInvent
+        /// </summary>
+        /// <param name="UpdOperationInvent">Сам объект данные которого нужно обновить</param>
+        public void UpdateOperationInvent(BLL.OperationPlg.OperationInvent UpdOperationInvent)
+        {
+            this.PrvI.UpdateOperationInvent(UpdOperationInvent);
+        }
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <returns>Получает текущий список Local из базы данных</returns>
@@ -723,6 +761,43 @@ namespace AlgoritmCashFunc.Lib
             this.PrvI.UpdateDocumentKasBook(UpdDocumentKasBook);
         }
 
+        /// <summary>
+        /// Проверка наличия информации объекта DocumentInvent
+        /// </summary>
+        /// <param name="DocumentInvent">Объект DocumentInvent который нужно проверить в базе данных</param>
+        /// <returns>Возвращаем флаг смогли найти объект или нет</returns>
+        public bool HashDocumentInvent(BLL.DocumentPlg.DocumentInvent DocumentInvent)
+        {
+            return this.PrvI.HashDocumentInvent(DocumentInvent);
+        }
+
+        /// <summary>
+        /// Читаем информацию по объекту DocumentInvent
+        /// </summary>
+        /// <param name="DocumentInvent">Объект DocumentInvent который нужно прочитать в соответсвии с параметрами из базы</param>
+        /// <returns>Возвращаем флаг смогли проччитать объект или нет</returns>
+        public bool GetDocumentInvent(ref BLL.DocumentPlg.DocumentInvent DocumentInvent)
+        {
+            return this.PrvI.GetDocumentInvent(ref DocumentInvent);
+        }
+
+        /// <summary>
+        /// Вставка новой информации в объект DocumentInvent
+        /// </summary>
+        /// <param name="NewDocumentInvent">Вставляем в базу информацию по объекту DocumentInvent</param>
+        public void SetDocumentInvent(BLL.DocumentPlg.DocumentInvent NewDocumentInvent)
+        {
+            this.PrvI.SetDocumentInvent(NewDocumentInvent);
+        }
+
+        /// <summary>
+        /// Обновляем в базе данных инфу по объекту DocumentInvent
+        /// </summary>
+        /// <param name="UpdDocumentInvent">Сам объект данные которого нужно обновить</param>
+        public void UpdateDocumentInvent(BLL.DocumentPlg.DocumentInvent UpdDocumentInvent)
+        {
+            this.PrvI.UpdateDocumentInvent(UpdDocumentInvent);
+        }
         #endregion
 
         #region ProviderPrizmI
