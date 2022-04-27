@@ -300,10 +300,49 @@ namespace AlgoritmCashFunc
                             break;
                         // Инвентаризация средств
                         case 7:
-                            this.txtBoxInventOKPO.ReadOnly = false;
-                            this.txtBoxInventOKUD.ReadOnly = false;
-                            this.txtBoxInventOrganization.ReadOnly = false;
-                            this.txtBoxInventStructPodr.ReadOnly = false;
+                            // Делаем поля читаемыми только админу и менеджеру
+                            if (Com.UserFarm.CurrentUser.Role == RoleEn.Admin ||
+                                Com.UserFarm.CurrentUser.Role == RoleEn.Manager)
+                            {
+                                this.txtBoxInventOrganization.ReadOnly = false;
+                                this.txtBoxInventStructPodr.ReadOnly = false;
+                                this.txtBoxInventOKPO.ReadOnly = false;
+                                this.txtBoxInventOKUD.ReadOnly = false;
+                                this.txtBoxInventDateDoc.ReadOnly = false;
+                                this.txtBoxInventNumDoc.ReadOnly = false;
+                            }                         
+                            
+                            // Левая сторона
+                            this.txtBoxInventFactStr1.ReadOnly = true;
+                            this.txtBoxInventFactStr2.ReadOnly = false;
+                            this.txtBoxInventFactStr3.ReadOnly = false;
+                            this.txtBoxInventFactStr4.ReadOnly = false;
+                            this.txtBoxInventFactStr5.ReadOnly = false;
+                            this.txtBoxInventFactVal1.ReadOnly = false;
+                            this.txtBoxInventFactVal2.ReadOnly = false;
+                            this.txtBoxInventFactVal3.ReadOnly = false;
+                            this.txtBoxInventFactVal4.ReadOnly = false;
+                            this.txtBoxInventFactVal5.ReadOnly = false;
+                            this.txtBoxInventItogPoUchDan.ReadOnly = false;
+                            this.txtBoxInventLastPrihodNum.ReadOnly = false;
+                            this.txtBoxInventLastRashodNum.ReadOnly = false;
+
+                            // Правая сторона центр
+                            this.txtBoxInventPrikazTypAndDocNum.ReadOnly = false;
+                            this.txtBoxInventPrikazUreDate.ReadOnly = false;
+                            this.txtBoxInventPrikazDolMatOtv.ReadOnly = false;
+                            this.txtBoxInventPrikazDecodeMatOtv.ReadOnly = false;
+
+                            // Правая торона низ
+                            this.txtBoxInventKomissionStr1.ReadOnly = false;
+                            this.txtBoxInventKomissionStr2.ReadOnly = false;
+                            this.txtBoxInventKomissionStr3.ReadOnly = false;
+                            this.txtBoxInventKomissionStr4.ReadOnly = false;
+                            this.txtBoxInventTitleKomissionDecode1.ReadOnly = false;
+                            this.txtBoxInventTitleKomissionDecode2.ReadOnly = false;
+                            this.txtBoxInventTitleKomissionDecode3.ReadOnly = false;
+                            this.txtBoxInventTitleKomissionDecode4.ReadOnly = false;
+                            
                             break;
                         default:
                             break;
@@ -416,11 +455,45 @@ namespace AlgoritmCashFunc
                             this.txtBoxVerifNalStructPodr.ReadOnly = true;
                             break;
                         // Инвентаризация средств
-                        case 7:
-                            this.txtBoxInventOKPO.ReadOnly = true;
-                            this.txtBoxInventOKUD.ReadOnly = true;
+                        case 7:                          
                             this.txtBoxInventOrganization.ReadOnly = true;
                             this.txtBoxInventStructPodr.ReadOnly = true;
+                            this.txtBoxInventOKPO.ReadOnly = true;
+                            this.txtBoxInventOKUD.ReadOnly = true;
+                            this.txtBoxInventDateDoc.ReadOnly = true;
+                            this.txtBoxInventNumDoc.ReadOnly = true;
+                          
+                            // Левая сторона
+                            this.txtBoxInventFactStr1.ReadOnly = true;
+                            this.txtBoxInventFactStr2.ReadOnly = true;
+                            this.txtBoxInventFactStr3.ReadOnly = true;
+                            this.txtBoxInventFactStr4.ReadOnly = true;
+                            this.txtBoxInventFactStr5.ReadOnly = true;
+                            this.txtBoxInventFactVal1.ReadOnly = true;
+                            this.txtBoxInventFactVal2.ReadOnly = true;
+                            this.txtBoxInventFactVal3.ReadOnly = true;
+                            this.txtBoxInventFactVal4.ReadOnly = true;
+                            this.txtBoxInventFactVal5.ReadOnly = true;
+                            this.txtBoxInventItogPoUchDan.ReadOnly = true;
+                            this.txtBoxInventLastPrihodNum.ReadOnly = true;
+                            this.txtBoxInventLastRashodNum.ReadOnly = true;
+
+                            // Правая сторона центр
+                            this.txtBoxInventPrikazTypAndDocNum.ReadOnly = true;
+                            this.txtBoxInventPrikazUreDate.ReadOnly = true;
+                            this.txtBoxInventPrikazDolMatOtv.ReadOnly = true;
+                            this.txtBoxInventPrikazDecodeMatOtv.ReadOnly = true;
+
+                            // Правая торона низ
+                            this.txtBoxInventKomissionStr1.ReadOnly = true;
+                            this.txtBoxInventKomissionStr2.ReadOnly = true;
+                            this.txtBoxInventKomissionStr3.ReadOnly = true;
+                            this.txtBoxInventKomissionStr4.ReadOnly = true;
+                            this.txtBoxInventTitleKomissionDecode1.ReadOnly = true;
+                            this.txtBoxInventTitleKomissionDecode2.ReadOnly = true;
+                            this.txtBoxInventTitleKomissionDecode3.ReadOnly = true;
+                            this.txtBoxInventTitleKomissionDecode4.ReadOnly = true;
+
                             break;
                         default:
                             break;
@@ -656,6 +729,44 @@ namespace AlgoritmCashFunc
                         this.txtBoxInventOrganization.Text = Kassa.Organization;
                         this.txtBoxInventStructPodr.Text = Kassa.StructPodrazdelenie;
                         this.txtBoxInventOKPO.Text = Kassa.OKPO;
+                        this.txtBoxInventDateDoc.Text = DateTime.Now.ToShortDateString();
+                        this.txtBoxInventNumDoc.Text = string.Empty;
+
+                        // Заполняем инфу по операции
+                        BLL.OperationPlg.OperationInvent OperInvent = (BLL.OperationPlg.OperationInvent)OperationFarm.CurOperationList["OperationInvent"];
+                        this.txtBoxInventOKUD.Text = (OperInvent != null && !string.IsNullOrWhiteSpace(OperInvent.OKUD) ? OperInvent.OKUD : "0317013");
+
+                        // Левая сторона
+                        this.txtBoxInventFactStr1.Text = "наличных денег";
+                        this.txtBoxInventFactStr2.Text = string.Empty;
+                        this.txtBoxInventFactStr3.Text = string.Empty;
+                        this.txtBoxInventFactStr4.Text = string.Empty;
+                        this.txtBoxInventFactStr5.Text = string.Empty;
+                        this.txtBoxInventFactVal1.Text = "0";
+                        this.txtBoxInventFactVal2.Text = "0";
+                        this.txtBoxInventFactVal3.Text = "0";
+                        this.txtBoxInventFactVal4.Text = "0";
+                        this.txtBoxInventFactVal5.Text = "0";
+                        this.txtBoxInventItogPoUchDan.Text = "0";
+                        this.txtBoxInventLastPrihodNum.Text = "0";
+                        this.txtBoxInventLastRashodNum.Text = "0";
+
+                        // Правая сторона центр
+                        this.txtBoxInventPrikazTypAndDocNum.Text = string.Empty;
+                        this.txtBoxInventPrikazUreDate.Text = string.Empty;
+                        this.txtBoxInventPrikazDolMatOtv.Text = string.Empty;
+                        this.txtBoxInventPrikazDecodeMatOtv.Text = string.Empty;
+
+                        // Правая торона низ
+                        this.txtBoxInventKomissionStr1.Text = string.Empty;
+                        this.txtBoxInventKomissionStr2.Text = string.Empty;
+                        this.txtBoxInventKomissionStr3.Text = string.Empty;
+                        this.txtBoxInventKomissionStr4.Text = string.Empty;
+                        this.txtBoxInventTitleKomissionDecode1.Text = string.Empty;
+                        this.txtBoxInventTitleKomissionDecode2.Text = string.Empty;
+                        this.txtBoxInventTitleKomissionDecode3.Text = string.Empty;
+                        this.txtBoxInventTitleKomissionDecode4.Text = string.Empty;
+
                         break;
                     default:
                         break;
@@ -1337,21 +1448,86 @@ namespace AlgoritmCashFunc
                         break;
                     // Инвентаризация средств
                     case 7:
-                        // Запоминаем инфу по организации
-                        Kassa.Organization = this.txtBoxInventOrganization.Text;
-                        Kassa.StructPodrazdelenie = this.txtBoxInventStructPodr.Text;
-                        Kassa.OKPO = this.txtBoxInventOKPO.Text;
-
-                        // Валидация заполненных данных по подразделению и сохранение в базе
-                        ValidateKassa(Kassa);
+                        // Запоминаем инфу по организации только если документ в текущей дете если нет то это правка старого документа запоминать тогда не нужно
+                        if (DateTime.Parse(this.txtBoxInventDateDoc.Text).Date == DateTime.Now.Date)
+                        {
+                            Kassa.Organization = this.txtBoxInventOrganization.Text;
+                            Kassa.StructPodrazdelenie = this.txtBoxInventStructPodr.Text;
+                            Kassa.OKPO = this.txtBoxInventOKPO.Text;
+                            
+                            // Валидация заполненных данных по подразделению и сохранение в базе
+                            ValidateKassa(Kassa);
+                        }
 
                         // Валидация введённой даты
                         try { this.CurDoc.UreDate = DateTime.Parse(this.txtBoxInventDateDoc.Text); }
                         catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxInventDateDoc.Text)); }
+                        
+                        // Валидация введённой даты
+                        if (string.IsNullOrWhiteSpace(this.txtBoxInventDateDoc.Text)) new ApplicationException("Поле номер документа не может быть пустым.");
+                        else
+                        {
+                            try { this.CurDoc.DocNum = int.Parse(this.txtBoxInventNumDoc.Text); }
+                            catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение номера документа {0} к числу.", this.txtBoxRashNumDoc.Text)); }
+                        }
+                        
+                        // Валидация Дебитора
+                        this.CurDoc.LocalDebitor = Kassa;
 
+                        // Валидация кредитора
+                        this.CurDoc.LocalCreditor = Kassa;
+
+                        // Левая сторона
+                        ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactStr1 = this.txtBoxInventFactStr1.Text;
+                        ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactStr2 = this.txtBoxInventFactStr2.Text;
+                        ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactStr3 = this.txtBoxInventFactStr3.Text;
+                        ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactStr4 = this.txtBoxInventFactStr4.Text;
+                        ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactStr5 = this.txtBoxInventFactStr5.Text;
+                        try { ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactVal1 = Decimal.Parse(this.txtBoxInventFactVal1.Text); }
+                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать {0} в число.", this.txtBoxInventFactVal1.Text)); }
+                        try { ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactVal2 = Decimal.Parse(this.txtBoxInventFactVal2.Text); }
+                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать {0} в число.", this.txtBoxInventFactVal2.Text)); }
+                        try { ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactVal3 = Decimal.Parse(this.txtBoxInventFactVal3.Text); }
+                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать {0} в число.", this.txtBoxInventFactVal3.Text)); }
+                        try { ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactVal4 = Decimal.Parse(this.txtBoxInventFactVal4.Text); }
+                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать {0} в число.", this.txtBoxInventFactVal4.Text)); }
+                        try { ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactVal5 = Decimal.Parse(this.txtBoxInventFactVal5.Text); }
+                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать {0} в число.", this.txtBoxInventFactVal5.Text)); }
+                        try { ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).ItogPoUchDan = Decimal.Parse(this.txtBoxInventItogPoUchDan.Text); }
+                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать {0} в число.", this.txtBoxInventItogPoUchDan.Text)); }
+                        try { ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).LastPrihodNum = int.Parse(this.txtBoxInventLastPrihodNum.Text); }
+                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать {0} в число.", this.txtBoxInventLastPrihodNum.Text)); }
+                        try { ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).LastRashodNum = int.Parse(this.txtBoxInventLastRashodNum.Text); }
+                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать {0} в число.", this.txtBoxInventLastRashodNum.Text)); }
+
+                        // Правая сторона центр
+                        ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).PrikazTypAndDocNum = this.txtBoxInventPrikazTypAndDocNum.Text;
+                        try { ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).PrikazUreDate = DateTime.Parse(this.txtBoxInventPrikazUreDate.Text); }
+                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxInventPrikazUreDate.Text)); }
+                        ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).PrikazDolMatOtv = this.txtBoxInventPrikazDolMatOtv.Text;
+                        ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).PrikazDecodeMatOtv = this.txtBoxInventPrikazDecodeMatOtv.Text;
+
+                        // Правая торона низ
+                        ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).KomissionStr1 = this.txtBoxInventKomissionStr1.Text;
+                        ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).KomissionStr2 = this.txtBoxInventKomissionStr2.Text;
+                        ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).KomissionStr3 = this.txtBoxInventKomissionStr3.Text;
+                        ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).KomissionStr4 = this.txtBoxInventKomissionStr4.Text;
+                        ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).KomissionDecode1 = this.txtBoxInventTitleKomissionDecode1.Text;
+                        ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).KomissionDecode2 = this.txtBoxInventTitleKomissionDecode2.Text;
+                        ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).KomissionDecode3 = this.txtBoxInventTitleKomissionDecode3.Text;
+                        ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).KomissionDecode4 = this.txtBoxInventTitleKomissionDecode4.Text;
+                        
                         // Сохранение инфы в базе
                         Kassa.LastDocNumInvent = int.Parse(this.txtBoxInventNumDoc.Text);
                         Kassa.Save();
+
+                        // Заполняем инфу по операции
+                        BLL.OperationPlg.OperationInvent OperInvent = (BLL.OperationPlg.OperationInvent)this.CurDoc.CurOperation;
+                        OperInvent.OKUD = this.txtBoxInventOKUD.Text;
+                        OperInvent.Save();
+
+                        // Сохранение документа
+                        this.CurDoc.Save();
 
                         break;
                     default:
@@ -1822,13 +1998,107 @@ namespace AlgoritmCashFunc
                         break;
                     // Инвентаризация средств
                     case 7:
-                        // Создаём пустой документ
-                        //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
-                        this.txtBoxInventNumDoc.Text = (Kassa.LastDocNumInvent + 1).ToString();
-                        // Проверка на наличие ошибок при создании пустого документа
-                        //if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
-                        //
-                        this.txtBoxInventDateDoc.Text = DateTime.Now.Date.ToShortDateString();
+
+                        // Если был передан конкретный документ который пользователь правит то заполняем полями из документа
+                        if (sender != null && e == null)
+                        {
+                            // Получаем документ
+                            this.CurDoc = (BLL.DocumentPlg.DocumentInvent)sender;
+                                                        
+                            // Проверка на наличие ошибок при создании пустого документа
+                            if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
+                            
+                            this.txtBoxInventOrganization.Text = Kassa.Organization;
+                            this.txtBoxInventStructPodr.Text = Kassa.StructPodrazdelenie;
+                            this.txtBoxInventOKPO.Text = Kassa.OKPO;
+                            this.txtBoxInventDateDoc.Text = ((DateTime)this.CurDoc.UreDate).ToShortDateString();
+                            this.txtBoxInventNumDoc.Text = this.CurDoc.DocNum.ToString();
+
+                            // Заполняем инфу по операции
+                            BLL.OperationPlg.OperationInvent OperInvent = (BLL.OperationPlg.OperationInvent)OperationFarm.CurOperationList["OperationInvent"];
+                            this.txtBoxInventOKUD.Text = (OperInvent != null && !string.IsNullOrWhiteSpace(OperInvent.OKUD) ? OperInvent.OKUD : "0317013");
+
+                            // Левая сторона
+                            this.txtBoxInventFactStr1.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactStr1;
+                            this.txtBoxInventFactStr2.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactStr2;
+                            this.txtBoxInventFactStr3.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactStr3;
+                            this.txtBoxInventFactStr4.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactStr4;
+                            this.txtBoxInventFactStr5.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactStr5;
+                            this.txtBoxInventFactVal1.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactVal1.ToString();
+                            this.txtBoxInventFactVal2.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactVal2.ToString();
+                            this.txtBoxInventFactVal3.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactVal3.ToString();
+                            this.txtBoxInventFactVal4.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactVal4.ToString();
+                            this.txtBoxInventFactVal5.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).FactVal5.ToString();
+                            this.txtBoxInventItogPoUchDan.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).ItogPoUchDan.ToString();
+                            this.txtBoxInventLastPrihodNum.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).LastPrihodNum.ToString();
+                            this.txtBoxInventLastRashodNum.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).LastRashodNum.ToString();
+
+                            // Правая сторона центр
+                            this.txtBoxInventPrikazTypAndDocNum.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).PrikazTypAndDocNum;
+                            this.txtBoxInventPrikazUreDate.Text = ((DateTime)((BLL.DocumentPlg.DocumentInvent)this.CurDoc).PrikazUreDate).ToShortDateString();
+                            this.txtBoxInventPrikazDolMatOtv.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).PrikazDolMatOtv;
+                            this.txtBoxInventPrikazDecodeMatOtv.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).PrikazDecodeMatOtv;
+
+                            // Правая торона низ
+                            this.txtBoxInventKomissionStr1.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).KomissionStr1;
+                            this.txtBoxInventKomissionStr2.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).KomissionStr2;
+                            this.txtBoxInventKomissionStr3.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).KomissionStr3;
+                            this.txtBoxInventKomissionStr4.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).KomissionStr4;
+                            this.txtBoxInventTitleKomissionDecode1.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).KomissionDecode1;
+                            this.txtBoxInventTitleKomissionDecode2.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).KomissionDecode2;
+                            this.txtBoxInventTitleKomissionDecode3.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).KomissionDecode3;
+                            this.txtBoxInventTitleKomissionDecode4.Text = ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).KomissionDecode4;
+                        }
+                        else
+                        {
+                            // Создаём пустой документ
+                            this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentInvent");
+
+                            // Проверка на наличие ошибок при создании пустого документа
+                            if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
+
+                            this.txtBoxInventOrganization.Text = Kassa.Organization;
+                            this.txtBoxInventStructPodr.Text = Kassa.StructPodrazdelenie;
+                            this.txtBoxInventOKPO.Text = Kassa.OKPO;
+                            this.txtBoxInventDateDoc.Text = DateTime.Now.Date.ToShortDateString();
+                            this.txtBoxInventNumDoc.Text = (Kassa.LastDocNumInvent + 1).ToString();
+
+                            // Заполняем инфу по операции
+                            BLL.OperationPlg.OperationInvent OperInvent = (BLL.OperationPlg.OperationInvent)OperationFarm.CurOperationList["OperationInvent"];
+                            this.txtBoxInventOKUD.Text = (OperInvent != null && !string.IsNullOrWhiteSpace(OperInvent.OKUD) ? OperInvent.OKUD : "0317013");
+
+                            // Левая сторона
+                            this.txtBoxInventFactStr1.Text = "наличных денег";
+                            this.txtBoxInventFactStr2.Text = string.Empty;
+                            this.txtBoxInventFactStr3.Text = string.Empty;
+                            this.txtBoxInventFactStr4.Text = string.Empty;
+                            this.txtBoxInventFactStr5.Text = string.Empty;
+                            this.txtBoxInventFactVal1.Text = "0";
+                            this.txtBoxInventFactVal2.Text = "0";
+                            this.txtBoxInventFactVal3.Text = "0";
+                            this.txtBoxInventFactVal4.Text = "0";
+                            this.txtBoxInventFactVal5.Text = "0";
+                            this.txtBoxInventItogPoUchDan.Text = "0";
+                            this.txtBoxInventLastPrihodNum.Text = "0";
+                            this.txtBoxInventLastRashodNum.Text = "0";
+
+                            // Правая сторона центр
+                            this.txtBoxInventPrikazTypAndDocNum.Text = string.Empty;
+                            this.txtBoxInventPrikazUreDate.Text = string.Empty;
+                            this.txtBoxInventPrikazDolMatOtv.Text = string.Empty;
+                            this.txtBoxInventPrikazDecodeMatOtv.Text = string.Empty;
+
+                            // Правая торона низ
+                            this.txtBoxInventKomissionStr1.Text = string.Empty;
+                            this.txtBoxInventKomissionStr2.Text = string.Empty;
+                            this.txtBoxInventKomissionStr3.Text = string.Empty;
+                            this.txtBoxInventKomissionStr4.Text = string.Empty;
+                            this.txtBoxInventTitleKomissionDecode1.Text = string.Empty;
+                            this.txtBoxInventTitleKomissionDecode2.Text = string.Empty;
+                            this.txtBoxInventTitleKomissionDecode3.Text = string.Empty;
+                            this.txtBoxInventTitleKomissionDecode4.Text = string.Empty;
+                        }
+
                         break;
                     default:
                         break;
@@ -2217,8 +2487,35 @@ namespace AlgoritmCashFunc
             }
         }
 
-
-
+        // Подсчёт итога в поле txtBoxInventFactValTotal
+        private void txtBoxInventFactVal_TextChanged(object sender, EventArgs e)
+        {
+            decimal sum = 0;
+            try
+            {
+                try { sum += Decimal.Parse(this.txtBoxInventFactVal1.Text);}
+                catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать {0} в число.", this.txtBoxInventFactVal1.Text)); }
+                try { sum += Decimal.Parse(this.txtBoxInventFactVal2.Text); }
+                catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать {0} в число.", this.txtBoxInventFactVal2.Text)); }
+                try { sum += Decimal.Parse(this.txtBoxInventFactVal3.Text); }
+                catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать {0} в число.", this.txtBoxInventFactVal3.Text)); }
+                try { sum += Decimal.Parse(this.txtBoxInventFactVal4.Text); }
+                catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать {0} в число.", this.txtBoxInventFactVal4.Text)); }
+                try { sum += Decimal.Parse(this.txtBoxInventFactVal5.Text); }
+                catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать {0} в число.", this.txtBoxInventFactVal5.Text)); }
+                
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при подсчёте суммы в поле txtBoxInventFactValTotal с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.txtBoxInventFactVal_TextChanged", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
+            }
+            finally
+            {
+                this.txtBoxInventFactValTotal.Text = sum.ToString();
+            }
+        }
         #endregion
 
     }

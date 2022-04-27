@@ -32,7 +32,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FStart));
             this.pnlTop = new System.Windows.Forms.Panel();
             this.pnlTopFill = new System.Windows.Forms.Panel();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
             this.pnlTopRight = new System.Windows.Forms.Panel();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnOperator = new System.Windows.Forms.Button();
+            this.picBoxAKS = new System.Windows.Forms.PictureBox();
+            this.picBoxPrizm = new System.Windows.Forms.PictureBox();
             this.pnlFill = new System.Windows.Forms.Panel();
             this.tabCntOperation = new System.Windows.Forms.TabControl();
             this.tabPagePrihod = new System.Windows.Forms.TabPage();
@@ -108,6 +115,7 @@
             this.txtBoxPrihOKUD = new System.Windows.Forms.TextBox();
             this.tabPageRashod = new System.Windows.Forms.TabPage();
             this.pnlPagRashTop2 = new System.Windows.Forms.Panel();
+            this.btnRashReportReturnBlank = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pnlPagRashTop2LeftTop8 = new System.Windows.Forms.Panel();
             this.cmbBoxRashKreditor = new System.Windows.Forms.ComboBox();
@@ -207,6 +215,10 @@
             this.lblKassBookDolRukOrg = new System.Windows.Forms.Label();
             this.pnlPagKassBookTop2LeftTop0 = new System.Windows.Forms.Panel();
             this.pnlPagKassBookTop1 = new System.Windows.Forms.Panel();
+            this.btnKassBookExport = new System.Windows.Forms.Button();
+            this.btnKassBookTitle = new System.Windows.Forms.Button();
+            this.btnKassBookDelete = new System.Windows.Forms.Button();
+            this.btnKassBookEdit = new System.Windows.Forms.Button();
             this.pnlPagKassBookTop1Left = new System.Windows.Forms.Panel();
             this.dtGridKassBook = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -408,24 +420,61 @@
             this.TSMItemLocalAccounters = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemLocalChiefCashiers = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemLocalKassa = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnRashReportReturnBlank = new System.Windows.Forms.Button();
-            this.btnKassBookExport = new System.Windows.Forms.Button();
-            this.btnKassBookTitle = new System.Windows.Forms.Button();
-            this.btnKassBookDelete = new System.Windows.Forms.Button();
-            this.btnKassBookEdit = new System.Windows.Forms.Button();
-            this.btnPrint = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.btnOperator = new System.Windows.Forms.Button();
-            this.picBoxAKS = new System.Windows.Forms.PictureBox();
-            this.picBoxPrizm = new System.Windows.Forms.PictureBox();
             this.TSMItemLocalPaidInReasons = new System.Windows.Forms.ToolStripMenuItem();
-            this.localBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.TSMItemLocalPaidRashReasons = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnlPagInventLeft = new System.Windows.Forms.Panel();
+            this.pnlPagInventFill = new System.Windows.Forms.Panel();
+            this.pnlPagInventFillTop = new System.Windows.Forms.Panel();
+            this.lblTitleFactNalSr = new System.Windows.Forms.Label();
+            this.lblTitleNaSum = new System.Windows.Forms.Label();
+            this.txtBoxInventFactStr1 = new System.Windows.Forms.TextBox();
+            this.txtBoxInventFactVal1 = new System.Windows.Forms.TextBox();
+            this.txtBoxInventFactStr2 = new System.Windows.Forms.TextBox();
+            this.txtBoxInventFactStr3 = new System.Windows.Forms.TextBox();
+            this.txtBoxInventFactStr4 = new System.Windows.Forms.TextBox();
+            this.txtBoxInventFactStr5 = new System.Windows.Forms.TextBox();
+            this.txtBoxInventFactVal2 = new System.Windows.Forms.TextBox();
+            this.txtBoxInventFactVal3 = new System.Windows.Forms.TextBox();
+            this.txtBoxInventFactVal4 = new System.Windows.Forms.TextBox();
+            this.txtBoxInventFactVal5 = new System.Windows.Forms.TextBox();
+            this.lblTotalTitleFactNalSr = new System.Windows.Forms.Label();
+            this.txtBoxInventFactValTotal = new System.Windows.Forms.TextBox();
+            this.lblItogPoUchDan = new System.Windows.Forms.Label();
+            this.txtBoxInventItogPoUchDan = new System.Windows.Forms.TextBox();
+            this.lblLastPrihodNum = new System.Windows.Forms.Label();
+            this.lblLastRashodNum = new System.Windows.Forms.Label();
+            this.txtBoxInventLastPrihodNum = new System.Windows.Forms.TextBox();
+            this.txtBoxInventLastRashodNum = new System.Windows.Forms.TextBox();
+            this.lblTitleOsnovanieDlInvent = new System.Windows.Forms.Label();
+            this.lblPrikazTypAndDocNum = new System.Windows.Forms.Label();
+            this.txtBoxInventPrikazTypAndDocNum = new System.Windows.Forms.TextBox();
+            this.lblPrikazUreDate = new System.Windows.Forms.Label();
+            this.txtBoxInventPrikazUreDate = new System.Windows.Forms.TextBox();
+            this.lblPrikazDolMatOtv = new System.Windows.Forms.Label();
+            this.txtBoxInventPrikazDolMatOtv = new System.Windows.Forms.TextBox();
+            this.lblPrikazDecodeMatOtv = new System.Windows.Forms.Label();
+            this.txtBoxInventPrikazDecodeMatOtv = new System.Windows.Forms.TextBox();
+            this.grpBoxInventKomProvInvent = new System.Windows.Forms.GroupBox();
+            this.lblInventTitleKomissionStr = new System.Windows.Forms.Label();
+            this.lblInventTitleKomissionDecode = new System.Windows.Forms.Label();
+            this.lblInventKomissionStr1 = new System.Windows.Forms.Label();
+            this.txtBoxInventKomissionStr1 = new System.Windows.Forms.TextBox();
+            this.txtBoxInventTitleKomissionDecode1 = new System.Windows.Forms.TextBox();
+            this.lblInventKomissionStr2 = new System.Windows.Forms.Label();
+            this.lblInventKomissionStr3 = new System.Windows.Forms.Label();
+            this.lblInventKomissionStr4 = new System.Windows.Forms.Label();
+            this.txtBoxInventKomissionStr2 = new System.Windows.Forms.TextBox();
+            this.txtBoxInventKomissionStr3 = new System.Windows.Forms.TextBox();
+            this.txtBoxInventKomissionStr4 = new System.Windows.Forms.TextBox();
+            this.txtBoxInventTitleKomissionDecode2 = new System.Windows.Forms.TextBox();
+            this.txtBoxInventTitleKomissionDecode3 = new System.Windows.Forms.TextBox();
+            this.txtBoxInventTitleKomissionDecode4 = new System.Windows.Forms.TextBox();
+            this.localBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pnlTop.SuspendLayout();
             this.pnlTopFill.SuspendLayout();
             this.pnlTopRight.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxAKS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxPrizm)).BeginInit();
             this.pnlFill.SuspendLayout();
             this.tabCntOperation.SuspendLayout();
             this.tabPagePrihod.SuspendLayout();
@@ -575,8 +624,10 @@
             this.pnlBottom.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoxAKS)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoxPrizm)).BeginInit();
+            this.pnlPagInventLeft.SuspendLayout();
+            this.pnlPagInventFill.SuspendLayout();
+            this.pnlPagInventFillTop.SuspendLayout();
+            this.grpBoxInventKomProvInvent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.localBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -603,6 +654,51 @@
             this.pnlTopFill.Size = new System.Drawing.Size(566, 42);
             this.pnlTopFill.TabIndex = 3;
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
+            this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPrint.Location = new System.Drawing.Point(260, 3);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(114, 36);
+            this.btnPrint.TabIndex = 2;
+            this.btnPrint.Text = "Печать  ";
+            this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSave.Location = new System.Drawing.Point(119, 3);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(135, 36);
+            this.btnSave.TabIndex = 1;
+            this.btnSave.Text = "Сохранить";
+            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
+            // 
+            // btnNew
+            // 
+            this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnNew.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnNew.Image = ((System.Drawing.Image)(resources.GetObject("btnNew.Image")));
+            this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNew.Location = new System.Drawing.Point(6, 3);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(107, 36);
+            this.btnNew.TabIndex = 0;
+            this.btnNew.Text = "Новый  ";
+            this.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            this.btnNew.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
+            // 
             // pnlTopRight
             // 
             this.pnlTopRight.Controls.Add(this.btnExit);
@@ -612,6 +708,60 @@
             this.pnlTopRight.Name = "pnlTopRight";
             this.pnlTopRight.Size = new System.Drawing.Size(324, 42);
             this.pnlTopRight.TabIndex = 2;
+            // 
+            // btnExit
+            // 
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
+            this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExit.Location = new System.Drawing.Point(204, 3);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(108, 36);
+            this.btnExit.TabIndex = 2;
+            this.btnExit.Text = "Выход  ";
+            this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnExit.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
+            // 
+            // btnOperator
+            // 
+            this.btnOperator.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnOperator.Image = ((System.Drawing.Image)(resources.GetObject("btnOperator.Image")));
+            this.btnOperator.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnOperator.Location = new System.Drawing.Point(6, 3);
+            this.btnOperator.Name = "btnOperator";
+            this.btnOperator.Size = new System.Drawing.Size(192, 36);
+            this.btnOperator.TabIndex = 1;
+            this.btnOperator.Text = "Смена оператора  ";
+            this.btnOperator.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnOperator.UseVisualStyleBackColor = true;
+            this.btnOperator.Click += new System.EventHandler(this.btnOperator_Click);
+            this.btnOperator.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
+            // 
+            // picBoxAKS
+            // 
+            this.picBoxAKS.Dock = System.Windows.Forms.DockStyle.Left;
+            this.picBoxAKS.Image = ((System.Drawing.Image)(resources.GetObject("picBoxAKS.Image")));
+            this.picBoxAKS.Location = new System.Drawing.Point(152, 0);
+            this.picBoxAKS.Name = "picBoxAKS";
+            this.picBoxAKS.Size = new System.Drawing.Size(152, 42);
+            this.picBoxAKS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBoxAKS.TabIndex = 1;
+            this.picBoxAKS.TabStop = false;
+            this.picBoxAKS.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
+            // 
+            // picBoxPrizm
+            // 
+            this.picBoxPrizm.Dock = System.Windows.Forms.DockStyle.Left;
+            this.picBoxPrizm.Image = ((System.Drawing.Image)(resources.GetObject("picBoxPrizm.Image")));
+            this.picBoxPrizm.Location = new System.Drawing.Point(0, 0);
+            this.picBoxPrizm.Name = "picBoxPrizm";
+            this.picBoxPrizm.Size = new System.Drawing.Size(152, 42);
+            this.picBoxPrizm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBoxPrizm.TabIndex = 0;
+            this.picBoxPrizm.TabStop = false;
+            this.picBoxPrizm.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
             // 
             // pnlFill
             // 
@@ -1478,6 +1628,20 @@
             this.pnlPagRashTop2.Name = "pnlPagRashTop2";
             this.pnlPagRashTop2.Size = new System.Drawing.Size(1180, 243);
             this.pnlPagRashTop2.TabIndex = 3;
+            // 
+            // btnRashReportReturnBlank
+            // 
+            this.btnRashReportReturnBlank.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnRashReportReturnBlank.Image = global::AlgoritmCashFunc.Properties.Resources.print;
+            this.btnRashReportReturnBlank.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRashReportReturnBlank.Location = new System.Drawing.Point(699, 21);
+            this.btnRashReportReturnBlank.Name = "btnRashReportReturnBlank";
+            this.btnRashReportReturnBlank.Size = new System.Drawing.Size(203, 36);
+            this.btnRashReportReturnBlank.TabIndex = 5;
+            this.btnRashReportReturnBlank.Text = "Бланк возврата";
+            this.btnRashReportReturnBlank.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRashReportReturnBlank.UseVisualStyleBackColor = true;
+            this.btnRashReportReturnBlank.Click += new System.EventHandler(this.btnRashReportReturnBlank_Click);
             // 
             // panel6
             // 
@@ -2589,6 +2753,61 @@
             this.pnlPagKassBookTop1.Name = "pnlPagKassBookTop1";
             this.pnlPagKassBookTop1.Size = new System.Drawing.Size(1180, 223);
             this.pnlPagKassBookTop1.TabIndex = 2;
+            // 
+            // btnKassBookExport
+            // 
+            this.btnKassBookExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnKassBookExport.Image = ((System.Drawing.Image)(resources.GetObject("btnKassBookExport.Image")));
+            this.btnKassBookExport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnKassBookExport.Location = new System.Drawing.Point(972, 146);
+            this.btnKassBookExport.Name = "btnKassBookExport";
+            this.btnKassBookExport.Size = new System.Drawing.Size(203, 36);
+            this.btnKassBookExport.TabIndex = 5;
+            this.btnKassBookExport.Text = "Выгрузка";
+            this.btnKassBookExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnKassBookExport.UseVisualStyleBackColor = true;
+            this.btnKassBookExport.Click += new System.EventHandler(this.btnKassBookExport_Click);
+            // 
+            // btnKassBookTitle
+            // 
+            this.btnKassBookTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnKassBookTitle.Image = global::AlgoritmCashFunc.Properties.Resources.print;
+            this.btnKassBookTitle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnKassBookTitle.Location = new System.Drawing.Point(972, 104);
+            this.btnKassBookTitle.Name = "btnKassBookTitle";
+            this.btnKassBookTitle.Size = new System.Drawing.Size(203, 36);
+            this.btnKassBookTitle.TabIndex = 4;
+            this.btnKassBookTitle.Text = "Обложка ";
+            this.btnKassBookTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnKassBookTitle.UseVisualStyleBackColor = true;
+            this.btnKassBookTitle.Click += new System.EventHandler(this.btnKassBookTitle_Click);
+            // 
+            // btnKassBookDelete
+            // 
+            this.btnKassBookDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnKassBookDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnKassBookDelete.Image")));
+            this.btnKassBookDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnKassBookDelete.Location = new System.Drawing.Point(972, 62);
+            this.btnKassBookDelete.Name = "btnKassBookDelete";
+            this.btnKassBookDelete.Size = new System.Drawing.Size(203, 36);
+            this.btnKassBookDelete.TabIndex = 3;
+            this.btnKassBookDelete.Text = "Удалить";
+            this.btnKassBookDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnKassBookDelete.UseVisualStyleBackColor = true;
+            // 
+            // btnKassBookEdit
+            // 
+            this.btnKassBookEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnKassBookEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnKassBookEdit.Image")));
+            this.btnKassBookEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnKassBookEdit.Location = new System.Drawing.Point(972, 20);
+            this.btnKassBookEdit.Name = "btnKassBookEdit";
+            this.btnKassBookEdit.Size = new System.Drawing.Size(203, 36);
+            this.btnKassBookEdit.TabIndex = 2;
+            this.btnKassBookEdit.Text = "Изменить  ";
+            this.btnKassBookEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnKassBookEdit.UseVisualStyleBackColor = true;
+            this.btnKassBookEdit.Click += new System.EventHandler(this.btnKassBookEdit_Click);
             // 
             // pnlPagKassBookTop1Left
             // 
@@ -4375,6 +4594,8 @@
             // tabPageInvent
             // 
             this.tabPageInvent.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageInvent.Controls.Add(this.pnlPagInventFill);
+            this.tabPageInvent.Controls.Add(this.pnlPagInventLeft);
             this.tabPageInvent.Controls.Add(this.pnlPagInventTop);
             this.tabPageInvent.Location = new System.Drawing.Point(4, 4);
             this.tabPageInvent.Name = "tabPageInvent";
@@ -4740,174 +4961,6 @@
             this.TSMItemLocalKassa.Text = "Настрока кассы";
             this.TSMItemLocalKassa.Click += new System.EventHandler(this.TSMItemLocalKassa_Click);
             // 
-            // btnRashReportReturnBlank
-            // 
-            this.btnRashReportReturnBlank.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnRashReportReturnBlank.Image = global::AlgoritmCashFunc.Properties.Resources.print;
-            this.btnRashReportReturnBlank.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRashReportReturnBlank.Location = new System.Drawing.Point(699, 21);
-            this.btnRashReportReturnBlank.Name = "btnRashReportReturnBlank";
-            this.btnRashReportReturnBlank.Size = new System.Drawing.Size(203, 36);
-            this.btnRashReportReturnBlank.TabIndex = 5;
-            this.btnRashReportReturnBlank.Text = "Бланк возврата";
-            this.btnRashReportReturnBlank.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRashReportReturnBlank.UseVisualStyleBackColor = true;
-            this.btnRashReportReturnBlank.Click += new System.EventHandler(this.btnRashReportReturnBlank_Click);
-            // 
-            // btnKassBookExport
-            // 
-            this.btnKassBookExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnKassBookExport.Image = ((System.Drawing.Image)(resources.GetObject("btnKassBookExport.Image")));
-            this.btnKassBookExport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnKassBookExport.Location = new System.Drawing.Point(972, 146);
-            this.btnKassBookExport.Name = "btnKassBookExport";
-            this.btnKassBookExport.Size = new System.Drawing.Size(203, 36);
-            this.btnKassBookExport.TabIndex = 5;
-            this.btnKassBookExport.Text = "Выгрузка";
-            this.btnKassBookExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnKassBookExport.UseVisualStyleBackColor = true;
-            this.btnKassBookExport.Click += new System.EventHandler(this.btnKassBookExport_Click);
-            // 
-            // btnKassBookTitle
-            // 
-            this.btnKassBookTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnKassBookTitle.Image = global::AlgoritmCashFunc.Properties.Resources.print;
-            this.btnKassBookTitle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnKassBookTitle.Location = new System.Drawing.Point(972, 104);
-            this.btnKassBookTitle.Name = "btnKassBookTitle";
-            this.btnKassBookTitle.Size = new System.Drawing.Size(203, 36);
-            this.btnKassBookTitle.TabIndex = 4;
-            this.btnKassBookTitle.Text = "Обложка ";
-            this.btnKassBookTitle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnKassBookTitle.UseVisualStyleBackColor = true;
-            this.btnKassBookTitle.Click += new System.EventHandler(this.btnKassBookTitle_Click);
-            // 
-            // btnKassBookDelete
-            // 
-            this.btnKassBookDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnKassBookDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnKassBookDelete.Image")));
-            this.btnKassBookDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnKassBookDelete.Location = new System.Drawing.Point(972, 62);
-            this.btnKassBookDelete.Name = "btnKassBookDelete";
-            this.btnKassBookDelete.Size = new System.Drawing.Size(203, 36);
-            this.btnKassBookDelete.TabIndex = 3;
-            this.btnKassBookDelete.Text = "Удалить";
-            this.btnKassBookDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnKassBookDelete.UseVisualStyleBackColor = true;
-            // 
-            // btnKassBookEdit
-            // 
-            this.btnKassBookEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnKassBookEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnKassBookEdit.Image")));
-            this.btnKassBookEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnKassBookEdit.Location = new System.Drawing.Point(972, 20);
-            this.btnKassBookEdit.Name = "btnKassBookEdit";
-            this.btnKassBookEdit.Size = new System.Drawing.Size(203, 36);
-            this.btnKassBookEdit.TabIndex = 2;
-            this.btnKassBookEdit.Text = "Изменить  ";
-            this.btnKassBookEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnKassBookEdit.UseVisualStyleBackColor = true;
-            this.btnKassBookEdit.Click += new System.EventHandler(this.btnKassBookEdit_Click);
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
-            this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPrint.Location = new System.Drawing.Point(260, 3);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(114, 36);
-            this.btnPrint.TabIndex = 2;
-            this.btnPrint.Text = "Печать  ";
-            this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(119, 3);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(135, 36);
-            this.btnSave.TabIndex = 1;
-            this.btnSave.Text = "Сохранить";
-            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            this.btnSave.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
-            // 
-            // btnNew
-            // 
-            this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnNew.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnNew.Image = ((System.Drawing.Image)(resources.GetObject("btnNew.Image")));
-            this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNew.Location = new System.Drawing.Point(6, 3);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(107, 36);
-            this.btnNew.TabIndex = 0;
-            this.btnNew.Text = "Новый  ";
-            this.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnNew.UseVisualStyleBackColor = true;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            this.btnNew.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
-            // 
-            // btnExit
-            // 
-            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
-            this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(204, 3);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(108, 36);
-            this.btnExit.TabIndex = 2;
-            this.btnExit.Text = "Выход  ";
-            this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            this.btnExit.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
-            // 
-            // btnOperator
-            // 
-            this.btnOperator.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnOperator.Image = ((System.Drawing.Image)(resources.GetObject("btnOperator.Image")));
-            this.btnOperator.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnOperator.Location = new System.Drawing.Point(6, 3);
-            this.btnOperator.Name = "btnOperator";
-            this.btnOperator.Size = new System.Drawing.Size(192, 36);
-            this.btnOperator.TabIndex = 1;
-            this.btnOperator.Text = "Смена оператора  ";
-            this.btnOperator.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnOperator.UseVisualStyleBackColor = true;
-            this.btnOperator.Click += new System.EventHandler(this.btnOperator_Click);
-            this.btnOperator.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
-            // 
-            // picBoxAKS
-            // 
-            this.picBoxAKS.Dock = System.Windows.Forms.DockStyle.Left;
-            this.picBoxAKS.Image = ((System.Drawing.Image)(resources.GetObject("picBoxAKS.Image")));
-            this.picBoxAKS.Location = new System.Drawing.Point(152, 0);
-            this.picBoxAKS.Name = "picBoxAKS";
-            this.picBoxAKS.Size = new System.Drawing.Size(152, 42);
-            this.picBoxAKS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBoxAKS.TabIndex = 1;
-            this.picBoxAKS.TabStop = false;
-            this.picBoxAKS.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
-            // 
-            // picBoxPrizm
-            // 
-            this.picBoxPrizm.Dock = System.Windows.Forms.DockStyle.Left;
-            this.picBoxPrizm.Image = ((System.Drawing.Image)(resources.GetObject("picBoxPrizm.Image")));
-            this.picBoxPrizm.Location = new System.Drawing.Point(0, 0);
-            this.picBoxPrizm.Name = "picBoxPrizm";
-            this.picBoxPrizm.Size = new System.Drawing.Size(152, 42);
-            this.picBoxPrizm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBoxPrizm.TabIndex = 0;
-            this.picBoxPrizm.TabStop = false;
-            this.picBoxPrizm.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ActiveStatusLogon_MouseMove);
-            // 
             // TSMItemLocalPaidInReasons
             // 
             this.TSMItemLocalPaidInReasons.Name = "TSMItemLocalPaidInReasons";
@@ -4915,16 +4968,570 @@
             this.TSMItemLocalPaidInReasons.Text = "Список оснований для прихода";
             this.TSMItemLocalPaidInReasons.Click += new System.EventHandler(this.TSMItemLocalPaidInReasons_Click);
             // 
-            // localBindingSource
-            // 
-            this.localBindingSource.DataSource = typeof(AlgoritmCashFunc.BLL.Local);
-            // 
             // TSMItemLocalPaidRashReasons
             // 
             this.TSMItemLocalPaidRashReasons.Name = "TSMItemLocalPaidRashReasons";
             this.TSMItemLocalPaidRashReasons.Size = new System.Drawing.Size(248, 22);
             this.TSMItemLocalPaidRashReasons.Text = "Список оснований для расхода";
             this.TSMItemLocalPaidRashReasons.Click += new System.EventHandler(this.TSMItemLocalPaidRashReasons_Click);
+            // 
+            // pnlPagInventLeft
+            // 
+            this.pnlPagInventLeft.Controls.Add(this.txtBoxInventLastRashodNum);
+            this.pnlPagInventLeft.Controls.Add(this.txtBoxInventLastPrihodNum);
+            this.pnlPagInventLeft.Controls.Add(this.lblLastRashodNum);
+            this.pnlPagInventLeft.Controls.Add(this.lblLastPrihodNum);
+            this.pnlPagInventLeft.Controls.Add(this.txtBoxInventItogPoUchDan);
+            this.pnlPagInventLeft.Controls.Add(this.lblItogPoUchDan);
+            this.pnlPagInventLeft.Controls.Add(this.txtBoxInventFactValTotal);
+            this.pnlPagInventLeft.Controls.Add(this.lblTotalTitleFactNalSr);
+            this.pnlPagInventLeft.Controls.Add(this.txtBoxInventFactVal5);
+            this.pnlPagInventLeft.Controls.Add(this.txtBoxInventFactVal4);
+            this.pnlPagInventLeft.Controls.Add(this.txtBoxInventFactVal3);
+            this.pnlPagInventLeft.Controls.Add(this.txtBoxInventFactVal2);
+            this.pnlPagInventLeft.Controls.Add(this.txtBoxInventFactStr5);
+            this.pnlPagInventLeft.Controls.Add(this.txtBoxInventFactStr4);
+            this.pnlPagInventLeft.Controls.Add(this.txtBoxInventFactStr3);
+            this.pnlPagInventLeft.Controls.Add(this.txtBoxInventFactStr2);
+            this.pnlPagInventLeft.Controls.Add(this.txtBoxInventFactVal1);
+            this.pnlPagInventLeft.Controls.Add(this.txtBoxInventFactStr1);
+            this.pnlPagInventLeft.Controls.Add(this.lblTitleNaSum);
+            this.pnlPagInventLeft.Controls.Add(this.lblTitleFactNalSr);
+            this.pnlPagInventLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlPagInventLeft.Location = new System.Drawing.Point(3, 190);
+            this.pnlPagInventLeft.Name = "pnlPagInventLeft";
+            this.pnlPagInventLeft.Size = new System.Drawing.Size(423, 383);
+            this.pnlPagInventLeft.TabIndex = 2;
+            // 
+            // pnlPagInventFill
+            // 
+            this.pnlPagInventFill.Controls.Add(this.grpBoxInventKomProvInvent);
+            this.pnlPagInventFill.Controls.Add(this.pnlPagInventFillTop);
+            this.pnlPagInventFill.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlPagInventFill.Location = new System.Drawing.Point(426, 190);
+            this.pnlPagInventFill.Name = "pnlPagInventFill";
+            this.pnlPagInventFill.Size = new System.Drawing.Size(757, 383);
+            this.pnlPagInventFill.TabIndex = 3;
+            // 
+            // pnlPagInventFillTop
+            // 
+            this.pnlPagInventFillTop.Controls.Add(this.txtBoxInventPrikazDecodeMatOtv);
+            this.pnlPagInventFillTop.Controls.Add(this.lblPrikazDecodeMatOtv);
+            this.pnlPagInventFillTop.Controls.Add(this.txtBoxInventPrikazDolMatOtv);
+            this.pnlPagInventFillTop.Controls.Add(this.lblPrikazDolMatOtv);
+            this.pnlPagInventFillTop.Controls.Add(this.txtBoxInventPrikazUreDate);
+            this.pnlPagInventFillTop.Controls.Add(this.lblPrikazUreDate);
+            this.pnlPagInventFillTop.Controls.Add(this.txtBoxInventPrikazTypAndDocNum);
+            this.pnlPagInventFillTop.Controls.Add(this.lblPrikazTypAndDocNum);
+            this.pnlPagInventFillTop.Controls.Add(this.lblTitleOsnovanieDlInvent);
+            this.pnlPagInventFillTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPagInventFillTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlPagInventFillTop.Name = "pnlPagInventFillTop";
+            this.pnlPagInventFillTop.Size = new System.Drawing.Size(757, 134);
+            this.pnlPagInventFillTop.TabIndex = 0;
+            // 
+            // lblTitleFactNalSr
+            // 
+            this.lblTitleFactNalSr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblTitleFactNalSr.ForeColor = System.Drawing.Color.Black;
+            this.lblTitleFactNalSr.Location = new System.Drawing.Point(1, 3);
+            this.lblTitleFactNalSr.Name = "lblTitleFactNalSr";
+            this.lblTitleFactNalSr.Size = new System.Drawing.Size(218, 26);
+            this.lblTitleFactNalSr.TabIndex = 2;
+            this.lblTitleFactNalSr.Tag = "";
+            this.lblTitleFactNalSr.Text = "Фактическое наличие средств";
+            this.lblTitleFactNalSr.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblTitleNaSum
+            // 
+            this.lblTitleNaSum.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblTitleNaSum.ForeColor = System.Drawing.Color.Black;
+            this.lblTitleNaSum.Location = new System.Drawing.Point(255, 3);
+            this.lblTitleNaSum.Name = "lblTitleNaSum";
+            this.lblTitleNaSum.Size = new System.Drawing.Size(155, 26);
+            this.lblTitleNaSum.TabIndex = 3;
+            this.lblTitleNaSum.Tag = "";
+            this.lblTitleNaSum.Text = "на сумму";
+            this.lblTitleNaSum.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtBoxInventFactStr1
+            // 
+            this.txtBoxInventFactStr1.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxInventFactStr1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventFactStr1.Location = new System.Drawing.Point(5, 32);
+            this.txtBoxInventFactStr1.Name = "txtBoxInventFactStr1";
+            this.txtBoxInventFactStr1.ReadOnly = true;
+            this.txtBoxInventFactStr1.Size = new System.Drawing.Size(227, 26);
+            this.txtBoxInventFactStr1.TabIndex = 4;
+            this.txtBoxInventFactStr1.Text = "наличных денег";
+            // 
+            // txtBoxInventFactVal1
+            // 
+            this.txtBoxInventFactVal1.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxInventFactVal1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventFactVal1.Location = new System.Drawing.Point(258, 32);
+            this.txtBoxInventFactVal1.Name = "txtBoxInventFactVal1";
+            this.txtBoxInventFactVal1.ReadOnly = true;
+            this.txtBoxInventFactVal1.Size = new System.Drawing.Size(159, 26);
+            this.txtBoxInventFactVal1.TabIndex = 5;
+            this.txtBoxInventFactVal1.Text = "0";
+            this.txtBoxInventFactVal1.TextChanged += new System.EventHandler(this.txtBoxInventFactVal_TextChanged);
+            // 
+            // txtBoxInventFactStr2
+            // 
+            this.txtBoxInventFactStr2.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventFactStr2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventFactStr2.Location = new System.Drawing.Point(6, 64);
+            this.txtBoxInventFactStr2.Name = "txtBoxInventFactStr2";
+            this.txtBoxInventFactStr2.ReadOnly = true;
+            this.txtBoxInventFactStr2.Size = new System.Drawing.Size(226, 26);
+            this.txtBoxInventFactStr2.TabIndex = 6;
+            // 
+            // txtBoxInventFactStr3
+            // 
+            this.txtBoxInventFactStr3.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventFactStr3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventFactStr3.Location = new System.Drawing.Point(6, 96);
+            this.txtBoxInventFactStr3.Name = "txtBoxInventFactStr3";
+            this.txtBoxInventFactStr3.ReadOnly = true;
+            this.txtBoxInventFactStr3.Size = new System.Drawing.Size(226, 26);
+            this.txtBoxInventFactStr3.TabIndex = 7;
+            // 
+            // txtBoxInventFactStr4
+            // 
+            this.txtBoxInventFactStr4.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventFactStr4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventFactStr4.Location = new System.Drawing.Point(6, 128);
+            this.txtBoxInventFactStr4.Name = "txtBoxInventFactStr4";
+            this.txtBoxInventFactStr4.ReadOnly = true;
+            this.txtBoxInventFactStr4.Size = new System.Drawing.Size(226, 26);
+            this.txtBoxInventFactStr4.TabIndex = 8;
+            // 
+            // txtBoxInventFactStr5
+            // 
+            this.txtBoxInventFactStr5.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventFactStr5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventFactStr5.Location = new System.Drawing.Point(6, 160);
+            this.txtBoxInventFactStr5.Name = "txtBoxInventFactStr5";
+            this.txtBoxInventFactStr5.ReadOnly = true;
+            this.txtBoxInventFactStr5.Size = new System.Drawing.Size(226, 26);
+            this.txtBoxInventFactStr5.TabIndex = 9;
+            // 
+            // txtBoxInventFactVal2
+            // 
+            this.txtBoxInventFactVal2.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventFactVal2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventFactVal2.Location = new System.Drawing.Point(258, 64);
+            this.txtBoxInventFactVal2.Name = "txtBoxInventFactVal2";
+            this.txtBoxInventFactVal2.ReadOnly = true;
+            this.txtBoxInventFactVal2.Size = new System.Drawing.Size(159, 26);
+            this.txtBoxInventFactVal2.TabIndex = 10;
+            this.txtBoxInventFactVal2.Text = "0";
+            this.txtBoxInventFactVal2.TextChanged += new System.EventHandler(this.txtBoxInventFactVal_TextChanged);
+            // 
+            // txtBoxInventFactVal3
+            // 
+            this.txtBoxInventFactVal3.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventFactVal3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventFactVal3.Location = new System.Drawing.Point(258, 96);
+            this.txtBoxInventFactVal3.Name = "txtBoxInventFactVal3";
+            this.txtBoxInventFactVal3.ReadOnly = true;
+            this.txtBoxInventFactVal3.Size = new System.Drawing.Size(159, 26);
+            this.txtBoxInventFactVal3.TabIndex = 11;
+            this.txtBoxInventFactVal3.Text = "0";
+            this.txtBoxInventFactVal3.TextChanged += new System.EventHandler(this.txtBoxInventFactVal_TextChanged);
+            // 
+            // txtBoxInventFactVal4
+            // 
+            this.txtBoxInventFactVal4.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventFactVal4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventFactVal4.Location = new System.Drawing.Point(258, 128);
+            this.txtBoxInventFactVal4.Name = "txtBoxInventFactVal4";
+            this.txtBoxInventFactVal4.ReadOnly = true;
+            this.txtBoxInventFactVal4.Size = new System.Drawing.Size(159, 26);
+            this.txtBoxInventFactVal4.TabIndex = 12;
+            this.txtBoxInventFactVal4.Text = "0";
+            this.txtBoxInventFactVal4.TextChanged += new System.EventHandler(this.txtBoxInventFactVal_TextChanged);
+            // 
+            // txtBoxInventFactVal5
+            // 
+            this.txtBoxInventFactVal5.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventFactVal5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventFactVal5.Location = new System.Drawing.Point(258, 160);
+            this.txtBoxInventFactVal5.Name = "txtBoxInventFactVal5";
+            this.txtBoxInventFactVal5.ReadOnly = true;
+            this.txtBoxInventFactVal5.Size = new System.Drawing.Size(159, 26);
+            this.txtBoxInventFactVal5.TabIndex = 13;
+            this.txtBoxInventFactVal5.Text = "0";
+            this.txtBoxInventFactVal5.TextChanged += new System.EventHandler(this.txtBoxInventFactVal_TextChanged);
+            // 
+            // lblTotalTitleFactNalSr
+            // 
+            this.lblTotalTitleFactNalSr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblTotalTitleFactNalSr.ForeColor = System.Drawing.Color.Black;
+            this.lblTotalTitleFactNalSr.Location = new System.Drawing.Point(5, 203);
+            this.lblTotalTitleFactNalSr.Name = "lblTotalTitleFactNalSr";
+            this.lblTotalTitleFactNalSr.Size = new System.Drawing.Size(218, 40);
+            this.lblTotalTitleFactNalSr.TabIndex = 14;
+            this.lblTotalTitleFactNalSr.Tag = "";
+            this.lblTotalTitleFactNalSr.Text = "Итого фактическое наличие \r\nна сумму";
+            this.lblTotalTitleFactNalSr.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtBoxInventFactValTotal
+            // 
+            this.txtBoxInventFactValTotal.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventFactValTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventFactValTotal.Location = new System.Drawing.Point(258, 209);
+            this.txtBoxInventFactValTotal.Name = "txtBoxInventFactValTotal";
+            this.txtBoxInventFactValTotal.ReadOnly = true;
+            this.txtBoxInventFactValTotal.Size = new System.Drawing.Size(159, 26);
+            this.txtBoxInventFactValTotal.TabIndex = 15;
+            this.txtBoxInventFactValTotal.Text = "0";
+            // 
+            // lblItogPoUchDan
+            // 
+            this.lblItogPoUchDan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblItogPoUchDan.ForeColor = System.Drawing.Color.Black;
+            this.lblItogPoUchDan.Location = new System.Drawing.Point(5, 255);
+            this.lblItogPoUchDan.Name = "lblItogPoUchDan";
+            this.lblItogPoUchDan.Size = new System.Drawing.Size(218, 40);
+            this.lblItogPoUchDan.TabIndex = 16;
+            this.lblItogPoUchDan.Tag = "";
+            this.lblItogPoUchDan.Text = "Итого по учётным \r\nданным на сумму";
+            this.lblItogPoUchDan.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtBoxInventItogPoUchDan
+            // 
+            this.txtBoxInventItogPoUchDan.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventItogPoUchDan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventItogPoUchDan.Location = new System.Drawing.Point(258, 261);
+            this.txtBoxInventItogPoUchDan.Name = "txtBoxInventItogPoUchDan";
+            this.txtBoxInventItogPoUchDan.ReadOnly = true;
+            this.txtBoxInventItogPoUchDan.Size = new System.Drawing.Size(159, 26);
+            this.txtBoxInventItogPoUchDan.TabIndex = 17;
+            this.txtBoxInventItogPoUchDan.Text = "0";
+            // 
+            // lblLastPrihodNum
+            // 
+            this.lblLastPrihodNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblLastPrihodNum.ForeColor = System.Drawing.Color.Black;
+            this.lblLastPrihodNum.Location = new System.Drawing.Point(5, 313);
+            this.lblLastPrihodNum.Name = "lblLastPrihodNum";
+            this.lblLastPrihodNum.Size = new System.Drawing.Size(267, 24);
+            this.lblLastPrihodNum.TabIndex = 18;
+            this.lblLastPrihodNum.Tag = "";
+            this.lblLastPrihodNum.Text = "Последний номер приходного ордера";
+            this.lblLastPrihodNum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblLastRashodNum
+            // 
+            this.lblLastRashodNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblLastRashodNum.ForeColor = System.Drawing.Color.Black;
+            this.lblLastRashodNum.Location = new System.Drawing.Point(5, 347);
+            this.lblLastRashodNum.Name = "lblLastRashodNum";
+            this.lblLastRashodNum.Size = new System.Drawing.Size(267, 24);
+            this.lblLastRashodNum.TabIndex = 19;
+            this.lblLastRashodNum.Tag = "";
+            this.lblLastRashodNum.Text = "Последний номер расходного ордера";
+            this.lblLastRashodNum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtBoxInventLastPrihodNum
+            // 
+            this.txtBoxInventLastPrihodNum.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventLastPrihodNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventLastPrihodNum.Location = new System.Drawing.Point(278, 311);
+            this.txtBoxInventLastPrihodNum.Name = "txtBoxInventLastPrihodNum";
+            this.txtBoxInventLastPrihodNum.ReadOnly = true;
+            this.txtBoxInventLastPrihodNum.Size = new System.Drawing.Size(139, 26);
+            this.txtBoxInventLastPrihodNum.TabIndex = 20;
+            this.txtBoxInventLastPrihodNum.Text = "0";
+            // 
+            // txtBoxInventLastRashodNum
+            // 
+            this.txtBoxInventLastRashodNum.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventLastRashodNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventLastRashodNum.Location = new System.Drawing.Point(278, 345);
+            this.txtBoxInventLastRashodNum.Name = "txtBoxInventLastRashodNum";
+            this.txtBoxInventLastRashodNum.ReadOnly = true;
+            this.txtBoxInventLastRashodNum.Size = new System.Drawing.Size(139, 26);
+            this.txtBoxInventLastRashodNum.TabIndex = 21;
+            this.txtBoxInventLastRashodNum.Text = "0";
+            // 
+            // lblTitleOsnovanieDlInvent
+            // 
+            this.lblTitleOsnovanieDlInvent.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblTitleOsnovanieDlInvent.ForeColor = System.Drawing.Color.Black;
+            this.lblTitleOsnovanieDlInvent.Location = new System.Drawing.Point(6, 0);
+            this.lblTitleOsnovanieDlInvent.Name = "lblTitleOsnovanieDlInvent";
+            this.lblTitleOsnovanieDlInvent.Size = new System.Drawing.Size(649, 26);
+            this.lblTitleOsnovanieDlInvent.TabIndex = 3;
+            this.lblTitleOsnovanieDlInvent.Tag = "";
+            this.lblTitleOsnovanieDlInvent.Text = "Основание для проведения инвентаризации (приказ, постановление, распоряжение)";
+            this.lblTitleOsnovanieDlInvent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblPrikazTypAndDocNum
+            // 
+            this.lblPrikazTypAndDocNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrikazTypAndDocNum.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblPrikazTypAndDocNum.Location = new System.Drawing.Point(6, 33);
+            this.lblPrikazTypAndDocNum.Name = "lblPrikazTypAndDocNum";
+            this.lblPrikazTypAndDocNum.Size = new System.Drawing.Size(171, 25);
+            this.lblPrikazTypAndDocNum.TabIndex = 4;
+            this.lblPrikazTypAndDocNum.Text = "Тип и номер документа";
+            this.lblPrikazTypAndDocNum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtBoxInventPrikazTypAndDocNum
+            // 
+            this.txtBoxInventPrikazTypAndDocNum.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxInventPrikazTypAndDocNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventPrikazTypAndDocNum.Location = new System.Drawing.Point(183, 31);
+            this.txtBoxInventPrikazTypAndDocNum.Name = "txtBoxInventPrikazTypAndDocNum";
+            this.txtBoxInventPrikazTypAndDocNum.ReadOnly = true;
+            this.txtBoxInventPrikazTypAndDocNum.Size = new System.Drawing.Size(159, 26);
+            this.txtBoxInventPrikazTypAndDocNum.TabIndex = 6;
+            // 
+            // lblPrikazUreDate
+            // 
+            this.lblPrikazUreDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrikazUreDate.ForeColor = System.Drawing.Color.Black;
+            this.lblPrikazUreDate.Location = new System.Drawing.Point(370, 32);
+            this.lblPrikazUreDate.Name = "lblPrikazUreDate";
+            this.lblPrikazUreDate.Size = new System.Drawing.Size(122, 25);
+            this.lblPrikazUreDate.TabIndex = 7;
+            this.lblPrikazUreDate.Tag = "";
+            this.lblPrikazUreDate.Text = "Дата документа";
+            this.lblPrikazUreDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtBoxInventPrikazUreDate
+            // 
+            this.txtBoxInventPrikazUreDate.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventPrikazUreDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventPrikazUreDate.Location = new System.Drawing.Point(493, 30);
+            this.txtBoxInventPrikazUreDate.Name = "txtBoxInventPrikazUreDate";
+            this.txtBoxInventPrikazUreDate.ReadOnly = true;
+            this.txtBoxInventPrikazUreDate.Size = new System.Drawing.Size(125, 26);
+            this.txtBoxInventPrikazUreDate.TabIndex = 8;
+            // 
+            // lblPrikazDolMatOtv
+            // 
+            this.lblPrikazDolMatOtv.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrikazDolMatOtv.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblPrikazDolMatOtv.Location = new System.Drawing.Point(6, 65);
+            this.lblPrikazDolMatOtv.Name = "lblPrikazDolMatOtv";
+            this.lblPrikazDolMatOtv.Size = new System.Drawing.Size(309, 25);
+            this.lblPrikazDolMatOtv.TabIndex = 9;
+            this.lblPrikazDolMatOtv.Text = "Должность мат ответсвенного лица";
+            this.lblPrikazDolMatOtv.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtBoxInventPrikazDolMatOtv
+            // 
+            this.txtBoxInventPrikazDolMatOtv.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxInventPrikazDolMatOtv.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventPrikazDolMatOtv.Location = new System.Drawing.Point(332, 63);
+            this.txtBoxInventPrikazDolMatOtv.Name = "txtBoxInventPrikazDolMatOtv";
+            this.txtBoxInventPrikazDolMatOtv.ReadOnly = true;
+            this.txtBoxInventPrikazDolMatOtv.Size = new System.Drawing.Size(286, 26);
+            this.txtBoxInventPrikazDolMatOtv.TabIndex = 10;
+            // 
+            // lblPrikazDecodeMatOtv
+            // 
+            this.lblPrikazDecodeMatOtv.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPrikazDecodeMatOtv.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblPrikazDecodeMatOtv.Location = new System.Drawing.Point(6, 96);
+            this.lblPrikazDecodeMatOtv.Name = "lblPrikazDecodeMatOtv";
+            this.lblPrikazDecodeMatOtv.Size = new System.Drawing.Size(171, 25);
+            this.lblPrikazDecodeMatOtv.TabIndex = 11;
+            this.lblPrikazDecodeMatOtv.Text = "Расшифровка подписи";
+            this.lblPrikazDecodeMatOtv.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtBoxInventPrikazDecodeMatOtv
+            // 
+            this.txtBoxInventPrikazDecodeMatOtv.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxInventPrikazDecodeMatOtv.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventPrikazDecodeMatOtv.Location = new System.Drawing.Point(183, 96);
+            this.txtBoxInventPrikazDecodeMatOtv.Name = "txtBoxInventPrikazDecodeMatOtv";
+            this.txtBoxInventPrikazDecodeMatOtv.ReadOnly = true;
+            this.txtBoxInventPrikazDecodeMatOtv.Size = new System.Drawing.Size(435, 26);
+            this.txtBoxInventPrikazDecodeMatOtv.TabIndex = 12;
+            // 
+            // grpBoxInventKomProvInvent
+            // 
+            this.grpBoxInventKomProvInvent.Controls.Add(this.txtBoxInventTitleKomissionDecode4);
+            this.grpBoxInventKomProvInvent.Controls.Add(this.txtBoxInventTitleKomissionDecode3);
+            this.grpBoxInventKomProvInvent.Controls.Add(this.txtBoxInventTitleKomissionDecode2);
+            this.grpBoxInventKomProvInvent.Controls.Add(this.txtBoxInventKomissionStr4);
+            this.grpBoxInventKomProvInvent.Controls.Add(this.txtBoxInventKomissionStr3);
+            this.grpBoxInventKomProvInvent.Controls.Add(this.txtBoxInventKomissionStr2);
+            this.grpBoxInventKomProvInvent.Controls.Add(this.lblInventKomissionStr4);
+            this.grpBoxInventKomProvInvent.Controls.Add(this.lblInventKomissionStr3);
+            this.grpBoxInventKomProvInvent.Controls.Add(this.lblInventKomissionStr2);
+            this.grpBoxInventKomProvInvent.Controls.Add(this.txtBoxInventTitleKomissionDecode1);
+            this.grpBoxInventKomProvInvent.Controls.Add(this.txtBoxInventKomissionStr1);
+            this.grpBoxInventKomProvInvent.Controls.Add(this.lblInventKomissionStr1);
+            this.grpBoxInventKomProvInvent.Controls.Add(this.lblInventTitleKomissionDecode);
+            this.grpBoxInventKomProvInvent.Controls.Add(this.lblInventTitleKomissionStr);
+            this.grpBoxInventKomProvInvent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpBoxInventKomProvInvent.Location = new System.Drawing.Point(0, 134);
+            this.grpBoxInventKomProvInvent.Name = "grpBoxInventKomProvInvent";
+            this.grpBoxInventKomProvInvent.Size = new System.Drawing.Size(757, 249);
+            this.grpBoxInventKomProvInvent.TabIndex = 1;
+            this.grpBoxInventKomProvInvent.TabStop = false;
+            this.grpBoxInventKomProvInvent.Text = "Комиссия, проводившая инвентаризацию";
+            // 
+            // lblInventTitleKomissionStr
+            // 
+            this.lblInventTitleKomissionStr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblInventTitleKomissionStr.ForeColor = System.Drawing.Color.Black;
+            this.lblInventTitleKomissionStr.Location = new System.Drawing.Point(119, 28);
+            this.lblInventTitleKomissionStr.Name = "lblInventTitleKomissionStr";
+            this.lblInventTitleKomissionStr.Size = new System.Drawing.Size(270, 24);
+            this.lblInventTitleKomissionStr.TabIndex = 4;
+            this.lblInventTitleKomissionStr.Tag = "";
+            this.lblInventTitleKomissionStr.Text = "Должность членов комиссии";
+            this.lblInventTitleKomissionStr.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblInventTitleKomissionDecode
+            // 
+            this.lblInventTitleKomissionDecode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblInventTitleKomissionDecode.ForeColor = System.Drawing.Color.Black;
+            this.lblInventTitleKomissionDecode.Location = new System.Drawing.Point(359, 28);
+            this.lblInventTitleKomissionDecode.Name = "lblInventTitleKomissionDecode";
+            this.lblInventTitleKomissionDecode.Size = new System.Drawing.Size(197, 24);
+            this.lblInventTitleKomissionDecode.TabIndex = 5;
+            this.lblInventTitleKomissionDecode.Tag = "";
+            this.lblInventTitleKomissionDecode.Text = "Расшифровка подписей";
+            this.lblInventTitleKomissionDecode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblInventKomissionStr1
+            // 
+            this.lblInventKomissionStr1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblInventKomissionStr1.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblInventKomissionStr1.Location = new System.Drawing.Point(6, 57);
+            this.lblInventKomissionStr1.Name = "lblInventKomissionStr1";
+            this.lblInventKomissionStr1.Size = new System.Drawing.Size(109, 25);
+            this.lblInventKomissionStr1.TabIndex = 6;
+            this.lblInventKomissionStr1.Text = "Председатель";
+            this.lblInventKomissionStr1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtBoxInventKomissionStr1
+            // 
+            this.txtBoxInventKomissionStr1.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxInventKomissionStr1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventKomissionStr1.Location = new System.Drawing.Point(122, 55);
+            this.txtBoxInventKomissionStr1.Name = "txtBoxInventKomissionStr1";
+            this.txtBoxInventKomissionStr1.ReadOnly = true;
+            this.txtBoxInventKomissionStr1.Size = new System.Drawing.Size(220, 26);
+            this.txtBoxInventKomissionStr1.TabIndex = 7;
+            // 
+            // txtBoxInventTitleKomissionDecode1
+            // 
+            this.txtBoxInventTitleKomissionDecode1.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.txtBoxInventTitleKomissionDecode1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventTitleKomissionDecode1.Location = new System.Drawing.Point(348, 55);
+            this.txtBoxInventTitleKomissionDecode1.Name = "txtBoxInventTitleKomissionDecode1";
+            this.txtBoxInventTitleKomissionDecode1.ReadOnly = true;
+            this.txtBoxInventTitleKomissionDecode1.Size = new System.Drawing.Size(270, 26);
+            this.txtBoxInventTitleKomissionDecode1.TabIndex = 8;
+            // 
+            // lblInventKomissionStr2
+            // 
+            this.lblInventKomissionStr2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblInventKomissionStr2.ForeColor = System.Drawing.Color.Black;
+            this.lblInventKomissionStr2.Location = new System.Drawing.Point(6, 89);
+            this.lblInventKomissionStr2.Name = "lblInventKomissionStr2";
+            this.lblInventKomissionStr2.Size = new System.Drawing.Size(109, 25);
+            this.lblInventKomissionStr2.TabIndex = 9;
+            this.lblInventKomissionStr2.Tag = "";
+            this.lblInventKomissionStr2.Text = "Первый член";
+            this.lblInventKomissionStr2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblInventKomissionStr3
+            // 
+            this.lblInventKomissionStr3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblInventKomissionStr3.ForeColor = System.Drawing.Color.Black;
+            this.lblInventKomissionStr3.Location = new System.Drawing.Point(6, 121);
+            this.lblInventKomissionStr3.Name = "lblInventKomissionStr3";
+            this.lblInventKomissionStr3.Size = new System.Drawing.Size(109, 25);
+            this.lblInventKomissionStr3.TabIndex = 10;
+            this.lblInventKomissionStr3.Tag = "";
+            this.lblInventKomissionStr3.Text = "Второй член";
+            this.lblInventKomissionStr3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblInventKomissionStr4
+            // 
+            this.lblInventKomissionStr4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblInventKomissionStr4.ForeColor = System.Drawing.Color.Black;
+            this.lblInventKomissionStr4.Location = new System.Drawing.Point(6, 153);
+            this.lblInventKomissionStr4.Name = "lblInventKomissionStr4";
+            this.lblInventKomissionStr4.Size = new System.Drawing.Size(109, 25);
+            this.lblInventKomissionStr4.TabIndex = 11;
+            this.lblInventKomissionStr4.Tag = "";
+            this.lblInventKomissionStr4.Text = "Третий член";
+            this.lblInventKomissionStr4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtBoxInventKomissionStr2
+            // 
+            this.txtBoxInventKomissionStr2.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventKomissionStr2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventKomissionStr2.Location = new System.Drawing.Point(122, 87);
+            this.txtBoxInventKomissionStr2.Name = "txtBoxInventKomissionStr2";
+            this.txtBoxInventKomissionStr2.ReadOnly = true;
+            this.txtBoxInventKomissionStr2.Size = new System.Drawing.Size(220, 26);
+            this.txtBoxInventKomissionStr2.TabIndex = 12;
+            // 
+            // txtBoxInventKomissionStr3
+            // 
+            this.txtBoxInventKomissionStr3.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventKomissionStr3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventKomissionStr3.Location = new System.Drawing.Point(122, 119);
+            this.txtBoxInventKomissionStr3.Name = "txtBoxInventKomissionStr3";
+            this.txtBoxInventKomissionStr3.ReadOnly = true;
+            this.txtBoxInventKomissionStr3.Size = new System.Drawing.Size(220, 26);
+            this.txtBoxInventKomissionStr3.TabIndex = 13;
+            // 
+            // txtBoxInventKomissionStr4
+            // 
+            this.txtBoxInventKomissionStr4.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventKomissionStr4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventKomissionStr4.Location = new System.Drawing.Point(122, 151);
+            this.txtBoxInventKomissionStr4.Name = "txtBoxInventKomissionStr4";
+            this.txtBoxInventKomissionStr4.ReadOnly = true;
+            this.txtBoxInventKomissionStr4.Size = new System.Drawing.Size(220, 26);
+            this.txtBoxInventKomissionStr4.TabIndex = 14;
+            // 
+            // txtBoxInventTitleKomissionDecode2
+            // 
+            this.txtBoxInventTitleKomissionDecode2.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventTitleKomissionDecode2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventTitleKomissionDecode2.Location = new System.Drawing.Point(348, 87);
+            this.txtBoxInventTitleKomissionDecode2.Name = "txtBoxInventTitleKomissionDecode2";
+            this.txtBoxInventTitleKomissionDecode2.ReadOnly = true;
+            this.txtBoxInventTitleKomissionDecode2.Size = new System.Drawing.Size(270, 26);
+            this.txtBoxInventTitleKomissionDecode2.TabIndex = 15;
+            // 
+            // txtBoxInventTitleKomissionDecode3
+            // 
+            this.txtBoxInventTitleKomissionDecode3.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventTitleKomissionDecode3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventTitleKomissionDecode3.Location = new System.Drawing.Point(348, 119);
+            this.txtBoxInventTitleKomissionDecode3.Name = "txtBoxInventTitleKomissionDecode3";
+            this.txtBoxInventTitleKomissionDecode3.ReadOnly = true;
+            this.txtBoxInventTitleKomissionDecode3.Size = new System.Drawing.Size(270, 26);
+            this.txtBoxInventTitleKomissionDecode3.TabIndex = 16;
+            // 
+            // txtBoxInventTitleKomissionDecode4
+            // 
+            this.txtBoxInventTitleKomissionDecode4.BackColor = System.Drawing.Color.White;
+            this.txtBoxInventTitleKomissionDecode4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtBoxInventTitleKomissionDecode4.Location = new System.Drawing.Point(348, 151);
+            this.txtBoxInventTitleKomissionDecode4.Name = "txtBoxInventTitleKomissionDecode4";
+            this.txtBoxInventTitleKomissionDecode4.ReadOnly = true;
+            this.txtBoxInventTitleKomissionDecode4.Size = new System.Drawing.Size(270, 26);
+            this.txtBoxInventTitleKomissionDecode4.TabIndex = 17;
+            // 
+            // localBindingSource
+            // 
+            this.localBindingSource.DataSource = typeof(AlgoritmCashFunc.BLL.Local);
             // 
             // FStart
             // 
@@ -4943,6 +5550,8 @@
             this.pnlTop.ResumeLayout(false);
             this.pnlTopFill.ResumeLayout(false);
             this.pnlTopRight.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxAKS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxPrizm)).EndInit();
             this.pnlFill.ResumeLayout(false);
             this.tabCntOperation.ResumeLayout(false);
             this.tabPagePrihod.ResumeLayout(false);
@@ -5185,8 +5794,13 @@
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoxAKS)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoxPrizm)).EndInit();
+            this.pnlPagInventLeft.ResumeLayout(false);
+            this.pnlPagInventLeft.PerformLayout();
+            this.pnlPagInventFill.ResumeLayout(false);
+            this.pnlPagInventFillTop.ResumeLayout(false);
+            this.pnlPagInventFillTop.PerformLayout();
+            this.grpBoxInventKomProvInvent.ResumeLayout(false);
+            this.grpBoxInventKomProvInvent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.localBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -5588,6 +6202,53 @@
         private System.Windows.Forms.ToolStripMenuItem TSMItemLocalChiefCashiers;
         private System.Windows.Forms.ToolStripMenuItem TSMItemLocalPaidInReasons;
         private System.Windows.Forms.ToolStripMenuItem TSMItemLocalPaidRashReasons;
+        private System.Windows.Forms.Panel pnlPagInventFill;
+        private System.Windows.Forms.Panel pnlPagInventFillTop;
+        private System.Windows.Forms.Panel pnlPagInventLeft;
+        private System.Windows.Forms.Label lblTitleNaSum;
+        private System.Windows.Forms.Label lblTitleFactNalSr;
+        private System.Windows.Forms.TextBox txtBoxInventFactVal1;
+        private System.Windows.Forms.TextBox txtBoxInventFactStr1;
+        private System.Windows.Forms.TextBox txtBoxInventFactVal5;
+        private System.Windows.Forms.TextBox txtBoxInventFactVal4;
+        private System.Windows.Forms.TextBox txtBoxInventFactVal3;
+        private System.Windows.Forms.TextBox txtBoxInventFactVal2;
+        private System.Windows.Forms.TextBox txtBoxInventFactStr5;
+        private System.Windows.Forms.TextBox txtBoxInventFactStr4;
+        private System.Windows.Forms.TextBox txtBoxInventFactStr3;
+        private System.Windows.Forms.TextBox txtBoxInventFactStr2;
+        private System.Windows.Forms.TextBox txtBoxInventFactValTotal;
+        private System.Windows.Forms.Label lblTotalTitleFactNalSr;
+        private System.Windows.Forms.Label lblItogPoUchDan;
+        private System.Windows.Forms.TextBox txtBoxInventItogPoUchDan;
+        private System.Windows.Forms.TextBox txtBoxInventLastRashodNum;
+        private System.Windows.Forms.TextBox txtBoxInventLastPrihodNum;
+        private System.Windows.Forms.Label lblLastRashodNum;
+        private System.Windows.Forms.Label lblLastPrihodNum;
+        private System.Windows.Forms.Label lblTitleOsnovanieDlInvent;
+        private System.Windows.Forms.Label lblPrikazUreDate;
+        private System.Windows.Forms.TextBox txtBoxInventPrikazTypAndDocNum;
+        private System.Windows.Forms.Label lblPrikazTypAndDocNum;
+        private System.Windows.Forms.TextBox txtBoxInventPrikazUreDate;
+        private System.Windows.Forms.TextBox txtBoxInventPrikazDolMatOtv;
+        private System.Windows.Forms.Label lblPrikazDolMatOtv;
+        private System.Windows.Forms.TextBox txtBoxInventPrikazDecodeMatOtv;
+        private System.Windows.Forms.Label lblPrikazDecodeMatOtv;
+        private System.Windows.Forms.GroupBox grpBoxInventKomProvInvent;
+        private System.Windows.Forms.Label lblInventTitleKomissionDecode;
+        private System.Windows.Forms.Label lblInventTitleKomissionStr;
+        private System.Windows.Forms.TextBox txtBoxInventKomissionStr1;
+        private System.Windows.Forms.Label lblInventKomissionStr1;
+        private System.Windows.Forms.TextBox txtBoxInventTitleKomissionDecode1;
+        private System.Windows.Forms.TextBox txtBoxInventTitleKomissionDecode4;
+        private System.Windows.Forms.TextBox txtBoxInventTitleKomissionDecode3;
+        private System.Windows.Forms.TextBox txtBoxInventTitleKomissionDecode2;
+        private System.Windows.Forms.TextBox txtBoxInventKomissionStr4;
+        private System.Windows.Forms.TextBox txtBoxInventKomissionStr3;
+        private System.Windows.Forms.TextBox txtBoxInventKomissionStr2;
+        private System.Windows.Forms.Label lblInventKomissionStr4;
+        private System.Windows.Forms.Label lblInventKomissionStr3;
+        private System.Windows.Forms.Label lblInventKomissionStr2;
     }
 }
 

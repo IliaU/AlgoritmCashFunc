@@ -201,5 +201,29 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 throw ae;
             }
         }
+
+        /// <summary>
+        /// Метод заставляет переписать родительский не новый поверз создаёт а переписывает. Для того чтобы плагин мог реализовать своё специфическое сохранение
+        /// </summary>
+        protected override void SaveChildron()
+        {
+            try
+            {
+                if (Com.ProviderFarm.CurrentPrv.HashDocumentInvent(this))
+                {
+                    Com.ProviderFarm.CurrentPrv.UpdateDocumentInvent(this);
+                }
+                else  // Если нет то вставляем
+                {
+                    Com.ProviderFarm.CurrentPrv.SetDocumentInvent(this);
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
+                Com.Log.EventSave(ae.Message, string.Format("{0}.SaveChildron", GetType().Name), EventEn.Error);
+                throw ae;
+            }
+        }
     }
 }
