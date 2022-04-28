@@ -1529,6 +1529,9 @@ namespace AlgoritmCashFunc
                         // Сохранение документа
                         this.CurDoc.Save();
 
+                        // Печать документа
+                        this.CurDoc.PrintDefault();
+
                         break;
                     default:
                         break;
