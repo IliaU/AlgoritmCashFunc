@@ -270,35 +270,6 @@ namespace AlgoritmCashFunc
                             this.txtBoxKasBookGlavBuh.ReadOnly = false;
                             
                             break;
-                        // Акт о возврате денег
-                        case 3:
-                            this.txtBoxActVozvOKPO.ReadOnly = false;
-                            this.txtBoxActVozvOKUD.ReadOnly = false;
-                            this.txtBoxActVozvOrganization.ReadOnly = false;
-                            this.txtBoxActVozvStructPodr.ReadOnly = false;
-                            break;
-                        // Отчёт кассира
-                        case 4:
-                            this.txtBoxReportKasOKPO.ReadOnly = false;
-                            this.txtBoxReportKasOKUD.ReadOnly = false;
-                            this.txtBoxReportKasOrganization.ReadOnly = false;
-                            this.txtBoxReportKasStructPodr.ReadOnly = false;
-                            break;
-                        // Счётчики ККМ
-                        case 5:
-                            this.txtBoxScetKkmOKPO.ReadOnly = false;
-                            this.txtBoxScetKkmOKUD.ReadOnly = false;
-                            this.txtBoxScetKkmOrganization.ReadOnly = false;
-                            this.txtBoxScetKkmStructPodr.ReadOnly = false;
-                            break;
-                        // Проверка наличных
-                        case 6:
-                            this.txtBoxVerifNalOKPO.ReadOnly = false;
-                            this.txtBoxVerifNalOKUD.ReadOnly = false;
-                            this.txtBoxVerifNalOrganization.ReadOnly = false;
-                            this.txtBoxVerifNalStructPodr.ReadOnly = false;
-                            break;
-                        // Инвентаризация средств
                         case 7:
                             // Делаем поля читаемыми только админу и менеджеру
                             if (Com.UserFarm.CurrentUser.Role == RoleEn.Admin ||
@@ -426,36 +397,8 @@ namespace AlgoritmCashFunc
 
 
                             break;
-                        // Акт о возврате денег
-                        case 3:
-                            this.txtBoxActVozvOKPO.ReadOnly = true;
-                            this.txtBoxActVozvOKUD.ReadOnly = true;
-                            this.txtBoxActVozvOrganization.ReadOnly = true;
-                            this.txtBoxActVozvStructPodr.ReadOnly = true;
-                            break;
-                        // Отчёт кассира
-                        case 4:
-                            this.txtBoxReportKasOKPO.ReadOnly = true;
-                            this.txtBoxReportKasOKUD.ReadOnly = true;
-                            this.txtBoxReportKasOrganization.ReadOnly = true;
-                            this.txtBoxReportKasStructPodr.ReadOnly = true;
-                            break;
-                        // Счётчики ККМ
-                        case 5:
-                            this.txtBoxScetKkmOKPO.ReadOnly = true;
-                            this.txtBoxScetKkmOKUD.ReadOnly = true;
-                            this.txtBoxScetKkmOrganization.ReadOnly = true;
-                            this.txtBoxScetKkmStructPodr.ReadOnly = true;
-                            break;
-                        // Проверка наличных
-                        case 6:
-                            this.txtBoxVerifNalOKPO.ReadOnly = true;
-                            this.txtBoxVerifNalOKUD.ReadOnly = true;
-                            this.txtBoxVerifNalOrganization.ReadOnly = true;
-                            this.txtBoxVerifNalStructPodr.ReadOnly = true;
-                            break;
                         // Инвентаризация средств
-                        case 7:                          
+                        case 3:                          
                             this.txtBoxInventOrganization.ReadOnly = true;
                             this.txtBoxInventStructPodr.ReadOnly = true;
                             this.txtBoxInventOKPO.ReadOnly = true;
@@ -700,32 +643,8 @@ namespace AlgoritmCashFunc
                         else this.txtBoxKasBookDateDoc_TextChanged(null, null);
 
                         break;
-                    // Акт о возврате денег
-                    case 3:
-                        this.txtBoxActVozvOrganization.Text = Kassa.Organization;
-                        this.txtBoxActVozvStructPodr.Text = Kassa.StructPodrazdelenie;
-                        this.txtBoxActVozvOKPO.Text = Kassa.OKPO;
-                        break;
-                    // Отчёт кассира
-                    case 4:
-                        this.txtBoxReportKasOrganization.Text = Kassa.Organization;
-                        this.txtBoxReportKasStructPodr.Text = Kassa.StructPodrazdelenie;
-                        this.txtBoxReportKasOKPO.Text = Kassa.OKPO;
-                        break;
-                    // Счётчики ККМ
-                    case 5:
-                        this.txtBoxScetKkmOrganization.Text = Kassa.Organization;
-                        this.txtBoxScetKkmStructPodr.Text = Kassa.StructPodrazdelenie;
-                        this.txtBoxScetKkmOKPO.Text = Kassa.OKPO;
-                        break;
-                    // Проверка наличных
-                    case 6:
-                        this.txtBoxVerifNalOrganization.Text = Kassa.Organization;
-                        this.txtBoxVerifNalStructPodr.Text = Kassa.StructPodrazdelenie;
-                        this.txtBoxVerifNalOKPO.Text = Kassa.OKPO;
-                        break;
                     // Инвентаризация средств
-                    case 7:
+                    case 3:
                         this.txtBoxInventOrganization.Text = Kassa.Organization;
                         this.txtBoxInventStructPodr.Text = Kassa.StructPodrazdelenie;
                         this.txtBoxInventOKPO.Text = Kassa.OKPO;
@@ -976,6 +895,24 @@ namespace AlgoritmCashFunc
             {
                 ApplicationException ae = new ApplicationException(string.Format("Упали при работе со списком старших кассиров с ошибкой: ({0})", ex.Message));
                 Log.EventSave(ae.Message, string.Format("{0}.TSMItemLocalPaidRashReasons_Click", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
+            }
+        }
+
+        // Список по документу в расходе
+        private void TSMItemLocalRashPoDocum_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (FListLocalRashPoDocum Frm = new FListLocalRashPoDocum())
+                {
+                    Frm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при работе со списком старших кассиров с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.TSMItemLocalRashPoDocum_Click", GetType().Name), EventEn.Error, true, true);
                 //throw ae;
             }
         }
@@ -1370,84 +1307,8 @@ namespace AlgoritmCashFunc
                         this.CurDoc.Save();
 
                         break;
-                    // Акт о возврате денег
-                    case 3:
-                        // Запоминаем инфу по организации
-                        Kassa.Organization = this.txtBoxActVozvOrganization.Text;
-                        Kassa.StructPodrazdelenie = this.txtBoxActVozvStructPodr.Text;
-                        Kassa.OKPO = this.txtBoxActVozvOKPO.Text;
-
-                        // Валидация заполненных данных по подразделению и сохранение в базе
-                        ValidateKassa(Kassa);
-
-                        // Валидация введённой даты
-                        try { this.CurDoc.UreDate = DateTime.Parse(this.txtBoxActVozvDateDoc.Text); }
-                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxActVozvDateDoc.Text)); }
-
-                        // Сохранение инфы в базе
-                        Kassa.LastDocNumActVozv = int.Parse(this.txtBoxActVozvNumDoc.Text);
-                        Kassa.Save();
-
-                        break;
-                    // Отчёт кассира
-                    case 4:
-                        // Запоминаем инфу по организации
-                        Kassa.Organization = this.txtBoxReportKasOrganization.Text;
-                        Kassa.StructPodrazdelenie = this.txtBoxReportKasStructPodr.Text;
-                        Kassa.OKPO = this.txtBoxReportKasOKPO.Text;
-
-                        // Валидация заполненных данных по подразделению и сохранение в базе
-                        ValidateKassa(Kassa);
-
-                        // Валидация введённой даты
-                        try { this.CurDoc.UreDate = DateTime.Parse(this.txtBoxReportKasDateDoc.Text); }
-                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxReportKasDateDoc.Text)); }
-
-                        // Сохранение инфы в базе
-                        Kassa.LastDocNumReportKas = int.Parse(this.txtBoxReportKasNumDoc.Text);
-                        Kassa.Save();
-
-                        break;
-                    // Счётчики ККМ
-                    case 5:
-                        // Запоминаем инфу по организации
-                        Kassa.Organization = this.txtBoxScetKkmOrganization.Text;
-                        Kassa.StructPodrazdelenie = this.txtBoxScetKkmStructPodr.Text;
-                        Kassa.OKPO = this.txtBoxScetKkmOKPO.Text;
-
-                        // Валидация заполненных данных по подразделению и сохранение в базе
-                        ValidateKassa(Kassa);
-
-                        // Валидация введённой даты
-                        try { this.CurDoc.UreDate = DateTime.Parse(this.txtBoxScetKkmDateDoc.Text); }
-                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxScetKkmDateDoc.Text)); }
-
-                        // Сохранение инфы в базе
-                        Kassa.LastDocNumScetKkm = int.Parse(this.txtBoxScetKkmNumDoc.Text);
-                        Kassa.Save();
-
-                        break;
-                    // Проверка наличных
-                    case 6:
-                        // Запоминаем инфу по организации
-                        Kassa.Organization = this.txtBoxVerifNalOrganization.Text;
-                        Kassa.StructPodrazdelenie = this.txtBoxVerifNalStructPodr.Text;
-                        Kassa.OKPO = this.txtBoxVerifNalOKPO.Text;
-
-                        // Валидация заполненных данных по подразделению и сохранение в базе
-                        ValidateKassa(Kassa);
-
-                        // Валидация введённой даты
-                        try { this.CurDoc.UreDate = DateTime.Parse(this.txtBoxVerifNalDateDoc.Text); }
-                        catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxVerifNalDateDoc.Text)); }
-
-                        // Сохранение инфы в базе
-                        Kassa.LastDocNumVerifNal = int.Parse(this.txtBoxVerifNalNumDoc.Text);
-                        Kassa.Save();
-
-                        break;
                     // Инвентаризация средств
-                    case 7:
+                    case 3:
                         // Запоминаем инфу по организации только если документ в текущей дете если нет то это правка старого документа запоминать тогда не нужно
                         if (DateTime.Parse(this.txtBoxInventDateDoc.Text).Date == DateTime.Now.Date)
                         {
@@ -1959,48 +1820,8 @@ namespace AlgoritmCashFunc
                         if (((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).SaveValueNotValid) { }
 
                         break;
-                    // Акт о возврате денег
-                    case 3:
-                        // Создаём пустой документ
-                        //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
-                        this.txtBoxActVozvNumDoc.Text = (Kassa.LastDocNumActVozv + 1).ToString();
-                        // Проверка на наличие ошибок при создании пустого документа
-                        //if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
-                        //
-                        this.txtBoxActVozvDateDoc.Text = DateTime.Now.Date.ToShortDateString();
-                        break;
-                    // Отчёт кассира
-                    case 4:
-                        // Создаём пустой документ
-                        //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
-                        this.txtBoxReportKasNumDoc.Text = (Kassa.LastDocNumReportKas + 1).ToString();
-                        // Проверка на наличие ошибок при создании пустого документа
-                        //if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
-                        //
-                        break;
-                    // Счётчики ККМ
-                    case 5:
-                        // Создаём пустой документ
-                        //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
-                        this.txtBoxScetKkmNumDoc.Text = (Kassa.LastDocNumScetKkm + 1).ToString();
-                        // Проверка на наличие ошибок при создании пустого документа
-                        //if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
-                        //
-                        this.txtBoxScetKkmDateDoc.Text = DateTime.Now.Date.ToShortDateString();
-                        this.txtBoxScetKkmTimeDoc.Text = DateTime.Now.ToShortTimeString().ToString();
-                        break;
-                    // Проверка наличных
-                    case 6:
-                        // Создаём пустой документ
-                        //this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
-                        this.txtBoxVerifNalNumDoc.Text = (Kassa.LastDocNumVerifNal + 1).ToString();
-                        // Проверка на наличие ошибок при создании пустого документа
-                        //if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
-                        //
-                        this.txtBoxVerifNalDateDoc.Text = DateTime.Now.Date.ToShortDateString();
-                        break;
                     // Инвентаризация средств
-                    case 7:
+                    case 3:
 
                         // Если был передан конкретный документ который пользователь правит то заполняем полями из документа
                         if (sender != null && e == null)
@@ -2520,6 +2341,5 @@ namespace AlgoritmCashFunc
             }
         }
         #endregion
-
     }
 }

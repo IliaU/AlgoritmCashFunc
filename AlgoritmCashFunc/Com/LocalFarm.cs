@@ -58,6 +58,11 @@ namespace AlgoritmCashFunc.Com
         public static List<LocalAccounters> CurLocalAccounters = new List<LocalAccounters>();
 
         /// <summary>
+        /// Список в документе расхода пополю (по документу)
+        /// </summary>
+        public static List<LocalRashPoDocum> CurLocalRashPoDocum = new List<LocalRashPoDocum>();
+
+        /// <summary>
         /// Конструктор
         /// </summary>
         public LocalFarm()
@@ -256,6 +261,9 @@ namespace AlgoritmCashFunc.Com
 
                     // Заполняем список сотрудников
                     if (item.LocFullName == "LocalAccounters") CurLocalAccounters.Add((LocalAccounters)item);
+
+                    // Заполняем по документу для документа расхода
+                    if (item.LocFullName == "LocalRashPoDocum") CurLocalRashPoDocum.Add((LocalRashPoDocum)item);
                 }
 
                 // Сохраняем промежуточный итог

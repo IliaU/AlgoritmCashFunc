@@ -65,6 +65,7 @@
     <Compile Include="BLL\LocalPlg\LocalKassa.cs" />
     <Compile Include="BLL\LocalPlg\LocalPaidInReasons.cs" />
     <Compile Include="BLL\LocalPlg\LocalPaidRashReasons.cs" />
+    <Compile Include="BLL\LocalPlg\LocalRashPoDocum.cs" />
     <Compile Include="BLL\OperationPlg\Lib\OperationBase.cs" />
     <Compile Include="BLL\Local.cs" />
     <Compile Include="BLL\LocalPlg\Lib\LocalInterface.cs" />
@@ -150,6 +151,12 @@
     <Compile Include="FListLocalPaidRashReasons.Designer.cs">
       <DependentUpon>FListLocalPaidRashReasons.cs</DependentUpon>
     </Compile>
+    <Compile Include="FListLocalRashPoDocum.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FListLocalRashPoDocum.Designer.cs">
+      <DependentUpon>FListLocalRashPoDocum.cs</DependentUpon>
+    </Compile>
     <Compile Include="FLogon.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +229,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FListLocalPaidRashReasons.resx">
       <DependentUpon>FListLocalPaidRashReasons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FListLocalRashPoDocum.resx">
+      <DependentUpon>FListLocalRashPoDocum.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FLogon.resx">
       <DependentUpon>FLogon.cs</DependentUpon>

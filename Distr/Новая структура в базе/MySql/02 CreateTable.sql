@@ -66,18 +66,23 @@ CREATE TABLE `aks`.`cashfunc_local` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci; 
 #
 INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`) VALUES (1, 'LocalPokupatel', 'Разовый покупатель', 0, 1, 0, 0);
-INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft) VALUES (2, 'LocalPaidInReasons', 'Возврат от подотчётного лица', 1, 1, 0, 0);
-INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft) VALUES (3, 'LocalPaidInReasons', 'Оплата от покупателя (наличные)', 1, 1, 0, 0);
-INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft) VALUES (4, 'LocalPaidInReasons', 'Оплата от покупателя (кредитные карты)', 1, 1, 0, 0);
-INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft) VALUES (5, 'LocalPaidInReasons', 'Аванс от покупателя (наличные)', 1, 1, 0, 0);
-INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft) VALUES (6, 'LocalPaidInReasons', 'Возврат денежных средств на размен', 1, 1, 0, 0);
-INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft) VALUES (7, 'LocalPaidInReasons', 'Прочий приход', 1, 1, 0, 0);
-INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft) VALUES (8, 'LocalPaidRashReasons', 'Выдача подотчетному лицу', 1, 1, 0, 0);
-INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft) VALUES (9, 'LocalPaidRashReasons', 'Возврат покупателю', 1, 1, 0, 0);
-INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft) VALUES (10, 'LocalPaidRashReasons', 'Выдача денежных средств на размен', 1, 1, 0, 0);
-INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft) VALUES (11, 'LocalPaidRashReasons', 'Инкассация', 1, 1, 0, 0);
-INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft) VALUES (12, 'LocalPaidRashReasons', 'Прочий расход', 1, 1, 0, 0);
-INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft) VALUES (13, 'LocalAccounters', 'Давыдова Ю.В.', 0, 0, 1, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`) VALUES (2, 'LocalPaidInReasons', 'Возврат от подотчётного лица', 1, 1, 0, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`) VALUES (3, 'LocalPaidInReasons', 'Оплата от покупателя (наличные)', 1, 1, 0, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`) VALUES (4, 'LocalPaidInReasons', 'Оплата от покупателя (кредитные карты)', 1, 1, 0, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`) VALUES (5, 'LocalPaidInReasons', 'Аванс от покупателя (наличные)', 1, 1, 0, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`) VALUES (6, 'LocalPaidInReasons', 'Возврат денежных средств на размен', 1, 1, 0, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`) VALUES (7, 'LocalPaidInReasons', 'Прочий приход', 1, 1, 0, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`) VALUES (8, 'LocalPaidRashReasons', 'Выдача подотчетному лицу', 1, 1, 0, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`) VALUES (9, 'LocalPaidRashReasons', 'Возврат покупателю', 1, 1, 0, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`) VALUES (10, 'LocalPaidRashReasons', 'Выдача денежных средств на размен', 1, 1, 0, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`) VALUES (11, 'LocalPaidRashReasons', 'Инкассация', 1, 1, 0, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`) VALUES (12, 'LocalPaidRashReasons', 'Прочий расход', 1, 1, 0, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`) VALUES (13, 'LocalAccounters', 'Давыдова Ю.В.', 0, 0, 1, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`) VALUES (14, 'LocalRashPoDocum', 'Паспорт гражданина РФ', 1, 1, 0, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`) VALUES (15, 'LocalRashPoDocum', 'Паспорт иностранного гражданина', 1, 1, 0, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`) VALUES (16, 'LocalRashPoDocum', 'Дипломатический паспорт', 1, 1, 0, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`) VALUES (17, 'LocalRashPoDocum', 'Удостоверение личности моряка', 1, 1, 0, 0);
+INSERT INTO `aks`.`cashfunc_local` (`Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft`) VALUES (18, 'LocalRashPoDocum', 'Удостоверение личности военнослужащего', 1, 1, 0, 0);
 
 
 
