@@ -244,12 +244,12 @@ namespace AlgoritmCashFunc
                             this.cmbBoxRashKreditor.Enabled = true;             // Выдалкассир 
                             this.cmbBoxRashDebitor.Enabled = true;              // Выдать
                             this.cmbBoxRashPaidRashReasons.Enabled = true;      // Основание
+                            this.cmbBoxRashPoDoc.Enabled = true;                // Список по документу
 
                             this.txtBoxRashDebitKodDivision.ReadOnly = false;
                             this.txtBoxRashDebitKodAnalUch.ReadOnly = false;
                             this.txtBoxRashSumma.ReadOnly = false;
                             this.txtBoxRashKodNazn.ReadOnly = false;
-                            this.txtBoxRashPoDoc.ReadOnly = false;
                             this.txtBoxRashPrilozenie.ReadOnly = false;
 
                             break;
@@ -270,7 +270,7 @@ namespace AlgoritmCashFunc
                             this.txtBoxKasBookGlavBuh.ReadOnly = false;
                             
                             break;
-                        case 7:
+                        case 3:
                             // Делаем поля читаемыми только админу и менеджеру
                             if (Com.UserFarm.CurrentUser.Role == RoleEn.Admin ||
                                 Com.UserFarm.CurrentUser.Role == RoleEn.Manager)
@@ -370,12 +370,12 @@ namespace AlgoritmCashFunc
                             this.cmbBoxRashKreditor.Enabled = false;                // Выдалкассир 
                             this.cmbBoxRashDebitor.Enabled = false;                 // Выдать
                             this.cmbBoxRashPaidRashReasons.Enabled = false;         // Основание
+                            this.cmbBoxRashPoDoc.Enabled = false;                   // Список по документу
 
                             this.txtBoxRashDebitKodDivision.ReadOnly = true;
                             this.txtBoxRashDebitKodAnalUch.ReadOnly = true;
                             this.txtBoxRashSumma.ReadOnly = true;
                             this.txtBoxRashKodNazn.ReadOnly = true;
-                            this.txtBoxRashPoDoc.ReadOnly = true;
                             this.txtBoxRashPrilozenie.ReadOnly = true;
 
                             break;
@@ -588,6 +588,15 @@ namespace AlgoritmCashFunc
                             }
                         }
 
+                        // Список по документу
+                        if (this.cmbBoxRashPaidRashReasons.Items.Count == 0)
+                        {
+                            foreach (Local item in LocalFarm.CurLocalRashPoDocum)
+                            {
+                                this.cmbBoxRashPaidRashReasons.Items.Add(item.LocalName);
+                            }
+                        }
+
                         // Заполняем поле основание значенеие по умолчанию и зависимые поля
                         this.cmbBoxRashPaidRashReasons_SelectedIndexChanged(null, null);
                         this.cmbBoxRashDebitor.SelectedIndex = -1;
@@ -597,7 +606,6 @@ namespace AlgoritmCashFunc
                         this.txtBoxRashDebitKodAnalUch.Text = string.Empty;
                         this.txtBoxRashSumma.Text = string.Empty;
                         this.txtBoxRashKodNazn.Text = string.Empty;
-                        this.txtBoxRashPoDoc.Text = string.Empty;
                         this.txtBoxRashPrilozenie.Text = string.Empty;
                         
                         break;
@@ -628,6 +636,13 @@ namespace AlgoritmCashFunc
                         foreach (Local item in LocalFarm.CurLocalChiefCashiers)
                         {
                             this.cmbBoxKassBookKasir.Items.Add(item.LocalName);
+                        }
+
+                        // Заполняем список по документу
+                        this.cmbBoxRashPoDoc.Items.Clear();
+                        foreach (Local item in LocalFarm.CurLocalRashPoDocum)
+                        {
+                            this.cmbBoxRashPoDoc.Items.Add(item.LocalName);
                         }
 
                         // Заполняем поле основание значенеие по умолчанию и зависимые поля
@@ -1197,7 +1212,7 @@ namespace AlgoritmCashFunc
                         }
 
                         // Сохраняем осталдьные параметры документа
-                        ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).PoDoc = this.txtBoxRashPoDoc.Text;
+                        ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).PoDoc = this.cmbBoxRashPoDoc.Text;
                         ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).Prilozenie = this.txtBoxRashPrilozenie.Text;
                         ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).DolRukFio = this.txtBoxRashDolRukOrg.Text;
                         ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).RukFio = this.txtBoxRashRukFio.Text;
@@ -1641,14 +1656,27 @@ namespace AlgoritmCashFunc
                             if (selectIndexRashKreditor > -1) this.cmbBoxRashKreditor.SelectedIndex = selectIndexRashKreditor;
                             else this.cmbBoxRashKreditor.Text = this.CurDoc.OtherKreditor;
 
-
+                            // Кредитор
+                            int selectIndexRashPoDoc = -1;
+                            if (((BLL.DocumentPlg.DocumentRashod)this.CurDoc).PoDoc != null)
+                            {
+                                for (int i = 0; i < LocalFarm.CurLocalRashPoDocum.Count; i++)
+                                {
+                                    if (LocalFarm.CurLocalRashPoDocum[i].LocalName == ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).PoDoc)
+                                    {
+                                        selectIndexRashPoDoc = i;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (selectIndexRashPoDoc > -1) this.cmbBoxRashPoDoc.SelectedIndex = selectIndexRashPoDoc;
+                            else this.cmbBoxRashPoDoc.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).PoDoc;
 
 
                             this.txtBoxRashDebitKodDivision.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).DebetKodDivision;
                             this.txtBoxRashDebitKodAnalUch.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).DebetKodAnalUch;
                             this.txtBoxRashSumma.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).Summa.ToString("#.00", CultureInfo.CurrentCulture);
                             this.txtBoxRashKodNazn.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).KodNazn;
-                            this.txtBoxRashPoDoc.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).PoDoc;
                             this.txtBoxRashPrilozenie.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).Prilozenie;
                         }
                         else
@@ -1674,12 +1702,12 @@ namespace AlgoritmCashFunc
 
                             this.cmbBoxRashDebitor.SelectedIndex = -1;
                             this.cmbBoxRashKreditor.SelectedIndex = -1;
+                            this.cmbBoxRashPoDoc.SelectedIndex = -1;
 
                             this.txtBoxRashDebitKodDivision.Text = string.Empty;
                             this.txtBoxRashDebitKodAnalUch.Text = string.Empty;
                             this.txtBoxRashSumma.Text = string.Empty;
                             this.txtBoxRashKodNazn.Text = string.Empty;
-                            this.txtBoxRashPoDoc.Text = string.Empty;
                             this.txtBoxRashPrilozenie.Text = string.Empty;
 
                             // Если указано значение по умолчению то выставляем его

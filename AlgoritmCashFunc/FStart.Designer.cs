@@ -140,7 +140,6 @@
             this.txtBoxRashOsnovanie = new System.Windows.Forms.TextBox();
             this.lblRashOsnovanie = new System.Windows.Forms.Label();
             this.pnlPagRashTop2LeftTop1 = new System.Windows.Forms.Panel();
-            this.txtBoxRashPoDoc = new System.Windows.Forms.TextBox();
             this.lblRashPoDoc = new System.Windows.Forms.Label();
             this.pnlPagRashTop2LeftTop0 = new System.Windows.Forms.Panel();
             this.cmbBoxRashDebitor = new System.Windows.Forms.ComboBox();
@@ -332,8 +331,9 @@
             this.TSMItemLocalKassa = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemLocalPaidInReasons = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemLocalPaidRashReasons = new System.Windows.Forms.ToolStripMenuItem();
-            this.localBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.TSMItemLocalRashPoDocum = new System.Windows.Forms.ToolStripMenuItem();
+            this.localBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cmbBoxRashPoDoc = new System.Windows.Forms.ComboBox();
             this.pnlTop.SuspendLayout();
             this.pnlTopFill.SuspendLayout();
             this.pnlTopRight.SuspendLayout();
@@ -1714,24 +1714,13 @@
             // 
             // pnlPagRashTop2LeftTop1
             // 
-            this.pnlPagRashTop2LeftTop1.Controls.Add(this.txtBoxRashPoDoc);
+            this.pnlPagRashTop2LeftTop1.Controls.Add(this.cmbBoxRashPoDoc);
             this.pnlPagRashTop2LeftTop1.Controls.Add(this.lblRashPoDoc);
             this.pnlPagRashTop2LeftTop1.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlPagRashTop2LeftTop1.Location = new System.Drawing.Point(0, 27);
             this.pnlPagRashTop2LeftTop1.Name = "pnlPagRashTop2LeftTop1";
             this.pnlPagRashTop2LeftTop1.Size = new System.Drawing.Size(656, 27);
             this.pnlPagRashTop2LeftTop1.TabIndex = 7;
-            // 
-            // txtBoxRashPoDoc
-            // 
-            this.txtBoxRashPoDoc.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.txtBoxRashPoDoc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtBoxRashPoDoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txtBoxRashPoDoc.Location = new System.Drawing.Point(120, 0);
-            this.txtBoxRashPoDoc.Name = "txtBoxRashPoDoc";
-            this.txtBoxRashPoDoc.ReadOnly = true;
-            this.txtBoxRashPoDoc.Size = new System.Drawing.Size(536, 26);
-            this.txtBoxRashPoDoc.TabIndex = 3;
             // 
             // lblRashPoDoc
             // 
@@ -3831,16 +3820,27 @@
             this.TSMItemLocalPaidRashReasons.Text = "Список оснований для расхода";
             this.TSMItemLocalPaidRashReasons.Click += new System.EventHandler(this.TSMItemLocalPaidRashReasons_Click);
             // 
-            // localBindingSource
-            // 
-            this.localBindingSource.DataSource = typeof(AlgoritmCashFunc.BLL.Local);
-            // 
             // TSMItemLocalRashPoDocum
             // 
             this.TSMItemLocalRashPoDocum.Name = "TSMItemLocalRashPoDocum";
             this.TSMItemLocalRashPoDocum.Size = new System.Drawing.Size(248, 22);
             this.TSMItemLocalRashPoDocum.Text = "Список по документу в расходе";
             this.TSMItemLocalRashPoDocum.Click += new System.EventHandler(this.TSMItemLocalRashPoDocum_Click);
+            // 
+            // localBindingSource
+            // 
+            this.localBindingSource.DataSource = typeof(AlgoritmCashFunc.BLL.Local);
+            // 
+            // cmbBoxRashPoDoc
+            // 
+            this.cmbBoxRashPoDoc.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.cmbBoxRashPoDoc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbBoxRashPoDoc.Enabled = false;
+            this.cmbBoxRashPoDoc.FormattingEnabled = true;
+            this.cmbBoxRashPoDoc.Location = new System.Drawing.Point(120, 0);
+            this.cmbBoxRashPoDoc.Name = "cmbBoxRashPoDoc";
+            this.cmbBoxRashPoDoc.Size = new System.Drawing.Size(536, 23);
+            this.cmbBoxRashPoDoc.TabIndex = 4;
             // 
             // FStart
             // 
@@ -3924,7 +3924,6 @@
             this.pnlPagRashTop2LeftTop2.ResumeLayout(false);
             this.pnlPagRashTop2LeftTop2.PerformLayout();
             this.pnlPagRashTop2LeftTop1.ResumeLayout(false);
-            this.pnlPagRashTop2LeftTop1.PerformLayout();
             this.pnlPagRashTop2LeftTop0.ResumeLayout(false);
             this.pnlPagRashTop1.ResumeLayout(false);
             this.grBoxKodNaznRash.ResumeLayout(false);
@@ -4225,7 +4224,6 @@
         private System.Windows.Forms.TextBox txtBoxRashDebitKodDivision;
         private System.Windows.Forms.Label lblRashDebitKodDivision;
         private System.Windows.Forms.Panel pnlPagRashTop2LeftTop1;
-        private System.Windows.Forms.TextBox txtBoxRashPoDoc;
         private System.Windows.Forms.Label lblRashPoDoc;
         private System.Windows.Forms.Panel pnlPagRashTop2LeftTop6;
         private System.Windows.Forms.TextBox txtBoxRashRukFio;
@@ -4328,6 +4326,7 @@
         private System.Windows.Forms.Label lblInventKomissionStr3;
         private System.Windows.Forms.Label lblInventKomissionStr2;
         private System.Windows.Forms.ToolStripMenuItem TSMItemLocalRashPoDocum;
+        private System.Windows.Forms.ComboBox cmbBoxRashPoDoc;
     }
 }
 
