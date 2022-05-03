@@ -34,6 +34,19 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         string PrintConnectionString();
 
         /// <summary>
+        /// Получаем последний номер документа по типу который задан в документе за год в котором юридическая дата документа на основе которого получаем номер
+        /// </summary>
+        /// <param name="doc">Документ откуда получаем тип и юридическую дату</param>
+        /// <returns>Номер последнего документа если он найден если не найден то 0</returns>
+        int MaxDocNumForYaer(Document doc);
+
+        /// <summary>
+        /// Обновление документов при встаке документа в прошлое
+        /// </summary>
+        /// <param name="doc">Документ на который ориентируемся</param>
+        void UpdateNumDocForAdd(Document doc);
+
+        /// <summary>
         /// Получение списка операций из базы данных 
         /// </summary>
         /// <returns>Стандартный список операций</returns>

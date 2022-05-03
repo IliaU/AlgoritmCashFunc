@@ -200,7 +200,7 @@ namespace AlgoritmCashFunc
                                 this.txtBoxPrihOrganization.ReadOnly = false;
                                 this.txtBoxPrichStructPodr.ReadOnly = false;
                                 this.txtBoxPrihDateDoc.ReadOnly = false;
-                                this.txtBoxPrihNumDoc.ReadOnly = false;
+                                this.txtBoxPrihNumDoc.ReadOnly = true;
                                 this.txtBoxPrichDebetNomerSchet.ReadOnly = false;
                                 this.txtBoxPrihKreditKorSchet.ReadOnly = false;
                                 this.txtBoxPrihOsnovanie.ReadOnly = false;
@@ -232,7 +232,7 @@ namespace AlgoritmCashFunc
                                 this.txtBoxRashOrganization.ReadOnly = false;
                                 this.txtBoxRashStructPodr.ReadOnly = false;
                                 this.txtBoxRashDateDoc.ReadOnly = false;
-                                this.txtBoxRashNumDoc.ReadOnly = false;
+                                this.txtBoxRashNumDoc.ReadOnly = true;
                                 this.txtBoxRashDebitKorSchet.ReadOnly = false;
                                 this.txtBoxRashKreditNomerSchet.ReadOnly = false;
                                 this.txtBoxRashDolRukOrg.ReadOnly = false;
@@ -280,7 +280,7 @@ namespace AlgoritmCashFunc
                                 this.txtBoxInventOKPO.ReadOnly = false;
                                 this.txtBoxInventOKUD.ReadOnly = false;
                                 this.txtBoxInventDateDoc.ReadOnly = false;
-                                this.txtBoxInventNumDoc.ReadOnly = false;
+                                this.txtBoxInventNumDoc.ReadOnly = true;
                             }                         
                             
                             // Левая сторона
@@ -1053,7 +1053,6 @@ namespace AlgoritmCashFunc
                             this.CurDoc.LocalCreditor = LocalFarm.CurLocalEmployees[this.cmbBoxPrihKreditor.SelectedIndex];
                         }
 
-
                         ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KreditKodDivision = this.txtBoxPrihKreditKodDivision.Text;
                         ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KredikKodAnalUch = this.txtBoxPrihKredikKodAnalUch.Text;
                         //
@@ -1101,7 +1100,19 @@ namespace AlgoritmCashFunc
                         }
 
                         // Сохранение инфы в базе
-                        Kassa.LastDocNumPrih = int.Parse(this.txtBoxPrihNumDoc.Text);
+                        if (((DateTime)this.CurDoc.UreDate).Date == DateTime.Now.Date)
+                        {
+                            Kassa.LastDocNumPrih = int.Parse(this.txtBoxPrihNumDoc.Text);
+                        }
+                        else
+                        {
+                            // Меняем нумерацию документов в текущем году
+                            Com.ProviderFarm.CurrentPrv.UpdateNumDocForAdd(this.CurDoc);
+
+                            // Если это текущий годж то менять номер нужно если не тот год но вставка в предыдущий год не меняет номер документа в текущем году
+                            if (((DateTime)this.CurDoc.UreDate).Year== DateTime.Now.Year) Kassa.LastDocNumPrih++;
+                        }
+
                         Kassa.Save();
 
                         // Заполняем инфу по операции
@@ -1217,10 +1228,20 @@ namespace AlgoritmCashFunc
                         ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).DolRukFio = this.txtBoxRashDolRukOrg.Text;
                         ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).RukFio = this.txtBoxRashRukFio.Text;
                         ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).GlavBuh = this.txtBoxRashGlavBuh.Text;
-
-
+                        
                         // Сохранение инфы в базе
-                        Kassa.LastDocNumRash = int.Parse(this.txtBoxRashNumDoc.Text);
+                        if (((DateTime)this.CurDoc.UreDate).Date == DateTime.Now.Date)
+                        {
+                            Kassa.LastDocNumPrih = int.Parse(this.txtBoxRashNumDoc.Text);
+                        }
+                        else
+                        {
+                            // Меняем нумерацию документов в текущем году
+                            Com.ProviderFarm.CurrentPrv.UpdateNumDocForAdd(this.CurDoc);
+
+                            // Если это текущий годж то менять номер нужно если не тот год но вставка в предыдущий год не меняет номер документа в текущем году
+                            if (((DateTime)this.CurDoc.UreDate).Year == DateTime.Now.Year) Kassa.LastDocNumPrih++;
+                        }
                         Kassa.Save();
                                                 
                         // Заполняем инфу по операции
@@ -1394,7 +1415,18 @@ namespace AlgoritmCashFunc
                         ((BLL.DocumentPlg.DocumentInvent)this.CurDoc).KomissionDecode4 = this.txtBoxInventTitleKomissionDecode4.Text;
                         
                         // Сохранение инфы в базе
-                        Kassa.LastDocNumInvent = int.Parse(this.txtBoxInventNumDoc.Text);
+                        if (((DateTime)this.CurDoc.UreDate).Date == DateTime.Now.Date)
+                        {
+                            Kassa.LastDocNumPrih = int.Parse(this.txtBoxInventNumDoc.Text);
+                        }
+                        else
+                        {
+                            // Меняем нумерацию документов в текущем году
+                            Com.ProviderFarm.CurrentPrv.UpdateNumDocForAdd(this.CurDoc);
+
+                            // Если это текущий годж то менять номер нужно если не тот год но вставка в предыдущий год не меняет номер документа в текущем году
+                            if (((DateTime)this.CurDoc.UreDate).Year == DateTime.Now.Year) Kassa.LastDocNumPrih++;
+                        }
                         Kassa.Save();
 
                         // Заполняем инфу по операции
@@ -1550,7 +1582,7 @@ namespace AlgoritmCashFunc
                         {
                             // Создаём пустой документ
                             this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentPrihod");
-                            this.txtBoxPrihNumDoc.Text = (Kassa.LastDocNumPrih + 1).ToString();
+                            this.txtBoxPrihNumDoc.Text = (/*Kassa.LastDocNumPrih*/ Com.ProviderFarm.CurrentPrv.MaxDocNumForYaer(this.CurDoc) + 1).ToString();
                             this.txtBoxPrihGlavBuh.Text = Kassa.GlavBuhFio;
                             // Проверка на наличие ошибок при создании пустого документа
                             if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", "DocumentPrihod"));
@@ -1683,7 +1715,7 @@ namespace AlgoritmCashFunc
                         {
                             // Создаём пустой документ
                             this.CurDoc = Com.DocumentFarm.CreateNewDocument("DocumentRashod");
-                            this.txtBoxRashNumDoc.Text = (Kassa.LastDocNumRash + 1).ToString();
+                            this.txtBoxRashNumDoc.Text = (/*Kassa.LastDocNumRash*/ Com.ProviderFarm.CurrentPrv.MaxDocNumForYaer(this.CurDoc) + 1).ToString();
                             this.txtBoxRashDolRukOrg.Text = Kassa.DolRukOrg;
                             this.txtBoxRashRukFio.Text = Kassa.RukFio;
                             this.txtBoxRashGlavBuh.Text = Kassa.GlavBuhFio;
@@ -1781,7 +1813,7 @@ namespace AlgoritmCashFunc
                             catch (Exception) { }
 
                             // Создаём пустой документ так как за эту дату документ не найден
-                            this.CurDoc = Com.DocumentFarm.CreateNewDocument(null, "DocumentKasBook", UreDt, DateTime.Now, DateTime.Now, Com.UserFarm.CurrentUser.Logon, Com.OperationFarm.CurOperationList["OperationKasBook"], null, null, null, null, Com.LocalFarm.CurLocalDepartament.LastDocNumKasBook + 1, true, false);  // тут надо получить документ и список на день который указан если документа нет то создаём его и получаем список документов в этом дне с остатками на начало и конец для того чтобы можно было мостроить суммы на начало дня и конец выбранного дня
+                            this.CurDoc = Com.DocumentFarm.CreateNewDocument(null, "DocumentKasBook", UreDt, DateTime.Now, DateTime.Now, Com.UserFarm.CurrentUser.Logon, Com.OperationFarm.CurOperationList["OperationKasBook"], null, null, null, null, /*Com.LocalFarm.CurLocalDepartament.LastDocNumKasBook*/ Com.ProviderFarm.CurrentPrv.MaxDocNumForYaer(this.CurDoc) + 1, true, false);  // тут надо получить документ и список на день который указан если документа нет то создаём его и получаем список документов в этом дне с остатками на начало и конец для того чтобы можно было мостроить суммы на начало дня и конец выбранного дня
                             //this.CurDoc.DocNum = (Kassa.LastDocNumKasBook + 1);  // Номер документа получили при создании документа
 
                             this.txtBoxKasBookDolRukOrg.Text = Kassa.DolRukOrg;
@@ -1913,7 +1945,7 @@ namespace AlgoritmCashFunc
                             this.txtBoxInventStructPodr.Text = Kassa.StructPodrazdelenie;
                             this.txtBoxInventOKPO.Text = Kassa.OKPO;
                             this.txtBoxInventDateDoc.Text = DateTime.Now.Date.ToShortDateString();
-                            this.txtBoxInventNumDoc.Text = (Kassa.LastDocNumInvent + 1).ToString();
+                            this.txtBoxInventNumDoc.Text = (/*Kassa.LastDocNumInvent*/ Com.ProviderFarm.CurrentPrv.MaxDocNumForYaer(this.CurDoc) + 1).ToString();
 
                             // Заполняем инфу по операции
                             BLL.OperationPlg.OperationInvent OperInvent = (BLL.OperationPlg.OperationInvent)OperationFarm.CurOperationList["OperationInvent"];

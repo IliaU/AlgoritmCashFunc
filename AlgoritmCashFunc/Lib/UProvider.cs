@@ -274,6 +274,25 @@ namespace AlgoritmCashFunc.Lib
         }
 
         /// <summary>
+        /// Получаем последний номер документа по типу который задан в документе за год в котором юридическая дата документа на основе которого получаем номер
+        /// </summary>
+        /// <param name="doc">Документ откуда получаем тип и юридическую дату</param>
+        /// <returns>Номер последнего документа если он найден если не найден то 0</returns>
+        public int MaxDocNumForYaer(Document doc)
+        {
+            return this.PrvI.MaxDocNumForYaer(doc);
+        }
+
+        /// <summary>
+        /// Обновление документов при встаке документа в прошлое
+        /// </summary>
+        /// <param name="doc">Документ на который ориентируемся</param>
+        public void UpdateNumDocForAdd(Document doc)
+        {
+            this.PrvI.UpdateNumDocForAdd(doc);
+        }
+
+        /// <summary>
         /// Получение списка операций из базы данных 
         /// </summary>
         /// <returns>Стандартный список операций</returns>

@@ -140,6 +140,7 @@
             this.txtBoxRashOsnovanie = new System.Windows.Forms.TextBox();
             this.lblRashOsnovanie = new System.Windows.Forms.Label();
             this.pnlPagRashTop2LeftTop1 = new System.Windows.Forms.Panel();
+            this.cmbBoxRashPoDoc = new System.Windows.Forms.ComboBox();
             this.lblRashPoDoc = new System.Windows.Forms.Label();
             this.pnlPagRashTop2LeftTop0 = new System.Windows.Forms.Panel();
             this.cmbBoxRashDebitor = new System.Windows.Forms.ComboBox();
@@ -333,7 +334,6 @@
             this.TSMItemLocalPaidRashReasons = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemLocalRashPoDocum = new System.Windows.Forms.ToolStripMenuItem();
             this.localBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.cmbBoxRashPoDoc = new System.Windows.Forms.ComboBox();
             this.pnlTop.SuspendLayout();
             this.pnlTopFill.SuspendLayout();
             this.pnlTopRight.SuspendLayout();
@@ -1721,6 +1721,17 @@
             this.pnlPagRashTop2LeftTop1.Name = "pnlPagRashTop2LeftTop1";
             this.pnlPagRashTop2LeftTop1.Size = new System.Drawing.Size(656, 27);
             this.pnlPagRashTop2LeftTop1.TabIndex = 7;
+            // 
+            // cmbBoxRashPoDoc
+            // 
+            this.cmbBoxRashPoDoc.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.cmbBoxRashPoDoc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmbBoxRashPoDoc.Enabled = false;
+            this.cmbBoxRashPoDoc.FormattingEnabled = true;
+            this.cmbBoxRashPoDoc.Location = new System.Drawing.Point(120, 0);
+            this.cmbBoxRashPoDoc.Name = "cmbBoxRashPoDoc";
+            this.cmbBoxRashPoDoc.Size = new System.Drawing.Size(536, 23);
+            this.cmbBoxRashPoDoc.TabIndex = 4;
             // 
             // lblRashPoDoc
             // 
@@ -3830,17 +3841,6 @@
             // localBindingSource
             // 
             this.localBindingSource.DataSource = typeof(AlgoritmCashFunc.BLL.Local);
-            // 
-            // cmbBoxRashPoDoc
-            // 
-            this.cmbBoxRashPoDoc.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.cmbBoxRashPoDoc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cmbBoxRashPoDoc.Enabled = false;
-            this.cmbBoxRashPoDoc.FormattingEnabled = true;
-            this.cmbBoxRashPoDoc.Location = new System.Drawing.Point(120, 0);
-            this.cmbBoxRashPoDoc.Name = "cmbBoxRashPoDoc";
-            this.cmbBoxRashPoDoc.Size = new System.Drawing.Size(536, 23);
-            this.cmbBoxRashPoDoc.TabIndex = 4;
             // 
             // FStart
             // 

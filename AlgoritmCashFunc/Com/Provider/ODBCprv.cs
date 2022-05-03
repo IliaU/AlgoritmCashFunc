@@ -218,6 +218,81 @@ namespace AlgoritmCashFunc.Com.Provider
         }
 
         /// <summary>
+        /// Получаем последний номер документа по типу который задан в документе за год в котором юридическая дата документа на основе которого получаем номер
+        /// </summary>
+        /// <param name="doc">Документ откуда получаем тип и юридическую дату</param>
+        /// <returns>Номер последнего документа если он найден если не найден то 0</returns>
+        public int MaxDocNumForYaer(Document doc)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            return MaxDocNumForYaerORA(doc);
+                            //break;
+                        case "myodbc8a.dll":
+                            return MaxDocNumForYaerMySql(doc);
+                            //break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                // Логируем ошибку если её должен видеть пользователь или если взведён флаг трассировке в файле настройки программы
+                if (Com.Config.Trace) base.EventSave(ex.Message, "MaxDocNumForYaer", EventEn.Error);
+
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Обновление документов при встаке документа в прошлое
+        /// </summary>
+        /// <param name="doc">Документ на который ориентируемся</param>
+        public void UpdateNumDocForAdd(Document doc)
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            UpdateNumDocForAddORA(doc);
+                            break;
+                        case "myodbc8a.dll":
+                            UpdateNumDocForAddMySql(doc);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                //return 0;
+            }
+            catch (Exception ex)
+            {
+                // Логируем ошибку если её должен видеть пользователь или если взведён флаг трассировке в файле настройки программы
+                if (Com.Config.Trace) base.EventSave(ex.Message, "UpdateNumDocForAdd", EventEn.Error);
+
+                throw ex;
+            }
+        }
+
+        /// <summary>
         /// Получение списка операций из базы данных 
         /// </summary>
         /// <returns>Стандартный список операций</returns>
@@ -2384,6 +2459,125 @@ namespace AlgoritmCashFunc.Com.Provider
             {
                 base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".setDataORA", EventEn.Error);
                 if (Com.Config.Trace) base.EventSave(SQL, GetType().Name + ".setDataORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Получаем последний номер документа по типу который задан в документе за год в котором юридическая дата документа на основе которого получаем номер
+        /// </summary>
+        /// <param name="doc">Документ откуда получаем тип и юридическую дату</param>
+        /// <returns>Номер последнего документа если он найден если не найден то 0</returns>
+        private int MaxDocNumForYaerORA(Document doc)
+        {
+            string CommandSql = String.Format(@"Select Max(DocNum) As MaxDocNum
+From `aks`.`cashfunc_document`
+Where `DocFullName`='{0}'
+  and `UreDate` >= str_to_date('01.01.{1}','%d.%m.%Y')", doc.DocFullName, ((DateTime)doc.UreDate).Year);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".MaxDocNumForYaerORA", EventEn.Dump);
+
+                int rez = 0;
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+
+                            if (dr.HasRows)
+                            {
+                                // Получаем схему таблицы
+                                //DataTable tt = dr.GetSchemaTable();
+
+                                //foreach (DataRow item in tt.Rows)
+                                //{
+                                //    DataColumn ncol = new DataColumn(item["ColumnName"].ToString(), Type.GetType(item["DataType"].ToString()));
+                                //ncol.SetOrdinal(int.Parse(item["ColumnOrdinal"].ToString()));
+                                //ncol.MaxLength = (int.Parse(item["ColumnSize"].ToString()) < 300 ? 300 : int.Parse(item["ColumnSize"].ToString()));
+                                //rez.Columns.Add(ncol);
+                                //}
+
+                                // пробегаем по строкам
+                                while (dr.Read())
+                                {
+                                    for (int i = 0; i < dr.FieldCount; i++)
+                                    {
+                                        if (!dr.IsDBNull(i) && dr.GetName(i).ToUpper() == ("MaxDocNum").ToUpper()) rez = int.Parse(dr.GetValue(i).ToString());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".MaxDocNumForYaerORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".MaxDocNumForYaerORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".MaxDocNumForYaerORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".MaxDocNumForYaerORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновление документов при встаке документа в прошлое
+        /// </summary>
+        /// <param name="doc">Документ на который ориентируемся</param>
+        private void UpdateNumDocForAddORA(Document doc)
+        {
+            string CommandSql = String.Format(@"Update `aks`.`cashfunc_document`
+Set DocNum=DocNum+1
+Where `DocFullName`='{0}'
+  and `UreDate` >= str_to_date('{1}','%d.%m.%Y')
+  and `UreDate` < str_to_date('01.01.{2}','%d.%m.%Y')", doc.DocFullName, 
+                ((DateTime)doc.UreDate).AddDays(1),
+                ((DateTime)doc.UreDate).AddYears(1).Year);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateNumDocForAddORA", EventEn.Dump);
+
+                //int rez = 0;
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                //return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateNumDocForAddORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateNumDocForAddORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateNumDocForAddORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateNumDocForAddORA", EventEn.Dump);
                 throw;
             }
         }
@@ -4871,6 +5065,125 @@ From `aks`.`cashfunc_local`");
             {
                 base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".setDataMySql", EventEn.Error);
                 if (Com.Config.Trace) base.EventSave(SQL, GetType().Name + ".setDataMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Получаем последний номер документа по типу который задан в документе за год в котором юридическая дата документа на основе которого получаем номер
+        /// </summary>
+        /// <param name="doc">Документ откуда получаем тип и юридическую дату</param>
+        /// <returns>Номер последнего документа если он найден если не найден то 0</returns>
+        private int MaxDocNumForYaerMySql(Document doc)
+        {
+            string CommandSql = String.Format(@"Select Max(DocNum) As MaxDocNum
+From `aks`.`cashfunc_document`
+Where `DocFullName`='{0}'
+  and `UreDate` >= str_to_date('01.01.{1}','%d.%m.%Y')", doc.DocFullName, ((DateTime)doc.UreDate).Year);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".MaxDocNumForYaerMySql", EventEn.Dump);
+
+                int rez = 0;
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+
+                            if (dr.HasRows)
+                            {
+                                // Получаем схему таблицы
+                                //DataTable tt = dr.GetSchemaTable();
+
+                                //foreach (DataRow item in tt.Rows)
+                                //{
+                                //    DataColumn ncol = new DataColumn(item["ColumnName"].ToString(), Type.GetType(item["DataType"].ToString()));
+                                //ncol.SetOrdinal(int.Parse(item["ColumnOrdinal"].ToString()));
+                                //ncol.MaxLength = (int.Parse(item["ColumnSize"].ToString()) < 300 ? 300 : int.Parse(item["ColumnSize"].ToString()));
+                                //rez.Columns.Add(ncol);
+                                //}
+
+                                // пробегаем по строкам
+                                while (dr.Read())
+                                {
+                                    for (int i = 0; i < dr.FieldCount; i++)
+                                    {
+                                        if (!dr.IsDBNull(i) && dr.GetName(i).ToUpper() == ("MaxDocNum").ToUpper()) rez = int.Parse(dr.GetValue(i).ToString());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".MaxDocNumForYaerMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".MaxDocNumForYaerMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".MaxDocNumForYaerMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".MaxDocNumForYaerMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Обновление документов при встаке документа в прошлое
+        /// </summary>
+        /// <param name="doc">Документ на который ориентируемся</param>
+        private void UpdateNumDocForAddMySql(Document doc)
+        {
+            string CommandSql = String.Format(@"Update `aks`.`cashfunc_document`
+Set DocNum=DocNum+1
+Where `DocFullName`='{0}'
+  and `UreDate` >= str_to_date('{1}','%d.%m.%Y')
+  and `UreDate` < str_to_date('01.01.{2}','%d.%m.%Y')", doc.DocFullName,
+                ((DateTime)doc.UreDate).AddDays(1),
+                ((DateTime)doc.UreDate).AddYears(1).Year);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateNumDocForAddMySql", EventEn.Dump);
+
+                //int rez = 0;
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                //return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateNumDocForAddMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateNumDocForAddMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".UpdateNumDocForAddMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".UpdateNumDocForAddMySql", EventEn.Dump);
                 throw;
             }
         }
