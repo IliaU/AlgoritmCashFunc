@@ -71,6 +71,8 @@ namespace AlgoritmCashFunc.Com
         /// <param name="WriteLog">Запись в лог</param>
         public static void Setup(UProvider Uprov, bool WriteLog)
         {
+            _CurrentPrv = Uprov;
+
             // Собственно обработка события
             EventProviderFarm myArg = new EventProviderFarm(Uprov);
             if (onEventSetup != null)
@@ -79,7 +81,6 @@ namespace AlgoritmCashFunc.Com
             }
 
             // Логируем изменение подключения
-            _CurrentPrv = Uprov;
             if (WriteLog) Log.EventSave(string.Format("Пользователь настроил новое подключениe: {0} ({1})", Uprov.PrintConnectionString(), Uprov.PrvInType), "ProviderFarm", EventEn.Message);
         }
         //

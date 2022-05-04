@@ -453,6 +453,7 @@ namespace AlgoritmCashFunc.Com
 
                 Com.LocalFarm.UpdateLocalListFromDB();
                 Com.OperationFarm.UpdateOperationList();
+                Com.DocumentFarm.UpdateDocumentListFromDB();
 
                 Save();
             }

@@ -38,14 +38,14 @@ namespace AlgoritmCashFunc.Com
                     ListOperationName();
 
                     // Обновление списка операций
-                    UpdateOperationList();
+                    if (Com.ProviderFarm.CurrentPrv != null && Com.ProviderFarm.CurrentPrv.HashConnect) UpdateOperationList();
                 }
             }
             catch (Exception ex)
             {
                 ApplicationException ae = new ApplicationException(string.Format("Упали при инициализации конструктора с ошибкой: ({0})", ex.Message));
                 Com.Log.EventSave(ae.Message, GetType().Name, EventEn.Error);
-                throw ae;
+                //throw ae;
             }
         }
 

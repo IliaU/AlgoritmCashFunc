@@ -493,6 +493,13 @@ namespace AlgoritmCashFunc
                 // Сброс текущего документа
                 this.CurDoc = null;
 
+                // Если нет подключенияк базе
+                if (Com.ProviderFarm.CurrentPrv == null || !Com.ProviderFarm.CurrentPrv.HashConnect)
+                {
+                    Com.Log.EventSave("Нет подключения к базе данных", string.Format("{0}.btnNew_Click", GetType().Name), EventEn.Error, true, true);
+                    return;
+                }
+
                 // Получаем текущее подразделение
                 BLL.LocalPlg.LocalKassa Kassa = Com.LocalFarm.CurLocalDepartament;
 
@@ -1500,6 +1507,13 @@ namespace AlgoritmCashFunc
                     return;
                 }
 
+                // Если нет подключенияк базе
+                if (Com.ProviderFarm.CurrentPrv == null || !Com.ProviderFarm.CurrentPrv.HashConnect)
+                {
+                    Com.Log.EventSave("Нет подключения к базе данных", string.Format("{0}.btnNew_Click", GetType().Name), EventEn.Error, true, true);
+                    return;
+                }
+
                 // Получаем текущее подразделение
                 BLL.LocalPlg.LocalKassa Kassa = Com.LocalFarm.CurLocalDepartament;
 
@@ -1813,6 +1827,7 @@ namespace AlgoritmCashFunc
                             catch (Exception) { }
 
                             // Создаём пустой документ так как за эту дату документ не найден
+                            this.CurDoc=Com.DocumentFarm.CreateNewDocument("DocumentKasBook");
                             this.CurDoc = Com.DocumentFarm.CreateNewDocument(null, "DocumentKasBook", UreDt, DateTime.Now, DateTime.Now, Com.UserFarm.CurrentUser.Logon, Com.OperationFarm.CurOperationList["OperationKasBook"], null, null, null, null, /*Com.LocalFarm.CurLocalDepartament.LastDocNumKasBook*/ Com.ProviderFarm.CurrentPrv.MaxDocNumForYaer(this.CurDoc) + 1, true, false);  // тут надо получить документ и список на день который указан если документа нет то создаём его и получаем список документов в этом дне с остатками на начало и конец для того чтобы можно было мостроить суммы на начало дня и конец выбранного дня
                             //this.CurDoc.DocNum = (Kassa.LastDocNumKasBook + 1);  // Номер документа получили при создании документа
 
