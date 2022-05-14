@@ -749,7 +749,7 @@ namespace AlgoritmCashFunc
             }
         }
         
-        // Всовываем на всех ледементах чтобы смотерть активность пользователя на движение мышки
+        // Всовываем на всех эледементах чтобы смотерть активность пользователя на движение мышки
         private void ActiveStatusLogon_MouseMove(object sender, MouseEventArgs e)
         {
             try
@@ -1555,27 +1555,12 @@ namespace AlgoritmCashFunc
 
 
                             // Дебитор
-                            int selectIndexPrihKreditor = -1;
+                            int selectIndexPrihDebitor= -1;
                             if (this.CurDoc.LocalDebitor != null)
                             {
                                 for (int i = 0; i < LocalFarm.CurLocalChiefCashiers.Count; i++)
                                 {
                                     if (LocalFarm.CurLocalChiefCashiers[i].LocalName == (this.CurDoc.LocalDebitor.LocalName))
-                                    {
-                                        selectIndexPrihKreditor = i;
-                                        break;
-                                    }
-                                }
-                            }
-                            if (selectIndexPrihKreditor > -1) this.cmbBoxPrihKreditor.SelectedIndex = selectIndexPrihKreditor;
-                            else this.cmbBoxPrihKreditor.Text = this.CurDoc.OtherDebitor;
-                            // Кредитор
-                            int selectIndexPrihDebitor = -1;
-                            if (this.CurDoc.LocalCreditor != null)
-                            {
-                                for (int i = 0; i < LocalFarm.CurLocalEmployees.Count; i++)
-                                {
-                                    if (LocalFarm.CurLocalEmployees[i].LocalName == (this.CurDoc.LocalCreditor.LocalName))
                                     {
                                         selectIndexPrihDebitor = i;
                                         break;
@@ -1583,7 +1568,23 @@ namespace AlgoritmCashFunc
                                 }
                             }
                             if (selectIndexPrihDebitor > -1) this.cmbBoxPrihDebitor.SelectedIndex = selectIndexPrihDebitor;
-                            else this.cmbBoxPrihDebitor.Text = this.CurDoc.OtherKreditor;
+                            else this.cmbBoxPrihDebitor.Text = this.CurDoc.OtherDebitor;
+
+                            // Кредитор
+                            int selectIndexPrihKreditor = -1;
+                            if (this.CurDoc.LocalCreditor != null)
+                            {
+                                for (int i = 0; i < LocalFarm.CurLocalEmployees.Count; i++)
+                                {
+                                    if (LocalFarm.CurLocalEmployees[i].LocalName == (this.CurDoc.LocalCreditor.LocalName))
+                                    {
+                                        selectIndexPrihKreditor = i;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (selectIndexPrihKreditor > -1) this.cmbBoxPrihKreditor.SelectedIndex = selectIndexPrihKreditor;
+                            else this.cmbBoxPrihKreditor.Text = this.CurDoc.OtherKreditor;
                             
                             this.txtBoxPrihKreditKodDivision.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KreditKodDivision;
                             this.txtBoxPrihKredikKodAnalUch.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).KredikKodAnalUch;
@@ -1835,7 +1836,7 @@ namespace AlgoritmCashFunc
                             this.txtBoxKasBookRukFio.Text = Kassa.RukFio;
                             this.txtBoxKasBookGlavBuh.Text = Kassa.GlavBuhFio;
                         }
-
+                        
                         // Заполняем список документов
                         DocumentList DocListKassBock = ((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).DocList;
                         //
@@ -1849,20 +1850,23 @@ namespace AlgoritmCashFunc
                             {
                                 DataRow nrow = this.dtDocKassBook.NewRow();
                                 nrow["Id"] = itemDocKassBook.Id;
-                                if (itemDocKassBook.LocalDebitor != null) nrow["FromTo"] = itemDocKassBook.LocalDebitor.LocalName;
-                                else
+
+                                switch (itemDocKassBook.DocFullName)
                                 {
-                                    switch (itemDocKassBook.DocFullName)
-                                    {
-                                        case "DocumentPrihod":
-                                            nrow["FromTo"] = ((BLL.DocumentPlg.DocumentPrihod)itemDocKassBook).OtherDebitor;
-                                            break;
-                                        case "DocumentRashod":
-                                            nrow["FromTo"] = ((BLL.DocumentPlg.DocumentRashod)itemDocKassBook).OtherDebitor;
-                                            break;
-                                        default:
-                                            break;
-                                    }
+                                    case "DocumentPrihod":
+
+                                        if (itemDocKassBook.LocalCreditor != null) nrow["FromTo"] = itemDocKassBook.LocalCreditor.LocalName;
+                                        else nrow["FromTo"] = ((BLL.DocumentPlg.DocumentPrihod)itemDocKassBook).OtherKreditor;
+                                           
+                                        break;
+                                    case "DocumentRashod":
+
+                                        if (itemDocKassBook.LocalDebitor != null) nrow["FromTo"] = itemDocKassBook.LocalDebitor.LocalName;
+                                        else nrow["FromTo"] = ((BLL.DocumentPlg.DocumentRashod)itemDocKassBook).OtherDebitor;
+
+                                        break;
+                                    default:
+                                        break;
                                 }
 
                                 switch (itemDocKassBook.DocFullName)
@@ -1893,7 +1897,7 @@ namespace AlgoritmCashFunc
                         // Тут похоже надо сообщить пользаку что документ надо бы сохранить иначе сумма в базе не будет совпадать с той что мы посчитали
                         // Может цвет поменять в ячейке надо подумать
                         if (((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).SaveValueNotValid) { }
-
+                        
                         break;
                     // Инвентаризация средств
                     case 3:

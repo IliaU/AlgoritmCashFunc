@@ -4093,7 +4093,8 @@ From `aks`.`cashfunc_local`");
         private DocumentList GetDocumentListFromDbORA(int? LastDay, int? OperationId)
         {
             string CommandSql = String.Format(@"Select `Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision` 
-From `aks`.`cashfunc_local`");
+From `aks`.`cashfunc_local`
+Order by `Id`");
 
             try
             {
@@ -4175,7 +4176,8 @@ From `aks`.`cashfunc_local`");
         private DocumentList GetDocumentListFromDbORA(DateTime? Dt, int? OperationId, bool HasNotin)
         {
             string CommandSql = String.Format(@"Select `Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision` 
-From `aks`.`cashfunc_local`");
+From `aks`.`cashfunc_local`
+Order by `Id`");
 
             try
             {
@@ -7265,7 +7267,8 @@ From  DocUnion ",  Dt.ToShortDateString());
             string CommandSql = String.Format(@"Select `Id`, `DocFullName`, `UreDate`, `CteateDate`, `ModifyDate`, `ModifyUser`, `OperationId`, `LocalDebitorId`, `LocalCreditorId`, `OtherDebitor`, `OtherKreditor`, `DocNum`, `IsDraft`, `IsProcessed` 
 From `aks`.`CashFunc_Document`
 Where `UreDate`>={0} 
-    and `OperationId`={1}", (LastDay == null ? "`OperationId`" : string.Format("Str_To_Date('{0}', '%d.%m.%Y')", DateTime.Now.AddDays((double)LastDay*-1).ToShortDateString()))
+    and `OperationId`={1}
+Order by `Id`", (LastDay == null ? "`OperationId`" : string.Format("Str_To_Date('{0}', '%d.%m.%Y')", DateTime.Now.AddDays((double)LastDay*-1).ToShortDateString()))
             , (OperationId == null ? "`OperationId`" : OperationId.ToString())
             );
 
@@ -7391,7 +7394,8 @@ Where `UreDate`>={0}
             string CommandSql = String.Format(@"Select `Id`, `DocFullName`, `UreDate`, `CteateDate`, `ModifyDate`, `ModifyUser`, `OperationId`, `LocalDebitorId`, `LocalCreditorId`, `OtherDebitor`, `OtherKreditor`, `DocNum`, `IsDraft`, `IsProcessed` 
 From `aks`.`CashFunc_Document`
 Where `UreDate`={0} 
-    and `OperationId`{1}{2}", (Dt==null ? "`OperationId`" : string.Format("Str_To_Date('{0}', '%d.%m.%Y')", ((DateTime)Dt).ToShortDateString()))
+    and `OperationId`{1}{2}
+Order by `Id`", (Dt==null ? "`OperationId`" : string.Format("Str_To_Date('{0}', '%d.%m.%Y')", ((DateTime)Dt).ToShortDateString()))
             , (HasNotin?"<>":"=")
             , (OperationId==null ? "`OperationId`" : OperationId.ToString())
             );

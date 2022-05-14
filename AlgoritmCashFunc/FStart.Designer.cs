@@ -221,12 +221,6 @@
             this.btnKassBookEdit = new System.Windows.Forms.Button();
             this.pnlPagKassBookTop1Left = new System.Windows.Forms.Panel();
             this.dtGridKassBook = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NoDoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FromTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.KorShet = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Prihod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rashod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlPagKasBookTop = new System.Windows.Forms.Panel();
             this.lblTitleKasBook = new System.Windows.Forms.Label();
             this.pnlPagKasBookTopRight1 = new System.Windows.Forms.Panel();
@@ -334,6 +328,12 @@
             this.TSMItemLocalPaidRashReasons = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemLocalRashPoDocum = new System.Windows.Forms.ToolStripMenuItem();
             this.localBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.NoDoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FromTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.KorShet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Prihod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rashod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlTop.SuspendLayout();
             this.pnlTopFill.SuspendLayout();
             this.pnlTopRight.SuspendLayout();
@@ -2629,62 +2629,18 @@
             this.dtGridKassBook.AllowUserToDeleteRows = false;
             this.dtGridKassBook.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGridKassBook.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
             this.NoDoc,
             this.FromTo,
             this.KorShet,
             this.Prihod,
-            this.Rashod});
+            this.Rashod,
+            this.Id});
             this.dtGridKassBook.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtGridKassBook.Location = new System.Drawing.Point(0, 0);
             this.dtGridKassBook.Name = "dtGridKassBook";
             this.dtGridKassBook.ReadOnly = true;
             this.dtGridKassBook.Size = new System.Drawing.Size(966, 223);
             this.dtGridKassBook.TabIndex = 0;
-            // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
-            // 
-            // NoDoc
-            // 
-            this.NoDoc.DataPropertyName = "NoDoc";
-            this.NoDoc.HeaderText = "№ док";
-            this.NoDoc.Name = "NoDoc";
-            this.NoDoc.ReadOnly = true;
-            // 
-            // FromTo
-            // 
-            this.FromTo.DataPropertyName = "FromTo";
-            this.FromTo.HeaderText = "От кого получено или кому выдано";
-            this.FromTo.Name = "FromTo";
-            this.FromTo.ReadOnly = true;
-            this.FromTo.Width = 500;
-            // 
-            // KorShet
-            // 
-            this.KorShet.DataPropertyName = "KorShet";
-            this.KorShet.HeaderText = "Кор.счёт";
-            this.KorShet.Name = "KorShet";
-            this.KorShet.ReadOnly = true;
-            // 
-            // Prihod
-            // 
-            this.Prihod.DataPropertyName = "Prihod";
-            this.Prihod.HeaderText = "Приход";
-            this.Prihod.Name = "Prihod";
-            this.Prihod.ReadOnly = true;
-            // 
-            // Rashod
-            // 
-            this.Rashod.DataPropertyName = "Rashod";
-            this.Rashod.HeaderText = "Расход";
-            this.Rashod.Name = "Rashod";
-            this.Rashod.ReadOnly = true;
             // 
             // pnlPagKasBookTop
             // 
@@ -3842,6 +3798,51 @@
             // 
             this.localBindingSource.DataSource = typeof(AlgoritmCashFunc.BLL.Local);
             // 
+            // NoDoc
+            // 
+            this.NoDoc.DataPropertyName = "NoDoc";
+            this.NoDoc.HeaderText = "№ док";
+            this.NoDoc.Name = "NoDoc";
+            this.NoDoc.ReadOnly = true;
+            // 
+            // FromTo
+            // 
+            this.FromTo.DataPropertyName = "FromTo";
+            this.FromTo.HeaderText = "От кого получено или кому выдано";
+            this.FromTo.Name = "FromTo";
+            this.FromTo.ReadOnly = true;
+            this.FromTo.Width = 500;
+            // 
+            // KorShet
+            // 
+            this.KorShet.DataPropertyName = "KorShet";
+            this.KorShet.HeaderText = "Кор.счёт";
+            this.KorShet.Name = "KorShet";
+            this.KorShet.ReadOnly = true;
+            // 
+            // Prihod
+            // 
+            this.Prihod.DataPropertyName = "Prihod";
+            this.Prihod.HeaderText = "Приход";
+            this.Prihod.Name = "Prihod";
+            this.Prihod.ReadOnly = true;
+            // 
+            // Rashod
+            // 
+            this.Rashod.DataPropertyName = "Rashod";
+            this.Rashod.HeaderText = "Расход";
+            this.Rashod.Name = "Rashod";
+            this.Rashod.ReadOnly = true;
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            this.Id.Width = 50;
+            // 
             // FStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4264,12 +4265,6 @@
         private System.Windows.Forms.TextBox txtBoxKasBookDolRukOrg;
         private System.Windows.Forms.Label lblKassBookDolRukOrg;
         private System.Windows.Forms.Panel pnlPagKassBookTop2LeftTop0;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NoDoc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FromTo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn KorShet;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Prihod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rashod;
         private System.Windows.Forms.ToolStripMenuItem справочникиToolStripMenuItem;
         private System.Windows.Forms.Button btnRashReportReturnBlank;
         private System.Windows.Forms.ToolStripMenuItem TSMItemLocalEmployees;
@@ -4327,6 +4322,12 @@
         private System.Windows.Forms.Label lblInventKomissionStr2;
         private System.Windows.Forms.ToolStripMenuItem TSMItemLocalRashPoDocum;
         private System.Windows.Forms.ComboBox cmbBoxRashPoDoc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NoDoc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FromTo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn KorShet;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Prihod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Rashod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
     }
 }
 

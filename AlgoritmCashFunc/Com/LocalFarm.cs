@@ -239,6 +239,14 @@ namespace AlgoritmCashFunc.Com
                 if (Com.ProviderFarm.CurrentPrv != null) if (Com.ProviderFarm.CurrentPrv != null) TmpLocalList = Com.ProviderFarm.CurrentPrv.GetLocalListFromDB();
                     else TmpLocalList = new LocalList();
 
+                // Чистка списков
+                CurLocalChiefCashiers.Clear();
+                CurLocalPaidInReasons.Clear();
+                CurLocalPaidRashReasons.Clear();
+                CurLocalEmployees.Clear();
+                CurLocalAccounters.Clear();
+                CurLocalRashPoDocum.Clear();
+                
                 // Пробегаем по списк для того чтобы проверить есть ли в списке Local  с именем хоста нашей тачки от которой мы сейчас работаем
                 foreach (Local item in TmpLocalList)
                 {

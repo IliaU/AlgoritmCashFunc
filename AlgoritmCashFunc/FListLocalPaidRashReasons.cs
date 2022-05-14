@@ -153,6 +153,8 @@ namespace AlgoritmCashFunc
                     }
                 }
 
+                Com.LocalFarm.UpdateLocalListFromDB();
+
                 this.Close();
             }
             catch (Exception ex)
