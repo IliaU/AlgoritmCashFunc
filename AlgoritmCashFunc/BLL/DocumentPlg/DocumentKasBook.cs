@@ -182,14 +182,16 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                     {
                         case "DocumentPrihod":
                             nrow["A1"] = string.Format("no{0}", item.DocNum);
-                            nrow["A2"] = item.LocalDebitor.LocalName;
+                            if (item.LocalDebitor != null) nrow["A2"] = item.LocalDebitor.LocalName;
+                            else nrow["A2"] = this.OtherDebitor;
                             nrow["A3"] = ((DocumentPrihod)item).KredikKorSchet;
                             nrow["A4"] = ((DocumentPrihod)item).Summa.ToString("#.00", CultureInfo.CurrentCulture); 
                             CountPrich++;
                             break;
                         case "DocumentRashod":
                             nrow["A1"] = string.Format("po{0}", item.DocNum);
-                            nrow["A2"] = item.LocalDebitor.LocalName;
+                            if (item.LocalDebitor!=null) nrow["A2"] = item.LocalDebitor.LocalName;
+                            else nrow["A2"] = this.OtherDebitor;
                             nrow["A3"] = ((DocumentRashod)item).DebetKorSchet;
                             nrow["A5"] = ((DocumentRashod)item).Summa.ToString("#.00", CultureInfo.CurrentCulture);
                             CountRash++;
@@ -272,7 +274,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 Bookmark BmCRash = new Bookmark("BmCRash", Com.Utils.GetStringForInt(CountRash, "", "", "", false).ToLower());
                 BmL.Add(BmCRash, true);
                 //
-                Bookmark BmKassir= new Bookmark("BmKassir", this.LocalCreditor.LocalName);
+                Bookmark BmKassir= new Bookmark("BmKassir", (this.LocalCreditor!=null?this.LocalCreditor.LocalName:this.OtherKreditor));
                 BmL.Add(BmKassir, true);
                 //
                 Bookmark BmBuhg = new Bookmark("BmBuhg", this.GlavBuh);

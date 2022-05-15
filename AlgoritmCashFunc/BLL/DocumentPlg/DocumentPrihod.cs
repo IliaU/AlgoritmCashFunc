@@ -514,7 +514,8 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 //
                 TabTmpKassir.Columns.Add(new DataColumn("A", typeof(string)));
                 DataRow nrowKassir = TabTmpKassir.NewRow();
-                nrowKassir["A"] = ((BLL.LocalPlg.LocalChiefCashiers)this.LocalDebitor).LocalName;
+                if (this.LocalDebitor != null) nrowKassir["A"] = ((BLL.LocalPlg.LocalChiefCashiers)this.LocalDebitor).LocalName;
+                else nrowKassir["A"] = this.OtherDebitor;
                 TabTmpKassir.Rows.Add(nrowKassir);
 
                 // Добавлем эту таблицу в наш класс
@@ -532,7 +533,8 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 //
                 TabTmpFrom.Columns.Add(new DataColumn("A", typeof(string)));
                 DataRow nrowFrom = TabTmpFrom.NewRow();
-                nrowFrom["A"] = ((BLL.LocalPlg.LocalEmployees)this.LocalCreditor).LocalName;
+                if(this.LocalCreditor!=null) nrowFrom["A"] = ((BLL.LocalPlg.LocalEmployees)this.LocalCreditor).LocalName;
+                nrowFrom["A"] = this.OtherKreditor;
                 TabTmpFrom.Rows.Add(nrowFrom);
 
                 // Добавлем эту таблицу в наш класс
