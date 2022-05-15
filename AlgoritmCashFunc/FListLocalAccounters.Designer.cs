@@ -28,15 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
             this.pnlFill = new System.Windows.Forms.Panel();
             this.dgData = new System.Windows.Forms.DataGridView();
+            this.cntxMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tlStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.CId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlBottom.SuspendLayout();
             this.pnlFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).BeginInit();
+            this.cntxMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlBottom
@@ -73,11 +77,27 @@
             this.dgData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CId,
             this.ColData});
+            this.dgData.ContextMenuStrip = this.cntxMenuStrip;
             this.dgData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgData.Location = new System.Drawing.Point(0, 0);
             this.dgData.Name = "dgData";
             this.dgData.Size = new System.Drawing.Size(655, 493);
             this.dgData.TabIndex = 0;
+            this.dgData.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgData_CellMouseEnter);
+            // 
+            // cntxMenuStrip
+            // 
+            this.cntxMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tlStripMenuItemDelete});
+            this.cntxMenuStrip.Name = "cntxMenuStrip";
+            this.cntxMenuStrip.Size = new System.Drawing.Size(153, 48);
+            // 
+            // tlStripMenuItemDelete
+            // 
+            this.tlStripMenuItemDelete.Name = "tlStripMenuItemDelete";
+            this.tlStripMenuItemDelete.Size = new System.Drawing.Size(152, 22);
+            this.tlStripMenuItemDelete.Text = "Удалить";
+            this.tlStripMenuItemDelete.Click += new System.EventHandler(this.tlStripMenuItemDelete_Click);
             // 
             // CId
             // 
@@ -90,7 +110,7 @@
             // ColData
             // 
             this.ColData.DataPropertyName = "ColData";
-            this.ColData.HeaderText = "Старшие кассиры";
+            this.ColData.HeaderText = "Бухгалтеры";
             this.ColData.Name = "ColData";
             this.ColData.Width = 600;
             // 
@@ -106,6 +126,7 @@
             this.pnlBottom.ResumeLayout(false);
             this.pnlFill.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).EndInit();
+            this.cntxMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -116,6 +137,8 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Panel pnlFill;
         private System.Windows.Forms.DataGridView dgData;
+        private System.Windows.Forms.ContextMenuStrip cntxMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem tlStripMenuItemDelete;
         private System.Windows.Forms.DataGridViewTextBoxColumn CId;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColData;
     }

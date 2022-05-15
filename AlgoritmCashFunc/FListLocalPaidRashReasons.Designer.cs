@@ -28,19 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
             this.dgData = new System.Windows.Forms.DataGridView();
-            this.pnlFill = new System.Windows.Forms.Panel();
             this.CId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Osnovanie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KreditNomerSchet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DebetKorSchet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FlagFormReturn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.pnlFill = new System.Windows.Forms.Panel();
+            this.cntxMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tlStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).BeginInit();
             this.pnlFill.SuspendLayout();
+            this.cntxMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlBottom
@@ -72,20 +76,13 @@
             this.KreditNomerSchet,
             this.DebetKorSchet,
             this.FlagFormReturn});
+            this.dgData.ContextMenuStrip = this.cntxMenuStrip;
             this.dgData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgData.Location = new System.Drawing.Point(0, 0);
             this.dgData.Name = "dgData";
             this.dgData.Size = new System.Drawing.Size(885, 493);
             this.dgData.TabIndex = 0;
-            // 
-            // pnlFill
-            // 
-            this.pnlFill.Controls.Add(this.dgData);
-            this.pnlFill.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlFill.Location = new System.Drawing.Point(0, 0);
-            this.pnlFill.Name = "pnlFill";
-            this.pnlFill.Size = new System.Drawing.Size(885, 493);
-            this.pnlFill.TabIndex = 6;
+            this.dgData.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgData_CellMouseEnter);
             // 
             // CId
             // 
@@ -127,6 +124,29 @@
             this.FlagFormReturn.Name = "FlagFormReturn";
             this.FlagFormReturn.Width = 120;
             // 
+            // pnlFill
+            // 
+            this.pnlFill.Controls.Add(this.dgData);
+            this.pnlFill.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlFill.Location = new System.Drawing.Point(0, 0);
+            this.pnlFill.Name = "pnlFill";
+            this.pnlFill.Size = new System.Drawing.Size(885, 493);
+            this.pnlFill.TabIndex = 6;
+            // 
+            // cntxMenuStrip
+            // 
+            this.cntxMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tlStripMenuItemDelete});
+            this.cntxMenuStrip.Name = "cntxMenuStrip";
+            this.cntxMenuStrip.Size = new System.Drawing.Size(119, 26);
+            // 
+            // tlStripMenuItemDelete
+            // 
+            this.tlStripMenuItemDelete.Name = "tlStripMenuItemDelete";
+            this.tlStripMenuItemDelete.Size = new System.Drawing.Size(118, 22);
+            this.tlStripMenuItemDelete.Text = "Удалить";
+            this.tlStripMenuItemDelete.Click += new System.EventHandler(this.tlStripMenuItemDelete_Click);
+            // 
             // FListLocalPaidRashReasons
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -139,6 +159,7 @@
             this.pnlBottom.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).EndInit();
             this.pnlFill.ResumeLayout(false);
+            this.cntxMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -155,5 +176,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn KreditNomerSchet;
         private System.Windows.Forms.DataGridViewTextBoxColumn DebetKorSchet;
         private System.Windows.Forms.DataGridViewCheckBoxColumn FlagFormReturn;
+        private System.Windows.Forms.ContextMenuStrip cntxMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem tlStripMenuItemDelete;
     }
 }

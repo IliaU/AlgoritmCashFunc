@@ -138,5 +138,33 @@ namespace AlgoritmCashFunc
                 Com.Log.EventSave(string.Format(@"Ошибка в методе {0}:""{1}""", "btnSave_Click", ex.Message), this.GetType().FullName, EventEn.Error, true, true);
             }
         }
+
+        // Пользователь удаляет строку
+        private void tlStripMenuItemDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int index = -1;
+                if (this.cntxMenuStrip.Tag != null) index = (int)this.cntxMenuStrip.Tag;
+                if (index >= 0) this.dgData.Rows.RemoveAt(index);
+            }
+            catch (Exception ex)
+            {
+                Com.Log.EventSave(string.Format(@"Ошибка в методе {0}:""{1}""", "tlStripMenuItemDelete_Click", ex.Message), this.GetType().FullName, EventEn.Error, true, true);
+            }
+        }
+
+        // Попали в ячейку
+        private void dgData_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                this.cntxMenuStrip.Tag = e.RowIndex;
+            }
+            catch (Exception ex)
+            {
+                Com.Log.EventSave(string.Format(@"Ошибка в методе {0}:""{1}""", "dgData_CellEnter", ex.Message), this.GetType().FullName, EventEn.Error, true, true);
+            }
+        }
     }
 }

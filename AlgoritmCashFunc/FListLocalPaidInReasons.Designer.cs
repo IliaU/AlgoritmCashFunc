@@ -28,18 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
             this.dgData = new System.Windows.Forms.DataGridView();
-            this.pnlFill = new System.Windows.Forms.Panel();
             this.CId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Osnovanie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DebetNomerSchet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KredikKorSchet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlFill = new System.Windows.Forms.Panel();
+            this.cntxMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tlStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).BeginInit();
             this.pnlFill.SuspendLayout();
+            this.cntxMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlBottom
@@ -70,20 +74,13 @@
             this.Osnovanie,
             this.DebetNomerSchet,
             this.KredikKorSchet});
+            this.dgData.ContextMenuStrip = this.cntxMenuStrip;
             this.dgData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgData.Location = new System.Drawing.Point(0, 0);
             this.dgData.Name = "dgData";
             this.dgData.Size = new System.Drawing.Size(767, 493);
             this.dgData.TabIndex = 0;
-            // 
-            // pnlFill
-            // 
-            this.pnlFill.Controls.Add(this.dgData);
-            this.pnlFill.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlFill.Location = new System.Drawing.Point(0, 0);
-            this.pnlFill.Name = "pnlFill";
-            this.pnlFill.Size = new System.Drawing.Size(767, 493);
-            this.pnlFill.TabIndex = 4;
+            this.dgData.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgData_CellMouseEnter);
             // 
             // CId
             // 
@@ -118,6 +115,29 @@
             this.KredikKorSchet.HeaderText = "Кред № сч";
             this.KredikKorSchet.Name = "KredikKorSchet";
             // 
+            // pnlFill
+            // 
+            this.pnlFill.Controls.Add(this.dgData);
+            this.pnlFill.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlFill.Location = new System.Drawing.Point(0, 0);
+            this.pnlFill.Name = "pnlFill";
+            this.pnlFill.Size = new System.Drawing.Size(767, 493);
+            this.pnlFill.TabIndex = 4;
+            // 
+            // cntxMenuStrip
+            // 
+            this.cntxMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tlStripMenuItemDelete});
+            this.cntxMenuStrip.Name = "cntxMenuStrip";
+            this.cntxMenuStrip.Size = new System.Drawing.Size(153, 48);
+            // 
+            // tlStripMenuItemDelete
+            // 
+            this.tlStripMenuItemDelete.Name = "tlStripMenuItemDelete";
+            this.tlStripMenuItemDelete.Size = new System.Drawing.Size(152, 22);
+            this.tlStripMenuItemDelete.Text = "Удалить";
+            this.tlStripMenuItemDelete.Click += new System.EventHandler(this.tlStripMenuItemDelete_Click);
+            // 
             // FListLocalPaidInReasons
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -130,6 +150,7 @@
             this.pnlBottom.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).EndInit();
             this.pnlFill.ResumeLayout(false);
+            this.cntxMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -145,5 +166,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Osnovanie;
         private System.Windows.Forms.DataGridViewTextBoxColumn DebetNomerSchet;
         private System.Windows.Forms.DataGridViewTextBoxColumn KredikKorSchet;
+        private System.Windows.Forms.ContextMenuStrip cntxMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem tlStripMenuItemDelete;
     }
 }

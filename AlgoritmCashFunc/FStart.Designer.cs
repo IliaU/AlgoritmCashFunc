@@ -221,6 +221,12 @@
             this.btnKassBookEdit = new System.Windows.Forms.Button();
             this.pnlPagKassBookTop1Left = new System.Windows.Forms.Panel();
             this.dtGridKassBook = new System.Windows.Forms.DataGridView();
+            this.NoDoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FromTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.KorShet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Prihod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rashod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlPagKasBookTop = new System.Windows.Forms.Panel();
             this.lblTitleKasBook = new System.Windows.Forms.Label();
             this.pnlPagKasBookTopRight1 = new System.Windows.Forms.Panel();
@@ -328,12 +334,6 @@
             this.TSMItemLocalPaidRashReasons = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMItemLocalRashPoDocum = new System.Windows.Forms.ToolStripMenuItem();
             this.localBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.NoDoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FromTo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.KorShet = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Prihod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rashod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlTop.SuspendLayout();
             this.pnlTopFill.SuspendLayout();
             this.pnlTopRight.SuspendLayout();
@@ -2642,6 +2642,51 @@
             this.dtGridKassBook.Size = new System.Drawing.Size(966, 223);
             this.dtGridKassBook.TabIndex = 0;
             // 
+            // NoDoc
+            // 
+            this.NoDoc.DataPropertyName = "NoDoc";
+            this.NoDoc.HeaderText = "№ док";
+            this.NoDoc.Name = "NoDoc";
+            this.NoDoc.ReadOnly = true;
+            // 
+            // FromTo
+            // 
+            this.FromTo.DataPropertyName = "FromTo";
+            this.FromTo.HeaderText = "От кого получено или кому выдано";
+            this.FromTo.Name = "FromTo";
+            this.FromTo.ReadOnly = true;
+            this.FromTo.Width = 500;
+            // 
+            // KorShet
+            // 
+            this.KorShet.DataPropertyName = "KorShet";
+            this.KorShet.HeaderText = "Кор.счёт";
+            this.KorShet.Name = "KorShet";
+            this.KorShet.ReadOnly = true;
+            // 
+            // Prihod
+            // 
+            this.Prihod.DataPropertyName = "Prihod";
+            this.Prihod.HeaderText = "Приход";
+            this.Prihod.Name = "Prihod";
+            this.Prihod.ReadOnly = true;
+            // 
+            // Rashod
+            // 
+            this.Rashod.DataPropertyName = "Rashod";
+            this.Rashod.HeaderText = "Расход";
+            this.Rashod.Name = "Rashod";
+            this.Rashod.ReadOnly = true;
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            this.Id.Width = 50;
+            // 
             // pnlPagKasBookTop
             // 
             this.pnlPagKasBookTop.Controls.Add(this.lblTitleKasBook);
@@ -3797,51 +3842,6 @@
             // localBindingSource
             // 
             this.localBindingSource.DataSource = typeof(AlgoritmCashFunc.BLL.Local);
-            // 
-            // NoDoc
-            // 
-            this.NoDoc.DataPropertyName = "NoDoc";
-            this.NoDoc.HeaderText = "№ док";
-            this.NoDoc.Name = "NoDoc";
-            this.NoDoc.ReadOnly = true;
-            // 
-            // FromTo
-            // 
-            this.FromTo.DataPropertyName = "FromTo";
-            this.FromTo.HeaderText = "От кого получено или кому выдано";
-            this.FromTo.Name = "FromTo";
-            this.FromTo.ReadOnly = true;
-            this.FromTo.Width = 500;
-            // 
-            // KorShet
-            // 
-            this.KorShet.DataPropertyName = "KorShet";
-            this.KorShet.HeaderText = "Кор.счёт";
-            this.KorShet.Name = "KorShet";
-            this.KorShet.ReadOnly = true;
-            // 
-            // Prihod
-            // 
-            this.Prihod.DataPropertyName = "Prihod";
-            this.Prihod.HeaderText = "Приход";
-            this.Prihod.Name = "Prihod";
-            this.Prihod.ReadOnly = true;
-            // 
-            // Rashod
-            // 
-            this.Rashod.DataPropertyName = "Rashod";
-            this.Rashod.HeaderText = "Расход";
-            this.Rashod.Name = "Rashod";
-            this.Rashod.ReadOnly = true;
-            // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
-            this.Id.Width = 50;
             // 
             // FStart
             // 
