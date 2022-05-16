@@ -31,16 +31,16 @@
             this.components = new System.ComponentModel.Container();
             this.pnlFill = new System.Windows.Forms.Panel();
             this.dgData = new System.Windows.Forms.DataGridView();
-            this.CId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColData = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pnlBottom = new System.Windows.Forms.Panel();
-            this.btnSave = new System.Windows.Forms.Button();
             this.cntxMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tlStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnlBottom = new System.Windows.Forms.Panel();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.CId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).BeginInit();
-            this.pnlBottom.SuspendLayout();
             this.cntxMenuStrip.SuspendLayout();
+            this.pnlBottom.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlFill
@@ -66,20 +66,19 @@
             this.dgData.TabIndex = 0;
             this.dgData.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgData_CellMouseEnter);
             // 
-            // CId
+            // cntxMenuStrip
             // 
-            this.CId.DataPropertyName = "CId";
-            this.CId.HeaderText = "Id";
-            this.CId.Name = "CId";
-            this.CId.ReadOnly = true;
-            this.CId.Visible = false;
+            this.cntxMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tlStripMenuItemDelete});
+            this.cntxMenuStrip.Name = "cntxMenuStrip";
+            this.cntxMenuStrip.Size = new System.Drawing.Size(119, 26);
             // 
-            // ColData
+            // tlStripMenuItemDelete
             // 
-            this.ColData.DataPropertyName = "ColData";
-            this.ColData.HeaderText = "Старшие кассиры";
-            this.ColData.Name = "ColData";
-            this.ColData.Width = 600;
+            this.tlStripMenuItemDelete.Name = "tlStripMenuItemDelete";
+            this.tlStripMenuItemDelete.Size = new System.Drawing.Size(118, 22);
+            this.tlStripMenuItemDelete.Text = "Удалить";
+            this.tlStripMenuItemDelete.Click += new System.EventHandler(this.tlStripMenuItemDelete_Click);
             // 
             // pnlBottom
             // 
@@ -100,19 +99,20 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // cntxMenuStrip
+            // CId
             // 
-            this.cntxMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tlStripMenuItemDelete});
-            this.cntxMenuStrip.Name = "cntxMenuStrip";
-            this.cntxMenuStrip.Size = new System.Drawing.Size(119, 26);
+            this.CId.DataPropertyName = "CId";
+            this.CId.HeaderText = "Id";
+            this.CId.Name = "CId";
+            this.CId.ReadOnly = true;
+            this.CId.Visible = false;
             // 
-            // tlStripMenuItemDelete
+            // ColData
             // 
-            this.tlStripMenuItemDelete.Name = "tlStripMenuItemDelete";
-            this.tlStripMenuItemDelete.Size = new System.Drawing.Size(118, 22);
-            this.tlStripMenuItemDelete.Text = "Удалить";
-            this.tlStripMenuItemDelete.Click += new System.EventHandler(this.tlStripMenuItemDelete_Click);
+            this.ColData.DataPropertyName = "ColData";
+            this.ColData.HeaderText = "Кассиры";
+            this.ColData.Name = "ColData";
+            this.ColData.Width = 600;
             // 
             // FListLocalChiefCashiers
             // 
@@ -122,11 +122,11 @@
             this.Controls.Add(this.pnlBottom);
             this.Controls.Add(this.pnlFill);
             this.Name = "FListLocalChiefCashiers";
-            this.Text = "Список старших кассиров";
+            this.Text = "Список кассиров";
             this.pnlFill.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).EndInit();
-            this.pnlBottom.ResumeLayout(false);
             this.cntxMenuStrip.ResumeLayout(false);
+            this.pnlBottom.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -137,9 +137,9 @@
         private System.Windows.Forms.DataGridView dgData;
         private System.Windows.Forms.Panel pnlBottom;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColData;
         private System.Windows.Forms.ContextMenuStrip cntxMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem tlStripMenuItemDelete;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColData;
     }
 }

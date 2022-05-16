@@ -3794,7 +3794,7 @@
             // 
             this.TSMItemLocalEmployees.Name = "TSMItemLocalEmployees";
             this.TSMItemLocalEmployees.Size = new System.Drawing.Size(248, 22);
-            this.TSMItemLocalEmployees.Text = "Кассиры";
+            this.TSMItemLocalEmployees.Text = "Сотрудники";
             this.TSMItemLocalEmployees.Click += new System.EventHandler(this.TSMItemLocalEmployees_Click);
             // 
             // TSMItemLocalAccounters
@@ -3808,7 +3808,7 @@
             // 
             this.TSMItemLocalChiefCashiers.Name = "TSMItemLocalChiefCashiers";
             this.TSMItemLocalChiefCashiers.Size = new System.Drawing.Size(248, 22);
-            this.TSMItemLocalChiefCashiers.Text = "Старшие кассиры";
+            this.TSMItemLocalChiefCashiers.Text = "Кассиры";
             this.TSMItemLocalChiefCashiers.Click += new System.EventHandler(this.TSMItemLocalChiefCashiers_Click);
             // 
             // TSMItemLocalKassa

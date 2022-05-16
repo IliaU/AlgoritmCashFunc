@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dgData = new System.Windows.Forms.DataGridView();
-            this.CId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cntxMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tlStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlFill = new System.Windows.Forms.Panel();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
+            this.CId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).BeginInit();
             this.cntxMenuStrip.SuspendLayout();
             this.pnlFill.SuspendLayout();
@@ -56,21 +56,6 @@
             this.dgData.Size = new System.Drawing.Size(655, 461);
             this.dgData.TabIndex = 0;
             this.dgData.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgData_CellMouseEnter);
-            // 
-            // CId
-            // 
-            this.CId.DataPropertyName = "CId";
-            this.CId.HeaderText = "Id";
-            this.CId.Name = "CId";
-            this.CId.ReadOnly = true;
-            this.CId.Visible = false;
-            // 
-            // ColData
-            // 
-            this.ColData.DataPropertyName = "ColData";
-            this.ColData.HeaderText = "Кассиры";
-            this.ColData.Name = "ColData";
-            this.ColData.Width = 600;
             // 
             // cntxMenuStrip
             // 
@@ -114,6 +99,21 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // CId
+            // 
+            this.CId.DataPropertyName = "CId";
+            this.CId.HeaderText = "Id";
+            this.CId.Name = "CId";
+            this.CId.ReadOnly = true;
+            this.CId.Visible = false;
+            // 
+            // ColData
+            // 
+            this.ColData.DataPropertyName = "ColData";
+            this.ColData.HeaderText = "Сотрудники";
+            this.ColData.Name = "ColData";
+            this.ColData.Width = 600;
+            // 
             // FListLocalEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -122,7 +122,7 @@
             this.Controls.Add(this.pnlFill);
             this.Controls.Add(this.pnlBottom);
             this.Name = "FListLocalEmployees";
-            this.Text = "Список кассиров";
+            this.Text = "Сотрудники";
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).EndInit();
             this.cntxMenuStrip.ResumeLayout(false);
             this.pnlFill.ResumeLayout(false);
@@ -137,9 +137,9 @@
         private System.Windows.Forms.Panel pnlFill;
         private System.Windows.Forms.Panel pnlBottom;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColData;
         private System.Windows.Forms.ContextMenuStrip cntxMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem tlStripMenuItemDelete;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColData;
     }
 }

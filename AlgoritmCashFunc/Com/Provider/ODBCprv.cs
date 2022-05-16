@@ -6253,7 +6253,7 @@ Where Id={0}", UpdOperationInvent.Id,
         /// <returns>Получает текущий список Local из базы данных</returns>
         private LocalList GetLocalListFromDbMySql()
         {
-            string CommandSql = String.Format(@"Select `Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft` From `aks`.`cashfunc_local`");
+            string CommandSql = String.Format(@"Select `Id`, `LocFullName`, `LocalName`, `IsSeller`, `IsСustomer`, `IsDivision`, `IsDraft` From `aks`.`cashfunc_local` Where `IsDraft`=0");
 
             try
             {
