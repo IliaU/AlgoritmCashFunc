@@ -836,5 +836,56 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 throw ae;
             }
         }
+
+        /// <summary>
+        /// Экспорт документа в 1С
+        /// </summary>
+        public override void ExportTo1C()
+        {
+            try
+            {
+                if (this.UreDate == null) throw new ApplicationException("У документа не задана юридическая дата.");
+
+                string FileName = string.Format("{0}_{1}_{2}{3}{4}.txt", Com.LocalFarm.CurLocalDepartament.StoreCode
+                    , Com.LocalFarm.CurLocalDepartament.CompanyCode
+                    , ((DateTime)this.UreDate).Year
+                    , ((DateTime)this.UreDate).Month.ToString("00")
+                    , ((DateTime)this.UreDate).Day.ToString("00"));
+
+                string PolKas = null;
+                if (this.LocalDebitor != null) PolKas = ((BLL.LocalPlg.LocalChiefCashiers)this.LocalDebitor).LocalName;
+                else PolKas = this.OtherDebitor;
+
+                string Sotrudnik = null;
+                if (this.LocalCreditor != null) Sotrudnik = ((BLL.LocalPlg.LocalEmployees)this.LocalCreditor).LocalName;
+                Sotrudnik = this.OtherKreditor;
+
+                string Row = string.Format("{0}\t{1}" +
+                    "\t{2}\t{3}" +
+                    "\t{4}\t{5}" +
+                    "\t{6}\t{7}" +
+                    "\t{8}\t{9}" +
+                    "\t{10}\t{11}" +
+                    "\t{12}\t{13}" +
+                    "\t{14}\t{15}" +
+                    "\t{16}\t{17}"
+                    , 1, this.DocNum
+                    , 20220127181619, 7708790060
+                    , Com.LocalFarm.CurLocalDepartament.OKPO, Com.LocalFarm.CurLocalDepartament.Organization
+                    , Com.LocalFarm.CurLocalDepartament.CompanyCode, Com.LocalFarm.CurLocalDepartament.StructPodrazdelenie
+                    , this.Summa, 0
+                    , this.GlavBuh, PolKas
+                    , Sotrudnik, this.VtomChisle
+                    , this.Osnovanie, this.PaidInReasons.LocalName
+                    , this.DebetNomerSchet, this.KredikKorSchet);
+                base.ExportTo1C(FileName, Row);
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
+                Com.Log.EventSave(ae.Message, string.Format("{0}.ExportTo1C", GetType().Name), EventEn.Error);
+                throw ae;
+            }
+        }
     }
 }

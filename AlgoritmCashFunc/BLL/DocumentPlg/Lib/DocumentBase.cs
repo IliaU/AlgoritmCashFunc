@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.Collections;
+using System.IO;
+using System.Threading;
 using AlgoritmCashFunc.Lib;
 
 namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
@@ -14,6 +16,20 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
     /// </summary>
     public abstract class DocumentBase
     {
+        #region Private Param
+        private static DocumentBase obj = null;
+
+        /// <summary>
+        /// Количество попыток записи в лог
+        /// </summary>
+        private static int IOCountPoput = 5;
+
+        /// <summary>
+        /// Количество милесекунд мкжду попутками записи
+        /// </summary>
+        private static int IOWhileInt = 500;
+        #endregion
+        
         /// <summary>
         /// Идентификатор в базе данных
         /// </summary>
@@ -235,6 +251,57 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
                 {
                     return _DocumentL.GetEnumerator();
                 }
+            }
+        }
+
+        /// <summary>
+        /// Экспорт документа в 1С
+        /// </summary>
+        /// <param name="FileName">Имя файла</param>
+        /// <param name="row">Строка которую вставить</param>
+        protected void ExportTo1C(string FileName, string row)
+        {
+            try
+            {
+                if (String.IsNullOrWhiteSpace(Com.LocalFarm.CurLocalDepartament.Upload1CDir)) throw new ApplicationException("Не указана папка в которую производится експорт файлов для 1С");
+                if (!Directory.Exists(Com.LocalFarm.CurLocalDepartament.Upload1CDir)) throw new ApplicationException("Папки в которую производится експорт файлов для 1С не существует");
+
+                this.ExportTo1C(FileName, row, IOCountPoput);
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
+                Com.Log.EventSave(ae.Message, string.Format("{0}.ExportTo1C", GetType().Name), EventEn.Error);
+                throw ae;
+            }
+        }
+
+        /// <summary>
+        /// Метод для записи информации в лог
+        /// </summary>
+        /// <param name="FileName">Имя файла</param>
+        /// <param name="row">Строка которую вставить</param>
+        /// <param name="IOCountPoput">Количество попыток записи в лог</param>
+        private void ExportTo1C(string FileName, string row, int IOCountPoput)
+        {
+            try
+            {
+                lock (obj)
+                {
+                    using (StreamWriter SwFileLog = new StreamWriter(Com.LocalFarm.CurLocalDepartament.Upload1CDir + @"\" + FileName, true))
+                    {
+                        SwFileLog.WriteLine(row);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                if (IOCountPoput > 0)
+                {
+                    Thread.Sleep(IOWhileInt);
+                    this.ExportTo1C(FileName, row, IOCountPoput - 1);
+                }
+                else throw;
             }
         }
 
