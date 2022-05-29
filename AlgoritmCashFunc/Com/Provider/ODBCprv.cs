@@ -218,6 +218,42 @@ namespace AlgoritmCashFunc.Com.Provider
         }
 
         /// <summary>
+        /// Установка номеров документа по правилам связанным с началом года
+        /// </summary>
+        public void SetDocNumForYear()
+        {
+            try
+            {
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            SetDocNumForYearORA();
+                            break;
+                        case "myodbc8a.dll":
+                            SetDocNumForYearMySql();
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                //return 0;
+            }
+            catch (Exception ex)
+            {
+                // Логируем ошибку если её должен видеть пользователь или если взведён флаг трассировке в файле настройки программы
+                if (Com.Config.Trace) base.EventSave(ex.Message, "SetDocNumForYear", EventEn.Error);
+
+                throw ex;
+            }
+        }
+
+        /// <summary>
         /// Получаем последний номер документа по типу который задан в документе за год в котором юридическая дата документа на основе которого получаем номер
         /// </summary>
         /// <param name="doc">Документ откуда получаем тип и юридическую дату</param>
@@ -2459,6 +2495,96 @@ namespace AlgoritmCashFunc.Com.Provider
             {
                 base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".setDataORA", EventEn.Error);
                 if (Com.Config.Trace) base.EventSave(SQL, GetType().Name + ".setDataORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Установка номеров документа по правилам связанным с началом года
+        /// </summary>
+        public void SetDocNumForYearORA()
+        {
+            string CommandSql = String.Format(@"With T As (Select `Id`, `UreDate`, `OperationId`, `DocNum`,
+      row_number() over(partition by YEAR(`UreDate`), `OperationId` order by `UreDate`) As PRN
+    From `aks`.`cashfunc_document`
+    Where `UreDate`>=str_to_date(ConCat('01.01.',convert(YEAR(curdate())-1, char)),'%d.%m.%Y'))
+Update `aks`.`cashfunc_document` D 
+  inner join  T On D.Id=T.Id
+Set D.`DocNum`=T.`DocNum`
+
+
+
+With T As (Select `OperationId`, Max(`DocNum`) As DocNum
+    From `aks`.`cashfunc_document`
+    Where `UreDate`>=str_to_date(ConCat('01.01.',convert(YEAR(curdate()), char)),'%d.%m.%Y')
+    Group By `OperationId`),
+    R As (Select Max(Case When `OperationId`=1 Then `DocNum` else 0 End) Prih,
+      Max(Case When `OperationId`=2 Then `DocNum` else 0 End) Rash,
+      Max(Case When `OperationId`=3 Then `DocNum` else 0 End) KasBook,
+      Max(Case When `OperationId`=4 Then `DocNum` else 0 End) Invent
+    From  T)
+Update `aks`.`cashfunc_local_kassa` K
+Set K.LastDocNumPrih=(Select Prih From R),
+  K.LastDocNumRash=(Select Rash From R),
+  K.LastDocNumKasBook=(Select KasBook From R),
+  K.LastDocNumInvent=(Select Invent From R)
+Where K.Id=2", Com.LocalFarm.CurLocalDepartament.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocNumForYearORA", EventEn.Dump);
+
+                int rez = 0;
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        using (OdbcDataReader dr = com.ExecuteReader())
+                        {
+
+                            if (dr.HasRows)
+                            {
+                                // Получаем схему таблицы
+                                //DataTable tt = dr.GetSchemaTable();
+
+                                //foreach (DataRow item in tt.Rows)
+                                //{
+                                //    DataColumn ncol = new DataColumn(item["ColumnName"].ToString(), Type.GetType(item["DataType"].ToString()));
+                                //ncol.SetOrdinal(int.Parse(item["ColumnOrdinal"].ToString()));
+                                //ncol.MaxLength = (int.Parse(item["ColumnSize"].ToString()) < 300 ? 300 : int.Parse(item["ColumnSize"].ToString()));
+                                //rez.Columns.Add(ncol);
+                                //}
+
+                                // пробегаем по строкам
+                                while (dr.Read())
+                                {
+                                    for (int i = 0; i < dr.FieldCount; i++)
+                                    {
+                                        if (!dr.IsDBNull(i) && dr.GetName(i).ToUpper() == ("MaxDocNum").ToUpper()) rez = int.Parse(dr.GetValue(i).ToString());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocNumForYearORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocNumForYearORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocNumForYearORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".SetDocNumForYearORA", EventEn.Dump);
                 throw;
             }
         }
@@ -5072,6 +5198,100 @@ Order by `Id`");
         }
 
         /// <summary>
+        /// Установка номеров документа по правилам связанным с началом года
+        /// </summary>
+        public void SetDocNumForYearMySql()
+        {
+            string CommandSql1 = String.Format(@"With T As (Select `Id`, `UreDate`, `OperationId`, `DocNum`,
+      row_number() over(partition by YEAR(`UreDate`), `OperationId` order by `UreDate`) As PRN
+    From `aks`.`cashfunc_document`
+    Where `UreDate`>=str_to_date(ConCat('01.01.',convert(YEAR(curdate())-1, char)),'%d.%m.%Y'))
+Update `aks`.`cashfunc_document` D 
+  inner join  T On D.Id=T.Id
+Set D.`DocNum`=T.`DocNum`");
+
+            string CommandSql2 = String.Format(@"With T As (Select `OperationId`, Max(`DocNum`) As DocNum
+    From `aks`.`cashfunc_document`
+    Where `UreDate`>=str_to_date(ConCat('01.01.',convert(YEAR(curdate()), char)),'%d.%m.%Y')
+    Group By `OperationId`),
+    R As (Select Max(Case When `OperationId`=1 Then `DocNum` else 0 End) Prih,
+      Max(Case When `OperationId`=2 Then `DocNum` else 0 End) Rash,
+      Max(Case When `OperationId`=3 Then `DocNum` else 0 End) KasBook,
+      Max(Case When `OperationId`=4 Then `DocNum` else 0 End) Invent
+    From  T)
+Update `aks`.`cashfunc_local_kassa` K
+Set K.LastDocNumPrih=(Select Prih From R),
+  K.LastDocNumRash=(Select Rash From R),
+  K.LastDocNumKasBook=(Select KasBook From R),
+  K.LastDocNumInvent=(Select Invent From R)
+Where K.Id={0}", Com.LocalFarm.CurLocalDepartament.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql1, GetType().Name + ".SetDocNumForYearMySql (Qwery1)", EventEn.Dump);
+                   
+                
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql1, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                //return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocNumForYearMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql1, GetType().Name + ".SetDocNumForYearMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocNumForYearMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql1, GetType().Name + ".SetDocNumForYearMySql", EventEn.Dump);
+                throw;
+            }
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql2, GetType().Name + ".SetDocNumForYearMySql  (Qwery2)", EventEn.Dump);
+                
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql2, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                //return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocNumForYearMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql2, GetType().Name + ".SetDocNumForYearMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocNumForYearMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql2, GetType().Name + ".SetDocNumForYearMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Получаем последний номер документа по типу который задан в документе за год в котором юридическая дата документа на основе которого получаем номер
         /// </summary>
         /// <param name="doc">Документ откуда получаем тип и юридическую дату</param>
@@ -5153,7 +5373,7 @@ Set DocNum=DocNum+1
 Where `DocFullName`='{0}'
   and `UreDate` >= str_to_date('{1}','%d.%m.%Y')
   and `UreDate` < str_to_date('01.01.{2}','%d.%m.%Y')", doc.DocFullName,
-                ((DateTime)doc.UreDate).AddDays(1),
+                ((DateTime)doc.UreDate).AddDays(1).ToShortDateString(),
                 ((DateTime)doc.UreDate).AddYears(1).Year);
 
             try

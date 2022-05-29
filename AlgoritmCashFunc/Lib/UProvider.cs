@@ -274,6 +274,14 @@ namespace AlgoritmCashFunc.Lib
         }
 
         /// <summary>
+        /// Установка номеров документа по правилам связанным с началом года
+        /// </summary>
+        public void SetDocNumForYear()
+        {
+            this.PrvPrizmI.SetDocNumForYear();
+        }
+
+        /// <summary>
         /// Получаем последний номер документа по типу который задан в документе за год в котором юридическая дата документа на основе которого получаем номер
         /// </summary>
         /// <param name="doc">Документ откуда получаем тип и юридическую дату</param>

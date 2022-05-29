@@ -85,6 +85,12 @@ namespace AlgoritmCashFunc.BLL
 
                 // Запускаем сохранение в нашем дочернем плагине
                 this.SaveChildron();
+                
+                // Проверка надату. Если у текущего документа дата не сегодняшняя значит пользователь редактирует документ в прошлом нужно номера документов пересторить за текущий год и предыдущий
+                //if (this.UreDate!=null && ((DateTime)this.UreDate).Date!=DateTime.Now.Date)
+                //{
+                //    Com.ProviderFarm.CurrentPrv.SetDocNumForYear();
+                //}
             }
             catch (Exception ex)
             {

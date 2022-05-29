@@ -19,5 +19,10 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         /// <param name="DocNumber">Номер документа</param>
         /// <returns>Документ</returns>
         Check GetCheck(int DocNumber);
+
+        /// <summary>
+        /// Установка номеров документа по правилам связанным с началом года
+        /// </summary>
+        void SetDocNumForYear();
     }
 }
