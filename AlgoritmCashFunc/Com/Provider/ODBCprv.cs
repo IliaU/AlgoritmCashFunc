@@ -5208,7 +5208,7 @@ Order by `Id`");
     Where `UreDate`>=str_to_date(ConCat('01.01.',convert(YEAR(curdate())-1, char)),'%d.%m.%Y'))
 Update `aks`.`cashfunc_document` D 
   inner join  T On D.Id=T.Id
-Set D.`DocNum`=T.`DocNum`");
+Set D.`DocNum`=T.`PRN`");
 
             string CommandSql2 = String.Format(@"With T As (Select `OperationId`, Max(`DocNum`) As DocNum
     From `aks`.`cashfunc_document`

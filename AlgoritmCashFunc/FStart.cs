@@ -1107,18 +1107,18 @@ namespace AlgoritmCashFunc
                         }
 
                         // Сохранение инфы в базе
-                        if (((DateTime)this.CurDoc.UreDate).Date == DateTime.Now.Date)
-                        {
+                        //if (((DateTime)this.CurDoc.UreDate).Date == DateTime.Now.Date)
+                        //{
                             Kassa.LastDocNumPrih = int.Parse(this.txtBoxPrihNumDoc.Text);
-                        }
-                        else
-                        {
+                        //}
+                        //else
+                        //{
                             // Меняем нумерацию документов в текущем году
-                            Com.ProviderFarm.CurrentPrv.UpdateNumDocForAdd(this.CurDoc);
+                        //    Com.ProviderFarm.CurrentPrv.UpdateNumDocForAdd(this.CurDoc);
 
                             // Если это текущий годж то менять номер нужно если не тот год но вставка в предыдущий год не меняет номер документа в текущем году
-                            if (((DateTime)this.CurDoc.UreDate).Year== DateTime.Now.Year) Kassa.LastDocNumPrih++;
-                        }
+                        //    if (((DateTime)this.CurDoc.UreDate).Year== DateTime.Now.Year) Kassa.LastDocNumPrih++;
+                        //}
 
                         Kassa.Save();
 
@@ -1237,18 +1237,18 @@ namespace AlgoritmCashFunc
                         ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).GlavBuh = this.txtBoxRashGlavBuh.Text;
                         
                         // Сохранение инфы в базе
-                        if (((DateTime)this.CurDoc.UreDate).Date == DateTime.Now.Date)
-                        {
+                        //if (((DateTime)this.CurDoc.UreDate).Date == DateTime.Now.Date)
+                        //{
                             Kassa.LastDocNumPrih = int.Parse(this.txtBoxRashNumDoc.Text);
-                        }
-                        else
-                        {
+                        //}
+                        //else
+                        //{
                             // Меняем нумерацию документов в текущем году
-                            Com.ProviderFarm.CurrentPrv.UpdateNumDocForAdd(this.CurDoc);
+                        //    Com.ProviderFarm.CurrentPrv.UpdateNumDocForAdd(this.CurDoc);
 
                             // Если это текущий годж то менять номер нужно если не тот год но вставка в предыдущий год не меняет номер документа в текущем году
-                            if (((DateTime)this.CurDoc.UreDate).Year == DateTime.Now.Year) Kassa.LastDocNumPrih++;
-                        }
+                        //    if (((DateTime)this.CurDoc.UreDate).Year == DateTime.Now.Year) Kassa.LastDocNumPrih++;
+                        //}
                         Kassa.Save();
                                                 
                         // Заполняем инфу по операции
