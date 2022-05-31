@@ -41,6 +41,7 @@ namespace AlgoritmCashFunc
                 this.DefBaskCoclortSSLabel = this.tSSLabel.BackColor;
 
                 //Инициируем механизм который проверяет необходимость блокировки пользователя
+                UserFarm.LogIn();
                 UserFarm.ActiveStatusLogon();
                 UserFarm.onEventLogOFF += UserFarm_onEventLogOFF;
 
@@ -1829,7 +1830,7 @@ namespace AlgoritmCashFunc
 
                             // Создаём пустой документ так как за эту дату документ не найден
                             this.CurDoc=Com.DocumentFarm.CreateNewDocument("DocumentKasBook");
-                            this.CurDoc = Com.DocumentFarm.CreateNewDocument(null, "DocumentKasBook", UreDt, DateTime.Now, DateTime.Now, Com.UserFarm.CurrentUser.Logon, Com.OperationFarm.CurOperationList["OperationKasBook"], null, null, null, null, /*Com.LocalFarm.CurLocalDepartament.LastDocNumKasBook*/ Com.ProviderFarm.CurrentPrv.MaxDocNumForYaer(this.CurDoc) + 1, true, false);  // тут надо получить документ и список на день который указан если документа нет то создаём его и получаем список документов в этом дне с остатками на начало и конец для того чтобы можно было мостроить суммы на начало дня и конец выбранного дня
+                            this.CurDoc = Com.DocumentFarm.CreateNewDocument(null, "DocumentKasBook", UreDt, DateTime.Now, DateTime.Now, Com.UserFarm.CurrentUser.Logon, Com.OperationFarm.CurOperationList["OperationKasBook"], null, null, Com.LocalFarm.CurLocalDepartament, null, null, /*Com.LocalFarm.CurLocalDepartament.LastDocNumKasBook*/ Com.ProviderFarm.CurrentPrv.MaxDocNumForYaer(this.CurDoc) + 1, true, false);  // тут надо получить документ и список на день который указан если документа нет то создаём его и получаем список документов в этом дне с остатками на начало и конец для того чтобы можно было мостроить суммы на начало дня и конец выбранного дня
                             //this.CurDoc.DocNum = (Kassa.LastDocNumKasBook + 1);  // Номер документа получили при создании документа
 
                             this.txtBoxKasBookDolRukOrg.Text = Kassa.DolRukOrg;

@@ -94,16 +94,19 @@ namespace AlgoritmCashFunc.BLL.LocalPlg.Lib
 
             /// <summary>
             /// Индексаторы
+            /// Поиск по типу плагина и имени
             /// </summary>
-            /// <param name="s">Поиск по LocalName</param>
+            /// <param name="LocFullName">Тип плагина</param>
+            /// <param name="LocalName">Имя</param>
             /// <returns>Возвращает операцию</returns>
-            public Local this[string s]
+            public Local this[string LocFullName, string LocalName]
             {
                 get
                 {
                     foreach (Local item in this._LocalL)
                     {
-                        if (item.LocalName == s) return item;
+                        if (item.LocFullName == LocFullName
+                            && item.LocalName == LocalName) return item;
                     }
 
                     return null;

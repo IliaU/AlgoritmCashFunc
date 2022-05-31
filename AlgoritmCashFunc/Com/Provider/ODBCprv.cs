@@ -220,7 +220,8 @@ namespace AlgoritmCashFunc.Com.Provider
         /// <summary>
         /// Установка номеров документа по правилам связанным с началом года
         /// </summary>
-        public void SetDocNumForYear()
+        /// <param name="DtStart">Дата начиная с которой нужно править документы кассовой книги в части баланса</param>
+        public void SetDocNumForYear(DateTime? DtStart)
         {
             try
             {
@@ -232,10 +233,10 @@ namespace AlgoritmCashFunc.Com.Provider
                     {
                         case "SQORA32.DLL":
                         case "SQORA64.DLL":
-                            SetDocNumForYearORA();
+                            SetDocNumForYearORA(DtStart);
                             break;
                         case "myodbc8a.dll":
-                            SetDocNumForYearMySql();
+                            SetDocNumForYearMySql(DtStart);
                             break;
                         default:
                             throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
@@ -2502,7 +2503,8 @@ namespace AlgoritmCashFunc.Com.Provider
         /// <summary>
         /// Установка номеров документа по правилам связанным с началом года
         /// </summary>
-        public void SetDocNumForYearORA()
+        /// <param name="DtStart">Дата начиная с которой нужно править документы кассовой книги в части баланса</param>
+        public void SetDocNumForYearORA(DateTime? DtStart)
         {
             string CommandSql = String.Format(@"With T As (Select `Id`, `UreDate`, `OperationId`, `DocNum`,
       row_number() over(partition by YEAR(`UreDate`), `OperationId` order by `UreDate`) As PRN
@@ -5200,19 +5202,22 @@ Order by `Id`");
         /// <summary>
         /// Установка номеров документа по правилам связанным с началом года
         /// </summary>
-        public void SetDocNumForYearMySql()
+        /// <param name="DtStart">Дата начиная с которой нужно править документы кассовой книги в части баланса</param>
+        public void SetDocNumForYearMySql(DateTime? DtStart)
         {
             string CommandSql1 = String.Format(@"With T As (Select `Id`, `UreDate`, `OperationId`, `DocNum`,
       row_number() over(partition by YEAR(`UreDate`), `OperationId` order by `UreDate`) As PRN
     From `aks`.`cashfunc_document`
-    Where `UreDate`>=str_to_date(ConCat('01.01.',convert(YEAR(curdate())-1, char)),'%d.%m.%Y'))
+    Where `Departament` = {0}
+        and `UreDate`>=str_to_date(ConCat('01.01.',convert({1}-1, char)),'%d.%m.%Y'))
 Update `aks`.`cashfunc_document` D 
   inner join  T On D.Id=T.Id
-Set D.`DocNum`=T.`PRN`");
+Set D.`DocNum`=T.`PRN`", Com.LocalFarm.CurLocalDepartament.Id
+                    , ((DateTime)DtStart).Year);
 
             string CommandSql2 = String.Format(@"With T As (Select `OperationId`, Max(`DocNum`) As DocNum
     From `aks`.`cashfunc_document`
-    Where `UreDate`>=str_to_date(ConCat('01.01.',convert(YEAR(curdate()), char)),'%d.%m.%Y')
+    Where `UreDate`>=str_to_date(ConCat('01.01.',convert({1}), char)),'%d.%m.%Y')
     Group By `OperationId`),
     R As (Select Max(Case When `OperationId`=1 Then `DocNum` else 0 End) Prih,
       Max(Case When `OperationId`=2 Then `DocNum` else 0 End) Rash,
@@ -5224,7 +5229,52 @@ Set K.LastDocNumPrih=(Select Prih From R),
   K.LastDocNumRash=(Select Rash From R),
   K.LastDocNumKasBook=(Select KasBook From R),
   K.LastDocNumInvent=(Select Invent From R)
-Where K.Id={0}", Com.LocalFarm.CurLocalDepartament.Id);
+Where K.Id={0}", Com.LocalFarm.CurLocalDepartament.Id
+                    , ((DateTime)DtStart).Year);
+
+            string CommandSql3 = String.Format(@"With T As (Select Str_To_Date('{1}','%d.%m.%Y') As FindDt),
+    # Получаем дату начиная с которой нужно искать документы и если есть ближайший кассовый документ то подтягиваем из него дату и остаток на начало дня который потом будем использовать как стартовое значение суммы
+    Conf0 As (Select Coalesce(Trim(Max(D.`UreDate`))
+        , (Select Trim(Min(`UreDate`)) From `aks`.`cashfunc_document`) ) As FindStart
+        , (Select Trim(Min(FindDt)) From T) As FindDt
+      From `aks`.`cashfunc_document` D
+        inner join `aks`.`cashfunc_document_kasbook` K On D.Id=K.Id
+      where D.`UreDate` < (Select Min(FindDt) From T)
+        and D.`DocFullName`='DocumentKasBook'
+        and D.`Departament`= {0}), 
+    Conf As (Select C.*, Coalesce(K.`SummaStartDay`,0) As StartSumm
+      From Conf0 C
+        left join `aks`.`cashfunc_document` D On C.FindStart = D.UreDate
+            and D.`DocFullName`='DocumentKasBook'
+            and D.`Departament`={0}
+        inner join `aks`.`cashfunc_document_kasbook` K On D.Id=K.Id),
+    # Получаем список всех документов с оборотами
+    Doc As (Select C.FindDt, C.StartSumm, D.Id, Trim(D.UreDate) As UreDate, D.`DocFullName`
+        , Coalesce(Coalesce(DP.Summa*O.KoefDebitor, DR.Summa*O.KoefDebitor), 0) As Oborot
+      From Conf C
+        inner join `aks`.`cashfunc_document` D On D.UreDate>=C.FindStart
+        inner join `aks`.`cashfunc_operation` O On D.OperationId=O.Id
+        left join `aks`.`cashfunc_document_prihod` DP On D.Id=DP.Id
+        left join `aks`.`cashfunc_document_rashod` DR On D.Id=DR.Id
+      Where D.`UreDate`>=C.FindStart
+        and D.`Departament`={0}), 
+    # Делаем соединение кассовых книг с оборотами относительно того периода котоорый в запрошенном окне
+    DocDetail As (Select KB.FindDt, KB.StartSumm, KB.Id, KB.UreDate, Coalesce(D.Oborot,0) As Oborot
+      From Doc KB
+        left join Doc D On KB.UreDate>D.UreDate and D.`DocFullName`<>'DocumentKasBook'
+      Where KB.`DocFullName`='DocumentKasBook'
+      #Order by KB.UreDate, D.UreDate
+      ),
+    Rez As (Select FindDt, StartSumm, UreDate, Id, Sum(Oborot) +  StartSumm As SummaStartDay
+      From DocDetail
+      Group By FindDt, StartSumm, UreDate, Id
+      #Order by UreDate
+      )
+Update `aks`.`cashfunc_document` D 
+  inner join  Rez R On D.Id=R.Id
+  inner join `aks`.`cashfunc_document_kasbook` K On D.Id=K.Id
+Set K.`SummaStartDay`=R.`SummaStartDay`", Com.LocalFarm.CurLocalDepartament.Id
+                                    , ((DateTime)DtStart).ToShortDateString());
 
             try
             {
@@ -5289,6 +5339,37 @@ Where K.Id={0}", Com.LocalFarm.CurLocalDepartament.Id);
                 if (Com.Config.Trace) base.EventSave(CommandSql2, GetType().Name + ".SetDocNumForYearMySql", EventEn.Dump);
                 throw;
             }
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql3, GetType().Name + ".SetDocNumForYearMySql  (Qwery3)", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql3, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                //return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocNumForYearMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql3, GetType().Name + ".SetDocNumForYearMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocNumForYearMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql3, GetType().Name + ".SetDocNumForYearMySql", EventEn.Dump);
+                throw;
+            }
         }
 
         /// <summary>
@@ -5301,7 +5382,10 @@ Where K.Id={0}", Com.LocalFarm.CurLocalDepartament.Id);
             string CommandSql = String.Format(@"Select Max(DocNum) As MaxDocNum
 From `aks`.`cashfunc_document`
 Where `DocFullName`='{0}'
-  and `UreDate` >= str_to_date('01.01.{1}','%d.%m.%Y')", doc.DocFullName, ((DateTime)doc.UreDate).Year);
+  and `Departament`= {2}
+  and `UreDate` >= str_to_date('01.01.{1}','%d.%m.%Y')", doc.DocFullName
+                           , ((DateTime)doc.UreDate).Year
+                        , Com.LocalFarm.CurLocalDepartament.Id.ToString());
 
             try
             {
@@ -6856,7 +6940,7 @@ Values({0}, '{1}', '{2}', '{3}', '{4}',
                             NewLocalKassa.LastDocNumReportKas, NewLocalKassa.LastDocNumScetKkm, NewLocalKassa.LastDocNumVerifNal, NewLocalKassa.LastDocNumInvent,
                             NewLocalKassa.INN, NewLocalKassa.ZavodKKM, NewLocalKassa.RegKKM, NewLocalKassa.GlavBuhFio,
                             NewLocalKassa.KkmName, NewLocalKassa.DolRukOrg, NewLocalKassa.RukFio, NewLocalKassa.ZavDivisionFio,
-                            NewLocalKassa.CompanyCode, NewLocalKassa.StoreCode, NewLocalKassa.Upload1CDir);
+                            NewLocalKassa.CompanyCode, NewLocalKassa.StoreCode, NewLocalKassa.Upload1CDir.Replace(@"\",@"\\"));
 
             try
             {
@@ -6908,7 +6992,7 @@ Where Id={0}", UpdLocalKassa.Id, UpdLocalKassa.Organization, UpdLocalKassa.Struc
             UpdLocalKassa.LastDocNumReportKas, UpdLocalKassa.LastDocNumScetKkm, UpdLocalKassa.LastDocNumVerifNal, UpdLocalKassa.LastDocNumInvent,
             UpdLocalKassa.INN, UpdLocalKassa.ZavodKKM, UpdLocalKassa.RegKKM, UpdLocalKassa.GlavBuhFio,
             UpdLocalKassa.KkmName, UpdLocalKassa.DolRukOrg, UpdLocalKassa.RukFio, UpdLocalKassa.ZavDivisionFio,
-            UpdLocalKassa.CompanyCode, UpdLocalKassa.StoreCode, UpdLocalKassa.Upload1CDir);
+            UpdLocalKassa.CompanyCode, UpdLocalKassa.StoreCode, UpdLocalKassa.Upload1CDir.Replace(@"\", @"\\"));
 
             try
             {
@@ -7384,19 +7468,27 @@ Where Id={0}", UpdLocalPaidRashReasons.Id,
         {
             string CommandSql = String.Format(@"With T As (Select Str_To_Date('{0}','%d.%m.%Y') As FindDt),
     # Получаем дату начиная с которой нужно искать документы и если есть ближайший кассовый документ то подтягиваем из него дату и остаток на начало дня который потом будем использовать как стартовое значение суммы
-    Conf As (Select Coalesce(Trim(Max(D.`UreDate`)), (Select Trim(Min(`UreDate`)) From `aks`.`cashfunc_document`) ) As FindStart
+    Conf0 As (Select Coalesce(Trim(Max(D.`UreDate`))
+        , (Select Trim(Min(`UreDate`)) From `aks`.`cashfunc_document`) ) As FindStart
         , (Select Trim(Min(FindDt)) From T) As FindDt
-        , Coalesce(Min(`SummaStartDay`),0) As StartSumm
       From `aks`.`cashfunc_document` D
         inner join `aks`.`cashfunc_document_kasbook` K On D.Id=K.Id
       where D.`UreDate` < (Select Min(FindDt) From T)
-        and D.`DocFullName`='DocumentKasBook'),
+        and D.`DocFullName`='DocumentKasBook'
+        and D.`Departament`= {1}),
+    Conf As (Select C.*, Coalesce(K.`SummaStartDay`,0) As StartSumm
+      From Conf0 C
+        left join `aks`.`cashfunc_document` D On C.FindStart = D.UreDate
+            and D.`DocFullName`='DocumentKasBook'
+            and D.`Departament`= {1}
+        inner join `aks`.`cashfunc_document_kasbook` K On D.Id=K.Id),
     # Получаем список отфильтрованных документов с признаком даты на которую ищем и стартовой суммой
     Doc As (Select C.FindDt, C.StartSumm, D.Id, Trim(D.UreDate) As UreDate, O.KoefDebitor
       From Conf C
         inner join `aks`.`cashfunc_document` D On D.UreDate>=C.FindStart
         inner join `aks`.`cashfunc_operation` O On D.OperationId=O.Id
       Where D.`DocFullName` in ('DocumentPrihod', 'DocumentRashod')
+        and D.`Departament`= {1}
         and D.`UreDate`>=C.FindStart
         and D.`UreDate`<Date_Add(FindDt,interval 1 day)),
     # Считаем по документу прихода
@@ -7417,7 +7509,7 @@ Where Id={0}", UpdLocalPaidRashReasons.Id,
         Select * From DocRash)
 # Считаем результат
 Select Sum(Ostatok) As Ostatok, Sum(Oborot) As Oborot
-From  DocUnion ",  Dt.ToShortDateString());
+From  DocUnion ",  Dt.ToShortDateString(), Com.LocalFarm.CurLocalDepartament.Id.ToString());
 
             try
             {
@@ -7488,9 +7580,10 @@ From  DocUnion ",  Dt.ToShortDateString());
 From `aks`.`CashFunc_Document`
 Where `UreDate`>={0} 
     and `OperationId`={1}
+    and `Departament`={2}
 Order by `Id`", (LastDay == null ? "`OperationId`" : string.Format("Str_To_Date('{0}', '%d.%m.%Y')", DateTime.Now.AddDays((double)LastDay*-1).ToShortDateString()))
             , (OperationId == null ? "`OperationId`" : OperationId.ToString())
-            );
+            , Com.LocalFarm.CurLocalDepartament.Id.ToString());
 
             try
             {
@@ -7578,7 +7671,7 @@ Order by `Id`", (LastDay == null ? "`OperationId`" : string.Format("Str_To_Date(
                                             if (TmpCred == null) throw new ApplicationException(string.Format("Кредитора с идентификатором {0} в документе где id={1} не существует.", TmpLocalCreditorId, TmpId));
                                         }
                                         
-                                        rez.Add(DocumentFarm.CreateNewDocument((int)TmpId, TmpDocFullName, TmpUreDate, (DateTime)TmpCteateDate, (DateTime)TmpModifyDate, TmpModifyUser, TmpOper, TmpDeb, TmpCred, TmpOtherDebitor, TmpOtherKreditor, TmpDocNum, TmpIsDraft, TmpIsProcessed));
+                                        rez.Add(DocumentFarm.CreateNewDocument((int)TmpId, TmpDocFullName, TmpUreDate, (DateTime)TmpCteateDate, (DateTime)TmpModifyDate, TmpModifyUser, TmpOper, TmpDeb, TmpCred, Com.LocalFarm.CurLocalDepartament, TmpOtherDebitor, TmpOtherKreditor, TmpDocNum, TmpIsDraft, TmpIsProcessed));
                                     }
                                 }
                             }
@@ -7614,10 +7707,12 @@ Order by `Id`", (LastDay == null ? "`OperationId`" : string.Format("Str_To_Date(
             string CommandSql = String.Format(@"Select `Id`, `DocFullName`, `UreDate`, `CteateDate`, `ModifyDate`, `ModifyUser`, `OperationId`, `LocalDebitorId`, `LocalCreditorId`, `OtherDebitor`, `OtherKreditor`, `DocNum`, `IsDraft`, `IsProcessed` 
 From `aks`.`CashFunc_Document`
 Where `UreDate`={0} 
+    and `Departament` = {3}
     and `OperationId`{1}{2}
 Order by `Id`", (Dt==null ? "`OperationId`" : string.Format("Str_To_Date('{0}', '%d.%m.%Y')", ((DateTime)Dt).ToShortDateString()))
             , (HasNotin?"<>":"=")
             , (OperationId==null ? "`OperationId`" : OperationId.ToString())
+            , Com.LocalFarm.CurLocalDepartament.Id.ToString()
             );
 
             try
@@ -7705,7 +7800,7 @@ Order by `Id`", (Dt==null ? "`OperationId`" : string.Format("Str_To_Date('{0}', 
                                             if (TmpCred == null) throw new ApplicationException(string.Format("Кредитора с идентификатором {0} в документе где id={1} не существует.", TmpLocalCreditorId, TmpId));
                                         }
 
-                                        rez.Add(DocumentFarm.CreateNewDocument((int)TmpId, TmpDocFullName, TmpUreDate, (DateTime)TmpCteateDate, (DateTime)TmpModifyDate, TmpModifyUser, TmpOper, TmpDeb, TmpCred, TmpOtherDebitor, TmpOtherKreditor, TmpDocNum, TmpIsDraft, TmpIsProcessed));
+                                        rez.Add(DocumentFarm.CreateNewDocument((int)TmpId, TmpDocFullName, TmpUreDate, (DateTime)TmpCteateDate, (DateTime)TmpModifyDate, TmpModifyUser, TmpOper, TmpDeb, TmpCred, Com.LocalFarm.CurLocalDepartament, TmpOtherDebitor, TmpOtherKreditor, TmpDocNum, TmpIsDraft, TmpIsProcessed));
                                     }
                                 }
                             }
@@ -7740,11 +7835,13 @@ Order by `Id`", (Dt==null ? "`OperationId`" : string.Format("Str_To_Date('{0}', 
 
             string CommandSql = String.Format(@"insert into `aks`.`CashFunc_Document`(`DocFullName`, `UreDate`, `CteateDate`, `ModifyDate`,
     `ModifyUser`, `OperationId`, `LocalDebitorId`, `LocalCreditorId`, 
-    `OtherDebitor`, `OtherKreditor`, `DocNum`, `IsDraft`
+    `Departament`, `OtherDebitor`, `OtherKreditor`, `DocNum`, 
+    `IsDraft`
 )
 Values(?, ?, ?, ?, 
     ?, ?, ?, ?,
-    ?, ?, ?, ?)");
+    ?, ?, ?, ?,
+    ?)");
             string CommandSql2 = "SELECT LAST_INSERT_ID()  As Id";
 
 
@@ -7769,9 +7866,11 @@ Values(?, ?, ?, ?,
                         com.Parameters.Add(new OdbcParameter("LocalDebitorId", OdbcType.Int) { Value = (NewDocument.LocalDebitor==null?-1:NewDocument.LocalDebitor.Id) });
                         com.Parameters.Add(new OdbcParameter("LocalCreditorId", OdbcType.Int) { Value = (NewDocument.LocalCreditor==null?-1:NewDocument.LocalCreditor.Id) });
                         //
+                        com.Parameters.Add(new OdbcParameter("Departament", OdbcType.Int) { Value = Com.LocalFarm.CurLocalDepartament.Id });
                         com.Parameters.Add(new OdbcParameter("OtherDebitor", OdbcType.VarChar, 200) { Value = NewDocument.OtherDebitor });
                         com.Parameters.Add(new OdbcParameter("OtherKreditor", OdbcType.VarChar, 200) { Value = NewDocument.OtherKreditor });
                         com.Parameters.Add(new OdbcParameter("DocNum", OdbcType.Int) { Value = NewDocument.DocNum });
+                        //
                         com.Parameters.Add(new OdbcParameter("IsDraft", OdbcType.Bit) { Value = NewDocument.IsDraft });
 
                         com.CommandTimeout = 900;  // 15 минут

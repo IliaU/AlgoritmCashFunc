@@ -60,15 +60,6 @@ namespace AlgoritmCashFunc.Com
             try
             {
                 _TimeoutMinuteForLogOFF = DefTimeoutMinuteForLogOFF;
-
-                FlagRun = true;
-
-                // Асинхронный запуск процесса
-                ThrUFarm = new Thread(AUserFarm);
-                //ThrWeb = new Thread(new ParameterizedThreadStart(Run)); //Запуск с параметрами   
-                ThrUFarm.Name = "A_Thr_UFarm";
-                ThrUFarm.IsBackground = true;
-                ThrUFarm.Start();
             }
             catch (Exception ex)
             {
@@ -156,6 +147,34 @@ namespace AlgoritmCashFunc.Com
         }
         
         /// <summary>
+        /// Запуск процесса входа и слежка перед блокировкой
+        /// </summary>
+        public static void LogIn()
+        {
+            try
+            {
+                Stop();
+                if (ThrUFarm != null) Join();
+
+                FlagRun = true;
+                LastActiveLogon = DateTime.Now;
+
+                // Асинхронный запуск процесса
+                ThrUFarm = new Thread(AUserFarm);
+                //ThrWeb = new Thread(new ParameterizedThreadStart(Run)); //Запуск с параметрами   
+                ThrUFarm.Name = "A_Thr_UFarm";
+                ThrUFarm.IsBackground = true;
+                ThrUFarm.Start();
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при обработки события с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.LogIn", "UserFarm"), EventEn.Error);
+                throw ae;
+            }
+        }
+
+        /// <summary>
         /// Блокировка пользователя 
         /// </summary>
         public static void LogOff()
@@ -232,11 +251,13 @@ namespace AlgoritmCashFunc.Com
         /// <summary>
         /// Асинхронный процесс который будет проверять нужно лочить пользователя или нет
         /// </summary>
-        private void AUserFarm()
+        private static void AUserFarm()
         {
             try
             {
-                while(FlagRun)
+                Thread.Sleep(1000);
+
+                while (FlagRun)
                 {
                     if (LastActiveLogon.AddMinutes(_TimeoutMinuteForLogOFF) < DateTime.Now)
                     {
@@ -249,7 +270,7 @@ namespace AlgoritmCashFunc.Com
             catch (Exception ex)
             {
                 ApplicationException ae = new ApplicationException(string.Format("Упали при асинхронной обработкепроцесса с ошибкой: ({0})", ex.Message));
-                Log.EventSave(ae.Message, string.Format("{0}.AUserFarm", GetType().Name), EventEn.Error);
+                Log.EventSave(ae.Message, string.Format("{0}.AUserFarm", "UserFarm"), EventEn.Error);
                 throw ae;
             }
         }
@@ -257,27 +278,30 @@ namespace AlgoritmCashFunc.Com
         /// <summary>
         /// Произошло событие выхода мользователя вызываем закрытие форм
         /// </summary>
-        private void LogOFF()
+        private static void LogOFF()
         {
             try
             {
                 lock (obj)
                 {
+                    FlagRun = false;
+
                     EventLogOFF myArg = new EventLogOFF(CurrentUser);
                     if (onEventLogOFF != null)
                     {
-                        Log.EventSave(string.Format("Блокировка пользователеля {0} ({1})", Com.UserFarm.CurrentUser.Logon, Com.UserFarm.CurrentUser.Role.ToString()), string.Format("{0}.LogOFF", GetType().Name), EventEn.Message);
-                        onEventLogOFF.Invoke(this, myArg);
+                        Log.EventSave(string.Format("Блокировка пользователеля {0} ({1})", Com.UserFarm.CurrentUser.Logon, Com.UserFarm.CurrentUser.Role.ToString()), string.Format("{0}.LogOFF", "UserFarm"), EventEn.Message);
+                        onEventLogOFF.Invoke(Com.UserFarm.CurrentUser, myArg);
                     }
+
+                    Com.UserFarm.CurrentUser = null;
                 }
             }
             catch (Exception ex)
             {
                 ApplicationException ae = new ApplicationException(string.Format("Упали при обработки события с ошибкой: ({0})", ex.Message));
-                Log.EventSave(ae.Message, string.Format("{0}.LogOFF", GetType().Name), EventEn.Error);
+                Log.EventSave(ae.Message, string.Format("{0}.LogOFF", "UserFarm"), EventEn.Error);
                 throw ae;
             }
         }
-
     }
 }

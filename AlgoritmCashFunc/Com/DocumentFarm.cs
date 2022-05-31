@@ -174,13 +174,14 @@ namespace AlgoritmCashFunc.Com
         /// <param name="CurOperation">Операция к которой относится этот документ</param>
         /// <param name="LocalDebitor">Дебитор</param>
         /// <param name="LocalCreditor">Кредитор</param>
+        /// <param name="Departament">Департамент или касса в которой создан документ</param>
         /// <param name="OtherDebitor">Дебитор который ввели вручную не из списка</param>
         /// <param name="OtherKreditor">Кредитор который ввели вручную не из списка</param>
         /// <param name="DocNum"> Черновик</param>
         /// <param name="IsDraft">Черновик</param>
         /// <param name="IsProcessed">Проведённый документ или нет</param>
         /// <returns>Возвращаем Local</returns>
-        public static Document CreateNewDocument(int? Id, string DocFullName, DateTime? UreDate, DateTime CteateDate, DateTime ModifyDate, string ModifyUser, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, string OtherDebitor, string OtherKreditor, int DocNum, bool IsDraft, bool IsProcessed)
+        public static Document CreateNewDocument(int? Id, string DocFullName, DateTime? UreDate, DateTime CteateDate, DateTime ModifyDate, string ModifyUser, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, Local Departament, string OtherDebitor, string OtherKreditor, int DocNum, bool IsDraft, bool IsProcessed)
         {
             // Если списка документов ещё нет то создаём его
             ListDocumentName();
@@ -195,7 +196,7 @@ namespace AlgoritmCashFunc.Com
                     Type myType = Type.GetType("AlgoritmCashFunc.BLL.DocumentPlg." + DocFullName.Trim(), false, true);
 
                     // Создаём экземпляр объекта  
-                    object[] targ = {Id, UreDate, CteateDate, ModifyDate,  ModifyUser, CurOperation, LocalDebitor, LocalCreditor, OtherDebitor, OtherKreditor, DocNum, IsDraft, IsProcessed};
+                    object[] targ = {Id, UreDate, CteateDate, ModifyDate,  ModifyUser, CurOperation, LocalDebitor, LocalCreditor, Departament, OtherDebitor, OtherKreditor, DocNum, IsDraft, IsProcessed};
                     rez = (Document)Activator.CreateInstance(myType, targ);
 
                     break;

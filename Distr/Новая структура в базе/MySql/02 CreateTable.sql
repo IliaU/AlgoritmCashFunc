@@ -171,6 +171,7 @@ CREATE TABLE `aks`.`CashFunc_Document` (
   `OperationId` int NOT NULL,
   `LocalDebitorId` int NOT NULL,
   `LocalCreditorId` int NOT NULL,
+  `Departament` int NOT NULL,
   `OtherDebitor` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `OtherKreditor` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `DocNum` int NOT NULL,

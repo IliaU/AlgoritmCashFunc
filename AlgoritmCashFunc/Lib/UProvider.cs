@@ -276,9 +276,10 @@ namespace AlgoritmCashFunc.Lib
         /// <summary>
         /// Установка номеров документа по правилам связанным с началом года
         /// </summary>
-        public void SetDocNumForYear()
+        /// <param name="DtStart">Дата начиная с которой нужно править документы кассовой книги в части баланса</param>
+        public void SetDocNumForYear(DateTime? DtStart)
         {
-            this.PrvPrizmI.SetDocNumForYear();
+            this.PrvPrizmI.SetDocNumForYear(DtStart);
         }
 
         /// <summary>

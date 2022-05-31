@@ -23,6 +23,7 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         /// <summary>
         /// Установка номеров документа по правилам связанным с началом года
         /// </summary>
-        void SetDocNumForYear();
+        /// <param name="DtStart">Дата начиная с которой нужно править документы кассовой книги в части баланса</param>
+        void SetDocNumForYear(DateTime? DtStart);
     }
 }

@@ -67,7 +67,7 @@ namespace AlgoritmCashFunc.BLL
                 if (base.Id == null)
                 {
                     // Предварительно проверяем на уникальность имя
-                    if (Com.LocalFarm.CurLocalList[base.LocalName] != null) throw new ApplicationException("С таким именем Local уже существует. Это уникальное поле.");
+                    if (Com.LocalFarm.CurLocalList[base.LocFullName, base.LocalName] != null) throw new ApplicationException("С таким именем Local уже существует. Это уникальное поле.");
 
                     // Убираем признак того что это черновик
                     base.IsDraft = false;
@@ -78,7 +78,7 @@ namespace AlgoritmCashFunc.BLL
                 }
                 else // Обновление уже существующего Local
                 {
-                    Local LocTmp = Com.LocalFarm.CurLocalList[base.LocalName];
+                    Local LocTmp = Com.LocalFarm.CurLocalList[base.LocFullName, base.LocalName];
                     if (LocTmp != null && LocTmp.Id != null && LocTmp.Id != base.Id) new ApplicationException("С таким именем Local уже существует. Это уникальное поле.");
 
                     // Пробуем обновить в базе инфу в таблице Local  вдруг пользователь например переименовал объект

@@ -22,11 +22,12 @@ namespace AlgoritmCashFunc.BLL
         /// <param name="CurOperation">Операция к которой относится этот документ</param>
         /// <param name="LocalDebitor">Дебитор</param>
         /// <param name="LocalCreditor">Кредитор</param>
+        /// <param name="Departament">Департамент или касса в которой создан документ</param>
         /// <param name="OtherDebitor">Дебитор который ввели вручную не из списка</param>
         /// <param name="OtherKreditor">Кредитор который ввели вручную не из списка</param>
         /// <param name="DocNum"> Черновик</param>
         /// <param name="IsDraft">Черновик</param>
-        public Document(string DocFullName, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, string OtherDebitor, string OtherKreditor, int DocNum, bool IsDraft) :base(DocFullName, CurOperation, LocalDebitor, LocalCreditor, OtherDebitor, OtherKreditor, DocNum, IsDraft)
+        public Document(string DocFullName, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, Local Departament, string OtherDebitor, string OtherKreditor, int DocNum, bool IsDraft) :base(DocFullName, CurOperation, LocalDebitor, LocalCreditor, Departament, OtherDebitor, OtherKreditor, DocNum, IsDraft)
         {
             try
             {
@@ -89,7 +90,7 @@ namespace AlgoritmCashFunc.BLL
                 // Проверка надату. Если у текущего документа дата не сегодняшняя значит пользователь редактирует документ в прошлом нужно номера документов пересторить за текущий год и предыдущий
                 if (this.UreDate!=null && ((DateTime)this.UreDate).Date!=DateTime.Now.Date)
                 {
-                    Com.ProviderFarm.CurrentPrv.SetDocNumForYear();
+                    Com.ProviderFarm.CurrentPrv.SetDocNumForYear(this.UreDate);
                 }
             }
             catch (Exception ex)
