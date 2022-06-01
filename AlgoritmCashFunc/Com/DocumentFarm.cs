@@ -100,8 +100,8 @@ namespace AlgoritmCashFunc.Com
                         // получаем параметры конструктора  
                         ParameterInfo[] parameters = ctor.GetParameters();
                         
-                        // если в этом конструктаре 13 параметров то проверяем тип и имя параметра 
-                        if (parameters.Length == 13)
+                        // если в этом конструктаре 14 параметров то проверяем тип и имя параметра 
+                        if (parameters.Length == 14)
                         {
                             bool flag2 = true;
                             if (parameters[0].ParameterType.Name != "Nullable`1" || parameters[0].Name != "Id") flag2 = false;
@@ -112,11 +112,12 @@ namespace AlgoritmCashFunc.Com
                             if (parameters[5].ParameterType.Name != "Operation" || parameters[5].Name != "CurOperation") flag2 = false;
                             if (parameters[6].ParameterType.Name != "Local" || parameters[6].Name != "LocalDebitor") flag2 = false;
                             if (parameters[7].ParameterType.Name != "Local" || parameters[7].Name != "LocalCreditor") flag2 = false;
-                            if (parameters[8].ParameterType.Name != "String" || parameters[8].Name != "OtherDebitor") flag2 = false;
-                            if (parameters[9].ParameterType.Name != "String" || parameters[9].Name != "OtherKreditor") flag2 = false;
-                            if (parameters[10].ParameterType.Name != "Int32" || parameters[10].Name != "DocNum") flag2 = false;
-                            if (parameters[11].ParameterType.Name != "Boolean" || parameters[11].Name != "IsDraft") flag2 = false;
-                            if (parameters[12].ParameterType.Name != "Boolean" || parameters[12].Name != "IsProcessed") flag2 = false;
+                            if (parameters[8].ParameterType.Name != "Local" || parameters[8].Name != "Departament") flag2 = false;
+                            if (parameters[9].ParameterType.Name != "String" || parameters[9].Name != "OtherDebitor") flag2 = false;
+                            if (parameters[10].ParameterType.Name != "String" || parameters[10].Name != "OtherKreditor") flag2 = false;
+                            if (parameters[11].ParameterType.Name != "Int32" || parameters[11].Name != "DocNum") flag2 = false;
+                            if (parameters[12].ParameterType.Name != "Boolean" || parameters[12].Name != "IsDraft") flag2 = false;
+                            if (parameters[13].ParameterType.Name != "Boolean" || parameters[13].Name != "IsProcessed") flag2 = false;
                             flag = flag2;
                         }
                         
