@@ -5209,7 +5209,7 @@ Order by `Id`");
       row_number() over(partition by YEAR(`UreDate`), `OperationId` order by `UreDate`) As PRN
     From `aks`.`cashfunc_document`
     Where `Departament` = {0}
-        and `UreDate`>=str_to_date(ConCat('01.01.',convert({1}-1, char)),'%d.%m.%Y'))
+        and `UreDate`>=str_to_date(ConCat('01.01.',convert({1}, char)),'%d.%m.%Y'))
 Update `aks`.`cashfunc_document` D 
   inner join  T On D.Id=T.Id
 Set D.`DocNum`=T.`PRN`", Com.LocalFarm.CurLocalDepartament.Id
@@ -5217,7 +5217,7 @@ Set D.`DocNum`=T.`PRN`", Com.LocalFarm.CurLocalDepartament.Id
 
             string CommandSql2 = String.Format(@"With T As (Select `OperationId`, Max(`DocNum`) As DocNum
     From `aks`.`cashfunc_document`
-    Where `UreDate`>=str_to_date(ConCat('01.01.',convert({1}), char)),'%d.%m.%Y')
+    Where `UreDate`>=str_to_date(ConCat('01.01.',convert({1}-1, char)),'%d.%m.%Y')
     Group By `OperationId`),
     R As (Select Max(Case When `OperationId`=1 Then `DocNum` else 0 End) Prih,
       Max(Case When `OperationId`=2 Then `DocNum` else 0 End) Rash,
