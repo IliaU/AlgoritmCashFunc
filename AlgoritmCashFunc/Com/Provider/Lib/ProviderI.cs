@@ -298,6 +298,13 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         int SetDocument(Document NewDocument);
 
         /// <summary>
+        /// Удаление Document из базы
+        /// </summary>
+        /// <param name="DelDocument">Удаляемый документ</param>
+        /// <returns>Идентификатор из базы данных под которым сохранили</returns>
+        void DeleteDocument(Document DelDocument);
+
+        /// <summary>
         /// Обновление Document в базе
         /// </summary>
         /// <param name="UpdDocument">Обновляемый документ</param>

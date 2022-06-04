@@ -2599,6 +2599,7 @@
             this.btnKassBookDelete.Text = "Удалить";
             this.btnKassBookDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnKassBookDelete.UseVisualStyleBackColor = true;
+            this.btnKassBookDelete.Click += new System.EventHandler(this.btnKassBookDelete_Click);
             // 
             // btnKassBookEdit
             // 

@@ -1689,6 +1689,44 @@ namespace AlgoritmCashFunc.Com.Provider
         }
 
         /// <summary>
+        /// Удаление Document из базы
+        /// </summary>
+        /// <param name="DelDocument">Удаляемый документ</param>
+        /// <returns>Идентификатор из базы данных под которым сохранили</returns>
+        public void DeleteDocument(Document DelDocument)
+        {
+            try
+            {
+                int rez = 0;
+                if (!this.HashConnect()) new ApplicationException("Нет подключение к базе данных." + this.Driver);
+                else
+                {
+                    // Проверка типа трайвера мы не можем обрабатьывать любой тип у каждого типа могут быть свои особенности
+                    switch (this.Driver)
+                    {
+                        case "SQORA32.DLL":
+                        case "SQORA64.DLL":
+                            DeleteDocumentORA(DelDocument);
+                            break;
+                        case "myodbc8a.dll":
+                            DeleteDocumentMySql(DelDocument);
+                            break;
+                        default:
+                            throw new ApplicationException("Извините. Мы не умеем работать с драйвером: " + this.Driver);
+                            //break;
+                    }
+                }
+                //return rez;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при удалении данных в источнике. {0}", ex.Message), GetType().Name + ".DeleteDocument", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(string.Format("{0} ({1})", DelDocument.DocFullName, DelDocument.UreDate), GetType().Name + ".DeleteDocument", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Обновление Document в базе
         /// </summary>
         /// <param name="UpdDocument">Обновляемый документ</param>
@@ -4419,6 +4457,47 @@ Order by `Id`");
         }
 
         /// <summary>
+        /// Удаление Document из базы
+        /// </summary>
+        /// <param name="DelDocument">Удаляемый документ</param>
+        /// <returns>Идентификатор из базы данных под которым сохранили</returns>
+        private void DeleteDocumentORA(Document DelDocument)
+        {
+            string CommandSql = "";// String.Format(@"insert into aks.prizm_cust_porog(cust_inn, invc_no, dt, pos_date, total_cash_sum) Values('{0}', '{1}', TO_DATE('{2}.{3}.{4}', 'YYYY.MM.DD'), STR_TO_DATE('{2}.{3}.{4} {5}:{6}:{7}', 'YYYY.MM.DD HH24:MI:SS'), {8})", CustInn, InvcNo, PosDate.Year, PosDate.Month, PosDate.Day, PosDate.Hour, PosDate.Minute, PosDate.Second, TotalCashSum.ToString().Replace(',', '.'));
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".DeleteDocumentORA", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                //return 0;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при удалении данных в источнике. {0}", ex.Message), GetType().Name + ".DeleteDocumentORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".DeleteDocumentORA", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при удалении данных в источнике. {0}", ex.Message), GetType().Name + ".DeleteDocumentORA", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".DeleteDocumentORA", EventEn.Dump);
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Обновление Document в базе
         /// </summary>
         /// <param name="UpdDocument">Обновляемый документ</param>
@@ -4575,7 +4654,7 @@ Order by `Id`");
                 throw;
             }
         }
-
+             
         /// <summary>
         /// Обновляем в базе данных инфу по объекту DocumentPrihod
         /// </summary>
@@ -5209,7 +5288,8 @@ Order by `Id`");
       row_number() over(partition by YEAR(`UreDate`), `OperationId` order by `UreDate`) As PRN
     From `aks`.`cashfunc_document`
     Where `Departament` = {0}
-        and `UreDate`>=str_to_date(ConCat('01.01.',convert({1}, char)),'%d.%m.%Y'))
+        and `UreDate`>=str_to_date(ConCat('01.01.',convert({1}, char)),'%d.%m.%Y')
+        and `IsDeleted`=0)
 Update `aks`.`cashfunc_document` D 
   inner join  T On D.Id=T.Id
 Set D.`DocNum`=T.`PRN`", Com.LocalFarm.CurLocalDepartament.Id
@@ -5218,6 +5298,7 @@ Set D.`DocNum`=T.`PRN`", Com.LocalFarm.CurLocalDepartament.Id
             string CommandSql2 = String.Format(@"With T As (Select `OperationId`, Max(`DocNum`) As DocNum
     From `aks`.`cashfunc_document`
     Where `UreDate`>=str_to_date(ConCat('01.01.',convert({1}-1, char)),'%d.%m.%Y')
+      and `IsDeleted`=0
     Group By `OperationId`),
     R As (Select Max(Case When `OperationId`=1 Then `DocNum` else 0 End) Prih,
       Max(Case When `OperationId`=2 Then `DocNum` else 0 End) Rash,
@@ -5241,7 +5322,8 @@ Where K.Id={0}", Com.LocalFarm.CurLocalDepartament.Id
         inner join `aks`.`cashfunc_document_kasbook` K On D.Id=K.Id
       where D.`UreDate` < (Select Min(FindDt) From T)
         and D.`DocFullName`='DocumentKasBook'
-        and D.`Departament`= {0}), 
+        and D.`Departament`= {0}
+        and D.`IsDeleted`=0), 
     Conf As (Select C.*, Coalesce(K.`SummaStartDay`,0) As StartSumm
       From Conf0 C
         left join `aks`.`cashfunc_document` D On C.FindStart = D.UreDate
@@ -5257,15 +5339,20 @@ Where K.Id={0}", Com.LocalFarm.CurLocalDepartament.Id
         left join `aks`.`cashfunc_document_prihod` DP On D.Id=DP.Id
         left join `aks`.`cashfunc_document_rashod` DR On D.Id=DR.Id
       Where D.`UreDate`>=C.FindStart
-        and D.`Departament`={0}), 
+        and D.`Departament`={0}
+        and D.`IsDeleted`=0), 
     # Делаем соединение кассовых книг с оборотами относительно того периода котоорый в запрошенном окне
     DocDetail As (Select KB.FindDt, KB.StartSumm, KB.Id, KB.UreDate, Coalesce(D.Oborot,0) As Oborot
+        , case when cast(D.UreDate as date) is not null and cast(KB.UreDate as date)=cast(D.UreDate as date) Then Coalesce(D.Oborot,0) else 0 end As OborotDay
       From Doc KB
-        left join Doc D On KB.UreDate>D.UreDate and D.`DocFullName`<>'DocumentKasBook'
+        left join Doc D On KB.UreDate>=D.UreDate and D.`DocFullName`<>'DocumentKasBook'
       Where KB.`DocFullName`='DocumentKasBook'
       #Order by KB.UreDate, D.UreDate
       ),
-    Rez As (Select FindDt, StartSumm, UreDate, Id, Sum(Oborot) +  StartSumm As SummaStartDay
+    Rez As (Select FindDt, StartSumm, UreDate, Id
+        , Sum(Oborot) +  StartSumm - Sum(OborotDay) As SummaStartDay
+        , Sum(Oborot) +  StartSumm As SummaEndDay
+        , Sum(OborotDay)
       From DocDetail
       Group By FindDt, StartSumm, UreDate, Id
       #Order by UreDate
@@ -5273,7 +5360,7 @@ Where K.Id={0}", Com.LocalFarm.CurLocalDepartament.Id
 Update `aks`.`cashfunc_document` D 
   inner join  Rez R On D.Id=R.Id
   inner join `aks`.`cashfunc_document_kasbook` K On D.Id=K.Id
-Set K.`SummaStartDay`=R.`SummaStartDay`", Com.LocalFarm.CurLocalDepartament.Id
+Set K.`SummaStartDay`=R.`SummaStartDay`, K.`SummaEndDay`=R.`SummaEndDay`", Com.LocalFarm.CurLocalDepartament.Id
                                     , ((DateTime)DtStart).ToShortDateString());
 
             try
@@ -5383,7 +5470,8 @@ Set K.`SummaStartDay`=R.`SummaStartDay`", Com.LocalFarm.CurLocalDepartament.Id
 From `aks`.`cashfunc_document`
 Where `DocFullName`='{0}'
   and `Departament`= {2}
-  and `UreDate` >= str_to_date('01.01.{1}','%d.%m.%Y')", doc.DocFullName
+  and `UreDate` >= str_to_date('01.01.{1}','%d.%m.%Y')
+  and `IsDeleted`=0", doc.DocFullName
                            , ((DateTime)doc.UreDate).Year
                         , Com.LocalFarm.CurLocalDepartament.Id.ToString());
 
@@ -5456,7 +5544,8 @@ Where `DocFullName`='{0}'
 Set DocNum=DocNum+1
 Where `DocFullName`='{0}'
   and `UreDate` >= str_to_date('{1}','%d.%m.%Y')
-  and `UreDate` < str_to_date('01.01.{2}','%d.%m.%Y')", doc.DocFullName,
+  and `UreDate` < str_to_date('01.01.{2}','%d.%m.%Y')
+  and `IsDeleted`=0", doc.DocFullName,
                 ((DateTime)doc.UreDate).AddDays(1).ToShortDateString(),
                 ((DateTime)doc.UreDate).AddYears(1).Year);
 
@@ -7475,7 +7564,8 @@ Where Id={0}", UpdLocalPaidRashReasons.Id,
         inner join `aks`.`cashfunc_document_kasbook` K On D.Id=K.Id
       where D.`UreDate` < (Select Min(FindDt) From T)
         and D.`DocFullName`='DocumentKasBook'
-        and D.`Departament`= {1}),
+        and D.`Departament`= {1}
+        and D.`IsDeleted`=0),
     Conf As (Select C.*, Coalesce(K.`SummaStartDay`,0) As StartSumm
       From Conf0 C
         left join `aks`.`cashfunc_document` D On C.FindStart = D.UreDate
@@ -7490,7 +7580,8 @@ Where Id={0}", UpdLocalPaidRashReasons.Id,
       Where D.`DocFullName` in ('DocumentPrihod', 'DocumentRashod')
         and D.`Departament`= {1}
         and D.`UreDate`>=C.FindStart
-        and D.`UreDate`<Date_Add(FindDt,interval 1 day)),
+        and D.`UreDate`<Date_Add(FindDt,interval 1 day)
+        and D.`IsDeleted`=0),
     # Считаем по документу прихода
     DocPrihod As (Select Sum(case when D.FindDt=D.UreDate Then 0 else DP.Summa*D.KoefDebitor end) As Ostatok
         , Sum(case when D.FindDt=D.UreDate Then DP.Summa*D.KoefDebitor else 0 end) As Oborot
@@ -7581,6 +7672,7 @@ From `aks`.`CashFunc_Document`
 Where `UreDate`>={0} 
     and `OperationId`={1}
     and `Departament`={2}
+    and `IsDeleted`=0
 Order by `Id`", (LastDay == null ? "`OperationId`" : string.Format("Str_To_Date('{0}', '%d.%m.%Y')", DateTime.Now.AddDays((double)LastDay*-1).ToShortDateString()))
             , (OperationId == null ? "`OperationId`" : OperationId.ToString())
             , Com.LocalFarm.CurLocalDepartament.Id.ToString());
@@ -7709,6 +7801,7 @@ From `aks`.`CashFunc_Document`
 Where `UreDate`={0} 
     and `Departament` = {3}
     and `OperationId`{1}{2}
+    and `IsDeleted`=0
 Order by `Id`", (Dt==null ? "`OperationId`" : string.Format("Str_To_Date('{0}', '%d.%m.%Y')", ((DateTime)Dt).ToShortDateString()))
             , (HasNotin?"<>":"=")
             , (OperationId==null ? "`OperationId`" : OperationId.ToString())
@@ -7914,6 +8007,52 @@ Values(?, ?, ?, ?,
                 throw;
             }
         }
+
+        /// <summary>
+        /// Удаление Document из базы
+        /// </summary>
+        /// <param name="DelDocument">Удаляемый документ</param>
+        /// <returns>Идентификатор из базы данных под которым сохранили</returns>
+        private void DeleteDocumentMySql(Document DelDocument)
+        {
+            if (DelDocument.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
+
+            string CommandSql = String.Format(@"Update `aks`.`CashFunc_Document`
+Set `IsDeleted`=1
+Where Id={0}", DelDocument.Id);
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".DeleteDocumentMySql", EventEn.Dump);
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSql, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                //return 0;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при удалении данных в источнике. {0}", ex.Message), GetType().Name + ".DeleteDocumentMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".DeleteDocumentMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при удалении данных в источнике. {0}", ex.Message), GetType().Name + ".DeleteDocumentMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSql, GetType().Name + ".DeleteDocumentMySql", EventEn.Dump);
+                throw;
+            }
+        }
+
 
         /// <summary>
         /// Обновление Document в базе

@@ -667,6 +667,16 @@ namespace AlgoritmCashFunc.Lib
         }
 
         /// <summary>
+        /// Удаление Document из базы
+        /// </summary>
+        /// <param name="DelDocument">Удаляемый документ</param>
+        /// <returns>Идентификатор из базы данных под которым сохранили</returns>
+        public void DeleteDocument(Document DelDocument)
+        {
+            this.PrvI.DeleteDocument(DelDocument);
+        }
+
+        /// <summary>
         /// Обновление Documentl в базе
         /// </summary>
         /// <param name="UpdDocument">Обновляемый документ</param>

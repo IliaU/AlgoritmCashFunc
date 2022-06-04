@@ -86,8 +86,8 @@ namespace AlgoritmCashFunc.BLL
 
                 // Запускаем сохранение в нашем дочернем плагине
                 this.SaveChildron();
-                
-                // Проверка надату. Если у текущего документа дата не сегодняшняя значит пользователь редактирует документ в прошлом нужно номера документов пересторить за текущий год и предыдущий
+
+                // Проверка надату. Если у текущего документа дата не сегодняшняя значит пользователь редактирует документ в прошлом нужно номера документов пересторить за текущий год и предыдущий и пересчитать остатки
                 if (this.UreDate!=null && ((DateTime)this.UreDate).Date!=DateTime.Now.Date)
                 {
                     Com.ProviderFarm.CurrentPrv.SetDocNumForYear(this.UreDate);
@@ -97,6 +97,52 @@ namespace AlgoritmCashFunc.BLL
             {
                 ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
                 Com.Log.EventSave(ae.Message, string.Format("{0}.Save", GetType().Name), EventEn.Error);
+                throw ae;
+            }
+        }
+
+        /// <summary>
+        /// Для того чтобы плагин мог реализовать своё специфическое удаление, который должны переписать наследуемые класы
+        /// </summary>
+        protected virtual void DeleteChildron()
+        {
+            try
+            {
+                Com.Log.EventSave("В наследуемомо классе не переписан этот метод получается что если что-то надо было ему удалить то он этого не сделал", string.Format("{0}.SaveChildron", GetType().Name), EventEn.Warning);
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
+                Com.Log.EventSave(ae.Message, string.Format("{0}.DeleteChildron", GetType().Name), EventEn.Error);
+                throw ae;
+            }
+        }
+
+        /// <summary>
+        /// Удаление документа со всеми его данными
+        /// </summary>
+        public void Delete()
+        {
+            try
+            {
+                if (base.Id == null) throw new ApplicationException("Удаление не возможно тку как документ ещё не был сохранён.");
+
+                base.ModifyUser = Com.UserFarm.CurrentUser.Logon;
+                base.ModifyDate = DateTime.Now;
+
+                // Запускаем удаление в нашем дочернем плагине
+                this.DeleteChildron();
+
+                // Выставляем флаги уделения в базе данных
+                Com.ProviderFarm.CurrentPrv.DeleteDocument(this);
+                                
+                // В прошлом нужно номера документов пересторить за текущий год и предыдущий и пересчитать остатки
+                Com.ProviderFarm.CurrentPrv.SetDocNumForYear(this.UreDate);
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
+                Com.Log.EventSave(ae.Message, string.Format("{0}.Delete", GetType().Name), EventEn.Error);
                 throw ae;
             }
         }

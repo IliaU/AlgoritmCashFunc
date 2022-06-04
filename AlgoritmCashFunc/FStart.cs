@@ -2234,12 +2234,39 @@ namespace AlgoritmCashFunc
             }
             catch (Exception ex)
             {
-                ApplicationException ae = new ApplicationException(string.Format("Упали при создании документа с ошибкой: ({0})", ex.Message));
+                ApplicationException ae = new ApplicationException(string.Format("Упали при изменении документа с ошибкой: ({0})", ex.Message));
                 Log.EventSave(ae.Message, string.Format("{0}.btnKassBookEdit_Click", GetType().Name), EventEn.Error, true, true);
                 //throw ae;
             }
         }
 
+        // Пользователь выбрал документ в кассовой книге для уделения
+        private void btnKassBookDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Если текущая вкладка кассовая книга
+                if (this.tabCntOperation.SelectedIndex == 2 && this.TagDocKassBook.Count > 0)
+                {
+                    // Если у пользователя выделана ячейка
+                    if (dtGridKassBook.SelectedCells.Count > 0)
+                    {
+                        int tIndex = dtGridKassBook.SelectedCells[0].RowIndex;
+                        this.TagDocKassBook[tIndex].Delete();
+
+                        this.tabCntOperation.SelectedIndex--;
+                        this.tabCntOperation.SelectedIndex++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при удалении документа с ошибкой: ({0})", ex.Message));
+                Log.EventSave(ae.Message, string.Format("{0}.btnKassBookDelete_Click", GetType().Name), EventEn.Error, true, true);
+                //throw ae;
+            }
+        }
+        
         // Пользователь решил напечатать документ
         private void btnKassBookTitle_Click(object sender, EventArgs e)
         {
