@@ -72,7 +72,7 @@ namespace AlgoritmCashFunc.BLL
                 // Если это новый документ то необходимо его создать в базе данных
                 if (base.Id == null)
                 {
-                    base.CteateDate = base.ModifyDate;
+                    base.CreateDate = base.ModifyDate;
 
                     // Вставляем новую запись и сохраняем идентификатор
                     int id = Com.ProviderFarm.CurrentPrv.SetDocument(this);

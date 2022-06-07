@@ -106,7 +106,7 @@ namespace AlgoritmCashFunc.Com
                             bool flag2 = true;
                             if (parameters[0].ParameterType.Name != "Nullable`1" || parameters[0].Name != "Id") flag2 = false;
                             if (parameters[1].ParameterType.Name != "Nullable`1" || parameters[1].Name != "UreDate") flag2 = false;
-                            if (parameters[2].ParameterType.Name != "DateTime" || parameters[2].Name != "CteateDate") flag2 = false;
+                            if (parameters[2].ParameterType.Name != "DateTime" || parameters[2].Name != "CreateDate") flag2 = false;
                             if (parameters[3].ParameterType.Name != "DateTime" || parameters[3].Name != "ModifyDate") flag2 = false;
                             if (parameters[4].ParameterType.Name != "String" || parameters[4].Name != "ModifyUser") flag2 = false;
                             if (parameters[5].ParameterType.Name != "Operation" || parameters[5].Name != "CurOperation") flag2 = false;

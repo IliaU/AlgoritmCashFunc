@@ -93,7 +93,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         /// </summary>
         /// <param name="Id">Идентификатор в базе данных</param>
         /// <param name="UreDate">Дата создания документа</param>
-        /// <param name="CteateDate">Дата создания документа</param>
+        /// <param name="CreateDate">Дата создания документа</param>
         /// <param name="ModifyDate">Дата изменеия документа</param>
         /// <param name="ModifyUser">Пользовтаель который изменил последний раз документ</param>
         /// <param name="CurOperation">Операция к которой относится этот документ</param>
@@ -105,13 +105,13 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         /// <param name="DocNum"> Черновик</param>
         /// <param name="IsDraft">Черновик</param>
         /// <param name="IsProcessed">Проведённый документ или нет</param>
-        public DocumentRashod(int? Id, DateTime? UreDate, DateTime CteateDate, DateTime ModifyDate, string ModifyUser, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, Local Departament, string OtherDebitor, string OtherKreditor, int DocNum, bool IsDraft, bool IsProcessed) : base("DocumentRashod", CurOperation, LocalDebitor, LocalCreditor, Departament, OtherDebitor, OtherKreditor, DocNum, IsProcessed)
+        public DocumentRashod(int? Id, DateTime? UreDate, DateTime CreateDate, DateTime ModifyDate, string ModifyUser, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, Local Departament, string OtherDebitor, string OtherKreditor, int DocNum, bool IsDraft, bool IsProcessed) : base("DocumentRashod", CurOperation, LocalDebitor, LocalCreditor, Departament, OtherDebitor, OtherKreditor, DocNum, IsProcessed)
         {
             try
             {
                 base.Id = Id;
                 base.UreDate = UreDate;
-                base.CteateDate = CteateDate;
+                base.CreateDate = CreateDate;
                 base.ModifyDate = ModifyDate;
                 base.ModifyUser = ModifyUser;
                 base.IsDraft = IsDraft;
@@ -145,6 +145,24 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
             {
                 ApplicationException ae = new ApplicationException(string.Format("Упали при инициализации конструктора с ошибкой: ({0})", ex.Message));
                 Com.Log.EventSave(ae.Message, GetType().Name, EventEn.Error);
+                throw ae;
+            }
+        }
+
+        /// <summary>
+        /// Установка даты создания для документа чтобы пользователь мог его поправить
+        /// </summary>
+        /// <param name="dt">Дата время которую выставить в документе</param>
+        public void SetCreatedDate(DateTime dt)
+        {
+            try
+            {
+                base.CreateDate = dt;
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
+                Com.Log.EventSave(ae.Message, string.Format("{0}.SetCreatedDate", GetType().Name), EventEn.Error);
                 throw ae;
             }
         }

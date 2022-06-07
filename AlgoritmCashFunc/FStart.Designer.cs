@@ -1210,9 +1210,9 @@
             this.grBoxDateDocPrih.Controls.Add(this.txtBoxPrihDateDoc);
             this.grBoxDateDocPrih.Controls.Add(this.lblPrihDateDoc);
             this.grBoxDateDocPrih.Dock = System.Windows.Forms.DockStyle.Right;
-            this.grBoxDateDocPrih.Location = new System.Drawing.Point(31, 0);
+            this.grBoxDateDocPrih.Location = new System.Drawing.Point(4, 0);
             this.grBoxDateDocPrih.Name = "grBoxDateDocPrih";
-            this.grBoxDateDocPrih.Size = new System.Drawing.Size(113, 97);
+            this.grBoxDateDocPrih.Size = new System.Drawing.Size(140, 97);
             this.grBoxDateDocPrih.TabIndex = 1;
             this.grBoxDateDocPrih.TabStop = false;
             // 
@@ -1223,7 +1223,7 @@
             this.txtBoxPrihDateDoc.Location = new System.Drawing.Point(3, 57);
             this.txtBoxPrihDateDoc.Name = "txtBoxPrihDateDoc";
             this.txtBoxPrihDateDoc.ReadOnly = true;
-            this.txtBoxPrihDateDoc.Size = new System.Drawing.Size(107, 21);
+            this.txtBoxPrihDateDoc.Size = new System.Drawing.Size(134, 21);
             this.txtBoxPrihDateDoc.TabIndex = 1;
             // 
             // lblPrihDateDoc
@@ -1232,7 +1232,7 @@
             this.lblPrihDateDoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblPrihDateDoc.Location = new System.Drawing.Point(3, 17);
             this.lblPrihDateDoc.Name = "lblPrihDateDoc";
-            this.lblPrihDateDoc.Size = new System.Drawing.Size(107, 40);
+            this.lblPrihDateDoc.Size = new System.Drawing.Size(134, 40);
             this.lblPrihDateDoc.TabIndex = 0;
             this.lblPrihDateDoc.Text = "Дата\r\nдокумента";
             this.lblPrihDateDoc.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -2052,9 +2052,9 @@
             this.grBoxDateDocRight.Controls.Add(this.txtBoxRashDateDoc);
             this.grBoxDateDocRight.Controls.Add(this.lblRashDateDoc);
             this.grBoxDateDocRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.grBoxDateDocRight.Location = new System.Drawing.Point(31, 0);
+            this.grBoxDateDocRight.Location = new System.Drawing.Point(4, 0);
             this.grBoxDateDocRight.Name = "grBoxDateDocRight";
-            this.grBoxDateDocRight.Size = new System.Drawing.Size(113, 97);
+            this.grBoxDateDocRight.Size = new System.Drawing.Size(140, 97);
             this.grBoxDateDocRight.TabIndex = 1;
             this.grBoxDateDocRight.TabStop = false;
             // 
@@ -2063,7 +2063,7 @@
             this.txtBoxRashDateDoc.Dock = System.Windows.Forms.DockStyle.Top;
             this.txtBoxRashDateDoc.Location = new System.Drawing.Point(3, 57);
             this.txtBoxRashDateDoc.Name = "txtBoxRashDateDoc";
-            this.txtBoxRashDateDoc.Size = new System.Drawing.Size(107, 21);
+            this.txtBoxRashDateDoc.Size = new System.Drawing.Size(134, 21);
             this.txtBoxRashDateDoc.TabIndex = 1;
             // 
             // lblRashDateDoc
@@ -2072,7 +2072,7 @@
             this.lblRashDateDoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblRashDateDoc.Location = new System.Drawing.Point(3, 17);
             this.lblRashDateDoc.Name = "lblRashDateDoc";
-            this.lblRashDateDoc.Size = new System.Drawing.Size(107, 40);
+            this.lblRashDateDoc.Size = new System.Drawing.Size(134, 40);
             this.lblRashDateDoc.TabIndex = 0;
             this.lblRashDateDoc.Text = "Дата\r\nдокумента";
             this.lblRashDateDoc.TextAlign = System.Drawing.ContentAlignment.TopCenter;

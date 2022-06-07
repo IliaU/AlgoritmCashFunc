@@ -1028,7 +1028,11 @@ namespace AlgoritmCashFunc
                         }
 
                         // Валидация введённой даты
-                        try { this.CurDoc.UreDate = DateTime.Parse(this.txtBoxPrihDateDoc.Text);}
+                        try
+                        {
+                            ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).SetCreatedDate(DateTime.Parse(this.txtBoxPrihDateDoc.Text));
+                            this.CurDoc.UreDate = DateTime.Parse(this.txtBoxPrihDateDoc.Text).Date;
+                        }
                         catch (Exception){ throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxPrihDateDoc.Text));}
                         
                         // Валидация Дебитора
@@ -1159,7 +1163,11 @@ namespace AlgoritmCashFunc
                         }
 
                         // Валидация введённой даты
-                        try { this.CurDoc.UreDate = DateTime.Parse(this.txtBoxRashDateDoc.Text); }
+                        try
+                        {
+                            ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).SetCreatedDate(DateTime.Parse(this.txtBoxRashDateDoc.Text));
+                            this.CurDoc.UreDate = DateTime.Parse(this.txtBoxRashDateDoc.Text).Date;
+                        }
                         catch (Exception) { throw new ApplicationException(string.Format("Не смогли преобразовать значение {0} к дате.", this.txtBoxRashDateDoc.Text)); }
 
                         // Валидация Дебитора
@@ -1529,7 +1537,7 @@ namespace AlgoritmCashFunc
                             this.CurDoc = (BLL.DocumentPlg.DocumentPrihod)sender;
                             this.txtBoxPrihNumDoc.Text = this.CurDoc.DocNum.ToString();
                             this.txtBoxPrihGlavBuh.Text = ((BLL.DocumentPlg.DocumentPrihod)this.CurDoc).GlavBuh;
-                            this.txtBoxPrihDateDoc.Text = ((DateTime)this.CurDoc.UreDate).ToShortDateString();
+                            this.txtBoxPrihDateDoc.Text = ((DateTime)this.CurDoc.CreateDate).ToString();
 
                             // Заполняем инфу по операции
                             BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)this.CurDoc.CurOperation;
@@ -1603,7 +1611,7 @@ namespace AlgoritmCashFunc
                             // Проверка на наличие ошибок при создании пустого документа
                             if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", "DocumentPrihod"));
                             //
-                            this.txtBoxPrihDateDoc.Text = DateTime.Now.Date.ToShortDateString();
+                            this.txtBoxPrihDateDoc.Text = DateTime.Now.Date.ToString();
 
                             // Заполняем инфу по операции
                             BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)this.CurDoc.CurOperation;
@@ -1647,7 +1655,7 @@ namespace AlgoritmCashFunc
                             this.txtBoxRashDolRukOrg.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).DolRukFio;
                             this.txtBoxRashRukFio.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).RukFio;
                             this.txtBoxRashGlavBuh.Text = ((BLL.DocumentPlg.DocumentRashod)this.CurDoc).GlavBuh;
-                            this.txtBoxRashDateDoc.Text = ((DateTime)this.CurDoc.UreDate).ToShortDateString();
+                            this.txtBoxRashDateDoc.Text = ((DateTime)this.CurDoc.CreateDate).ToString();
 
                             // Заполняем инфу по операции
                             BLL.OperationPlg.OperationRashod OperRashod = (BLL.OperationPlg.OperationRashod)this.CurDoc.CurOperation;
@@ -2252,10 +2260,14 @@ namespace AlgoritmCashFunc
                     if (dtGridKassBook.SelectedCells.Count > 0)
                     {
                         int tIndex = dtGridKassBook.SelectedCells[0].RowIndex;
-                        this.TagDocKassBook[tIndex].Delete();
 
-                        this.tabCntOperation.SelectedIndex--;
-                        this.tabCntOperation.SelectedIndex++;
+                        if (MessageBox.Show(string.Format("Вы действительно хотите удалить документ №{0}", this.TagDocKassBook[tIndex].DocNum), "Удаление документа", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            this.TagDocKassBook[tIndex].Delete();
+
+                            this.tabCntOperation.SelectedIndex--;
+                            this.tabCntOperation.SelectedIndex++;
+                        }
                     }
                 }
             }

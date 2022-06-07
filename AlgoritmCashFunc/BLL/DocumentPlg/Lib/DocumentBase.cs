@@ -48,7 +48,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
         /// <summary>
         /// Дата создания документа
         /// </summary>
-        public DateTime CteateDate { get; protected set; } = DateTime.Now;
+        public DateTime CreateDate { get; protected set; } = DateTime.Now;
 
         /// <summary>
         /// Юридическая дата к которой относится документ

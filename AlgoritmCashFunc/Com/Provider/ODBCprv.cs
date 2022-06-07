@@ -5316,7 +5316,7 @@ Where K.Id={0}", Com.LocalFarm.CurLocalDepartament.Id
             string CommandSql3 = String.Format(@"With T As (Select Str_To_Date('{1}','%d.%m.%Y') As FindDt),
     # Получаем дату начиная с которой нужно искать документы и если есть ближайший кассовый документ то подтягиваем из него дату и остаток на начало дня который потом будем использовать как стартовое значение суммы
     Conf0 As (Select Coalesce(Trim(Max(D.`UreDate`))
-        , (Select Trim(Min(`UreDate`)) From `aks`.`cashfunc_document`) ) As FindStart
+        , (Select Trim(Min(`UreDate`)) From `aks`.`cashfunc_document` Where `Departament`= {0}) ) As FindStart
         , (Select Trim(Min(FindDt)) From T) As FindDt
       From `aks`.`cashfunc_document` D
         inner join `aks`.`cashfunc_document_kasbook` K On D.Id=K.Id
@@ -7951,7 +7951,7 @@ Values(?, ?, ?, ?,
                     {
                         com.Parameters.Add(new OdbcParameter("DocFullName", OdbcType.VarChar, 100) { Value = NewDocument.DocFullName });
                         com.Parameters.Add(new OdbcParameter("UreDate", OdbcType.Date) { Value = NewDocument.UreDate });
-                        com.Parameters.Add(new OdbcParameter("CteateDate", OdbcType.DateTime) { Value = NewDocument.CteateDate });
+                        com.Parameters.Add(new OdbcParameter("CteateDate", OdbcType.DateTime) { Value = NewDocument.CreateDate });
                         com.Parameters.Add(new OdbcParameter("ModifyDate", OdbcType.DateTime) { Value = NewDocument.ModifyDate });
                         //
                         com.Parameters.Add(new OdbcParameter("ModifyUser", OdbcType.VarChar, 100) { Value = NewDocument.ModifyUser });
@@ -8063,7 +8063,7 @@ Where Id={0}", DelDocument.Id);
             if (UpdDocument.Id == null) new ApplicationException("Id не может быть пустым если его нет то тогда что искать?");
 
             string CommandSql = String.Format(@"Update `aks`.`CashFunc_Document`
-Set `UreDate`=?, `ModifyDate`=?, `ModifyUser`='{1}', `LocalDebitorId` = {2}, 
+Set `CteateDate`=?, `UreDate`=?, `ModifyDate`=?, `ModifyUser`='{1}', `LocalDebitorId` = {2}, 
     `LocalCreditorId`={3}, `OtherDebitor`={4}, `OtherKreditor`={5}, `IsProcessed`={6}, 
     `DocNum`={7}, `IsDraft`={8}
 Where Id={0}", UpdDocument.Id,
@@ -8089,6 +8089,7 @@ Where Id={0}", UpdDocument.Id,
 
                     using (OdbcCommand com = new OdbcCommand(CommandSql, con))
                     {
+                        com.Parameters.Add(new OdbcParameter("CteateDate", OdbcType.DateTime) { Value = UpdDocument.CreateDate });
                         com.Parameters.Add(new OdbcParameter("UreDate", OdbcType.Date) { Value = UpdDocument.UreDate });
                         com.Parameters.Add(new OdbcParameter("ModifyDate", OdbcType.DateTime) { Value = UpdDocument.ModifyDate });
 

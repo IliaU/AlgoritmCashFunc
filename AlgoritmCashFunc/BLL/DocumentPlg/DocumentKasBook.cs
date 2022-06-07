@@ -57,7 +57,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         /// </summary>
         /// <param name="Id">Идентификатор в базе данных</param>
         /// <param name="UreDate">Дата создания документа</param>
-        /// <param name="CteateDate">Дата создания документа</param>
+        /// <param name="CreateDate">Дата создания документа</param>
         /// <param name="ModifyDate">Дата изменеия документа</param>
         /// <param name="ModifyUser">Пользовтаель который изменил последний раз документ</param>
         /// <param name="CurOperation">Операция к которой относится этот документ</param>
@@ -69,13 +69,13 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         /// <param name="DocNum"> Черновик</param>
         /// <param name="IsDraft">Черновик</param>
         /// <param name="IsProcessed">Проведённый документ или нет</param>
-        public DocumentKasBook(int? Id, DateTime? UreDate, DateTime CteateDate, DateTime ModifyDate, string ModifyUser, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, Local Departament, string OtherDebitor, string OtherKreditor, int DocNum, bool IsDraft, bool IsProcessed) : base("DocumentKasBook", CurOperation, LocalDebitor, LocalCreditor, Departament, OtherDebitor, OtherKreditor, DocNum, IsProcessed)
+        public DocumentKasBook(int? Id, DateTime? UreDate, DateTime CreateDate, DateTime ModifyDate, string ModifyUser, Operation CurOperation, Local LocalDebitor, Local LocalCreditor, Local Departament, string OtherDebitor, string OtherKreditor, int DocNum, bool IsDraft, bool IsProcessed) : base("DocumentKasBook", CurOperation, LocalDebitor, LocalCreditor, Departament, OtherDebitor, OtherKreditor, DocNum, IsProcessed)
         {
             try
             {
                 base.Id = Id;
                 base.UreDate = UreDate;
-                base.CteateDate = CteateDate;
+                base.CreateDate = CreateDate;
                 base.ModifyDate = ModifyDate;
                 base.ModifyUser = ModifyUser;
                 base.IsDraft = IsDraft;
