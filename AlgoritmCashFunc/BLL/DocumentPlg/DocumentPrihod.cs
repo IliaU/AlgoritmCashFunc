@@ -553,7 +553,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 TabTmpFrom.Columns.Add(new DataColumn("A", typeof(string)));
                 DataRow nrowFrom = TabTmpFrom.NewRow();
                 if(this.LocalCreditor!=null) nrowFrom["A"] = ((BLL.LocalPlg.LocalEmployees)this.LocalCreditor).LocalName;
-                nrowFrom["A"] = this.OtherKreditor;
+                else nrowFrom["A"] = this.OtherKreditor;
                 TabTmpFrom.Rows.Add(nrowFrom);
 
                 // Добавлем эту таблицу в наш класс

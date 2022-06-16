@@ -5285,7 +5285,7 @@ Order by `Id`");
         public void SetDocNumForYearMySql(DateTime? DtStart)
         {
             string CommandSql1 = String.Format(@"With T As (Select `Id`, `UreDate`, `OperationId`, `DocNum`,
-      row_number() over(partition by YEAR(`UreDate`), `OperationId` order by `UreDate`) As PRN
+      row_number() over(partition by YEAR(`UreDate`), `OperationId` order by `UreDate`, Date_Add(CteateDate, interval DateDiff(UreDate,CteateDate) day)) As PRN
     From `aks`.`cashfunc_document`
     Where `Departament` = {0}
         and `UreDate`>=str_to_date(ConCat('01.01.',convert({1}, char)),'%d.%m.%Y')
@@ -7673,7 +7673,7 @@ Where `UreDate`>={0}
     and `OperationId`={1}
     and `Departament`={2}
     and `IsDeleted`=0
-Order by `Id`", (LastDay == null ? "`OperationId`" : string.Format("Str_To_Date('{0}', '%d.%m.%Y')", DateTime.Now.AddDays((double)LastDay*-1).ToShortDateString()))
+Order by `UreDate`, Date_Add(CteateDate, interval DateDiff(UreDate,CteateDate) day) ", (LastDay == null ? "`OperationId`" : string.Format("Str_To_Date('{0}', '%d.%m.%Y')", DateTime.Now.AddDays((double)LastDay*-1).ToShortDateString()))
             , (OperationId == null ? "`OperationId`" : OperationId.ToString())
             , Com.LocalFarm.CurLocalDepartament.Id.ToString());
 
@@ -7802,7 +7802,7 @@ Where `UreDate`={0}
     and `Departament` = {3}
     and `OperationId`{1}{2}
     and `IsDeleted`=0
-Order by `Id`", (Dt==null ? "`OperationId`" : string.Format("Str_To_Date('{0}', '%d.%m.%Y')", ((DateTime)Dt).ToShortDateString()))
+Order by `UreDate`, Date_Add(CteateDate, interval DateDiff(UreDate,CteateDate) day)", (Dt==null ? "`OperationId`" : string.Format("Str_To_Date('{0}', '%d.%m.%Y')", ((DateTime)Dt).ToShortDateString()))
             , (HasNotin?"<>":"=")
             , (OperationId==null ? "`OperationId`" : OperationId.ToString())
             , Com.LocalFarm.CurLocalDepartament.Id.ToString()

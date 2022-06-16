@@ -52,6 +52,7 @@
             this.lblUpload1CDir = new System.Windows.Forms.Label();
             this.txtBoxUpload1CDir = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
+            this.lblKassaId = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblKassaName
@@ -250,11 +251,21 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // lblKassaId
+            // 
+            this.lblKassaId.AutoSize = true;
+            this.lblKassaId.Location = new System.Drawing.Point(467, 13);
+            this.lblKassaId.Name = "lblKassaId";
+            this.lblKassaId.Size = new System.Drawing.Size(22, 13);
+            this.lblKassaId.TabIndex = 24;
+            this.lblKassaId.Text = "   . ";
+            // 
             // FListLocalKassa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(566, 369);
+            this.Controls.Add(this.lblKassaId);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtBoxUpload1CDir);
             this.Controls.Add(this.lblUpload1CDir);
@@ -312,5 +323,6 @@
         private System.Windows.Forms.Label lblUpload1CDir;
         private System.Windows.Forms.TextBox txtBoxUpload1CDir;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Label lblKassaId;
     }
 }

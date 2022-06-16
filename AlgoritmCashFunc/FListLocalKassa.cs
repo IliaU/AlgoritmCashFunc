@@ -27,6 +27,7 @@ namespace AlgoritmCashFunc
             {
                 InitializeComponent();
                 this.lblKassaName.Text = this.lblKassaName.Tag.ToString().Replace(@"@KassaName", CurKassa.HostName);
+                this.lblKassaId.Text = (CurKassa.Id != null ? CurKassa.Id.ToString():"--");
                 this.txtBoxOrganization.Text = CurKassa.Organization;
                 this.txtBoxStructPodrazdelenie.Text = CurKassa.StructPodrazdelenie;
                 this.txtBoxOKPO.Text = CurKassa.OKPO;
