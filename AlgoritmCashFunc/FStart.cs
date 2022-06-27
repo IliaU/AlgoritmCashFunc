@@ -1611,7 +1611,7 @@ namespace AlgoritmCashFunc
                             // Проверка на наличие ошибок при создании пустого документа
                             if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", "DocumentPrihod"));
                             //
-                            this.txtBoxPrihDateDoc.Text = DateTime.Now.Date.ToString();
+                            this.txtBoxPrihDateDoc.Text = DateTime.Now.ToString();
 
                             // Заполняем инфу по операции
                             BLL.OperationPlg.OperationPrihod OperPrihod = (BLL.OperationPlg.OperationPrihod)this.CurDoc.CurOperation;
@@ -1746,7 +1746,7 @@ namespace AlgoritmCashFunc
                             // Проверка на наличие ошибок при создании пустого документа
                             if (this.CurDoc == null) throw new ApplicationException(string.Format("Не удалось создать документ разбирайся с плагином для документа: {0}", ""));
                             //
-                            this.txtBoxRashDateDoc.Text = DateTime.Now.Date.ToShortDateString();
+                            this.txtBoxRashDateDoc.Text = DateTime.Now.ToString();
 
                             // Заполняем инфу по операции
                             BLL.OperationPlg.OperationRashod OperRashod = (BLL.OperationPlg.OperationRashod)this.CurDoc.CurOperation;
