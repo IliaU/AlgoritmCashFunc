@@ -7571,7 +7571,7 @@ Where Id={0}", UpdLocalPaidRashReasons.Id,
         left join `aks`.`cashfunc_document` D On C.FindStart = D.UreDate
             and D.`DocFullName`='DocumentKasBook'
             and D.`Departament`= {1}
-        inner join `aks`.`cashfunc_document_kasbook` K On D.Id=K.Id),
+        left join `aks`.`cashfunc_document_kasbook` K On D.Id=K.Id),
     # Получаем список отфильтрованных документов с признаком даты на которую ищем и стартовой суммой
     Doc As (Select C.FindDt, C.StartSumm, D.Id, Trim(D.UreDate) As UreDate, O.KoefDebitor
       From Conf C
