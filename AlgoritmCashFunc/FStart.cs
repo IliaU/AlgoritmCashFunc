@@ -1854,6 +1854,8 @@ namespace AlgoritmCashFunc
                         //
                         foreach (Document itemDocKassBook in DocListKassBock)
                         {
+                            //if (itemDocKassBook.DocFullName == "DocumentInvent") itemDocKassBook.PrintDefault();
+
                             if (itemDocKassBook.DocFullName == "DocumentPrihod"
                                 || itemDocKassBook.DocFullName == "DocumentRashod")
                             {

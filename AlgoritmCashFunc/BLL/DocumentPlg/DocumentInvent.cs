@@ -630,6 +630,8 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                     sumKItogFact = int.Parse(tmpItogFact.Substring(tmpItogFact.IndexOf(',') + 1));
                 }
                 else sumRItogFact = (int)this.ItogPoUchDan;
+                // Если вместо копеек нулл то заменяем на 0
+                if (sumKItogFact == null) sumKItogFact = 0;
 
                 // Создаём временную таблицу
                 DataTable TabTmpItogFactRub = new DataTable();
@@ -687,6 +689,8 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                     sumKItog = int.Parse(tmpItog.Substring(tmpItog.IndexOf(',') + 1));
                 }
                 else sumRItog = (int)this.ItogPoUchDan;
+                // Если вместо копеек нулл то заменяем на 0
+                if (sumKItog == null) sumKItog = 0;
 
                 // Создаём временную таблицу
                 DataTable TabTmpItogRub = new DataTable();

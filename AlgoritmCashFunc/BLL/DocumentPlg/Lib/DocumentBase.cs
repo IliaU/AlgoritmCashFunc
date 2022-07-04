@@ -17,7 +17,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
     public abstract class DocumentBase
     {
         #region Private Param
-        private static DocumentBase obj = null;
+        private static object obj = new object();
 
         /// <summary>
         /// Количество попыток записи в лог

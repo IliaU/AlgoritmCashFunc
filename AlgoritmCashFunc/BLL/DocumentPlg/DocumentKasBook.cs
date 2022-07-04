@@ -303,5 +303,86 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 throw ae;
             }
         }
+
+        /// <summary>
+        /// Экспорт документа в 1С
+        /// </summary>
+        public override void ExportTo1C()
+        {
+            try
+            {
+                if (this.UreDate == null) throw new ApplicationException("У документа не задана юридическая дата.");
+
+                string FileName = string.Format("{0}_{1}_{2}{3}{4}.txt", Com.LocalFarm.CurLocalDepartament.StoreCode
+                    , Com.LocalFarm.CurLocalDepartament.CompanyCode
+                    , ((DateTime)this.UreDate).Year
+                    , ((DateTime)this.UreDate).Month.ToString("00")
+                    , ((DateTime)this.UreDate).Day.ToString("00"));
+
+                string PolKas = null;
+                if (this.LocalDebitor != null) PolKas = ((BLL.LocalPlg.LocalChiefCashiers)this.LocalDebitor).LocalName;
+                else PolKas = this.OtherDebitor;
+
+                string Sotrudnik = null;
+                if (this.LocalCreditor != null) Sotrudnik = ((BLL.LocalPlg.LocalEmployees)this.LocalCreditor).LocalName;
+                Sotrudnik = this.OtherKreditor;
+
+                // Пробегаем по списку документов
+                foreach (Document item in this.DocList)
+                {
+                    string FromTo = null;
+                    string NoDoc = null;
+                    string KorShet = null;
+                    string Sum = null;
+                    switch (item.DocFullName)
+                    {
+                        case "DocumentPrihod":
+
+                            if (item.LocalCreditor != null) FromTo = item.LocalCreditor.LocalName;
+                            else FromTo = ((DocumentPrihod)item).OtherKreditor;
+
+                            NoDoc = string.Format("no{0}", item.DocNum);
+                            KorShet = ((DocumentPrihod)item).KredikKorSchet;
+                            Sum = ((DocumentPrihod)item).Summa.ToString("#.00", CultureInfo.CurrentCulture);
+                            break;                            
+                        case "DocumentRashod":
+
+                            if (item.LocalDebitor != null) FromTo = item.LocalDebitor.LocalName;
+                            else FromTo = ((DocumentRashod)item).OtherDebitor;
+
+                            NoDoc = string.Format("po{0}", item.DocNum);
+                            KorShet = ((DocumentRashod)item).DebetKorSchet;
+                            Sum = ((DocumentRashod)item).Summa.ToString("#.00", CultureInfo.CurrentCulture);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    string Row = string.Format("{0}\t{1}" +
+                    "\t{2}\t{3}" +
+                    "\t{4}\t{5}" +
+                    "\t{6}\t{7}" +
+                    "\t{8}\t{9}" +
+                    "\t{10}\t{11}" +
+                    "\t{12}\t{13}" +
+                    "\t{14}"
+                    , 1, this.DocNum
+                    , 20220127181619, 7708790060
+                    , Com.LocalFarm.CurLocalDepartament.OKPO, Com.LocalFarm.CurLocalDepartament.Organization
+                    , Com.LocalFarm.CurLocalDepartament.CompanyCode, Com.LocalFarm.CurLocalDepartament.StructPodrazdelenie
+                    , Sum, 0
+                    , this.DolRukFio, this.RukFio
+                    , this.GlavBuh, PolKas
+                    , Sotrudnik);
+                    base.ExportTo1C(FileName, Row);
+                }
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
+                Com.Log.EventSave(ae.Message, string.Format("{0}.ExportTo1C", GetType().Name), EventEn.Error);
+                throw ae;
+            }
+        }
     }
 }
