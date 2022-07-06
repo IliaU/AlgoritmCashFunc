@@ -162,6 +162,533 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
         {
             try
             {
+                this.PrintDefaultExcel();
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
+                Com.Log.EventSave(ae.Message, string.Format("{0}.PrintDefault", GetType().Name), EventEn.Error);
+                throw ae;
+            }
+        }
+
+        private void PrintDefaultExcel()
+        {
+            try
+            {
+                // Получаем текущее подразделение
+                BLL.LocalPlg.LocalKassa Kassa = Com.LocalFarm.CurLocalDepartament;
+
+                // Создаём таблицу с которой потом будем работать
+                TableList TabL = new TableList();
+
+                string SourceFile = string.Format(@"{0}\Dotx\KasBookDefault.xlsx", Environment.CurrentDirectory);
+                //string TargetFile = string.Format(@"{0}\Report\{1}PrihDefault.xlsx", Environment.CurrentDirectory, ((int)this.Id).ToString());
+
+
+                //////////////////////////////////////
+
+                // Создаём временную таблицу
+                DataTable TabTmpDay = new DataTable();
+                //
+                TabTmpDay.Columns.Add(new DataColumn("A", typeof(string)));
+                DataRow nrowDay = TabTmpDay.NewRow();
+                nrowDay["A"] = ((DateTime)this.UreDate).Day.ToString("00");
+                TabTmpDay.Rows.Add(nrowDay);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabDay0 = new Table("1|O2", TabTmpDay);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                TabL.Add(TabDay0, true);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabDay1 = new Table("1|O33", TabTmpDay);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                TabL.Add(TabDay1, true);
+
+                //////////////////////////////////////
+
+                // Создаём временную таблицу
+                DataTable TabTmpMon = new DataTable();
+                //
+                TabTmpMon.Columns.Add(new DataColumn("A", typeof(string)));
+                DataRow nrowMon = TabTmpMon.NewRow();
+                switch (((DateTime)this.UreDate).Month)
+                {
+                    case 1:
+                        nrowMon["A"] = "Январь";
+                        break;
+                    case 2:
+                        nrowMon["A"] = "Февраль";
+                        break;
+                    case 3:
+                        nrowMon["A"] = "Март";
+                        break;
+                    case 4:
+                        nrowMon["A"] = "Апрель";
+                        break;
+                    case 5:
+                        nrowMon["A"] = "Май";
+                        break;
+                    case 6:
+                        nrowMon["A"] = "Июнь";
+                        break;
+                    case 7:
+                        nrowMon["A"] = "Июль";
+                        break;
+                    case 8:
+                        nrowMon["A"] = "Август";
+                        break;
+                    case 9:
+                        nrowMon["A"] = "Сентябрь";
+                        break;
+                    case 10:
+                        nrowMon["A"] = "Октябрь";
+                        break;
+                    case 11:
+                        nrowMon["A"] = "Ноябрь";
+                        break;
+                    case 12:
+                        nrowMon["A"] = "Декабрь";
+                        break;
+                    default:
+                        break;
+                }
+
+                TabTmpMon.Rows.Add(nrowMon);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabMon0 = new Table("1|T2", TabTmpMon);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                TabL.Add(TabMon0, true);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabMon1 = new Table("1|T33", TabTmpMon);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                TabL.Add(TabMon1, true);
+
+                //////////////////////////////////////
+
+                // Создаём временную таблицу
+                DataTable TabTmpYear = new DataTable();
+                //
+                TabTmpYear.Columns.Add(new DataColumn("A", typeof(string)));
+                DataRow nrowYear = TabTmpYear.NewRow();
+                nrowYear["A"] = ((DateTime)this.UreDate).Year;
+                TabTmpYear.Rows.Add(nrowYear);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabYear0 = new Table("1|AK2", TabTmpYear);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                TabL.Add(TabYear0, true);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabYear1 = new Table("1|AK33", TabTmpYear);   // передаём индекс страницы (начинается с 1) и ячейку таблицы (её самый левый верхний угол) 
+                TabL.Add(TabYear1, true);
+
+                //////////////////////////////////////
+                /*
+                // Создаём временную таблицу
+                DataTable TabTmpDMY = new DataTable();
+                //
+                TabTmpDMY.Columns.Add(new DataColumn("A", typeof(string)));
+                DataRow nrowDMY = TabTmpDMY.NewRow();
+                nrowDMY["A"] = ((DateTime)this.UreDate).ToShortDateString();
+                TabTmpDMY.Rows.Add(nrowDMY);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabDMY0 = new Table("1|BB13", TabTmpDMY);
+                TabL.Add(TabDMY0, true);
+                */
+
+                //////////////////////////////////////
+
+                // Создаём временную таблицу
+                DataTable TabTmpDocNum = new DataTable();
+                //
+                TabTmpDocNum.Columns.Add(new DataColumn("A", typeof(string)));
+                DataRow nrowDocNum = TabTmpDocNum.NewRow();
+                nrowDocNum["A"] = this.DocNum.ToString();
+                TabTmpDocNum.Rows.Add(nrowDocNum);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabDocNum0 = new Table("1|BD2", TabTmpDocNum);
+                TabL.Add(TabDocNum0, true);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabDocNum1 = new Table("1|BD33", TabTmpDocNum);
+                TabL.Add(TabDocNum1, true);
+
+                //////////////////////////////////////
+
+                // Создаём временную таблицу
+                DataTable TabTmpSummaStartDay = new DataTable();
+                //
+                TabTmpSummaStartDay.Columns.Add(new DataColumn("A", typeof(string)));
+                DataRow nrowSummaStartDay = TabTmpSummaStartDay.NewRow();
+                nrowSummaStartDay["A"] = this.SummaStartDay.ToString("#.00", CultureInfo.CurrentCulture);
+                TabTmpSummaStartDay.Rows.Add(nrowSummaStartDay);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabSummaStartDay0 = new Table("1|AS7", TabTmpSummaStartDay);
+                TabL.Add(TabSummaStartDay0, true);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabSummaStartDay1 = new Table("1|AS38", TabTmpSummaStartDay);
+                TabL.Add(TabSummaStartDay1, true);
+
+                //////////////////////////////////////
+
+                if (this.DocList.Count > 30) throw new ApplicationException("Шаблон не потдерживает количество строк больше 30");
+
+                decimal? PerenosD = null;
+                decimal? PerenosE = null;
+                int CountD = 0;
+                int CountE = 0;
+
+                if (this.DocList.Count > 0)
+                {
+                    // Создаём временную таблицу
+                    DataTable TabTmpBodyA = new DataTable();
+                    TabTmpBodyA.Columns.Add(new DataColumn("A", typeof(string)));
+                    DataTable TabTmpBodyB = new DataTable();
+                    TabTmpBodyB.Columns.Add(new DataColumn("B", typeof(string)));
+                    DataTable TabTmpBodyC = new DataTable();
+                    TabTmpBodyC.Columns.Add(new DataColumn("C", typeof(string)));
+                    DataTable TabTmpBodyD = new DataTable();
+                    TabTmpBodyD.Columns.Add(new DataColumn("D", typeof(string)));
+                    DataTable TabTmpBodyE = new DataTable();
+                    TabTmpBodyE.Columns.Add(new DataColumn("E", typeof(string)));
+                    
+                    for (int i = 0; i < this.DocList.Count && i<21; i++)
+                    {
+                        DataRow nrowBodyA = TabTmpBodyA.NewRow();
+                        DataRow nrowBodyB = TabTmpBodyB.NewRow();
+                        DataRow nrowBodyC = TabTmpBodyC.NewRow();
+                        DataRow nrowBodyD = TabTmpBodyD.NewRow();
+                        DataRow nrowBodyE = TabTmpBodyE.NewRow();
+
+                        switch (this.DocList[i].DocFullName)
+                        {
+                            case "DocumentPrihod":
+                                nrowBodyA["A"] = string.Format("no{0}", this.DocList[i].DocNum);
+
+                                if (this.DocList[i].LocalCreditor != null) nrowBodyB["B"] = this.DocList[i].LocalCreditor.LocalName;
+                                else nrowBodyB["B"] = ((DocumentPrihod)this.DocList[i]).OtherKreditor;
+                                
+                                nrowBodyC["C"] = ((DocumentPrihod)this.DocList[i]).KredikKorSchet;
+
+                                nrowBodyD["D"] = ((DocumentPrihod)this.DocList[i]).Summa.ToString("#.00", CultureInfo.CurrentCulture);
+                                if (PerenosD != null) PerenosD = ((decimal)PerenosD) + ((DocumentPrihod)this.DocList[i]).Summa;
+                                else PerenosD = ((DocumentPrihod)this.DocList[i]).Summa;
+                                CountD++;
+
+                                 nrowBodyE["E"] = "";
+                                break;
+                            case "DocumentRashod":
+                                nrowBodyA["A"] = string.Format("po{0}", this.DocList[i].DocNum);
+
+                                if (this.DocList[i].LocalDebitor != null) nrowBodyB["B"] = this.DocList[i].LocalDebitor.LocalName;
+                                else nrowBodyB["B"] = ((DocumentRashod)this.DocList[i]).OtherDebitor;
+
+                                nrowBodyC["C"] = ((DocumentRashod)this.DocList[i]).DebetKorSchet;
+
+                                nrowBodyD["D"] = "";
+
+                                nrowBodyE["E"] = ((DocumentRashod)this.DocList[i]).Summa.ToString("#.00", CultureInfo.CurrentCulture);
+                                if (PerenosE != null) PerenosE = ((decimal)PerenosD) + ((DocumentRashod)this.DocList[i]).Summa;
+                                else PerenosE = ((DocumentRashod)this.DocList[i]).Summa;
+                                CountE++;
+                                break;
+                            default:
+                                break;
+                        }
+                        TabTmpBodyA.Rows.Add(nrowBodyA);
+                        TabTmpBodyB.Rows.Add(nrowBodyB);
+                        TabTmpBodyC.Rows.Add(nrowBodyC);
+                        TabTmpBodyD.Rows.Add(nrowBodyD);
+                        TabTmpBodyE.Rows.Add(nrowBodyE);
+                    }
+
+                    // Добавлем эту таблицу в наш класс
+                    Table TabBodyA0 = new Table("1|D9", TabTmpBodyA);
+                    TabL.Add(TabBodyA0, true);
+                    Table TabBodyB0 = new Table("1|M9", TabTmpBodyB);
+                    TabL.Add(TabBodyB0, true);
+                    Table TabBodyC0 = new Table("1|AG9", TabTmpBodyC);
+                    TabL.Add(TabBodyC0, true);
+                    Table TabBodyD0 = new Table("1|AS9", TabTmpBodyD);
+                    TabL.Add(TabBodyD0, true);
+                    Table TabBodyE0 = new Table("1|BE9", TabTmpBodyE);
+                    TabL.Add(TabBodyE0, true);
+
+                    // Добавлем эту таблицу в наш класс
+                    Table TabBodyA1 = new Table("1|D40", TabTmpBodyA);
+                    TabL.Add(TabBodyA1, true);
+                    Table TabBodyB1 = new Table("1|M40", TabTmpBodyB);
+                    TabL.Add(TabBodyB1, true);
+                    Table TabBodyC1 = new Table("1|AG40", TabTmpBodyC);
+                    TabL.Add(TabBodyC1, true);
+                    Table TabBodyD1 = new Table("1|AS40", TabTmpBodyD);
+                    TabL.Add(TabBodyD1, true);
+                    Table TabBodyE1 = new Table("1|BE40", TabTmpBodyE);
+                    TabL.Add(TabBodyE1, true);
+
+                    //------------------------- Перенос
+                    DataTable TabTmpPerenosD = new DataTable();
+                    TabTmpPerenosD.Columns.Add(new DataColumn("D", typeof(string)));
+                    DataRow nrowPerenosD = TabTmpPerenosD.NewRow();
+                    if (PerenosD != null) nrowPerenosD["D"] = ((decimal)PerenosD).ToString("#.00", CultureInfo.CurrentCulture);
+                    else nrowPerenosD["D"] = "";
+                    TabTmpPerenosD.Rows.Add(nrowPerenosD);
+                    //
+                    Table TabPerenosD0 = new Table("1|AS30", TabTmpPerenosD);
+                    TabL.Add(TabPerenosD0, true);
+                    Table TabPerenosD1 = new Table("1|AS61", TabTmpPerenosD);
+                    TabL.Add(TabPerenosD1, true);
+
+                    DataTable TabTmpPerenosE = new DataTable();
+                    TabTmpPerenosE.Columns.Add(new DataColumn("E", typeof(string)));
+                    DataRow nrowPerenosE = TabTmpPerenosE.NewRow();
+                    if (PerenosE != null) nrowPerenosE["E"] = ((decimal)PerenosE).ToString("#.00", CultureInfo.CurrentCulture);
+                    else nrowPerenosE["E"] = "";
+                    TabTmpPerenosE.Rows.Add(nrowPerenosE);
+                    //
+                    Table TabPerenosE0 = new Table("1|BE30", TabTmpPerenosE);
+                    TabL.Add(TabPerenosE0, true);
+                    Table TabPerenosE1 = new Table("1|BE61", TabTmpPerenosE);
+                    TabL.Add(TabPerenosE1, true);
+                    //-------------------------
+                }
+
+                if (this.DocList.Count > 21)
+                {
+                    // Создаём временную таблицу
+                    DataTable TabTmpBodyA = new DataTable();
+                    TabTmpBodyA.Columns.Add(new DataColumn("A", typeof(string)));
+                    DataTable TabTmpBodyB = new DataTable();
+                    TabTmpBodyB.Columns.Add(new DataColumn("B", typeof(string)));
+                    DataTable TabTmpBodyC = new DataTable();
+                    TabTmpBodyC.Columns.Add(new DataColumn("C", typeof(string)));
+                    DataTable TabTmpBodyD = new DataTable();
+                    TabTmpBodyD.Columns.Add(new DataColumn("D", typeof(string)));
+                    DataTable TabTmpBodyE = new DataTable();
+                    TabTmpBodyE.Columns.Add(new DataColumn("E", typeof(string)));
+
+                    for (int i = 21; i < this.DocList.Count; i++)
+                    {
+                        DataRow nrowBodyA = TabTmpBodyA.NewRow();
+                        DataRow nrowBodyB = TabTmpBodyB.NewRow();
+                        DataRow nrowBodyC = TabTmpBodyC.NewRow();
+                        DataRow nrowBodyD = TabTmpBodyD.NewRow();
+                        DataRow nrowBodyE = TabTmpBodyE.NewRow();
+
+                        switch (this.DocList[i].DocFullName)
+                        {
+                            case "DocumentPrihod":
+                                nrowBodyA["A"] = string.Format("no{0}", this.DocList[i].DocNum);
+
+                                if (this.DocList[i].LocalCreditor != null) nrowBodyB["B"] = this.DocList[i].LocalCreditor.LocalName;
+                                else nrowBodyB["B"] = ((BLL.DocumentPlg.DocumentPrihod)this.DocList[i]).OtherKreditor;
+
+                                nrowBodyC["C"] = ((BLL.DocumentPlg.DocumentPrihod)this.DocList[i]).KredikKorSchet;
+
+                                nrowBodyD["D"] = ((BLL.DocumentPlg.DocumentPrihod)this.DocList[i]).Summa.ToString("#.00", CultureInfo.CurrentCulture);
+                                if (PerenosD != null) PerenosD = ((decimal)PerenosD) + ((DocumentPrihod)this.DocList[i]).Summa;
+                                else PerenosD = ((DocumentPrihod)this.DocList[i]).Summa;
+                                CountD++;
+
+                                nrowBodyE["E"] = "";
+                                break;
+                            case "DocumentRashod":
+                                nrowBodyA["A"] = string.Format("po{0}", this.DocList[i].DocNum);
+
+                                if (this.DocList[i].LocalDebitor != null) nrowBodyB["B"] = this.DocList[i].LocalDebitor.LocalName;
+                                else nrowBodyB["B"] = ((BLL.DocumentPlg.DocumentRashod)this.DocList[i]).OtherDebitor;
+
+                                nrowBodyC["C"] = ((BLL.DocumentPlg.DocumentRashod)this.DocList[i]).DebetKorSchet;
+
+                                nrowBodyD["D"] = "";
+
+                                nrowBodyE["E"] = ((BLL.DocumentPlg.DocumentRashod)this.DocList[i]).Summa.ToString("#.00", CultureInfo.CurrentCulture);
+                                if (PerenosE != null) PerenosE = ((decimal)PerenosD) + ((DocumentRashod)this.DocList[i]).Summa;
+                                else PerenosE = ((DocumentRashod)this.DocList[i]).Summa;
+                                CountE++;
+                                break;
+                            default:
+                                break;
+                        }
+                        TabTmpBodyA.Rows.Add(nrowBodyA);
+                        TabTmpBodyB.Rows.Add(nrowBodyB);
+                        TabTmpBodyC.Rows.Add(nrowBodyC);
+                        TabTmpBodyD.Rows.Add(nrowBodyD);
+                        TabTmpBodyE.Rows.Add(nrowBodyE);
+                    }
+
+                    // Добавлем эту таблицу в наш класс
+                    Table TabBodyA0 = new Table("1|BU6", TabTmpBodyA);
+                    TabL.Add(TabBodyA0, true);
+                    Table TabBodyB0 = new Table("1|CC6", TabTmpBodyB);
+                    TabL.Add(TabBodyB0, true);
+                    Table TabBodyC0 = new Table("1|CW6", TabTmpBodyC);
+                    TabL.Add(TabBodyC0, true);
+                    Table TabBodyD0 = new Table("1|DH6", TabTmpBodyD);
+                    TabL.Add(TabBodyD0, true);
+                    Table TabBodyE0 = new Table("1|DT6", TabTmpBodyE);
+                    TabL.Add(TabBodyE0, true);
+
+                    // Добавлем эту таблицу в наш класс
+                    Table TabBodyA1 = new Table("1|BU37", TabTmpBodyA);
+                    TabL.Add(TabBodyA1, true);
+                    Table TabBodyB1 = new Table("1|CC37", TabTmpBodyB);
+                    TabL.Add(TabBodyB1, true);
+                    Table TabBodyC1 = new Table("1|CW37", TabTmpBodyC);
+                    TabL.Add(TabBodyC1, true);
+                    Table TabBodyD1 = new Table("1|DH37", TabTmpBodyD);
+                    TabL.Add(TabBodyD1, true);
+                    Table TabBodyE1 = new Table("1|DT637", TabTmpBodyE);
+                    TabL.Add(TabBodyE1, true);
+                }
+
+                //------------------------- Итого за день
+                DataTable TabTmpItogOfDayD = new DataTable();
+                TabTmpItogOfDayD.Columns.Add(new DataColumn("D", typeof(string)));
+                DataRow nrowItogOfDayD = TabTmpItogOfDayD.NewRow();
+                if (PerenosD != null) nrowItogOfDayD["D"] = ((decimal)PerenosD).ToString("#.00", CultureInfo.CurrentCulture);
+                else nrowItogOfDayD["D"] = "";
+                TabTmpItogOfDayD.Rows.Add(nrowItogOfDayD);
+                //
+                Table TabItogOfDayD0 = new Table("1|DH15", TabTmpItogOfDayD);
+                TabL.Add(TabItogOfDayD0, true);
+                Table TabItogOfDayD1 = new Table("1|DH46", TabTmpItogOfDayD);
+                TabL.Add(TabItogOfDayD1, true);
+
+                DataTable TabTmpItogOfDayE = new DataTable();
+                TabTmpItogOfDayE.Columns.Add(new DataColumn("E", typeof(string)));
+                DataRow nrowItogOfDayE = TabTmpItogOfDayE.NewRow();
+                if (PerenosE != null) nrowItogOfDayE["E"] = ((decimal)PerenosE).ToString("#.00", CultureInfo.CurrentCulture);
+                else nrowItogOfDayE["E"] = "";
+                TabTmpItogOfDayE.Rows.Add(nrowItogOfDayE);
+                //
+                Table TabItogOfDayE0 = new Table("1|DT15", TabTmpItogOfDayE);
+                TabL.Add(TabItogOfDayE0, true);
+                Table TabItogOfDayE1 = new Table("1|DT46", TabTmpItogOfDayE);
+                TabL.Add(TabItogOfDayE1, true);
+                //-------------------------
+
+                //////////////////////////////////////
+
+                // Создаём временную таблицу
+                DataTable TabTmpSummaEndDay = new DataTable();
+                //
+                TabTmpSummaEndDay.Columns.Add(new DataColumn("A", typeof(string)));
+                DataRow nrowSummaEndDay = TabTmpSummaEndDay.NewRow();
+                nrowSummaEndDay["A"] = this.SummaEndDay.ToString("#.00", CultureInfo.CurrentCulture);
+                TabTmpSummaEndDay.Rows.Add(nrowSummaEndDay);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabSummaEndDay0 = new Table("1|DH17", TabTmpSummaEndDay);
+                TabL.Add(TabSummaEndDay0, true);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabSummaEndDay1 = new Table("1|DH48", TabTmpSummaEndDay);
+                TabL.Add(TabSummaEndDay1, true);
+
+                //////////////////////////////////////
+
+                // Создаём временную таблицу
+                DataTable TabTmpKassir = new DataTable();
+                //
+                TabTmpKassir.Columns.Add(new DataColumn("A", typeof(string)));
+                DataRow nrowKassir = TabTmpKassir.NewRow();
+                nrowKassir["A"] = (this.LocalCreditor != null ? this.LocalCreditor.LocalName : this.OtherKreditor);
+                TabTmpKassir.Rows.Add(nrowKassir);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabKassir0 = new Table("1|CY22", TabTmpKassir);
+                TabL.Add(TabKassir0, true);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabKassir1 = new Table("1|CY53", TabTmpKassir);
+                TabL.Add(TabKassir1, true);
+
+                //////////////////////////////////////
+
+                // Создаём временную таблицу
+                DataTable TabTmpCountPrih = new DataTable();
+                //
+                TabTmpCountPrih.Columns.Add(new DataColumn("A", typeof(string)));
+                DataRow nrowCountPrih = TabTmpCountPrih.NewRow();
+                nrowCountPrih["A"] = Com.Utils.GetStringForInt(CountD, "", "", "", false).ToLower();
+                TabTmpCountPrih.Rows.Add(nrowCountPrih);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabCountPrih0 = new Table("1|CG25", TabTmpCountPrih);
+                TabL.Add(TabCountPrih0, true);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabCountPrih1 = new Table("1|CG56", TabTmpCountPrih);
+                TabL.Add(TabCountPrih1, true);
+
+                //////////////////////////////////////
+
+                // Создаём временную таблицу
+                DataTable TabTmpCountRash = new DataTable();
+                //
+                TabTmpCountRash.Columns.Add(new DataColumn("A", typeof(string)));
+                DataRow nrowCountRash = TabTmpCountRash.NewRow();
+                nrowCountRash["A"] = Com.Utils.GetStringForInt(CountE, "", "", "", false).ToLower();
+                TabTmpCountRash.Rows.Add(nrowCountRash);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabCountRash0 = new Table("1|BV27", TabTmpCountRash);
+                TabL.Add(TabCountRash0, true);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabCountRash1 = new Table("1|BV58", TabTmpCountRash);
+                TabL.Add(TabCountRash1, true);
+
+                //////////////////////////////////////
+
+                // Создаём временную таблицу
+                DataTable TabTmpGlavBuh = new DataTable();
+                //
+                TabTmpGlavBuh.Columns.Add(new DataColumn("A", typeof(string)));
+                DataRow nrowGlavBuh = TabTmpGlavBuh.NewRow();
+                nrowGlavBuh["A"] = this.GlavBuh;
+                TabTmpGlavBuh.Rows.Add(nrowGlavBuh);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabGlavBuh0 = new Table("1|CZ30", TabTmpGlavBuh);
+                TabL.Add(TabGlavBuh0, true);
+
+                // Добавлем эту таблицу в наш класс
+                Table TabGlavBuh1 = new Table("1|CZ61", TabTmpGlavBuh);
+                TabL.Add(TabGlavBuh1, true);
+
+                //////////////////////////////////////
+
+
+                // Создаём задание
+                TaskExcel Tsk = new TaskExcel(SourceFile, null, TabL, true);
+
+                // Можно создать отдельный екземпляр который сможет работать асинхронно со своими параметрами
+                ExcelServer SrvStatic = new ExcelServer(string.Format(@"{0}\Dotx", Environment.CurrentDirectory), string.Format(@"{0}\Report", Environment.CurrentDirectory));
+
+                // Запускаем формирование отчёта в синхронном режиме
+                SrvStatic.StartCreateReport(Tsk, 1);
+
+                // открываем приложение Excel
+                //SrvStatic.OlpenReport(Tsk);
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
+                Com.Log.EventSave(ae.Message, string.Format("{0}.PrintDefault", GetType().Name), EventEn.Error);
+                throw ae;
+            }
+        }
+
+
+        private void PrintDefaultWord()
+        {
+            try
+            {
                 // Получаем текущее подразделение
                 BLL.LocalPlg.LocalKassa Kassa = Com.LocalFarm.CurLocalDepartament;
 
@@ -186,12 +713,12 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                             if (item.LocalDebitor != null) nrow["A2"] = item.LocalDebitor.LocalName;
                             else nrow["A2"] = this.OtherDebitor;
                             nrow["A3"] = ((DocumentPrihod)item).KredikKorSchet;
-                            nrow["A4"] = ((DocumentPrihod)item).Summa.ToString("#.00", CultureInfo.CurrentCulture); 
+                            nrow["A4"] = ((DocumentPrihod)item).Summa.ToString("#.00", CultureInfo.CurrentCulture);
                             CountPrich++;
                             break;
                         case "DocumentRashod":
                             nrow["A1"] = string.Format("po{0}", item.DocNum);
-                            if (item.LocalDebitor!=null) nrow["A2"] = item.LocalDebitor.LocalName;
+                            if (item.LocalDebitor != null) nrow["A2"] = item.LocalDebitor.LocalName;
                             else nrow["A2"] = this.OtherDebitor;
                             nrow["A3"] = ((DocumentRashod)item).DebetKorSchet;
                             nrow["A5"] = ((DocumentRashod)item).Summa.ToString("#.00", CultureInfo.CurrentCulture);
@@ -275,12 +802,12 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 Bookmark BmCRash = new Bookmark("BmCRash", Com.Utils.GetStringForInt(CountRash, "", "", "", false).ToLower());
                 BmL.Add(BmCRash, true);
                 //
-                Bookmark BmKassir= new Bookmark("BmKassir", (this.LocalCreditor!=null?this.LocalCreditor.LocalName:this.OtherKreditor));
+                Bookmark BmKassir = new Bookmark("BmKassir", (this.LocalCreditor != null ? this.LocalCreditor.LocalName : this.OtherKreditor));
                 BmL.Add(BmKassir, true);
                 //
                 Bookmark BmBuhg = new Bookmark("BmBuhg", this.GlavBuh);
                 BmL.Add(BmBuhg, true);
-                
+
 
                 //////////////////////////////////////
 
@@ -303,7 +830,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 throw ae;
             }
         }
-
+        
         /// <summary>
         /// Экспорт документа в 1С
         /// </summary>
