@@ -2328,6 +2328,7 @@ namespace AlgoritmCashFunc
             {
                 Document SelectDocument = null;
 
+                /*   // Если нужно печатать только выделенный документ
                 // Если текущая вкладка кассовая книга
                 if (this.tabCntOperation.SelectedIndex == 2 && this.TagDocKassBook.Count > 0)
                 {
@@ -2346,6 +2347,11 @@ namespace AlgoritmCashFunc
                         }
                     }
                 }
+                */
+
+                // Печать всей книги
+                if (this.CurDoc != null) SelectDocument = this.CurDoc;
+
 
                 // Если документ найден
                 if (SelectDocument != null)

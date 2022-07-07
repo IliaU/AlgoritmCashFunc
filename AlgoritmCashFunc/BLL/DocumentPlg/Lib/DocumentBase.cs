@@ -272,6 +272,9 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
                 if (String.IsNullOrWhiteSpace(Com.LocalFarm.CurLocalDepartament.Upload1CDir)) throw new ApplicationException("Не указана папка в которую производится експорт файлов для 1С");
                 if (!Directory.Exists(Com.LocalFarm.CurLocalDepartament.Upload1CDir)) throw new ApplicationException("Папки в которую производится експорт файлов для 1С не существует");
 
+                if (File.Exists(string.Format("{0}\\{1}", Com.LocalFarm.CurLocalDepartament.Upload1CDir, FileName)))
+                    File.Delete(string.Format("{0}\\{1}", Com.LocalFarm.CurLocalDepartament.Upload1CDir, FileName));
+
                 this.ExportTo1C(FileName, row, IOCountPoput);
             }
             catch (Exception ex)

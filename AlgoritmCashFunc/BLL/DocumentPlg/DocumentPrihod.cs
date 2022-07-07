@@ -865,8 +865,8 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
             {
                 if (this.UreDate == null) throw new ApplicationException("У документа не задана юридическая дата.");
 
-                string FileName = string.Format("{0}_{1}_{2}{3}{4}.txt", Com.LocalFarm.CurLocalDepartament.StoreCode
-                    , Com.LocalFarm.CurLocalDepartament.CompanyCode
+                string FileName = string.Format("{0}_{1}_{2}{3}{4}.txt", Com.LocalFarm.CurLocalDepartament.CompanyCode
+                    , Com.LocalFarm.CurLocalDepartament.StoreCode
                     , ((DateTime)this.UreDate).Year
                     , ((DateTime)this.UreDate).Month.ToString("00")
                     , ((DateTime)this.UreDate).Day.ToString("00"));

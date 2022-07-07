@@ -684,7 +684,6 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
             }
         }
 
-
         private void PrintDefaultWord()
         {
             try
@@ -840,23 +839,35 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
             {
                 if (this.UreDate == null) throw new ApplicationException("У документа не задана юридическая дата.");
 
-                string FileName = string.Format("{0}_{1}_{2}{3}{4}.txt", Com.LocalFarm.CurLocalDepartament.StoreCode
-                    , Com.LocalFarm.CurLocalDepartament.CompanyCode
+                string FileName = string.Format("{0}_{1}_{2}{3}{4}.txt", Com.LocalFarm.CurLocalDepartament.CompanyCode
+                    , Com.LocalFarm.CurLocalDepartament.StoreCode
                     , ((DateTime)this.UreDate).Year
                     , ((DateTime)this.UreDate).Month.ToString("00")
                     , ((DateTime)this.UreDate).Day.ToString("00"));
 
                 string PolKas = null;
-                if (this.LocalDebitor != null) PolKas = ((BLL.LocalPlg.LocalChiefCashiers)this.LocalDebitor).LocalName;
+                if (this.LocalDebitor != null) PolKas = ((BLL.LocalPlg.LocalAccounters)this.LocalDebitor).LocalName;
                 else PolKas = this.OtherDebitor;
 
                 string Sotrudnik = null;
-                if (this.LocalCreditor != null) Sotrudnik = ((BLL.LocalPlg.LocalEmployees)this.LocalCreditor).LocalName;
+                if (this.LocalCreditor != null) Sotrudnik = ((BLL.LocalPlg.LocalChiefCashiers)this.LocalCreditor).LocalName;
                 Sotrudnik = this.OtherKreditor;
 
                 // Пробегаем по списку документов
                 foreach (Document item in this.DocList)
                 {
+                    string OrderTyp = "";
+                    string DolRukFio = "";
+                    string RukFio = "";
+                    string PoDocumrntu = "";
+                    string OsnovsnieNum = "";
+                    string OsnovanieTxt = "";
+                    string Prilozenie = "";
+                    string DebetNum = "";
+                    string KreditNum = "";
+                    string KodAnalitUch = "";
+                    string KodNaznachenia = "";
+
                     string FromTo = null;
                     string NoDoc = null;
                     string KorShet = null;
@@ -864,6 +875,15 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                     switch (item.DocFullName)
                     {
                         case "DocumentPrihod":
+
+                            OrderTyp = "1";
+                            OsnovsnieNum = ((DocumentPrihod)item).Osnovanie;
+                            OsnovanieTxt = ((DocumentPrihod)item).PaidInReasons.LocalName;
+                            Prilozenie = ((DocumentPrihod)item).Prilozenie;
+                            DebetNum = ((DocumentPrihod)item).DebetNomerSchet;
+                            KreditNum = ((DocumentPrihod)item).KredikKorSchet;
+                            KodAnalitUch = ((DocumentPrihod)item).KredikKodAnalUch;
+                            KodNaznachenia = ((DocumentPrihod)item).KodNazn;
 
                             if (item.LocalCreditor != null) FromTo = item.LocalCreditor.LocalName;
                             else FromTo = ((DocumentPrihod)item).OtherKreditor;
@@ -873,6 +893,18 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                             Sum = ((DocumentPrihod)item).Summa.ToString("#.00", CultureInfo.CurrentCulture);
                             break;                            
                         case "DocumentRashod":
+
+                            OrderTyp = "2";
+                            DolRukFio = this.DolRukFio;
+                            RukFio = this.RukFio;
+                            PoDocumrntu = ((DocumentRashod)item).PoDoc;
+                            OsnovsnieNum = ((DocumentRashod)item).Osnovanie;
+                            OsnovanieTxt = ((DocumentRashod)item).PaidRashReasons.LocalName;
+                            Prilozenie = ((DocumentRashod)item).Prilozenie;
+                            DebetNum = ((DocumentRashod)item).DebetKorSchet;
+                            KreditNum = ((DocumentRashod)item).KreditNomerSchet;
+                            KodAnalitUch = ((DocumentRashod)item).DebetKodAnalUch;
+                            KodNaznachenia = ((DocumentRashod)item).KodNazn;
 
                             if (item.LocalDebitor != null) FromTo = item.LocalDebitor.LocalName;
                             else FromTo = ((DocumentRashod)item).OtherDebitor;
@@ -892,15 +924,28 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                     "\t{8}\t{9}" +
                     "\t{10}\t{11}" +
                     "\t{12}\t{13}" +
-                    "\t{14}"
-                    , 1, this.DocNum
-                    , 20220127181619, 7708790060
+                    "\t{14}\t{15}" +
+                    "\t{16}\t{17}" +
+                    "\t{18}\t{19}" +
+                    "\t{20}\t{21}" +
+                    "\t{22}\t{23}"
+                    , OrderTyp, item.DocNum
+                    , string.Format("{0}{1}{2}{3}{4}{5}", ((DateTime)this.UreDate).Year
+                            , ((DateTime)this.UreDate).Month.ToString("00")
+                            , ((DateTime)this.UreDate).Day.ToString("00")
+                            , ((DateTime)this.CreateDate).Hour.ToString("00")
+                            , ((DateTime)this.CreateDate).Minute.ToString("00")
+                            , ((DateTime)this.CreateDate).Second.ToString("00")), Com.LocalFarm.CurLocalDepartament.INN
                     , Com.LocalFarm.CurLocalDepartament.OKPO, Com.LocalFarm.CurLocalDepartament.Organization
-                    , Com.LocalFarm.CurLocalDepartament.CompanyCode, Com.LocalFarm.CurLocalDepartament.StructPodrazdelenie
-                    , Sum, 0
-                    , this.DolRukFio, this.RukFio
+                    , Com.LocalFarm.CurLocalDepartament.StoreCode, Com.LocalFarm.CurLocalDepartament.StructPodrazdelenie
+                    , Sum, "0,00"
+                    , DolRukFio, RukFio
                     , this.GlavBuh, PolKas
-                    , Sotrudnik);
+                    , Sotrudnik, PoDocumrntu
+                    , OsnovsnieNum, OsnovanieTxt
+                    , Prilozenie, DebetNum
+                    , KreditNum, Com.LocalFarm.CurLocalDepartament.StoreCode
+                    , KodAnalitUch, KodNaznachenia);
                     base.ExportTo1C(FileName, Row);
                 }
             }
