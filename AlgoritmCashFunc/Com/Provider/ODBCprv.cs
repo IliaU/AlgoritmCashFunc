@@ -6920,7 +6920,7 @@ Where Id={0}", (int)LocalKassa.Id);
     `LastDocNumReportKas`, `LastDocNumScetKkm`, `LastDocNumVerifNal`, `LastDocNumInvent`,
     `INN`, `ZavodKKM`, `RegKKM`, `GlavBuhFio`,
     `KkmName`, `DolRukOrg`, `RukFio`, `ZavDivisionFio`,
-    `CompanyCode`, `StoreCode`, `Upload1CDir`
+    `CompanyCode`, `StoreCode`, `Upload1CDir`, `UploadExcelDir`
 From `aks`.`cashfunc_local_kassa`
 Where Id={0}", (int)LocalKassa.Id);
 
@@ -6983,6 +6983,7 @@ Where Id={0}", (int)LocalKassa.Id);
                                     if (!dr.IsDBNull(20)) LocalKassa.CompanyCode = dr.GetString(20);
                                     if (!dr.IsDBNull(21)) LocalKassa.StoreCode = dr.GetString(21);
                                     if (!dr.IsDBNull(22)) LocalKassa.Upload1CDir = dr.GetString(22);
+                                    if (!dr.IsDBNull(23)) LocalKassa.UploadExcelDir = dr.GetString(23);
                                 }
                             }
                         }
@@ -7018,18 +7019,18 @@ Where Id={0}", (int)LocalKassa.Id);
     `LastDocNumReportKas`, `LastDocNumScetKkm`, `LastDocNumVerifNal`, `LastDocNumInvent`,
     `INN`, `ZavodKKM`, `RegKKM`, `GlavBuhFio`,
     `KkmName`, `DolRukOrg`, `RukFio`, `ZavDivisionFio`,
-    `CompanyCode`, `StoreCode`, `Upload1CDir`) 
+    `CompanyCode`, `StoreCode`, `Upload1CDir`, `UploadExcelDir`) 
 Values({0}, '{1}', '{2}', '{3}', '{4}',
     {5}, {6}, {7}, {8},
     {9}, {10}, {11}, {12}, 
     '{13}', '{14}', '{15}', '{16}',
     '{17}', '{18}', '{19}', '{20}',
-    '{21}', '{22}', '{23}')", NewLocalKassa.Id, NewLocalKassa.HostName, NewLocalKassa.Organization, NewLocalKassa.StructPodrazdelenie, NewLocalKassa.OKPO,
+    '{21}', '{22}', '{23}', '{24}')", NewLocalKassa.Id, NewLocalKassa.HostName, NewLocalKassa.Organization, NewLocalKassa.StructPodrazdelenie, NewLocalKassa.OKPO,
                             NewLocalKassa.LastDocNumPrih, NewLocalKassa.LastDocNumRash, NewLocalKassa.LastDocNumKasBook, NewLocalKassa.LastDocNumActVozv,
                             NewLocalKassa.LastDocNumReportKas, NewLocalKassa.LastDocNumScetKkm, NewLocalKassa.LastDocNumVerifNal, NewLocalKassa.LastDocNumInvent,
                             NewLocalKassa.INN, NewLocalKassa.ZavodKKM, NewLocalKassa.RegKKM, NewLocalKassa.GlavBuhFio,
                             NewLocalKassa.KkmName, NewLocalKassa.DolRukOrg, NewLocalKassa.RukFio, NewLocalKassa.ZavDivisionFio,
-                            NewLocalKassa.CompanyCode, NewLocalKassa.StoreCode, NewLocalKassa.Upload1CDir.Replace(@"\",@"\\"));
+                            NewLocalKassa.CompanyCode, NewLocalKassa.StoreCode, NewLocalKassa.Upload1CDir.Replace(@"\",@"\\"), NewLocalKassa.UploadExcelDir.Replace(@"\", @"\\"));
 
             try
             {
@@ -7075,13 +7076,13 @@ Set `Organization`='{1}', `StructPodr`='{2}', `OKPO`='{3}',
     `LastDocNumReportKas`={8}, `LastDocNumScetKkm`={9}, `LastDocNumVerifNal`={10}, `LastDocNumInvent`={11},
     `INN`='{12}', `ZavodKKM`='{13}', `RegKKM`='{14}', `GlavBuhFio`='{15}',
     `KkmName`='{16}', `DolRukOrg`='{17}', `RukFio`='{18}', `ZavDivisionFio`='{19}',
-    `CompanyCode`='{20}', `StoreCode`='{21}', `Upload1CDir`='{22}'
+    `CompanyCode`='{20}', `StoreCode`='{21}', `Upload1CDir`='{22}', `UploadExcelDir`='{23}'
 Where Id={0}", UpdLocalKassa.Id, UpdLocalKassa.Organization, UpdLocalKassa.StructPodrazdelenie, UpdLocalKassa.OKPO,
             UpdLocalKassa.LastDocNumPrih, UpdLocalKassa.LastDocNumRash, UpdLocalKassa.LastDocNumKasBook, UpdLocalKassa.LastDocNumActVozv,
             UpdLocalKassa.LastDocNumReportKas, UpdLocalKassa.LastDocNumScetKkm, UpdLocalKassa.LastDocNumVerifNal, UpdLocalKassa.LastDocNumInvent,
             UpdLocalKassa.INN, UpdLocalKassa.ZavodKKM, UpdLocalKassa.RegKKM, UpdLocalKassa.GlavBuhFio,
             UpdLocalKassa.KkmName, UpdLocalKassa.DolRukOrg, UpdLocalKassa.RukFio, UpdLocalKassa.ZavDivisionFio,
-            UpdLocalKassa.CompanyCode, UpdLocalKassa.StoreCode, UpdLocalKassa.Upload1CDir.Replace(@"\", @"\\"));
+            UpdLocalKassa.CompanyCode, UpdLocalKassa.StoreCode, UpdLocalKassa.Upload1CDir.Replace(@"\", @"\\"), UpdLocalKassa.UploadExcelDir.Replace(@"\", @"\\"));
 
             try
             {

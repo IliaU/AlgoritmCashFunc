@@ -39,6 +39,7 @@ namespace AlgoritmCashFunc
                 this.txtBoxCompanyCode.Text = CurKassa.CompanyCode;
                 this.txtBoxStoreCode.Text = CurKassa.StoreCode;
                 this.txtBoxUpload1CDir.Text = CurKassa.Upload1CDir;
+                this.txtBoxUploadExcelDir.Text = CurKassa.UploadExcelDir;
             }
             catch (Exception ex)
             {
@@ -64,6 +65,7 @@ namespace AlgoritmCashFunc
                 CurKassa.CompanyCode = this.txtBoxCompanyCode.Text;
                 CurKassa.StoreCode = this.txtBoxStoreCode.Text;
                 CurKassa.Upload1CDir = this.txtBoxUpload1CDir.Text;
+                CurKassa.UploadExcelDir = this.txtBoxUploadExcelDir.Text;
                 this.CurKassa.Save();
                 this.Close();
             }

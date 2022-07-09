@@ -114,6 +114,7 @@ CREATE TABLE `aks`.`cashfunc_local_kassa` (
   `CompanyCode` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `StoreCode` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   `Upload1CDir` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL,
+  `UploadExcelDir` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `UIX_local_kassa_HostName` (`HostName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

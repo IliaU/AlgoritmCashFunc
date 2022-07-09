@@ -53,6 +53,8 @@
             this.txtBoxUpload1CDir = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblKassaId = new System.Windows.Forms.Label();
+            this.txtBoxUploadExcelDir = new System.Windows.Forms.TextBox();
+            this.lblUploadExcelDir = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblKassaName
@@ -243,7 +245,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(470, 332);
+            this.btnSave.Location = new System.Drawing.Point(470, 346);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 23;
@@ -260,11 +262,29 @@
             this.lblKassaId.TabIndex = 24;
             this.lblKassaId.Text = "   . ";
             // 
+            // txtBoxUploadExcelDir
+            // 
+            this.txtBoxUploadExcelDir.Location = new System.Drawing.Point(184, 320);
+            this.txtBoxUploadExcelDir.Name = "txtBoxUploadExcelDir";
+            this.txtBoxUploadExcelDir.Size = new System.Drawing.Size(361, 20);
+            this.txtBoxUploadExcelDir.TabIndex = 26;
+            // 
+            // lblUploadExcelDir
+            // 
+            this.lblUploadExcelDir.AutoSize = true;
+            this.lblUploadExcelDir.Location = new System.Drawing.Point(13, 323);
+            this.lblUploadExcelDir.Name = "lblUploadExcelDir";
+            this.lblUploadExcelDir.Size = new System.Drawing.Size(143, 13);
+            this.lblUploadExcelDir.TabIndex = 25;
+            this.lblUploadExcelDir.Text = "Папка для выгрузки Excel:";
+            // 
             // FListLocalKassa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(566, 369);
+            this.ClientSize = new System.Drawing.Size(566, 388);
+            this.Controls.Add(this.txtBoxUploadExcelDir);
+            this.Controls.Add(this.lblUploadExcelDir);
             this.Controls.Add(this.lblKassaId);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtBoxUpload1CDir);
@@ -324,5 +344,7 @@
         private System.Windows.Forms.TextBox txtBoxUpload1CDir;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lblKassaId;
+        private System.Windows.Forms.TextBox txtBoxUploadExcelDir;
+        private System.Windows.Forms.Label lblUploadExcelDir;
     }
 }

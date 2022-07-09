@@ -831,8 +831,23 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
 
                 //////////////////////////////////////
 
+                // Проверяем пути прежде чем выложить файл
+                string PathDir = ((DateTime)base.UreDate).Year.ToString();
+                base.CreateFolder(null, PathDir, "");
+                string PathDirTmp = ((DateTime)base.UreDate).Month.ToString("00");
+                base.CreateFolder(PathDir, PathDirTmp, "");
+                PathDir = string.Format("{0}\\{1}", PathDir, PathDirTmp);
+                PathDirTmp = ((DateTime)base.UreDate).Day.ToString("00");
+
                 // Создаём задание
-                TaskExcel Tsk = new TaskExcel(SourceFile, null, TabL, true);
+                TaskExcel Tsk = new TaskExcel(SourceFile
+                    , base.CreateFolder(PathDir, PathDirTmp
+                                            , string.Format("расход_ордер_{0}{1}{2}_{3}.xlsx"
+                                                        , ((DateTime)base.UreDate).Year
+                                                        , ((DateTime)base.UreDate).Month.ToString("00")
+                                                        , ((DateTime)base.UreDate).Day.ToString("00")
+                                                        , this.DocNum))
+                    , TabL, true);
 
                 // Можно создать отдельный екземпляр который сможет работать асинхронно со своими параметрами
                 ExcelServer SrvStatic = new ExcelServer(string.Format(@"{0}\Dotx", Environment.CurrentDirectory), string.Format(@"{0}\Report", Environment.CurrentDirectory));
@@ -841,7 +856,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 SrvStatic.StartCreateReport(Tsk, 1);
 
                 // открываем приложение Excel
-                //SrvStatic.OlpenReport(Tsk);
+                SrvStatic.OlpenReport(Tsk);
             }
             catch (Exception ex)
             {

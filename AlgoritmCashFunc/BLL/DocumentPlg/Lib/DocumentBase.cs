@@ -29,7 +29,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
         /// </summary>
         private static int IOWhileInt = 500;
         #endregion
-        
+
         /// <summary>
         /// Идентификатор в базе данных
         /// </summary>
@@ -89,7 +89,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
         /// Дебитор который ввели вручную не из списка
         /// </summary>
         public string OtherDebitor;
-        
+
         /// <summary>
         /// Кредитор который ввели вручную не из списка
         /// </summary>
@@ -260,6 +260,57 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
             }
         }
 
+
+        /// <summary>
+        /// Проверка наличия папки и если её нет то создаёт её
+        /// </summary>
+        /// <param name="PrefixDir">Путь подпапок от корня указанного в конфиге до папки которую нужно проверить</param>
+        /// <param name="Dir">Подпапка которую нужно проверить</param>
+        /// <param name="FileName">Имя файла который потом нужно воткнуть в самом конце для возврата полного путик файлу</param>
+        /// <returns>Возвращаем полный путь с учётом корня из настроек, префикса и имени файла</returns>
+        public string CreateFolder(string PrefixDir, string Dir, string FileName)
+        {
+            try
+            {
+                if (String.IsNullOrWhiteSpace(Dir)) throw new ApplicationException("Не указана папка в которую производится експорт файлов для Excel");
+                if (String.IsNullOrWhiteSpace(Com.LocalFarm.CurLocalDepartament.UploadExcelDir)) throw new ApplicationException("Не указана корневая папка в которую производится сохранение файлов для Excel");
+
+                // Узнаём домашний каталог убрав всякие ненужные символы и обработав разделитель каталогов в начале и в конце нашего префикса
+                string StartDir = Com.LocalFarm.CurLocalDepartament.UploadExcelDir;
+                if(!string.IsNullOrWhiteSpace(PrefixDir))
+                {
+                    while (PrefixDir.IndexOf(@"\\") >= 0)
+                    {
+                        PrefixDir = PrefixDir.Trim().Replace(@"\\", @"\");
+                    }
+
+                    if (PrefixDir.IndexOf(@"\") == 0) PrefixDir = PrefixDir.Substring(1);
+                    if (PrefixDir.Substring(PrefixDir.Length-1) == @"\") PrefixDir=PrefixDir.Substring(0, PrefixDir.Length - 1);
+
+                    if (!string.IsNullOrWhiteSpace(PrefixDir)) StartDir += string.Format("\\{0}", PrefixDir);
+                 }
+
+                if (!Directory.Exists(StartDir))
+                {
+                    if (StartDir == Com.LocalFarm.CurLocalDepartament.UploadExcelDir) Directory.CreateDirectory(StartDir);
+                    else throw new ApplicationException(String.Format("Папки ({0}) в которую производится сохранение файлов для Excel с учётом заданного префикса не существует", StartDir));
+                }
+
+                Dir = Dir.Replace(@"\", @"");
+
+                if (!Directory.Exists(string.Format("{0}\\{1}", StartDir, Dir)))
+                    Directory.CreateDirectory(string.Format("{0}\\{1}", StartDir, Dir));
+
+                return string.Format("{0}\\{1}\\{2}", StartDir, Dir, FileName);
+            }
+            catch (Exception ex)
+            {
+                ApplicationException ae = new ApplicationException(string.Format("Упали при выполнении метода с ошибкой: ({0})", ex.Message));
+                Com.Log.EventSave(ae.Message, string.Format("{0}.CreateFolder", GetType().Name), EventEn.Error);
+                throw ae;
+            }
+        }
+
         /// <summary>
         /// Экспорт документа в 1С
         /// </summary>
@@ -313,6 +364,5 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
                 else throw;
             }
         }
-
     }
 }

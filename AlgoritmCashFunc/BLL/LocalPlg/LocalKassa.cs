@@ -14,6 +14,11 @@ namespace AlgoritmCashFunc.BLL.LocalPlg
     public sealed class LocalKassa : Local
     {
         /// <summary>
+        /// Путь к папке для сохранения Excel фвйлов
+        /// </summary>
+        private string _UploadExcelDir=string.Format("{0}\\{1}", Environment.CurrentDirectory, "EXCEL output");
+
+        /// <summary>
         /// Имя хоста к которому привязана текущая локаль
         /// </summary>
         public string HostName { get; private set; } = Environment.MachineName;
@@ -127,6 +132,21 @@ namespace AlgoritmCashFunc.BLL.LocalPlg
         /// Путь к папке куда будем сохранять файлы для 1С
         /// </summary>
         public string Upload1CDir;
+
+        /// <summary>
+        /// Путь к папке для сохранения Excel фвйлов
+        /// </summary>
+        public string UploadExcelDir
+        {
+            get
+            {
+                return this._UploadExcelDir;
+            }
+            set
+            {
+                this._UploadExcelDir = value;
+            }
+        }
 
         /// <summary>
         /// Конструктор для загрузки из базы данных
