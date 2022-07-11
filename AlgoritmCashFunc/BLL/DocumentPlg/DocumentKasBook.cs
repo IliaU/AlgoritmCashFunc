@@ -646,20 +646,21 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 //////////////////////////////////////
 
                 // Создаём временную таблицу
-                DataTable TabTmpGlavBuh = new DataTable();
+                DataTable TabTmpBuh = new DataTable();
                 //
-                TabTmpGlavBuh.Columns.Add(new DataColumn("A", typeof(string)));
-                DataRow nrowGlavBuh = TabTmpGlavBuh.NewRow();
-                nrowGlavBuh["A"] = this.GlavBuh;
-                TabTmpGlavBuh.Rows.Add(nrowGlavBuh);
+                TabTmpBuh.Columns.Add(new DataColumn("A", typeof(string)));
+                DataRow nrowBuh = TabTmpBuh.NewRow();
+                if (this.LocalDebitor != null) nrowBuh["A"] = ((BLL.LocalPlg.LocalAccounters)this.LocalDebitor).LocalName;
+                else nrowBuh["A"] = this.OtherDebitor;
+                TabTmpBuh.Rows.Add(nrowBuh);
 
                 // Добавлем эту таблицу в наш класс
-                Table TabGlavBuh0 = new Table("1|CZ30", TabTmpGlavBuh);
-                TabL.Add(TabGlavBuh0, true);
+                Table TabBuh0 = new Table("1|CZ30", TabTmpBuh);
+                TabL.Add(TabBuh0, true);
 
                 // Добавлем эту таблицу в наш класс
-                Table TabGlavBuh1 = new Table("1|CZ61", TabTmpGlavBuh);
-                TabL.Add(TabGlavBuh1, true);
+                Table TabBuh1 = new Table("1|CZ61", TabTmpBuh);
+                TabL.Add(TabBuh1, true);
 
                 //////////////////////////////////////
 
@@ -861,9 +862,10 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
 
                 string Sotrudnik = null;
                 if (this.LocalCreditor != null) Sotrudnik = ((BLL.LocalPlg.LocalChiefCashiers)this.LocalCreditor).LocalName;
-                Sotrudnik = this.OtherKreditor;
+                else Sotrudnik = this.OtherKreditor;
 
                 // Пробегаем по списку документов
+                bool FlagDelete = true;
                 foreach (Document item in this.DocList)
                 {
                     string OrderTyp = "";
@@ -877,6 +879,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                     string KreditNum = "";
                     string KodAnalitUch = "";
                     string KodNaznachenia = "";
+                    string KodDivision = "";
 
                     string FromTo = null;
                     string NoDoc = null;
@@ -898,6 +901,8 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                             if (item.LocalCreditor != null) FromTo = item.LocalCreditor.LocalName;
                             else FromTo = ((DocumentPrihod)item).OtherKreditor;
 
+                            KodDivision = ((DocumentPrihod)item).KreditKodDivision;
+
                             NoDoc = string.Format("no{0}", item.DocNum);
                             KorShet = ((DocumentPrihod)item).KredikKorSchet;
                             Sum = ((DocumentPrihod)item).Summa.ToString("#.00", CultureInfo.CurrentCulture);
@@ -918,6 +923,8 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
 
                             if (item.LocalDebitor != null) FromTo = item.LocalDebitor.LocalName;
                             else FromTo = ((DocumentRashod)item).OtherDebitor;
+
+                            KodDivision = ((DocumentRashod)item).DebetKodDivision;
 
                             NoDoc = string.Format("po{0}", item.DocNum);
                             KorShet = ((DocumentRashod)item).DebetKorSchet;
@@ -954,9 +961,11 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                     , Sotrudnik, PoDocumrntu
                     , OsnovsnieNum, OsnovanieTxt
                     , Prilozenie, DebetNum
-                    , KreditNum, Com.LocalFarm.CurLocalDepartament.StoreCode
+                    , KreditNum, KodDivision
                     , KodAnalitUch, KodNaznachenia);
-                    base.ExportTo1C(FileName, Row);
+                    base.ExportTo1C(FileName, Row, FlagDelete);
+
+                    if (FlagDelete) FlagDelete = false;
                 }
             }
             catch (Exception ex)

@@ -912,7 +912,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                     , Sotrudnik, this.VtomChisle
                     , this.Osnovanie, this.PaidInReasons.LocalName
                     , this.DebetNomerSchet, this.KredikKorSchet);
-                base.ExportTo1C(FileName, Row);
+                base.ExportTo1C(FileName, Row, true);
             }
             catch (Exception ex)
             {

@@ -1008,7 +1008,7 @@ order by i.item_pos", DocNumber));
                     , Vidat, this.PoDoc
                     , this.Osnovanie, this.PaidRashReasons.LocalName
                     , this.DebetKorSchet, this.KreditNomerSchet);
-                base.ExportTo1C(FileName, Row);
+                base.ExportTo1C(FileName, Row, true);
             }
             catch (Exception ex)
             {

@@ -16,7 +16,7 @@ namespace AlgoritmCashFunc.BLL.LocalPlg
         /// <summary>
         /// Путь к папке для сохранения Excel фвйлов
         /// </summary>
-        private string _UploadExcelDir=string.Format("{0}\\{1}", Environment.CurrentDirectory, "EXCEL output");
+        private string _UploadExcelDir=string.Format("@CurrentDirectory\\{0}", "EXCEL output");
 
         /// <summary>
         /// Имя хоста к которому привязана текущая локаль

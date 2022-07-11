@@ -273,10 +273,10 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
             try
             {
                 if (String.IsNullOrWhiteSpace(Dir)) throw new ApplicationException("Не указана папка в которую производится експорт файлов для Excel");
-                if (String.IsNullOrWhiteSpace(Com.LocalFarm.CurLocalDepartament.UploadExcelDir)) throw new ApplicationException("Не указана корневая папка в которую производится сохранение файлов для Excel");
+                if (String.IsNullOrWhiteSpace(Com.LocalFarm.CurLocalDepartament.UploadExcelDir.Replace("@CurrentDirectory", Environment.CurrentDirectory))) throw new ApplicationException("Не указана корневая папка в которую производится сохранение файлов для Excel");
 
                 // Узнаём домашний каталог убрав всякие ненужные символы и обработав разделитель каталогов в начале и в конце нашего префикса
-                string StartDir = Com.LocalFarm.CurLocalDepartament.UploadExcelDir;
+                string StartDir = Com.LocalFarm.CurLocalDepartament.UploadExcelDir.Replace("@CurrentDirectory", Environment.CurrentDirectory);
                 if(!string.IsNullOrWhiteSpace(PrefixDir))
                 {
                     while (PrefixDir.IndexOf(@"\\") >= 0)
@@ -292,7 +292,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
 
                 if (!Directory.Exists(StartDir))
                 {
-                    if (StartDir == Com.LocalFarm.CurLocalDepartament.UploadExcelDir) Directory.CreateDirectory(StartDir);
+                    if (StartDir == Com.LocalFarm.CurLocalDepartament.UploadExcelDir.Replace("@CurrentDirectory", Environment.CurrentDirectory)) Directory.CreateDirectory(StartDir);
                     else throw new ApplicationException(String.Format("Папки ({0}) в которую производится сохранение файлов для Excel с учётом заданного префикса не существует", StartDir));
                 }
 
@@ -316,14 +316,15 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg.Lib
         /// </summary>
         /// <param name="FileName">Имя файла</param>
         /// <param name="row">Строка которую вставить</param>
-        protected void ExportTo1C(string FileName, string row)
+        /// <param name="FlagDelete">Если Истина то проверяется наличие файла и если он есть то удаляется файл</param>
+        protected void ExportTo1C(string FileName, string row, Boolean FlagDelete)
         {
             try
             {
                 if (String.IsNullOrWhiteSpace(Com.LocalFarm.CurLocalDepartament.Upload1CDir)) throw new ApplicationException("Не указана папка в которую производится експорт файлов для 1С");
                 if (!Directory.Exists(Com.LocalFarm.CurLocalDepartament.Upload1CDir)) throw new ApplicationException("Папки в которую производится експорт файлов для 1С не существует");
 
-                if (File.Exists(string.Format("{0}\\{1}", Com.LocalFarm.CurLocalDepartament.Upload1CDir, FileName)))
+                if (FlagDelete && File.Exists(string.Format("{0}\\{1}", Com.LocalFarm.CurLocalDepartament.Upload1CDir, FileName)))
                     File.Delete(string.Format("{0}\\{1}", Com.LocalFarm.CurLocalDepartament.Upload1CDir, FileName));
 
                 this.ExportTo1C(FileName, row, IOCountPoput);
