@@ -842,11 +842,11 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 // Создаём задание
                 TaskExcel Tsk = new TaskExcel(SourceFile
                     , base.CreateFolder(PathDir, PathDirTmp
-                                            , string.Format("расход_ордер_{0}{1}{2}_{3}.xlsx"
+                                            , string.Format("расход_ордер{0}{1}{2}{3}.xlsx"
                                                         , ((DateTime)base.UreDate).Year
                                                         , ((DateTime)base.UreDate).Month.ToString("00")
                                                         , ((DateTime)base.UreDate).Day.ToString("00")
-                                                        , this.DocNum))
+                                                        , this.DocNum.ToString("00000")))
                     , TabL, true);
 
                 // Можно создать отдельный екземпляр который сможет работать асинхронно со своими параметрами

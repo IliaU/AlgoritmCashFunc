@@ -391,7 +391,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                                 nrowBodyD["D"] = "";
 
                                 nrowBodyE["E"] = ((DocumentRashod)this.DocList[i]).Summa.ToString("#.00", CultureInfo.CurrentCulture);
-                                if (PerenosE != null) PerenosE = ((decimal)PerenosD) + ((DocumentRashod)this.DocList[i]).Summa;
+                                if (PerenosE != null) PerenosE = ((decimal)PerenosE) + ((DocumentRashod)this.DocList[i]).Summa;
                                 else PerenosE = ((DocumentRashod)this.DocList[i]).Summa;
                                 CountE++;
                                 break;
@@ -672,7 +672,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                 // Создаём задание
                 TaskExcel Tsk = new TaskExcel(SourceFile
                     , base.CreateFolder(PathDir, PathDirTmp
-                                            , string.Format("приход_ордер_{0}{1}{2}.xlsx"
+                                            , string.Format("кассов_книга{0}{1}{2}.xlsx"
                                                         , ((DateTime)base.UreDate).Year
                                                         , ((DateTime)base.UreDate).Month.ToString("00")
                                                         , ((DateTime)base.UreDate).Day.ToString("00")))
@@ -880,8 +880,8 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                     string KodAnalitUch = "";
                     string KodNaznachenia = "";
                     string KodDivision = "";
-
-                    string FromTo = null;
+                    string PoluKasOrVidKas = "";
+                    string PrinztoOtVidat = "";
                     string NoDoc = null;
                     string KorShet = null;
                     string Sum = null;
@@ -897,9 +897,12 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                             KreditNum = ((DocumentPrihod)item).KredikKorSchet;
                             KodAnalitUch = ((DocumentPrihod)item).KredikKodAnalUch;
                             KodNaznachenia = ((DocumentPrihod)item).KodNazn;
+                            
+                            if (item.LocalDebitor != null) PoluKasOrVidKas = ((BLL.LocalPlg.LocalChiefCashiers)item.LocalDebitor).LocalName;
+                            else PoluKasOrVidKas = ((DocumentRashod)item).OtherDebitor;
 
-                            if (item.LocalCreditor != null) FromTo = item.LocalCreditor.LocalName;
-                            else FromTo = ((DocumentPrihod)item).OtherKreditor;
+                            if (item.LocalCreditor != null) PrinztoOtVidat = ((BLL.LocalPlg.LocalEmployees)item.LocalCreditor).LocalName;
+                            else PrinztoOtVidat = ((DocumentRashod)item).OtherKreditor;
 
                             KodDivision = ((DocumentPrihod)item).KreditKodDivision;
 
@@ -920,9 +923,12 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                             KreditNum = ((DocumentRashod)item).KreditNomerSchet;
                             KodAnalitUch = ((DocumentRashod)item).DebetKodAnalUch;
                             KodNaznachenia = ((DocumentRashod)item).KodNazn;
+                            
+                            if (item.LocalCreditor != null) PoluKasOrVidKas = ((BLL.LocalPlg.LocalChiefCashiers)item.LocalCreditor).LocalName;
+                            else PoluKasOrVidKas = ((DocumentRashod)item).OtherKreditor;
 
-                            if (item.LocalDebitor != null) FromTo = item.LocalDebitor.LocalName;
-                            else FromTo = ((DocumentRashod)item).OtherDebitor;
+                            if (item.LocalDebitor != null) PrinztoOtVidat = ((BLL.LocalPlg.LocalEmployees)item.LocalDebitor).LocalName;
+                            else PrinztoOtVidat = ((DocumentRashod)item).OtherDebitor;
 
                             KodDivision = ((DocumentRashod)item).DebetKodDivision;
 
@@ -957,8 +963,8 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                     , Com.LocalFarm.CurLocalDepartament.StoreCode, Com.LocalFarm.CurLocalDepartament.StructPodrazdelenie
                     , Sum, "0,00"
                     , DolRukFio, RukFio
-                    , this.GlavBuh, PolKas
-                    , Sotrudnik, PoDocumrntu
+                    , this.GlavBuh, PoluKasOrVidKas
+                    , PrinztoOtVidat, PoDocumrntu
                     , OsnovsnieNum, OsnovanieTxt
                     , Prilozenie, DebetNum
                     , KreditNum, KodDivision
