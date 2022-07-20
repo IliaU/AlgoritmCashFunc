@@ -224,6 +224,7 @@ namespace AlgoritmCashFunc.Lib
                 {
                     rez = base.Update(updUser, HashExeption);
 
+
                     // Если обновление данных пользователя прошло успешно.
                     if (rez)
                     {

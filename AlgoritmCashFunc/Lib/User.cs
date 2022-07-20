@@ -32,5 +32,6 @@ namespace AlgoritmCashFunc.Lib
 
             //base.InitialUser(Logon);
         }
+
     }
 }

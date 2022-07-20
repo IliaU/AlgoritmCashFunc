@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Windows.Forms;
 using System.Globalization;
 using AlgoritmCashFunc.BLL.DocumentPlg.Lib;
 using AlgoritmCashFunc.Lib;
@@ -884,6 +885,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                     string PrinztoOtVidat = "";
                     string NoDoc = null;
                     string KorShet = null;
+                    string GlavBuh = null;
                     string Sum = null;
                     switch (item.DocFullName)
                     {
@@ -899,11 +901,12 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                             KodNaznachenia = ((DocumentPrihod)item).KodNazn;
                             
                             if (item.LocalDebitor != null) PoluKasOrVidKas = ((BLL.LocalPlg.LocalChiefCashiers)item.LocalDebitor).LocalName;
-                            else PoluKasOrVidKas = ((DocumentRashod)item).OtherDebitor;
+                            else PoluKasOrVidKas = ((DocumentPrihod)item).OtherDebitor;
 
                             if (item.LocalCreditor != null) PrinztoOtVidat = ((BLL.LocalPlg.LocalEmployees)item.LocalCreditor).LocalName;
-                            else PrinztoOtVidat = ((DocumentRashod)item).OtherKreditor;
+                            else PrinztoOtVidat = ((DocumentPrihod)item).OtherKreditor;
 
+                            GlavBuh = ((DocumentPrihod)item).GlavBuh;
                             KodDivision = ((DocumentPrihod)item).KreditKodDivision;
 
                             NoDoc = string.Format("no{0}", item.DocNum);
@@ -913,8 +916,8 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                         case "DocumentRashod":
 
                             OrderTyp = "2";
-                            DolRukFio = this.DolRukFio;
-                            RukFio = this.RukFio;
+                            DolRukFio = ((DocumentRashod)item).DolRukFio;
+                            RukFio = ((DocumentRashod)item).RukFio;
                             PoDocumrntu = ((DocumentRashod)item).PoDoc;
                             OsnovsnieNum = ((DocumentRashod)item).Osnovanie;
                             OsnovanieTxt = ((DocumentRashod)item).PaidRashReasons.LocalName;
@@ -930,6 +933,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                             if (item.LocalDebitor != null) PrinztoOtVidat = ((BLL.LocalPlg.LocalEmployees)item.LocalDebitor).LocalName;
                             else PrinztoOtVidat = ((DocumentRashod)item).OtherDebitor;
 
+                            GlavBuh = ((DocumentRashod)item).GlavBuh;
                             KodDivision = ((DocumentRashod)item).DebetKodDivision;
 
                             NoDoc = string.Format("po{0}", item.DocNum);
@@ -963,7 +967,7 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                     , Com.LocalFarm.CurLocalDepartament.StoreCode, Com.LocalFarm.CurLocalDepartament.StructPodrazdelenie
                     , Sum, "0,00"
                     , DolRukFio, RukFio
-                    , this.GlavBuh, PoluKasOrVidKas
+                    , GlavBuh, PoluKasOrVidKas
                     , PrinztoOtVidat, PoDocumrntu
                     , OsnovsnieNum, OsnovanieTxt
                     , Prilozenie, DebetNum
@@ -973,6 +977,8 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
 
                     if (FlagDelete) FlagDelete = false;
                 }
+
+                MessageBox.Show("Выгрузка завершена успешно."); 
             }
             catch (Exception ex)
             {
