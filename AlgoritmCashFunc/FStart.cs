@@ -1271,6 +1271,9 @@ namespace AlgoritmCashFunc
                         break;
                     // Кассовая книга
                     case 2:
+                        // Если в кассовой книге нет документов то сохранять документ не нужно
+                        if (((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).DocList.Count == 0) break;
+
                         // Запоминаем инфу по организации только если документ в текущей дете если нет то это правка старого документа запоминать тогда не нужно
                         if (DateTime.Parse(this.txtBoxKasBookDateDoc.Text).Date == DateTime.Now.Date)
                         {
@@ -1622,6 +1625,7 @@ namespace AlgoritmCashFunc
 
                             this.cmbBoxPrihDebitor.SelectedIndex = -1;
                             this.cmbBoxPrihKreditor.SelectedIndex = -1;
+                            this.cmbBoxPrihKreditor.Text = string.Empty;
 
                             this.txtBoxPrihKreditKodDivision.Text = string.Empty;
                             this.txtBoxPrihKredikKodAnalUch.Text = string.Empty;
@@ -1755,8 +1759,9 @@ namespace AlgoritmCashFunc
 
                             // Заполняем поле основание значенеие по умолчанию и зависимые поля
                             this.cmbBoxRashPaidRashReasons_SelectedIndexChanged(null, null);
-
+                            
                             this.cmbBoxRashDebitor.SelectedIndex = -1;
+                            this.cmbBoxRashDebitor.Text = string.Empty;
                             this.cmbBoxRashKreditor.SelectedIndex = -1;
                             this.cmbBoxRashPoDoc.SelectedIndex = -1;
 
@@ -2099,7 +2104,7 @@ namespace AlgoritmCashFunc
                     this.txtBoxPrichDebetNomerSchet.Text = string.Empty;
                     this.txtBoxPrihKreditKorSchet.Text = string.Empty;
                     this.txtBoxPrihOsnovanie.Text = string.Empty;
-                    //this.cmbBoxPrihPaidInReasons.SelectedIndex = -1;
+                    this.cmbBoxPrihPaidInReasons.SelectedIndex = -1;
                 }
                 else
                 {
@@ -2146,7 +2151,7 @@ namespace AlgoritmCashFunc
                     this.txtBoxRashDebitKorSchet.Text = string.Empty;
                     this.txtBoxRashKreditNomerSchet.Text = string.Empty;
                     this.txtBoxRashOsnovanie.Text = string.Empty;
-                    //this.cmbBoxRashPaidRashReasons.SelectedIndex = -1;
+                    this.cmbBoxRashPaidRashReasons.SelectedIndex = -1;
                 }
                 else
                 {

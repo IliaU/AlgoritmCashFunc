@@ -5284,6 +5284,27 @@ Order by `Id`");
         /// <param name="DtStart">Дата начиная с которой нужно править документы кассовой книги в части баланса</param>
         public void SetDocNumForYearMySql(DateTime? DtStart)
         {
+            string CommandSqlForEmptyKassBook1 = string.Format(@"with T As (Select D.Id, D.UreDate, D.Departament
+    From `aks`.`cashfunc_document_kasbook` KB
+      inner  join `aks`.`cashfunc_document` D On KB.Id=D.Id
+    Where D.Departament={0}),
+  D As (Select T.Id
+    From T
+      left join  `aks`.`cashfunc_document` D On T.Departament=D.Departament
+                                                and T.UreDate=D.Uredate
+                                                and T.id<>D.Id
+    Where D.Departament is null)
+Delete Del
+From aks.cashfunc_document_kasbook Del
+Where Del.id in (Select id from D)", Com.LocalFarm.CurLocalDepartament.Id);
+
+            string CommandSqlForEmptyKassBook2 = string.Format(@"Delete D
+From `aks`.`cashfunc_document` D
+  left  join `aks`.`cashfunc_document_kasbook` KB On D.Id=KB.Id
+Where D.Departament={0}
+  and D.DocFullName='DocumentKasBook'
+  and KB.id is null", Com.LocalFarm.CurLocalDepartament.Id);
+
             string CommandSql1 = String.Format(@"With T As (Select `Id`, `UreDate`, `OperationId`, `DocNum`,
       row_number() over(partition by YEAR(`UreDate`), `OperationId` order by `UreDate`, Date_Add(CteateDate, interval DateDiff(UreDate,CteateDate) day)) As PRN
     From `aks`.`cashfunc_document`
@@ -5362,6 +5383,78 @@ Update `aks`.`cashfunc_document` D
   inner join `aks`.`cashfunc_document_kasbook` K On D.Id=K.Id
 Set K.`SummaStartDay`=R.`SummaStartDay`, K.`SummaEndDay`=R.`SummaEndDay`", Com.LocalFarm.CurLocalDepartament.Id
                                     , ((DateTime)DtStart).ToShortDateString());
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSqlForEmptyKassBook1, GetType().Name + ".SetDocNumForYearMySql (Qwery1)", EventEn.Dump);
+
+
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSqlForEmptyKassBook1, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                //return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocNumForYearMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSqlForEmptyKassBook1, GetType().Name + ".SetDocNumForYearMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocNumForYearMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSqlForEmptyKassBook1, GetType().Name + ".SetDocNumForYearMySql", EventEn.Dump);
+                throw;
+            }
+
+            try
+            {
+                if (Com.Config.Trace) base.EventSave(CommandSqlForEmptyKassBook2, GetType().Name + ".SetDocNumForYearMySql (Qwery2)", EventEn.Dump);
+
+
+
+                // Закрывать конект не нужно он будет закрыт деструктором
+                using (OdbcConnection con = new OdbcConnection(base.ConnectionString))
+                {
+                    con.Open();
+
+                    using (OdbcCommand com = new OdbcCommand(CommandSqlForEmptyKassBook2, con))
+                    {
+                        com.CommandTimeout = 900;  // 15 минут
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                //return rez;
+            }
+            catch (OdbcException ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocNumForYearMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSqlForEmptyKassBook2, GetType().Name + ".SetDocNumForYearMySql", EventEn.Dump);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                base.EventSave(string.Format("Произожла ошибка при получении данных с источника. {0}", ex.Message), GetType().Name + ".SetDocNumForYearMySql", EventEn.Error);
+                if (Com.Config.Trace) base.EventSave(CommandSqlForEmptyKassBook2, GetType().Name + ".SetDocNumForYearMySql", EventEn.Dump);
+                throw;
+            }
+
+
+
+
+
+
 
             try
             {
