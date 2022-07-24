@@ -1624,6 +1624,7 @@ namespace AlgoritmCashFunc
                             this.cmbBoxPrihPaidInReasons_SelectedIndexChanged(null, null);
 
                             this.cmbBoxPrihDebitor.SelectedIndex = -1;
+                            this.cmbBoxPrihDebitor.Text = string.Empty;
                             this.cmbBoxPrihKreditor.SelectedIndex = -1;
                             this.cmbBoxPrihKreditor.Text = string.Empty;
 
@@ -1763,6 +1764,7 @@ namespace AlgoritmCashFunc
                             this.cmbBoxRashDebitor.SelectedIndex = -1;
                             this.cmbBoxRashDebitor.Text = string.Empty;
                             this.cmbBoxRashKreditor.SelectedIndex = -1;
+                            this.cmbBoxRashKreditor.Text = string.Empty;
                             this.cmbBoxRashPoDoc.SelectedIndex = -1;
 
                             this.txtBoxRashDebitKodDivision.Text = string.Empty;
