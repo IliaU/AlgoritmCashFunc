@@ -957,12 +957,12 @@ namespace AlgoritmCashFunc.BLL.DocumentPlg
                     "\t{20}\t{21}" +
                     "\t{22}\t{23}"
                     , OrderTyp, item.DocNum
-                    , string.Format("{0}{1}{2}{3}{4}{5}", ((DateTime)this.UreDate).Year
-                            , ((DateTime)this.UreDate).Month.ToString("00")
-                            , ((DateTime)this.UreDate).Day.ToString("00")
-                            , ((DateTime)this.CreateDate).Hour.ToString("00")
-                            , ((DateTime)this.CreateDate).Minute.ToString("00")
-                            , ((DateTime)this.CreateDate).Second.ToString("00")), Com.LocalFarm.CurLocalDepartament.INN
+                    , string.Format("{0}{1}{2}{3}{4}{5}", ((DateTime)item.UreDate).Year
+                            , ((DateTime)item.UreDate).Month.ToString("00")
+                            , ((DateTime)item.UreDate).Day.ToString("00")
+                            , ((DateTime)item.CreateDate).Hour.ToString("00")
+                            , ((DateTime)item.CreateDate).Minute.ToString("00")
+                            , ((DateTime)item.CreateDate).Second.ToString("00")), Com.LocalFarm.CurLocalDepartament.INN
                     , Com.LocalFarm.CurLocalDepartament.OKPO, Com.LocalFarm.CurLocalDepartament.Organization
                     , Com.LocalFarm.CurLocalDepartament.StoreCode, Com.LocalFarm.CurLocalDepartament.StructPodrazdelenie
                     , Sum, "0,00"
