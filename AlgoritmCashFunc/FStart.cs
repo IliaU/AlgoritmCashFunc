@@ -1002,6 +1002,9 @@ namespace AlgoritmCashFunc
                 // Получаем текущее подразделение
                 BLL.LocalPlg.LocalKassa Kassa = Com.LocalFarm.CurLocalDepartament;
 
+                // флаг того что мы идём на выход и успешность сохранения логировать не надо
+                bool fExit = false;
+
                 // На какой вкладке активность
                 switch (this.tabCntOperation.SelectedIndex)
                 {
@@ -1272,7 +1275,11 @@ namespace AlgoritmCashFunc
                     // Кассовая книга
                     case 2:
                         // Если в кассовой книге нет документов то сохранять документ не нужно
-                        if (((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).DocList.Count == 0) break;
+                        if (((BLL.DocumentPlg.DocumentKasBook)this.CurDoc).DocList.Count == 0)
+                        {
+                            fExit = true;
+                            break;
+                        }
 
                         // Запоминаем инфу по организации только если документ в текущей дете если нет то это правка старого документа запоминать тогда не нужно
                         if (DateTime.Parse(this.txtBoxKasBookDateDoc.Text).Date == DateTime.Now.Date)
@@ -1465,7 +1472,7 @@ namespace AlgoritmCashFunc
                 }
 
                 // Пишем успех но не в лог просто чтобы пользователь увидел что у него всё ок
-                Log.EventSave(string.Format("Документ №{0} успешно сохранён ({1}).", this.CurDoc.DocNum, this.CurDoc.DocFullName), string.Format("{0}.btnSave_Click", GetType().Name), EventEn.Message, false, false);
+                if (!fExit) Log.EventSave(string.Format("Документ №{0} успешно сохранён ({1}).", this.CurDoc.DocNum, this.CurDoc.DocFullName), string.Format("{0}.btnSave_Click", GetType().Name), EventEn.Message, false, false);
 
                 // Правим стиль кнопок
                 ((ButtonTagStatus)this.btnNew.Tag).Stat = ButtonStatusEn.Active;

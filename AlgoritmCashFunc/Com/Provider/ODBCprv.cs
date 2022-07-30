@@ -5287,12 +5287,14 @@ Order by `Id`");
             string CommandSqlForEmptyKassBook1 = string.Format(@"with T As (Select D.Id, D.UreDate, D.Departament
     From `aks`.`cashfunc_document_kasbook` KB
       inner  join `aks`.`cashfunc_document` D On KB.Id=D.Id
-    Where D.Departament={0}),
+    Where D.Departament={0}
+        and D.`IsDeleted`=0),
   D As (Select T.Id
     From T
       left join  `aks`.`cashfunc_document` D On T.Departament=D.Departament
                                                 and T.UreDate=D.Uredate
                                                 and T.id<>D.Id
+                                                and D.`IsDeleted`=0
     Where D.Departament is null)
 Delete Del
 From aks.cashfunc_document_kasbook Del
