@@ -88,9 +88,11 @@ namespace AlgoritmCashFunc.BLL
                 this.SaveChildron();
 
                 // Проверка надату. Если у текущего документа дата не сегодняшняя значит пользователь редактирует документ в прошлом нужно номера документов пересторить за текущий год и предыдущий и пересчитать остатки
-                if (this.UreDate!=null && ((DateTime)this.UreDate).Date!=DateTime.Now.Date)
+                if (this.UreDate!=null && 
+                    (((DateTime)this.UreDate).Date!=DateTime.Now.Date)
+                    || this.DocFullName == "DocumentKasBook")
                 {
-                    Com.ProviderFarm.CurrentPrv.SetDocNumForYear(this.UreDate);
+                    Com.ProviderFarm.CurrentPrv.SetDocNumForYear(((DateTime)this.UreDate).AddYears(-1));
                 }
             }
             catch (Exception ex)
