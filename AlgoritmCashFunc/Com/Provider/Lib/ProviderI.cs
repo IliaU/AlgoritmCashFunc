@@ -274,6 +274,13 @@ namespace AlgoritmCashFunc.Com.Provider.Lib
         RezultForOstatokAndOborot GetOstatokAndOborotForDay(DateTime Dt);
 
         /// <summary>
+        /// Получаем документ по его  идентификатору
+        /// </summary>
+        /// <param name="Id">Идентификатор документа</param>
+        /// <returns>Документ</returns>
+        Document GetDocumentFromDB(int Id);
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <param name="LastDay">Сколько последних дней грузить из базы данных если null значит весь период</param>

@@ -93,6 +93,13 @@ namespace AlgoritmCashFunc.BLL
                     || this.DocFullName == "DocumentKasBook")
                 {
                     Com.ProviderFarm.CurrentPrv.SetDocNumForYear(((DateTime)this.UreDate).AddYears(-1));
+
+                    // Если это кассовая книга то нужно получить номер документа из базы так как для этого типа документов номера просчитываются хитро
+                    if (this.DocFullName == "DocumentKasBook" && base.Id != null)
+                    {
+                        Document TmpDoc = Com.ProviderFarm.CurrentPrv.GetDocumentFromDB((int)base.Id);
+                        base.DocNum = TmpDoc.DocNum;
+                    }
                 }
             }
             catch (Exception ex)

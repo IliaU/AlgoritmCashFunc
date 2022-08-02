@@ -634,6 +634,16 @@ namespace AlgoritmCashFunc.Lib
         }
 
         /// <summary>
+        /// Получаем документ по его  идентификатору
+        /// </summary>
+        /// <param name="Id">Идентификатор документа</param>
+        /// <returns>Документ</returns>
+        public Document GetDocumentFromDB(int Id)
+        {
+            return this.PrvI.GetDocumentFromDB(Id);
+        }
+
+        /// <summary>
         /// Получаем список текущий докуменитов
         /// </summary>
         /// <param name="LastDay">Сколько последних дней грузить из базы данных если null значит весь период</param>
